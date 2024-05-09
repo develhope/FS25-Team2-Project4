@@ -69,6 +69,9 @@ export function Login() {
 
       <footer className={classes.iconsBox}>
         <p>oppure accedi con:</p>
+        <span className={classes.firstIcon}>mail</span>
+
+        <span className={classes.secondIcon}>mail</span>
       </footer>
     </div>
   );
