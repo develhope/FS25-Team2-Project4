@@ -1,10 +1,10 @@
-import { BrowserRouter } from "react-router-dom";
-import  App  from "./App";
+import { BrowserRouter } from "react-router-dom"
+import App from "./App"
 
-export function Root () {
+export function Root() {
     return (
         <BrowserRouter>
-        <App/>
+            <App />
         </BrowserRouter>
     )
 }
