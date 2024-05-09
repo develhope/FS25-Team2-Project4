@@ -1,8 +1,25 @@
-function App() {
+import { Link, Route, Router, Routes } from "react-router-dom"
+import RecipeCard from "./components/authentication/RecipeCard"
 
-  return (
-    <h2>My App</h2>
-  )
+function App() {
+    return (
+        <div>
+          <Link to="/">Discovery</Link>
+          <Link to="/favorited">Favorited</Link>
+          <Link to="/settings">Settings</Link>
+          
+            <Routes>
+                <Route path="/" element="{<Discovery />}" />
+                <Route path="favorited" element="{<Favorited />}" />
+                <Route path="settings" element="{<Settings />}" />
+            </Routes>
+
+            <Routes>
+                <Route path="recipe" element={<RecipeCard />} />
+                <Route path=":recipe" element="RecipePage" />
+            </Routes>
+        </div>
+    )
 }
 
 export default App
