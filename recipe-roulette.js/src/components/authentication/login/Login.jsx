@@ -1,34 +1,32 @@
 import { useState } from "react";
-import classes from "./Login.module.scss"
+import classes from "./Login.module.scss";
 
-function createData () {
-    return {
-        username: ``,
-        password: ``,
-    }
+function createData() {
+  return {
+    username: ``,
+    password: ``,
+  };
 }
 
-
 export function Login() {
-    
-    const [data, setData] = useState(createData())
+  const [data, setData] = useState(createData());
 
-    function handleInput (e) {
-        const name = e.target.name
-        const value = e.target.value
+  function handleInput(e) {
+    const name = e.target.name;
+    const value = e.target.value;
 
-        setData((d) => {
-            return {
-                ...d,
-                [name] : value
-            }
-        })
-    }
+    setData((d) => {
+      return {
+        ...d,
+        [name]: value,
+      };
+    });
+  }
 
-    function handleSubmit (e) {
-        e.preventDefault()
-        console.log(data);
-    }
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(data);
+  }
 
   return (
     <div className={classes.container}>
@@ -48,19 +46,29 @@ export function Login() {
             required
           />
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" placeholder="Insert password here" onChange={handleInput} required/>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Insert password here"
+            onChange={handleInput}
+            required
+          />
         </div>
 
         <div className={classes.btnBox}>
-          <button disabled={!data.username || !data.password} className={classes.loginBtn}>Login</button>
+          <button
+            disabled={!data.username || !data.password}
+            className={classes.loginBtn}
+          >
+            Login
+          </button>
           <button className={classes.signupBtn}>Sign Up</button>
         </div>
       </form>
 
       <footer className={classes.iconsBox}>
-          <div>
-
-          </div>
+        <p>oppure accedi con:</p>
       </footer>
     </div>
   );
