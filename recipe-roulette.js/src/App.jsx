@@ -1,7 +1,11 @@
+import { Login } from "./components/authentication/login/Login"
+
 function App() {
 
   return (
-    <h2>My App</h2>
+    <div>
+      <Login/>
+    </div>
   )
 }
 
