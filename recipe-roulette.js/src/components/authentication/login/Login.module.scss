@@ -1,0 +1,69 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5% 85% 10%;
+  place-items: center;
+  background-color: rgba(255, 236, 201, 1);
+  box-sizing: border-box;
+  border-radius: 1.5em;
+  width: 19.5em;
+  height: 24.125em;
+}
+
+.title {
+  grid-row: 1 / 2;
+  place-self: start;
+  padding-left: 1.5em;
+}
+
+.formBox {
+  grid-row: 2 / 3;
+  display: grid;
+  gap: 1.5em;
+
+  .inputBox {
+    display: grid;
+    place-self: start;
+
+    input{
+      border-radius: 1.5em;
+      border: 1px ridge grey;
+      width: 20em;
+      height: fit-content;
+      box-sizing: border-box;
+      padding: 0.75em;
+    }
+
+    label{
+      display: block;
+      padding-bottom: 0.5em;
+    }
+  }
+
+  .btnBox{
+    display: grid;
+    place-self: center;
+    gap: 1em;
+
+    .loginBtn{
+        background-color: rgba(245, 222, 98, 1);
+        border-radius: 1.5em;
+        width: 20em;
+        height: fit-content;
+        padding: 0.5em;
+    }
+
+    .signupBtn{
+        border-radius: 1.5em;
+        width: 20em;
+        height: fit-content;
+        padding: 0.5em;
+    }
+
+
+  }
+}
+
+.iconsBox {
+  grid-row: 3 / 4;
+}

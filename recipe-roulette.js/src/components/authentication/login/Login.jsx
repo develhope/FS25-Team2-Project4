@@ -1,4 +1,5 @@
 import { useState } from "react";
+import classes from "./Login.module.scss"
 
 function createData () {
     return {
@@ -30,13 +31,13 @@ export function Login() {
     }
 
   return (
-    <div className="container">
-      <header className="title">
+    <div className={classes.container}>
+      <header className={classes.title}>
         <h1>Login</h1>
       </header>
 
-      <form onSubmit={handleSubmit}>
-        <div className="input-box">
+      <form onSubmit={handleSubmit} className={classes.formBox}>
+        <div className={classes.inputBox}>
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -50,14 +51,16 @@ export function Login() {
           <input type="password" name="password" id="password" placeholder="Insert password here" onChange={handleInput} required/>
         </div>
 
-        <div className="btn-box">
-          <button disabled={!data.username || !data.password} >Login</button>
-          <button>Sign Up</button>
+        <div className={classes.btnBox}>
+          <button disabled={!data.username || !data.password} className={classes.loginBtn}>Login</button>
+          <button className={classes.signupBtn}>Sign Up</button>
         </div>
       </form>
 
-      <footer className="icons-box">
-        
+      <footer className={classes.iconsBox}>
+          <div>
+
+          </div>
       </footer>
     </div>
   );
