@@ -1,0 +1,53 @@
+.ingredientCard {
+    width: 100%;
+    height: 100%;
+    font-family: "Puritan";
+    font-size: 1.25rem;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+.header {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 1rem .5rem 1rem 1rem;
+
+    p {
+        width: 100%;
+    }
+    .checkIco {
+        margin-right: 1rem;
+        color: #3c3838;
+    }
+}
+.unselected {
+    .checkIco {
+        width: 0;
+        opacity: 0;
+        transition:
+            width,
+            opacity 0.3s ease-in-out;
+    }
+}
+.selected {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 4px solid #565151;
+    .checkIco {
+        width: fit-content;
+        opacity: 1;
+        transition:
+            width,
+            opacity 0.3s ease-in-out;
+    }
+}
+.closeIco {
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

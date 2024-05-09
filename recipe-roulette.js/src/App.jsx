@@ -1,5 +1,4 @@
 import { Link, Route, Routes } from "react-router-dom"
-/* import RecipeCard from "./components/RecipeCard" */
 import Discovery from "./pages/Discovery/Discovery"
 import Favorited from "./pages/Favorited/Favorited"
 import Settings from "./pages/Settings/Settings"
@@ -8,13 +7,7 @@ import {Login} from "./components/authentication/login/Login"
 
 function App() {
     return (
-        <div>
-            <Link className="pageLink" to="./">Discovery</Link>
-            <Link className="pageLink" to="./favorited">Favorited</Link>
-            <Link className="pageLink" to="./settings">Settings</Link>
-            <Link className="pageLink" to="./recipes-results">Recipe Results</Link>
-            <Link className="pageLink" to="./login">Login</Link> 
-
+        <div className="appContainer">
             <Routes>
                 <Route path="/" element={<Discovery />} />
                 <Route path="/favorited" element={<Favorited />} />
@@ -24,6 +17,21 @@ function App() {
                 </Route>
                 <Route path="/login" element={<Login/>} />
             </Routes>
+            
+            <div className="bottomNav">
+                <Link className="pageLink" to="./">
+                    Discovery
+                </Link>
+                <Link className="pageLink" to="./favorited">
+                    Favorited
+                </Link>
+                <Link className="pageLink" to="./settings">
+                    Settings
+                </Link>
+                <Link className="pageLink" to="./recipes-results">
+                    Recipe Results
+                </Link>
+            </div>
         </div>
     )
 }
