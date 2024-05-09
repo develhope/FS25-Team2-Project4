@@ -1,0 +1,13 @@
+.recipesResultsPage {
+    background-color: azure;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border: solid;
+    box-sizing: border-box;
+    padding: 1rem;
+    overflow-y: scroll;
+}
