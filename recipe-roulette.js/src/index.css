@@ -3,3 +3,11 @@
 body {
     margin: 1rem;
 }
+
+.pageLink {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem;
+    border: 1px gray solid;
+}
