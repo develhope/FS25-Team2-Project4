@@ -1,4 +1,4 @@
-import RecipeCard from "../../components/authentication/RecipeCard/RecipeCard"
+import RecipeCard from "../../components/RecipeCard/RecipeCard"
 
 function RecipeResults() {
     return (

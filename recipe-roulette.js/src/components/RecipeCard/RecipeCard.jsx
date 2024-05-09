@@ -1,4 +1,4 @@
-import styles from "./RecipeCard.module.scss"
+import classes from "./RecipeCard.module.scss"
 import { Link } from "react-router-dom"
 import { useFavorite } from "./useFavorite"
 
@@ -10,15 +10,15 @@ function RecipeCard({ title = defaultTitle, image = defaultImg }) {
     const { handleFavState, favState } = useFavorite(false)
 
     return (
-        styles.bottomItems && (
-            <Link to="recipeName" className={styles.recipeCard}>
+        classes.bottomItems && (
+            <Link to="recipeName" className={classes.recipeCard}>
                 {/* topItems */}
-                <div className={styles.topItems}>
+                <div className={classes.topItems}>
                     <div
                         onClick={(e) => handleFavState(e)}
-                        className={`${styles.favIcon} ${favState ? styles.isFav : styles.notFav}`}
+                        className={`${classes.favIcon} ${favState ? classes.isFav : classes.notFav}`}
                     >
-                        {styles.favIcon && (
+                        {classes.favIcon && (
                             <span className="material-symbols-outlined">favorite</span>
                         )}
                     </div>
@@ -26,7 +26,7 @@ function RecipeCard({ title = defaultTitle, image = defaultImg }) {
                 </div>
 
                 {/* bottomItems */}
-                <div className={styles.bottomItems}>
+                <div className={classes.bottomItems}>
                     <p>{title}</p>
                 </div>
             </Link>

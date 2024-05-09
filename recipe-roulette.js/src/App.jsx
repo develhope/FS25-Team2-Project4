@@ -1,5 +1,5 @@
 import { Link, Route, Routes } from "react-router-dom"
-import RecipeCard from "./components/authentication/RecipeCard/RecipeCard"
+/* import RecipeCard from "./components/RecipeCard" */
 import Discovery from "./pages/Discovery/Discovery"
 import Favorited from "./pages/Favorited/Favorited"
 import Settings from "./pages/Settings/Settings"
