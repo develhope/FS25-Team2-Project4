@@ -20,7 +20,6 @@
         width: 100%;
     }
     .checkIco {
-        height: 1.5rem;
         margin-right: 1rem;
         color: #3c3838;
     }
@@ -28,13 +27,15 @@
 .unselected {
     .checkIco {
         transform: translate(-1.5rem);
+        scale: .1;
         width: 1px;
         opacity: 0;
         transition: all 0.3s ease-in-out;
     }
-    transition: font-size 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 .selected {
+    scale: 1;
     font-size: 1.5rem;
     font-weight: 700;
     outline: 4px solid #565151;
@@ -44,7 +45,7 @@
         opacity: 1;
         transition: all 0.3s ease-in-out;
     }
-    transition: font-size 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 .closeIco {
     height: 4rem;
