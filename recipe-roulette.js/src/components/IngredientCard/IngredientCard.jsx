@@ -1,19 +1,25 @@
-import { useState } from "react"
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
+import { useIngredientCard } from "./useIngredientCard"
 
-export function IngredientCard({ label, bgColor, isSelected = true }) {
-    const [selectSate, setSelectSate] = useState(isSelected)
+export function IngredientCard({ label = "ingredient", bgColor, isSelected = false }) {
+    const {
+        handleIngredientSelect,
+        handleInputActivation,
+        handleInputChange,
+        handleInputDeactivation,
+        handlePressEnter,
+        selectSate,
+        inputValues,
+    } = useIngredientCard(label, isSelected)
+
     const bg = {
         backgroundColor: bgColor,
     }
 
-    function handleIngredientClick() {
-        setSelectSate((s) => !s)
-    }
     return (
         <div
-            onClick={handleIngredientClick}
+            onClick={handleIngredientSelect}
             className={`${classes.ingredientCard}  ${selectSate ? classes.selected : classes.unselected}`}
         >
             <div style={bg} className={classes.header}>
@@ -25,7 +31,15 @@ export function IngredientCard({ label, bgColor, isSelected = true }) {
                 />
 
                 {/* da trasformare in input */}
-                <p>{label}</p>
+                <input
+                    style={{bgColor}}
+                    type="text"
+                    onClick={handleInputActivation}
+                    onBlur={handleInputDeactivation}
+                    onKeyDown={handlePressEnter}
+                    onChange={handleInputChange}
+                    value={inputValues.current}
+                />
 
                 <div className={classes.closeIco}>
                     <MaterialSymbol icon="close" size={24} grade={24} />
