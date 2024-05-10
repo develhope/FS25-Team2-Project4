@@ -9,6 +9,7 @@ function Discovery() {
             <IngredientCard label={"ingrediente 1"} bgColor={"#FFBE84"} />
             <IngredientCard label={"ingrediente 1"} bgColor={"#FFBE84"} />
             <IngredientCard label={"ingrediente 1"} bgColor={"#FFBE84"} />
+            <IngredientCard label={"ingrediente 1"} bgColor={"#FFBE84"} />
         </div>
     )
 }
