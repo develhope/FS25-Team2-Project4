@@ -4,6 +4,8 @@ import Favorited from "./pages/Favorited/Favorited"
 import Settings from "./pages/Settings/Settings"
 import RecipeResults from "./pages/RecipesResults/RecipesResults"
 import {Login} from "./components/authentication/login/Login"
+import { Signup } from "./components/authentication/signup/Signup"
+
 
 function App() {
     return (
@@ -16,6 +18,7 @@ function App() {
                     <Route path="./:recipeName" element="RecipePage" />
                 </Route>
                 <Route path="/login" element={<Login/>} />
+                <Route path="/signup" element={<Signup/>} />
             </Routes>
             
             <div className="bottomNav">
@@ -33,6 +36,9 @@ function App() {
                 </Link>
                 <Link className="pageLink" to="./login">
                     Login
+                </Link>
+                <Link className="pageLink" to="./signup">
+                    Signup
                 </Link>
             </div>
         </div>

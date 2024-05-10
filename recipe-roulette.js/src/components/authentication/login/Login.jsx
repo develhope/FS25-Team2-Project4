@@ -41,6 +41,7 @@ export function Login() {
             type="text"
             name="username"
             id="username"
+            value={data.username}
             placeholder="Insert username here"
             onChange={handleInput}
             required
@@ -50,6 +51,7 @@ export function Login() {
             type="password"
             name="password"
             id="password"
+            value={data.password}
             placeholder="Insert password here"
             onChange={handleInput}
             required
@@ -68,7 +70,7 @@ export function Login() {
       </form>
 
       <footer className={classes.iconsBox}>
-        <p>oppure accedi con:</p>
+        <p>Login with:</p>
         <span className={classes.firstIcon}>mail</span>
 
         <span className={classes.secondIcon}>mail</span>
