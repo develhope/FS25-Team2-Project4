@@ -14,17 +14,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0.5rem 1rem 1rem;
-
+    flex-grow: 1;
+    .leftItems {
+        display: flex;
+        align-items: center;
+    }
     input {
-        padding: .25rem 0 ;
         margin: 0;
+        border: none;
         font-family: "Puritan";
         font-size: 1.25rem;
-        height: fit-content;
-        width: fit-content;
-        min-width: 1rem;
-        border: none;
-        background-color: #fff;
+        background-color: transparent;
+        max-width: 200px;
+    }
+    & :focus {
+        outline: none;
     }
     .checkIco {
         margin-right: 1rem;
@@ -39,12 +43,15 @@
         opacity: 0;
         transition: all 0.3s ease-in-out;
     }
-    transition: all 0.3s ease-in-out;
+    input {
+        transition: all 0.3s ease-in-out;
+    }
 }
 .selected {
     input {
         font-size: 1.5rem;
         font-weight: 700;
+        transition: all 0.3s ease-in-out;
     }
     scale: 1;
     font-size: 1.5rem;
@@ -56,7 +63,6 @@
         opacity: 1;
         transition: all 0.3s ease-in-out;
     }
-    transition: all 0.3s ease-in-out;
 }
 .closeIco {
     height: 4rem;

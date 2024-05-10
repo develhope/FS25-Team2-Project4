@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react"
-import { ingredients } from "./ingredients"
+import ingredients from "./ingredients"
+import { useRandomIngredients } from "../../pages/Discovery/useRandomIngredients"
 
-export function useIngredientCard(label, isSelected) {
+export function useIngredientCard(label, isSelected, id) {
+    const { handleIngredientUpdate } = useRandomIngredients(isSelected, id)
     const [selectSate, setSelectSate] = useState(isSelected)
     const [inputValues, setInputValues] = useState({
         empty: "",
@@ -9,12 +11,16 @@ export function useIngredientCard(label, isSelected) {
         current: label,
     })
 
-    const ingredientsArr = useMemo(() => ingredients())
+    const ingredientsArr = ingredients
     const ingredientsName = useMemo(() => ingredientsArr.map((ingredient) => ingredient.name))
 
     //quando l'ingrediente viene cliccato, viene impostata la varibile di stato selectState al valore opposto (true -> false)(false ->true)
     function handleIngredientSelect() {
-        setSelectSate((s) => !s)
+        setSelectSate((s) => {
+            const newState = !s
+            handleIngredientUpdate(newState, id)
+            return newState
+        })
     }
 
     //quando l'input viene cliccato, viene resettato il campo di testo (per evitare che debba essere cancellato il testo precedente) e memorizzato il valore precedente in inputValues.initial
@@ -88,5 +94,6 @@ export function useIngredientCard(label, isSelected) {
         handlePressEnter,
         selectSate,
         inputValues,
+        id,
     }
 }

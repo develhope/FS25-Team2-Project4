@@ -2,7 +2,13 @@ import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
 
-export function IngredientCard({ label = "ingredient", bgColor, isSelected = false }) {
+export function IngredientCard({
+    id,
+    label = "ingredient",
+    bgColor = "#fbfbfb",
+    isSelected = false,
+    handleIngredientUpdate,
+}) {
     const {
         handleIngredientSelect,
         handleInputActivation,
@@ -11,7 +17,7 @@ export function IngredientCard({ label = "ingredient", bgColor, isSelected = fal
         handlePressEnter,
         selectSate,
         inputValues,
-    } = useIngredientCard(label, isSelected)
+    } = useIngredientCard(label, isSelected, id)
 
     const bg = {
         backgroundColor: bgColor,
@@ -23,23 +29,26 @@ export function IngredientCard({ label = "ingredient", bgColor, isSelected = fal
             className={`${classes.ingredientCard}  ${selectSate ? classes.selected : classes.unselected}`}
         >
             <div style={bg} className={classes.header}>
-                <MaterialSymbol
-                    className={classes.checkIco}
-                    icon="check_circle"
-                    size={24}
-                    grade={24}
-                />
+                <div className={classes.leftItems}>
+                    <MaterialSymbol
+                        className={classes.checkIco}
+                        icon="check_circle"
+                        size={24}
+                        grade={24}
+                    />
 
-                {/* da trasformare in input */}
-                <input
-                    style={{bgColor}}
-                    type="text"
-                    onClick={handleInputActivation}
-                    onBlur={handleInputDeactivation}
-                    onKeyDown={handlePressEnter}
-                    onChange={handleInputChange}
-                    value={inputValues.current}
-                />
+                    {/* da trasformare in input */}
+                    <input
+                        style={{ bgColor }}
+                        type="text"
+                        placeholder={inputValues.initial}
+                        onClick={handleInputActivation}
+                        onBlur={handleInputDeactivation}
+                        onKeyDown={handlePressEnter}
+                        onChange={handleInputChange}
+                        value={inputValues.current}
+                    />
+                </div>
 
                 <div className={classes.closeIco}>
                     <MaterialSymbol icon="close" size={24} grade={24} />
