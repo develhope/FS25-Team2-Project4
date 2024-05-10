@@ -3,8 +3,8 @@ import classes from "./Signup.module.scss";
 
 function createData() {
   return {
-    firstName: ``,
-    lastName: ``,
+    name: ``,
+    surname: ``,
     email: ``,
     username: ``,
     password: ``,
@@ -49,24 +49,24 @@ export function Signup() {
 
       <form onSubmit={handleSubmit} className={classes.formBox}>
         <div className={classes.inputBox}>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
-            name="firstName"
-            id="firstName"
-            value={data.firstName}
+            name="name"
+            id="name"
+            value={data.name}
             onChange={handleInput}
             placeholder="Insert your first name"
             required
           />
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="surname">Surname</label>
           <input
             type="text"
-            name="lastName"
-            id="lastName"
-            value={data.lastName}
+            name="surname"
+            id="surname"
+            value={data.surname}
             onChange={handleInput}
-            placeholder="Insert your last name"
+            placeholder="Insert your surname"
             required
           />
           <label htmlFor="email">Email</label>
@@ -101,7 +101,7 @@ export function Signup() {
           />
           <p>{passError}</p>
 
-          <label htmlFor="check"></label>
+          <label htmlFor="check" className={classes.checkLabel}>I Agree with <span>Terms & Conditions</span>
           <input
             type="checkbox"
             name="check"
@@ -109,7 +109,8 @@ export function Signup() {
             checked={data.check}
             onChange={handleInput}
             required
-          />
+          /></label>
+     
         </div>
 
         <div className={classes.btnBox}>

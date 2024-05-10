@@ -1,5 +1,5 @@
 import { useState } from "react";
-import classes from "./Login.module.scss";
+import classes from "./Login.module.scss"
 
 function createData() {
   return {
