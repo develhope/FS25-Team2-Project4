@@ -1,5 +1,8 @@
 import { useState } from "react";
-import classes from "./Login.module.scss"
+import classes from "./Login.module.scss";
+import { Link } from "react-router-dom";
+import { LoginSocialGoogle } from "reactjs-social-login";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 function createData() {
   return {
@@ -58,22 +61,34 @@ export function Login() {
           />
         </div>
 
-        <div className={classes.btnBox}>
-          <button
-            disabled={!data.username || !data.password}
-            className={classes.loginBtn}
-          >
-            Login
-          </button>
-          <button className={classes.signupBtn}>Sign Up</button>
-        </div>
+        <button
+          disabled={!data.username || !data.password}
+          className={classes.loginBtn}
+        >
+          Login
+        </button>
+
+        <p>
+          Not registered yet?{" "}
+          <span>
+            <Link to="/signup">Sign Up</Link>
+          </span>
+        </p>
       </form>
 
       <footer className={classes.iconsBox}>
-        <p>Login with:</p>
-        <span className={classes.firstIcon}>mail</span>
-
-        <span className={classes.secondIcon}>mail</span>
+      <LoginSocialGoogle
+            isOnlyGetToken
+            client_id={'511651854576-4md3njisbf61ha7i2b0hn4nmp7gug82q.apps.googleusercontent.com'}
+            onResolve={({ provider, data }) => {
+             console.log(provider, data);
+            }}
+            onReject={(err) => {
+              console.log(err)
+            }}
+          >
+            <GoogleLoginButton/>
+          </LoginSocialGoogle>
       </footer>
     </div>
   );

@@ -13,19 +13,23 @@
 
 .title {
   grid-row: 1 / 2;
-  place-self: start;
-  padding-left: 1em;
+  place-self: center;
+  text-align: start;
   box-sizing: border-box;
-  font-size: 0.9em;
+  border-bottom: 1px solid rgba(28, 27, 31, 0.603);
+  width: 17em;
+  font-size: 1em;
 }
 
 .formBox {
   grid-row: 2 / 3;
   display: grid;
+  padding-bottom: 2em;
+  padding-top: 1em;
   .inputBox {
     display: grid;
     place-self: start;
-    width: 18em;
+    width: 17em;
 
     input {
       border-radius: 1.5em;
@@ -33,11 +37,11 @@
       height: fit-content;
       box-sizing: border-box;
       padding: 0.5em;
-      font-style: oblique,
+      font-style: oblique;
     }
 
-    ::placeholder{
-        font-size: 0.8em;
+    ::placeholder {
+      font-size: 0.8em;
     }
 
     label {
@@ -48,28 +52,26 @@
     .checkLabel {
       font-size: 0.8em;
       display: flex;
-      align-items: center;  
+      align-items: center;
+      gap: 0.2em;
 
-      span{
+      span {
         text-decoration: underline;
         color: blue;
       }
     }
   }
 
-  .btnBox {
-    display: grid;
+  .signupBtn {
     place-self: center;
-    width: 10em;
-
-    .signupBtn {
-      border-radius: 1.5em;
-      height: fit-content;
-      padding: 0.3em;
-      background-color: rgba(245, 222, 98, 1);
-      color: rgba(28, 27, 31, 1);
-      border: none;
-    }
+    width: 13em;
+    border-radius: 1.5em;
+    height: fit-content;
+    padding: 0.3em;
+    background-color: rgba(245, 222, 98, 1);
+    color: rgba(28, 27, 31, 1);
+    border: none;
+    margin-top: 1em;
   }
 }
 

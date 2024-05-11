@@ -3,10 +3,8 @@ import classes from "./Signup.module.scss";
 
 function createData() {
   return {
-    name: ``,
-    surname: ``,
-    email: ``,
     username: ``,
+    email: ``,
     password: ``,
     confirmPass: ``,
     check: ``,
@@ -49,24 +47,14 @@ export function Signup() {
 
       <form onSubmit={handleSubmit} className={classes.formBox}>
         <div className={classes.inputBox}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
-            name="name"
-            id="name"
-            value={data.name}
+            name="username"
+            id="username"
+            value={data.username}
             onChange={handleInput}
-            placeholder="Insert your first name"
-            required
-          />
-          <label htmlFor="surname">Surname</label>
-          <input
-            type="text"
-            name="surname"
-            id="surname"
-            value={data.surname}
-            onChange={handleInput}
-            placeholder="Insert your surname"
+            placeholder="Insert your username"
             required
           />
           <label htmlFor="email">Email</label>
@@ -101,7 +89,7 @@ export function Signup() {
           />
           <p>{passError}</p>
 
-          <label htmlFor="check" className={classes.checkLabel}>I Agree with <span>Terms & Conditions</span>
+          <label htmlFor="check" className={classes.checkLabel}>I Agree with<span>Terms & Conditions</span>
           <input
             type="checkbox"
             name="check"
@@ -113,17 +101,8 @@ export function Signup() {
      
         </div>
 
-        <div className={classes.btnBox}>
           <button className={classes.signupBtn}>Sign Up</button>
-        </div>
       </form>
-
-      <footer className={classes.iconsBox}>
-        <p>Signup with:</p>
-        <span className={classes.firstIcon}>mail</span>
-
-        <span className={classes.secondIcon}>mail</span>
-      </footer>
     </div>
   );
 }
