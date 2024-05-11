@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import ingredients from "./ingredients"
-import { useRandomIngredients } from "../../pages/Discovery/useRandomIngredients"
+import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function useIngredientCard(label, isSelected, id) {
-    const { handleIngredientUpdate } = useRandomIngredients(isSelected, id)
+    const { handleIngredientUpdate, ingredients } = useManageIngredients()
+
     const [selectSate, setSelectSate] = useState(isSelected)
     const [inputValues, setInputValues] = useState({
         empty: "",
@@ -18,7 +19,9 @@ export function useIngredientCard(label, isSelected, id) {
     function handleIngredientSelect() {
         setSelectSate((s) => {
             const newState = !s
+            isSelected = newState
             handleIngredientUpdate(newState, id)
+            //e viene chiamata la funzione handleIngredientUpdate di useManageIngredients
             return newState
         })
     }

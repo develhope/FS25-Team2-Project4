@@ -1,13 +1,13 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
+import { useEffect } from "react"
 
 export function IngredientCard({
     id,
     label = "ingredient",
     bgColor = "#fbfbfb",
     isSelected = false,
-    handleIngredientUpdate,
 }) {
     const {
         handleIngredientSelect,
@@ -22,7 +22,11 @@ export function IngredientCard({
     const bg = {
         backgroundColor: bgColor,
     }
+    useEffect(() => {
+        isSelected = selectSate
+    }, [selectSate])
 
+    console.log(isSelected);
     return (
         <div
             onClick={handleIngredientSelect}
