@@ -20,8 +20,8 @@ export function useIngredientCard(label, isSelected, id) {
         setSelectSate((s) => {
             const newState = !s
             isSelected = newState
+            //e viene chiamata la funzione handleIngredientUpdate di useManageIngredients che imposta la variabile globale (lista degli ingredienti) aggiornando il valore di "ingredient.isSelected"
             handleIngredientUpdate(newState, id)
-            //e viene chiamata la funzione handleIngredientUpdate di useManageIngredients
             return newState
         })
     }

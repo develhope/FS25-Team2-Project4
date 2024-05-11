@@ -5,11 +5,16 @@ import { useEffect } from "react"
 
 function Discovery() {
     const { randomIngredients, shuffleIngredients, ingredients } = useManageIngredients()
-    
+
+    //ordino gli ingredienti mostrati, mettendo sopra quelli selezionati e sotto quelli non selezionati
+    ingredients.sort((a, b) => {
+        return a.isSelected === b.isSelected ? 0 : a.isSelected ? -1 : 1
+    })
     const randomIngredientsIds = randomIngredients.map((ingredient) => ingredient.id)
     const shownIngredients = ingredients.filter((ingredient) =>
         randomIngredientsIds.includes(ingredient.id)
     )
+
     return (
         <div className={classes.ingredientsWrapper}>
             <h1>Discovery</h1>
