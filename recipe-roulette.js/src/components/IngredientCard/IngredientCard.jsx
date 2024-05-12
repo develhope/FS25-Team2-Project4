@@ -26,7 +26,6 @@ export function IngredientCard({
         isSelected = selectSate
     }, [selectSate])
 
-    console.log(isSelected);
     return (
         <div
             onClick={handleIngredientSelect}

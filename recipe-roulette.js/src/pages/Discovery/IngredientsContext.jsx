@@ -23,13 +23,8 @@ export const IngredientsProvider = ({ children }) => {
     //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
     const handleIngredientUpdate = (isSelected, itemId) => {
         //se un elemento viene selezionato allora si riducono gli slot di 1 (- 1 ingrediente generato casualmente, + 1 elemento selezionato che rimane a schermo)
-        if (isSelected) {
-            setSlots((n) => n - 1)
-        } else {
-            //se un elemento viene deselezionato aumenta gli slot di 1 per lo stesso motivo spiegato sopra
-            setSlots((n) => n + 1)
-        }
 
+        console.log("sots:", slots)
         //mappo l'array per aggiornare il valore dell'ingrediente selezionato/deselezionato
         const newData = ingredientsArr.map((ingredient) => {
             if (ingredient.id === itemId) {
@@ -50,6 +45,12 @@ export const IngredientsProvider = ({ children }) => {
 
         console.log("new data", newData)
         console.log("selectedIngretiens", newSelectedIngredients)
+
+        setSlots(() => {
+            const newN = 5 - newSelectedIngredients.length
+            console.log(newN)
+            return newN
+        })
     }
 
     //funzione che genera randomicamente gli ingredienti
@@ -83,11 +84,11 @@ export const IngredientsProvider = ({ children }) => {
         console.log("selectedIngs", selectedIngredients)
 
         //creo un array selected composto dagli elementi selezionati + i restanti elementi selezionati randomicamente
-        const selected = [...selectedIngredients, ...random]
-        console.log("shown ingredients", selected)
+        const result = [...selectedIngredients, ...random]
+        console.log("shown ingredients", result)
 
         //imposto la variabile di stato randomIngredient uguale a "selected"
-        setRandomIngredients(selected)
+        setRandomIngredients(result)
     }
 
     //funzione che ri esegue la funzione sopra

@@ -55,14 +55,13 @@ export function useIngredientCard(label, isSelected, id) {
 
     //quando l'input viene deselezionato, viene effettuato un filter dell'array contenente i nomi di tutti gli ingredienti in database
     function handleInputDeactivation(e) {
-        console.log(ingredientsName)
         const isInDatabase = ingredientsName.filter(
             (ingredient) => ingredient.toUpperCase() === e.target.value.toUpperCase()
         )
-        console.log(isInDatabase)
         //se il valore all'interno dell'input corrisponde al nome di un ingrediente, il nome dell'ingrediente viene
         //impostato come valore dell'input
         if (inputValues.current !== "" && isInDatabase.length === 1) {
+            
             setInputValues((prev) => {
                 return {
                     ...prev,
