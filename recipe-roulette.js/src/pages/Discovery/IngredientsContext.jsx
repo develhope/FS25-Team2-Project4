@@ -22,6 +22,7 @@ export const IngredientsProvider = ({ children }) => {
 
     //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
     const handleIngredientUpdate = (selectState, itemId) => {
+
         //mappo l'array per aggiornare il valore dell'ingrediente selezionato/deselezionato
         const newData = ingredientsArr.map((ingredient) => {
             if (ingredient.id === itemId) {
