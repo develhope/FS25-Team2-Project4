@@ -4,7 +4,6 @@ import { useIngredientCard } from "./useIngredientCard"
 import { useEffect } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
-
 export function IngredientCard({
     id,
     label = "ingredient",
@@ -17,15 +16,12 @@ export function IngredientCard({
         handleInputDeactivation,
         handlePressEnter,
         inputValues,
-    } = useIngredientCard(label, isSelected, id, bgColor)
+    } = useIngredientCard(label, id, bgColor, isSelected)
 
     const { handleIngredientUpdate } = useManageIngredients()
     const bg = {
         backgroundColor: bgColor,
     }
-    useEffect(() => {
-        isSelected, bgColor, id, label
-    }, [isSelected, bgColor, id, label])
 
     return (
         <div

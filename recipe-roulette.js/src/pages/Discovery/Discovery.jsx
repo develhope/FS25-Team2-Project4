@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useIngredientCard } from "../../components/IngredientCard/useIngredientCard"
 
 function Discovery() {
-    const { randomIngredients, shuffleIngredients, ingredients, handleIngredientUpdate } =
+    const { randomIngredients, shuffleIngredients, ingredients } =
         useManageIngredients()
 
     //ordino gli ingredienti mostrati, mettendo sopra quelli selezionati e sotto quelli non selezionati

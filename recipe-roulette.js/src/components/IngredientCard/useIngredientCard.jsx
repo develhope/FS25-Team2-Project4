@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react"
+import { useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
-export function useIngredientCard(label, id) {
+export function useIngredientCard(label, id ) {
     const { handleIngredientUpdate, ingredients } = useManageIngredients()
 
     const [inputValues, setInputValues] = useState({
@@ -9,7 +9,6 @@ export function useIngredientCard(label, id) {
         initial: "",
         current: label,
     })
-
 
     const ingredientsArr = ingredients
 
