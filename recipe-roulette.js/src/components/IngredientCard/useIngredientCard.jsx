@@ -1,30 +1,17 @@
 import { useEffect, useMemo, useState } from "react"
-import ingredients from "./ingredients"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
-export function useIngredientCard(label, isSelected, id) {
+export function useIngredientCard(label, id) {
     const { handleIngredientUpdate, ingredients } = useManageIngredients()
 
-    const [selectSate, setSelectSate] = useState(isSelected)
     const [inputValues, setInputValues] = useState({
         empty: "",
         initial: "",
         current: label,
     })
 
-    const ingredientsArr = ingredients
-    const ingredientsName = useMemo(() => ingredientsArr.map((ingredient) => ingredient.name))
 
-    //quando l'ingrediente viene cliccato, viene impostata la varibile di stato selectState al valore opposto (true -> false)(false ->true)
-    function handleIngredientSelect() {
-        setSelectSate((s) => {
-            const newState = !s
-            isSelected = newState
-            //e viene chiamata la funzione handleIngredientUpdate di useManageIngredients che imposta la variabile globale (lista degli ingredienti) aggiornando il valore di "ingredient.isSelected"
-            handleIngredientUpdate(newState, id)
-            return newState
-        })
-    }
+    const ingredientsArr = ingredients
 
     //quando l'input viene cliccato, viene resettato il campo di testo (per evitare che debba essere cancellato il testo precedente) e memorizzato il valore precedente in inputValues.initial
     function handleInputActivation(e) {
@@ -55,20 +42,27 @@ export function useIngredientCard(label, isSelected, id) {
 
     //quando l'input viene deselezionato, viene effettuato un filter dell'array contenente i nomi di tutti gli ingredienti in database
     function handleInputDeactivation(e) {
-        const isInDatabase = ingredientsName.filter(
-            (ingredient) => ingredient.toUpperCase() === e.target.value.toUpperCase()
+        const isInDatabase = ingredientsArr.filter(
+            (ingredient) =>
+                ingredient.name.toUpperCase() === e.target.value.toUpperCase() &&
+                !ingredient.isSelected
         )
+        console.log("isInDatabase:", isInDatabase)
+        console.log("original:", label, id)
         //se il valore all'interno dell'input corrisponde al nome di un ingrediente, il nome dell'ingrediente viene
         //impostato come valore dell'input
         if (inputValues.current !== "" && isInDatabase.length === 1) {
-            
             setInputValues((prev) => {
                 return {
                     ...prev,
-                    ["current"]: isInDatabase[0],
+                    ["current"]: inputValues.initial,
                 }
             })
-            setSelectSate(true)
+            console.log("handling ingredients update")
+            console.log("id:", id)
+            handleIngredientUpdate(false, id)
+            handleIngredientUpdate(true, isInDatabase[0].id)
+
             //in caso contrario, l'input viene impostato al suo valore iniziale
             //ad esempio de prima di cliccare sull'input avevamo l'ingrediente "tomato", il valore dell'input tornerà "tomato"
         } else {
@@ -89,12 +83,10 @@ export function useIngredientCard(label, isSelected, id) {
     }
 
     return {
-        handleIngredientSelect,
         handleInputActivation,
         handleInputChange,
         handleInputDeactivation,
         handlePressEnter,
-        selectSate,
         inputValues,
         id,
     }

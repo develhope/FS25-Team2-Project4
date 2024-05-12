@@ -2,6 +2,8 @@ import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
 import { useEffect } from "react"
+import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
+
 
 export function IngredientCard({
     id,
@@ -10,26 +12,25 @@ export function IngredientCard({
     isSelected = false,
 }) {
     const {
-        handleIngredientSelect,
         handleInputActivation,
         handleInputChange,
         handleInputDeactivation,
         handlePressEnter,
-        selectSate,
         inputValues,
-    } = useIngredientCard(label, isSelected, id)
+    } = useIngredientCard(label, isSelected, id, bgColor)
 
+    const { handleIngredientUpdate } = useManageIngredients()
     const bg = {
         backgroundColor: bgColor,
     }
     useEffect(() => {
-        isSelected = selectSate
-    }, [selectSate])
+        isSelected, bgColor, id, label
+    }, [isSelected, bgColor, id, label])
 
     return (
         <div
-            onClick={handleIngredientSelect}
-            className={`${classes.ingredientCard}  ${selectSate ? classes.selected : classes.unselected}`}
+            onClick={() => handleIngredientUpdate(!isSelected, id)}
+            className={`${classes.ingredientCard}  ${isSelected ? classes.selected : classes.unselected}`}
         >
             <div style={bg} className={classes.header}>
                 <div className={classes.leftItems}>
@@ -40,7 +41,6 @@ export function IngredientCard({
                         grade={24}
                     />
 
-                    {/* da trasformare in input */}
                     <input
                         style={{ bgColor }}
                         type="text"
