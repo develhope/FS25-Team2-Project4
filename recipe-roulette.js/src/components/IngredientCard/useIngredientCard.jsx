@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
-export function useIngredientCard(label, id ) {
+export function useIngredientCard(label, id, isSelected, bgColor) {
     const { handleIngredientUpdate, ingredients } = useManageIngredients()
 
     const [inputValues, setInputValues] = useState({
@@ -10,7 +10,34 @@ export function useIngredientCard(label, id ) {
         current: label,
     })
 
+    const [cardState, setCardState] = useState({
+        label: label,
+        state: isSelected,
+        id: id,
+        color: bgColor,
+    })
     const ingredientsArr = ingredients
+
+    useEffect(() => {
+        setCardState(() => {
+            return {
+                label: label,
+                state: isSelected,
+                id: id,
+                color: bgColor,
+            }
+        })
+    }, [label, bgColor, isSelected, id])
+
+    function handleIngredientClick() {
+        setCardState((prevData) => {
+            return {
+                ...prevData,
+                ["state"]: !cardState.state,
+            }
+        })
+        handleIngredientUpdate(!cardState.state, cardState.id)
+    }
 
     //quando l'input viene cliccato, viene resettato il campo di testo (per evitare che debba essere cancellato il testo precedente) e memorizzato il valore precedente in inputValues.initial
     function handleInputActivation(e) {
@@ -26,6 +53,13 @@ export function useIngredientCard(label, id ) {
                     ["current"]: "",
                 }
             })
+            setCardState((prevData) => {
+                return {
+                    ...prevData,
+                    ["state"]: false,
+                }
+            })
+            handleIngredientUpdate(false, id)
         }
     }
 
@@ -46,20 +80,25 @@ export function useIngredientCard(label, id ) {
                 ingredient.name.toUpperCase() === e.target.value.toUpperCase() &&
                 !ingredient.isSelected
         )
-        console.log("isInDatabase:", isInDatabase)
-        console.log("original:", label, id)
+
         //se il valore all'interno dell'input corrisponde al nome di un ingrediente, il nome dell'ingrediente viene
         //impostato come valore dell'input
         if (inputValues.current !== "" && isInDatabase.length === 1) {
             setInputValues((prev) => {
                 return {
                     ...prev,
-                    ["current"]: inputValues.initial,
+                    ["current"]: isInDatabase[0].name,
                 }
             })
-            console.log("handling ingredients update")
-            console.log("id:", id)
-            handleIngredientUpdate(false, id)
+
+            setCardState(() => {
+                return {
+                    label: isInDatabase[0].name,
+                    id: isInDatabase[0].id,
+                    ["state"]: true,
+                    color: isInDatabase[0].bgColor,
+                }
+            })
             handleIngredientUpdate(true, isInDatabase[0].id)
 
             //in caso contrario, l'input viene impostato al suo valore iniziale
@@ -71,6 +110,7 @@ export function useIngredientCard(label, id ) {
                     ["current"]: prev.initial,
                 }
             })
+            handleIngredientUpdate(cardState.state, id)
         }
     }
 
@@ -82,11 +122,13 @@ export function useIngredientCard(label, id ) {
     }
 
     return {
+        handleIngredientClick,
         handleInputActivation,
         handleInputChange,
         handleInputDeactivation,
         handlePressEnter,
         inputValues,
         id,
+        cardState,
     }
 }

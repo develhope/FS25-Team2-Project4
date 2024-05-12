@@ -23,7 +23,7 @@ export const IngredientsProvider = ({ children }) => {
     //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
     const handleIngredientUpdate = (selectState, itemId) => {
 
-        //mappo l'array per aggiornare il valore dell'ingrediente selezionato/deselezionato
+        //mappo l'array per aggiornare il valore dell'ingrediente modificato (selezionato/deselezionato/sostituito)
         const newData = ingredientsArr.map((ingredient) => {
             if (ingredient.id === itemId) {
                 return { ...ingredient, isSelected: selectState }
@@ -36,7 +36,9 @@ export const IngredientsProvider = ({ children }) => {
         setIngredientsArr(newData)
 
         //mappo l'array appena aggiornato per prendere tutti gli ingredienti con valore "isSelected = true"
-        const newSelectedIngredients = newData.filter((ingredient) => ingredient.isSelected)
+        const newSelectedIngredients = newData
+            .filter((ingredient) => ingredient.isSelected)
+            .sort((a, b) => (a.name === b.name) ? 0 : (a.name > b.name) ? 1 : -1)
 
         //e imposto il risultato all'array selectedIngredients (che contiene solo gli elementi con valore "isSelected = true")
         setSelectedIngredients(newSelectedIngredients)
@@ -77,12 +79,9 @@ export const IngredientsProvider = ({ children }) => {
         }
         //filtro l'array prendendo solo gli elementi che hanno un id che corrisconde ad un id presente in randomIds
         const random = ingredientsArr.filter((ingredient) => randomIds.includes(ingredient.id))
-        console.log("rando ing", random)
-        console.log("selectedIngs", selectedIngredients)
 
         //creo un array selected composto dagli elementi selezionati + i restanti elementi selezionati randomicamente
         const result = [...selectedIngredients, ...random]
-        console.log("shown ingredients", result)
 
         //imposto la variabile di stato randomIngredient uguale a "selected"
         setRandomIngredients(result)
@@ -101,7 +100,7 @@ export const IngredientsProvider = ({ children }) => {
                 randomIngredients,
                 shuffleIngredients,
                 handleIngredientUpdate,
-                ingredients: ingredientsArr
+                ingredients: ingredientsArr,
             }}
         >
             {children}

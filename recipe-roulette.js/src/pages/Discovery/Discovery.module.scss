@@ -7,4 +7,20 @@
     height: 100%;
     box-sizing: border-box;
     padding: 1rem;
+    align-items: center;
+}
+.cycleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    width: fit-content;
+    border: none;
+    border-radius: 2.5rem;
+    .ico {
+        padding-top: 5px ;
+        height: 2rem;
+        width: 2rem;
+        box-sizing: border-box;
+    }
 }

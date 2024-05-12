@@ -19,13 +19,15 @@
         display: flex;
         align-items: center;
     }
-    input {
+    textarea {
+        line-height: 100%;
+        align-content: center;
         margin: 0;
         border: none;
         font-family: "Puritan";
         font-size: 1.25rem;
         background-color: transparent;
-        max-width: 200px;
+        max-width: 11rem;
     }
     & :focus {
         outline: none;
@@ -36,6 +38,7 @@
     }
 }
 .unselected {
+    outline: 1px solid #ece9e8;
     .checkIco {
         transform: translate(-1.5rem);
         scale: 0.1;
@@ -43,12 +46,12 @@
         opacity: 0;
         transition: all 0.3s ease-in-out;
     }
-    input {
+    textarea {
         transition: all 0.3s ease-in-out;
     }
 }
 .selected {
-    input {
+    textarea {
         font-size: 1.5rem;
         font-weight: 700;
         transition: all 0.3s ease-in-out;
