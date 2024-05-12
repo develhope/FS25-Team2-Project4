@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./Signup.module.scss";
+import { Logo } from "../../Logo/Logo";
 
 function createData() {
   return {
@@ -40,7 +41,11 @@ export function Signup() {
   }
 
   return (
-    <div className={classes.container}>
+    <section className={classes.pageBox}>
+
+      <Logo/>
+
+      <div className={classes.container}>
       <header className={classes.title}>
         <h1>Signup</h1>
       </header>
@@ -104,5 +109,7 @@ export function Signup() {
           <button className={classes.signupBtn}>Sign Up</button>
       </form>
     </div>
+    </section>
+    
   );
 }

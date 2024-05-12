@@ -1,14 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Poetsen+One&display=swap');
+
+
+
+.pageBox {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  place-items: center;
+  margin: 0;
+  background-color: rgba(252, 194, 95, 1);
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, auto);
   place-items: center;
-  background-color: rgba(255, 236, 201, 1);
+  background-color: rgba(253, 225, 175, 1);
   box-sizing: border-box;
   border-radius: 1.5em;
   width: 19.5em;
   height: fit-content;
   font-size: 0.85em;
+  box-shadow: 0px 8px rgb(192, 148, 73);
 }
 
 .title {
@@ -17,7 +31,6 @@
   text-align: start;
   width: 17em;
   box-sizing: border-box;
-  font-size: 1em;
   border-bottom: 1px solid rgba(28, 27, 31, 0.603);
 }
 
@@ -55,13 +68,23 @@
 
   .loginBtn {
     background-color: rgba(245, 222, 98, 1);
+    place-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5em;
     border-radius: 1.5em;
     height: fit-content;
     width: 13em;
-    padding: 0.5em;
+    padding: 0.3em;
     color: rgba(28, 27, 31, 1);
+    font-weight: 600;
     border: none;
-    place-self: center;
+  }
+
+  p {
+    font-style: oblique;
   }
 }
 

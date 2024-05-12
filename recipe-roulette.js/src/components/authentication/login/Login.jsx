@@ -2,7 +2,9 @@ import { useState } from "react";
 import classes from "./Login.module.scss";
 import { Link } from "react-router-dom";
 import { LoginSocialGoogle } from "reactjs-social-login";
-import { GoogleLoginButton } from "react-social-login-buttons";
+import GoogleLoginButton from "../../Social Login Buttons/GoogleLoginButton";
+import { MaterialSymbol } from "react-material-symbols";
+import { Logo } from "../../Logo/Logo";
 
 function createData() {
   return {
@@ -32,7 +34,11 @@ export function Login() {
   }
 
   return (
-    <div className={classes.container}>
+    <section className={classes.pageBox}>
+
+      <Logo/>
+
+<div className={classes.container}>
       <header className={classes.title}>
         <h1>Login</h1>
       </header>
@@ -64,7 +70,7 @@ export function Login() {
         <button
           disabled={!data.username || !data.password}
           className={classes.loginBtn}
-        >
+        ><MaterialSymbol icon="login" size={22} wght={28}/>
           Login
         </button>
 
@@ -77,19 +83,25 @@ export function Login() {
       </form>
 
       <footer className={classes.iconsBox}>
-      <LoginSocialGoogle
-            isOnlyGetToken
-            client_id={'511651854576-4md3njisbf61ha7i2b0hn4nmp7gug82q.apps.googleusercontent.com'}
-            onResolve={({ provider, data }) => {
-             console.log(provider, data);
-            }}
-            onReject={(err) => {
-              console.log(err)
-            }}
-          >
-            <GoogleLoginButton/>
-          </LoginSocialGoogle>
+        <LoginSocialGoogle
+          isOnlyGetToken
+          client_id={
+            "511651854576-4md3njisbf61ha7i2b0hn4nmp7gug82q.apps.googleusercontent.com"
+          }
+          onResolve={({ provider, data }) => {
+            console.log(provider, data);
+          }}
+          onReject={(err) => {
+            console.log(err);
+          }}
+        >
+
+          <GoogleLoginButton/>
+        </LoginSocialGoogle>
       </footer>
     </div>
+
+    </section>
+    
   );
 }
