@@ -1,8 +1,7 @@
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import classes from "./Discovery.module.scss"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
-import { useEffect } from "react"
-import { useIngredientCard } from "../../components/IngredientCard/useIngredientCard"
+
 
 function Discovery() {
     const { randomIngredients, shuffleIngredients, ingredients } =
