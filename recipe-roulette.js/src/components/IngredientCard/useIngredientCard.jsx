@@ -46,7 +46,6 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         //se il campo di testo è vuoto, allora input.values non viene re-impostato (perchè sarebbe impostato a vuoto), e mantiene sempre il valore assegnato al primo click (ovvero ciò che si trovava nel campo di testo prima di cliccarvi)
         if (inputValues.current !== "") {
             setInputValues((prev) => {
-                console.log(prev.current)
                 return {
                     ...prev,
                     ["initial"]: prev.current,
