@@ -21,6 +21,10 @@ export const IngredientsProvider = ({ children }) => {
         selectRandomIngredients(ingredientsArr, slots, selectedIngredients)
     }, [initialValue])
 
+    useEffect(() => {
+        randomIngredients
+    }, [ingredientsArr])
+
     //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
     const handleIngredientUpdate = (selectState, itemId) => {
         //mappo l'array per aggiornare il valore dell'ingrediente modificato (selezionato/deselezionato/sostituito)
@@ -62,10 +66,12 @@ export const IngredientsProvider = ({ children }) => {
             }
         }
 
-        const newRandomIngredients = ingredientsArr.filter((ingredient) => randomIds.includes(ingredient.id))
+        const newRandomIngredients = ingredientsArr.filter((ingredient) =>
+            randomIds.includes(ingredient.id)
+        )
 
         setRandomIngredients([...selectedIngredients, ...newRandomIngredients])
-  
+
         return newRandomIngredients // Restituisci solo gli ingredienti selezionati casualmente
     }
 
@@ -81,7 +87,7 @@ export const IngredientsProvider = ({ children }) => {
         }
     }
     const handleIngredientsDecrement = (id, e) => {
-        const isTargetSelected = ingredientsArr.find(ingredient => ingredient.id === id)
+        const isTargetSelected = ingredientsArr.find((ingredient) => ingredient.id === id)
         e.stopPropagation()
         if (initialValue > 3 && !isTargetSelected.isSelected) {
             setInitialValue((n) => n - 1)
@@ -95,6 +101,7 @@ export const IngredientsProvider = ({ children }) => {
             value={{
                 selectedIngredients,
                 randomIngredients,
+                setRandomIngredients,
                 shuffleIngredients,
                 handleIngredientUpdate,
                 ingredients: ingredientsArr,

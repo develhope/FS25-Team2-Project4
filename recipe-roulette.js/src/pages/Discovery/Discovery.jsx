@@ -3,10 +3,14 @@ import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
+import { useEffect } from "react"
 
 function Discovery() {
-    const { randomIngredients, shuffleIngredients, handleIngredientsIncrement } =
-        useManageIngredients()
+    const {
+        randomIngredients,
+        shuffleIngredients,
+        handleIngredientsIncrement,
+    } = useManageIngredients()
 
     return (
         <div className={classes.ingredientsWrapper}>
