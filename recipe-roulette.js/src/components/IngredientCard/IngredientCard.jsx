@@ -16,9 +16,7 @@ export function IngredientCard({
         handleInputChange,
         handleInputDeactivation,
         handlePressEnter,
-        setInputValues,
         inputValues,
-        setCardState,
         cardState,
     } = useIngredientCard(label, id, isSelected, bgColor)
 
@@ -38,6 +36,7 @@ export function IngredientCard({
                     <MaterialSymbol className={classes.checkIco} icon="lock" size={24} grade={24} />
 
                     <textarea
+                        name="ingredient"
                         style={{ bgColor }}
                         type="text"
                         placeholder={inputValues.initial}

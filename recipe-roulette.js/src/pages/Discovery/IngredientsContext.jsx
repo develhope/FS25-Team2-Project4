@@ -21,9 +21,10 @@ export const IngredientsProvider = ({ children }) => {
         selectRandomIngredients(ingredientsArr, slots, selectedIngredients)
     }, [initialValue])
 
-    useEffect(() => {
-        randomIngredients
-    }, [ingredientsArr])
+    //refresha gli ingredienti visualizzati senza modificarli
+ /*    useEffect(() => {
+        selectRandomIngredients(randomIngredients, slots, selectedIngredients)
+    }, [ingredientsArr]) */
 
     //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
     const handleIngredientUpdate = (selectState, itemId) => {
@@ -55,7 +56,7 @@ export const IngredientsProvider = ({ children }) => {
 
     //funzione che genera randomicamente gli ingredienti
     const selectRandomIngredients = (ingredientsArr, slots, selectedIngredients) => {
-        const ingredientIds = ingredientsArr.map((ingredient) => ingredient.id)
+        const ingredientIds = ingredientsArr.filter(ingredient => !ingredient.isSelected).map((ingredient) => ingredient.id)
         const selectedIds = selectedIngredients.map((ingredient) => ingredient.id)
         const randomIds = []
 
