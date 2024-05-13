@@ -4,6 +4,7 @@ import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 export function useIngredientCard(label, id, isSelected, bgColor) {
     const { handleIngredientUpdate, ingredients, randomIngredients } = useManageIngredients()
 
+    //useState
     const [inputValues, setInputValues] = useState({
         empty: "",
         initial: "",
@@ -18,17 +19,26 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
     })
     const ingredientsArr = ingredients
 
+    //useEffect
     useEffect(() => {
+        setInputValues((prevData) => {
+            return {
+                ...prevData,
+                ["current"]: label,
+            }
+        })
         setCardState(() => {
             return {
-                label: label,
-                state: isSelected,
-                id: id,
-                color: bgColor,
+                ["label"]: label,
+                ["state"]: isSelected,
+                ["id"]: id,
+                ["color"]: bgColor,
             }
         })
     }, [label, bgColor, isSelected, id])
 
+
+    //funzione 1 seleziona l'elemento e aggiorna l'array di ingredienti di conseguenza
     function handleIngredientClick() {
         setCardState((prevData) => {
             return {
@@ -39,23 +49,23 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         handleIngredientUpdate(!cardState.state, cardState.id)
     }
 
-    //quando l'input viene cliccato, viene resettato il campo di testo (per evitare che debba essere cancellato il testo precedente) e memorizzato il valore precedente in inputValues.initial
+    //funzione 2 gestione dell'input quando viene attivato (click/ focus)
     function handleInputActivation(e) {
         //usiamo stopPropagation perchè in caso contrario il click arriverebbe al componente padre e l'ingrediente verrebbe selezionato
         e.stopPropagation()
-        //se il campo di testo è vuoto, allora input.values non viene re-impostato (perchè sarebbe impostato a vuoto), e mantiene sempre il valore assegnato al primo click (ovvero ciò che si trovava nel campo di testo prima di cliccarvi)
+        //se il campo di testo non è vuoto, inputValues.initial viene impostato al valore che si trovava precedentemente in current (ingrediente originale)
         if (inputValues.current !== "") {
             setInputValues((prev) => {
                 return {
                     ...prev,
                     ["initial"]: prev.current,
+                    //e current viene impostato a stringa vuota per mermettere di scrivervi senza dover cancellare
                     ["current"]: "",
                 }
             })
 
-            //imposto l'ingrediente corrente come false, ma non la variabile di stato
-            //(in questo modo non viene deselezionato (visivamente) quando clicchiamo sul campo di testo per scrivere)
-            //ma il valore isSelected sarà impostato a false in modo tale che l'ingrediente non spunti al successivo render
+            //imposto il valore isSelected dell'elemento "precedente" (che vogliamo sovrascrivere) a false, e lascio la variabile di stato invariata. 
+            //In questo modo non verrà visualizata l'animazione di deselezione, ma il nuovo ingredeinte prederà comunque il posto di quello precedente.
             handleIngredientUpdate(false, id)
         }
     }
@@ -70,11 +80,11 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         })
     }
 
-    //quando l'input viene deselezionato, viene effettuato un filter dell'array contenente i nomi di tutti gli ingredienti in database
-    function handleInputDeactivation(e) {
+    //quando l'input viene disattivato (deselezionato), viene effettuato un filter dell'array contenente i nomi di tutti gli ingredienti in database
+    function handleInputDeactivation() {
         const isInDatabase = ingredientsArr.filter(
             (ingredient) =>
-                ingredient.name.toUpperCase() === e.target.value.toUpperCase() &&
+                ingredient.name.toUpperCase() === inputValues.current.toUpperCase() &&
                 !ingredient.isSelected
         )
 
@@ -82,7 +92,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
 
         if (isInDatabase.length > 0) {
             isInDisplay = randomIngredients.filter(
-                (ingredient) => ingredient.name == isInDatabase[0].name
+                (ingredient) => ingredient === isInDatabase[0]
             )
         }
 
@@ -90,12 +100,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         //ingredienti visibili a schermo, il nome dell'ingrediente viene impostato come valore dell'input
         if (inputValues.current !== "" && isInDatabase.length === 1 && isInDisplay.length === 0) {
             //imposto la variabile di stato inputValues (quella che renderizza il nome dell'ingrediente)
-            setInputValues((prev) => {
-                return {
-                    ...prev,
-                    ["current"]: isInDatabase[0].name,
-                }
-            })
+
             //e la variabile di stato con tutte le altre informazioni sulla card
             setCardState(() => {
                 return {
@@ -103,6 +108,12 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                     id: isInDatabase[0].id,
                     ["state"]: true,
                     color: isInDatabase[0].bgColor,
+                }
+            })
+            setInputValues((prev) => {
+                return {
+                    ...prev,
+                    ["current"]: isInDatabase[0].name,
                 }
             })
             handleIngredientUpdate(true, isInDatabase[0].id)
@@ -140,7 +151,8 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         handleInputDeactivation,
         handlePressEnter,
         inputValues,
-        id,
+        setInputValues,
+        setCardState,
         cardState,
     }
 }
