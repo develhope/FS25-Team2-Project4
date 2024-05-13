@@ -1,37 +1,16 @@
-import { useState } from "react";
 import classes from "./Login.module.scss";
 import { Link } from "react-router-dom";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import GoogleLoginButton from "../../Social Login Buttons/GoogleLoginButton";
 import { MaterialSymbol } from "react-material-symbols";
 import { Logo } from "../../Logo/Logo";
+import { useForm } from "../../../hooks/Form/useForm";
 
-function createData() {
-  return {
-    username: ``,
-    password: ``,
-  };
-}
+
 
 export function Login() {
-  const [data, setData] = useState(createData());
 
-  function handleInput(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setData((d) => {
-      return {
-        ...d,
-        [name]: value,
-      };
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(data);
-  }
+  const {data, handleInput, handleSubmit} = useForm()
 
   return (
     <section className={classes.pageBox}>

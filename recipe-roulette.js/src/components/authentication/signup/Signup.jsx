@@ -1,44 +1,11 @@
-import { useState } from "react";
 import classes from "./Signup.module.scss";
 import { Logo } from "../../Logo/Logo";
+import { useForm } from "../../../hooks/Form/useForm";
 
-function createData() {
-  return {
-    username: ``,
-    email: ``,
-    password: ``,
-    confirmPass: ``,
-    check: ``,
-  };
-}
 
 export function Signup() {
-  const [data, setData] = useState(createData());
-  const [passError, setPassError] = useState(null);
 
-  function handleInput(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    const checked = e.target.checked;
-    const type = e.target.type;
-
-    setData((d) => {
-      return {
-        ...d,
-        [name]: type === `checkbox` ? checked : value,
-      };
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (data.password === data.confirmPass) {
-      console.log(data);
-    } else {
-      setPassError(`Please, confirm your password correctly`);
-    }
-  }
+  const {data, passError, handleInputCheckbox, handleSubmitVerifyPassword} = useForm()
 
   return (
     <section className={classes.pageBox}>
@@ -50,7 +17,7 @@ export function Signup() {
         <h1>Signup</h1>
       </header>
 
-      <form onSubmit={handleSubmit} className={classes.formBox}>
+      <form onSubmit={handleSubmitVerifyPassword} className={classes.formBox}>
         <div className={classes.inputBox}>
           <label htmlFor="username">Username</label>
           <input
@@ -58,7 +25,7 @@ export function Signup() {
             name="username"
             id="username"
             value={data.username}
-            onChange={handleInput}
+            onChange={handleInputCheckbox}
             placeholder="Insert your username"
             required
           />
@@ -68,7 +35,7 @@ export function Signup() {
             name="email"
             id="email"
             value={data.email}
-            onChange={handleInput}
+            onChange={handleInputCheckbox}
             placeholder="Insert your email"
             required
           />
@@ -78,7 +45,7 @@ export function Signup() {
             name="password"
             id="password"
             value={data.password}
-            onChange={handleInput}
+            onChange={handleInputCheckbox}
             placeholder="Insert a valid password"
             required
           />
@@ -88,7 +55,7 @@ export function Signup() {
             name="confirmPass"
             id="confirmPass"
             value={data.confirmPass}
-            onChange={handleInput}
+            onChange={handleInputCheckbox}
             placeholder="Repeat Password"
             required
           />
@@ -100,7 +67,7 @@ export function Signup() {
             name="check"
             id="check"
             checked={data.check}
-            onChange={handleInput}
+            onChange={handleInputCheckbox}
             required
           /></label>
      
