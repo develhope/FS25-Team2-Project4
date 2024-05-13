@@ -4,6 +4,7 @@
     border-radius: 1.5rem;
     overflow: hidden;
     box-sizing: border-box;
+    outline-offset: -1px;
 }
 .header {
     width: 100%;
@@ -18,6 +19,7 @@
         display: flex;
         align-items: center;
     }
+
     textarea {
         line-height: 100%;
         align-content: center;
@@ -37,6 +39,7 @@
         color: #3c3838;
     }
 }
+
 .unselected {
     outline: 1px solid #ece9e8;
     .checkIco {
@@ -51,20 +54,23 @@
     }
 }
 .selected {
+    outline: 4px solid #565151;
+    outline-offset: -2px;
     textarea {
         font-size: 1.5rem;
         font-weight: 700;
         transition: all 0.3s ease-in-out;
     }
-    scale: 1;
-    font-size: 1.5rem;
-    font-weight: 700;
-    outline: 4px solid #565151;
-    outline-offset: -4px;
-    .checkIco {
-        width: 1.5rem;
-        opacity: 1;
-        transition: all 0.3s ease-in-out;
+    .header {
+        scale: 1;
+        font-size: 1.5rem;
+        font-weight: 700;
+        outline-offset: -4px;
+        .checkIco {
+            width: 1.5rem;
+            opacity: 1;
+            transition: all 0.3s ease-in-out;
+        }
     }
 }
 .closeIco {
@@ -74,3 +80,23 @@
     align-items: center;
     justify-content: center;
 }
+
+/* .inputActive {
+    min-height: 320px;
+    box-sizing: border-box;
+    .header {
+        height: 4rem;
+    }
+    .autocompleteSuggestions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: calc(320px - 4rem);
+        overflow-y: scroll;
+        p {
+            margin: 0;
+            padding: 1rem;
+            border-top: 1px solid #ece9e8;
+        }
+    }
+} */

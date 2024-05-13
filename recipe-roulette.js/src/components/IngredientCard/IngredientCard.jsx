@@ -20,16 +20,20 @@ export function IngredientCard({
         cardState,
     } = useIngredientCard(label, id, isSelected, bgColor)
 
-    const { handleIngredientsDecrement } = useManageIngredients()
+    const { handleIngredientsDecrement, ingredients } = useManageIngredients()
 
     const bg = {
         backgroundColor: cardState.color,
     }
+    const border = {
+        outline: `4px solid ${cardState.color}`,
+    }
 
     return (
         <div
+            // style={border}
             onClick={handleIngredientClick}
-            className={`${classes.ingredientCard}  ${cardState.state ? classes.selected : classes.unselected}`}
+            className={`${classes.ingredientCard} ${classes.inputActive} ${cardState.state ? classes.selected : classes.unselected}`}
         >
             <div style={bg} className={classes.header}>
                 <div className={classes.leftItems}>
@@ -54,6 +58,13 @@ export function IngredientCard({
                 >
                     <MaterialSymbol icon="close" size={24} grade={24} />
                 </div>
+            </div>
+            <div className={classes.autocompleteSuggestions}>
+                {ingredients
+                    .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
+                    .map((ingredient) => {
+                        return <p /* onclick */ key={ingredient.id}>{ingredient.name}</p>
+                    })}
             </div>
         </div>
     )

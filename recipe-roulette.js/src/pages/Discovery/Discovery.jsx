@@ -3,7 +3,6 @@ import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
-import { useEffect } from "react"
 
 function Discovery() {
     const {
