@@ -52,12 +52,10 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                     ["current"]: "",
                 }
             })
-            setCardState((prevData) => {
-                return {
-                    ...prevData,
-                    ["state"]: false,
-                }
-            })
+
+            //imposto l'ingrediente corrente come false, ma non la variabile di stato
+            //(in questo modo non viene deselezionato (visivamente) quando clicchiamo sul campo di testo per scrivere)
+            //ma il valore isSelected sarà impostato a false in modo tale che l'ingrediente non spunti al successivo render
             handleIngredientUpdate(false, id)
         }
     }
