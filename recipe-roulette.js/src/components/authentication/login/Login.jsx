@@ -7,7 +7,7 @@ import { Logo } from "../../Logo/Logo";
 import { useForm } from "../../../hooks/Form/useForm";
 
 export function Login() {
-  const { data, handleInput, handleSubmit } = useForm();
+  const { data, inputRef, handleInput, handleSubmit } = useForm();
 
   return (
     <section className={classes.pageBox}>
@@ -28,6 +28,7 @@ export function Login() {
               value={data.username}
               placeholder="Insert username here"
               onChange={handleInput}
+              ref={inputRef}
               required
             />
             <label htmlFor="password">Password</label>

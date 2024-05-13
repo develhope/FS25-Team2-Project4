@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useForm() {
   const [data, setData] = useState(createData());
   const [passError, setPassError] = useState(null);
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
 
   function createData() {
     return {
@@ -63,6 +68,7 @@ export function useForm() {
   return {
     data,
     passError,
+    inputRef,
     handleInput,
     handleSubmit,
     handleInputCheckbox,

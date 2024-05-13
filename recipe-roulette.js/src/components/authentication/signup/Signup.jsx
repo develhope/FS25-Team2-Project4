@@ -3,7 +3,7 @@ import { Logo } from "../../Logo/Logo";
 import { useForm } from "../../../hooks/Form/useForm";
 
 export function Signup() {
-  const { data, passError, handleInputCheckbox, handleSubmitVerifyPassword } =
+  const { data, passError, inputRef, handleInputCheckbox, handleSubmitVerifyPassword } =
     useForm();
 
   return (
@@ -24,6 +24,7 @@ export function Signup() {
               id="username"
               value={data.username}
               onChange={handleInputCheckbox}
+              ref={inputRef}
               placeholder="Insert your username"
               required
             />
