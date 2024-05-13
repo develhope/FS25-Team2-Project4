@@ -5,7 +5,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
     const { handleIngredientUpdate, ingredients, randomIngredients } = useManageIngredients()
 
     const ingredientsArr = ingredients
-    
+
     //useState
     const [inputValues, setInputValues] = useState({
         empty: "",
@@ -39,7 +39,6 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         })
     }, [label, bgColor, isSelected, id, randomIngredients])
 
-    
     //funzione 1 seleziona l'elemento e aggiorna l'array di ingredienti di conseguenza
     function handleIngredientClick() {
         setCardState((prevData) => {
@@ -96,7 +95,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         if (isInDatabase.length > 0) {
             isInDisplay = randomIngredients.filter((ingredient) => ingredient == isInDatabase[0])
         }
-        console.log(isInDisplay);
+        console.log(isInDisplay)
         //se il valore all'interno dell'input corrisponde al nome di un ingrediente, e non è già presente tra gli
         //ingredienti visibili a schermo, il nome dell'ingrediente viene impostato come valore dell'input
         if (inputValues.current !== "" && isInDatabase.length === 1 && isInDisplay.length === 0) {
@@ -118,16 +117,21 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                 }
             })
             handleIngredientUpdate(true, isInDatabase[0].id)
-        } else {
-
-        /* else if (isInDatabase.length === 1 && isInDisplay.length === 1) {
+        } /* else if (isInDatabase.length === 1 && isInDisplay.length === 1) {
             //handleIngredintOnDisplay (spunta una snackbar di avviso oppure selezioniamo quell'elemento al posto di quello selezionato)
             //...
+            setCardState(() => {
+                return {
+                    label: isInDisplay[0].name,
+                    id: isInDisplay[0].id,
+                    ["state"]: true,
+                    color: isInDisplay[0].bgColor,
+                }
+            })
+            handleIngredientUpdate(true, isInDisplay[0].id)
             //in caso contrario, l'input viene impostato al suo valore iniziale
             //ad esempio de prima di cliccare sull'input avevamo l'ingrediente "tomato", il valore dell'input tornerà "tomato"
-        } 
-        
-        */
+        } */ else {
             setInputValues((prev) => {
                 return {
                     ...prev,
