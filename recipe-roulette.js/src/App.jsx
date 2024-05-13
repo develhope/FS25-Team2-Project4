@@ -30,7 +30,7 @@ function App() {
                     Settings
                 </Link>
                 <Link className="pageLink" to="./recipes-results">
-                    Recipe Results
+                    Recipes
                 </Link>
             </div>
         </div>

@@ -4,13 +4,10 @@ body {
     margin: 0;
     box-sizing: border-box;
     height: 100vh;
-    border: 1px solid;
 }
 #root {
-
     height: 100%;
     box-sizing: border-box;
-    border: solid;
 }
 .appContainer {
     display: flex;
@@ -22,11 +19,20 @@ body {
 }
 .bottomNav {
     background-color: white;
+    display: flex;
+    height: 5rem;
+    min-height: 5rem;
+    width: 100%;
+    box-sizing: border-box;
+    outline: 1px solid #E5E0DF;
 }
 .pageLink {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     color: inherit;
     padding: 1rem;
-    border: 1px gray solid;
+    text-align: center;
+    width: 100%;
 }

@@ -8,19 +8,37 @@
     box-sizing: border-box;
     padding: 1rem;
     align-items: center;
+    overflow: hidden;
 }
-.cycleButton {
+.bottomButtons {
     display: flex;
+    width: 100%;
+    gap: 1rem;
     align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    width: fit-content;
-    border: none;
-    border-radius: 2.5rem;
-    .ico {
-        padding-top: 5px ;
-        height: 2rem;
-        width: 2rem;
-        box-sizing: border-box;
+    .cycleButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 3.5rem;
+        min-width: 3.5rem;
+        border: none;
+        border-radius: 1.75rem;
+        color: #3C3838;
+        background-color: #87C38F;
+    }
+    .sideButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        font-size: 0.875rem;
+        padding: 1rem;
+        width: 100%;
+        height: fit-content;
+        color: #3C3838;
+        font-weight: 600;
+        border: 1px solid #E5E0DF;
+        border-radius: 2.5rem;
+        background-color: white;
     }
 }

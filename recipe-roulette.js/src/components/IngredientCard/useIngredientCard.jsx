@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function useIngredientCard(label, id, isSelected, bgColor) {
-    const { handleIngredientUpdate, ingredients } = useManageIngredients()
+    const { handleIngredientUpdate, ingredients, randomIngredients } = useManageIngredients()
 
     const [inputValues, setInputValues] = useState({
         empty: "",
@@ -78,16 +78,25 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                 !ingredient.isSelected
         )
 
-        //se il valore all'interno dell'input corrisponde al nome di un ingrediente, il nome dell'ingrediente viene
-        //impostato come valore dell'input
-        if (inputValues.current !== "" && isInDatabase.length === 1) {
+        let isInDisplay = []
+
+        if (isInDatabase.length > 0) {
+            isInDisplay = randomIngredients.filter(
+                (ingredient) => ingredient.name == isInDatabase[0].name
+            )
+        }
+
+        //se il valore all'interno dell'input corrisponde al nome di un ingrediente, e non è già presente tra gli
+        //ingredienti visibili a schermo, il nome dell'ingrediente viene impostato come valore dell'input
+        if (inputValues.current !== "" && isInDatabase.length === 1 && isInDisplay.length === 0) {
+            //imposto la variabile di stato inputValues (quella che renderizza il nome dell'ingrediente)
             setInputValues((prev) => {
                 return {
                     ...prev,
                     ["current"]: isInDatabase[0].name,
                 }
             })
-
+            //e la variabile di stato con tutte le altre informazioni sulla card
             setCardState(() => {
                 return {
                     label: isInDatabase[0].name,
@@ -97,7 +106,9 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                 }
             })
             handleIngredientUpdate(true, isInDatabase[0].id)
-
+        } else if (isInDatabase.length === 1 && isInDisplay.length === 1) {
+            //handleIngredintOnDisplay (spunta una snackbar di avviso oppure selezioniamo quell'elemento al posto di quello selezionato)
+            //...
             //in caso contrario, l'input viene impostato al suo valore iniziale
             //ad esempio de prima di cliccare sull'input avevamo l'ingrediente "tomato", il valore dell'input tornerà "tomato"
         } else {

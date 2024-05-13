@@ -1,6 +1,7 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
+import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function IngredientCard({
     id,
@@ -18,6 +19,8 @@ export function IngredientCard({
         cardState
     } = useIngredientCard(label, id, isSelected, bgColor)
 
+    const {handleIngredientsDecrement} = useManageIngredients()
+
     const bg = {
         backgroundColor: cardState.color,
     }
@@ -31,7 +34,7 @@ export function IngredientCard({
                 <div className={classes.leftItems}>
                     <MaterialSymbol
                         className={classes.checkIco}
-                        icon="check_circle"
+                        icon="lock"
                         size={24}
                         grade={24}
                     />
@@ -48,7 +51,7 @@ export function IngredientCard({
                     />
                 </div>
 
-                <div className={classes.closeIco}>
+                <div className={classes.closeIco} onClick={(e) => handleIngredientsDecrement(id, e)}>
                     <MaterialSymbol icon="close" size={24} grade={24} />
                 </div>
             </div>

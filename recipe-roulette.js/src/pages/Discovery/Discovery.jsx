@@ -1,10 +1,12 @@
 import { MaterialSymbol } from "react-material-symbols"
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
-import classes from "./Discovery.module.scss"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 
+import classes from "./Discovery.module.scss"
+
 function Discovery() {
-    const { randomIngredients, shuffleIngredients } = useManageIngredients()
+    const { randomIngredients, shuffleIngredients, handleIngredientsIncrement } =
+        useManageIngredients()
 
     return (
         <div className={classes.ingredientsWrapper}>
@@ -21,10 +23,20 @@ function Discovery() {
                         />
                     )
                 })}
-            <button className={classes.cycleButton} onClick={() => shuffleIngredients()}>
-                {" "}
-                <MaterialSymbol className={classes.ico} icon="cycle" size={24} grade={24} />
-            </button>
+            <div className={classes.bottomButtons}>
+                <button className={classes.sideButton} onClick={() => handleIngredientsIncrement()}>
+                    <MaterialSymbol className={classes.ico} icon="add" size={18} grade={18} />
+                    ingredient
+                </button>
+                <button className={classes.cycleButton} onClick={() => shuffleIngredients()}>
+                    {" "}
+                    <MaterialSymbol className={classes.ico} icon="cycle" size={18} grade={18} />
+                </button>
+                <button className={classes.sideButton}>
+                    <MaterialSymbol className={classes.ico} icon="done_all" size={18} grade={18} />
+                    find recipes
+                </button>
+            </div>
         </div>
     )
 }
