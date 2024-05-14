@@ -2,7 +2,6 @@ import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import { useEffect } from "react"
 
 export function IngredientCard({
     id,
@@ -15,25 +14,30 @@ export function IngredientCard({
         handleInputActivation,
         handleInputChange,
         handleInputDeactivation,
+        handleSuggestionClick,
         handlePressEnter,
         inputValues,
         cardState,
+        suggestions,
     } = useIngredientCard(label, id, isSelected, bgColor)
 
-    const { handleIngredientsDecrement, ingredients } = useManageIngredients()
+    const { handleIngredientsDecrement } = useManageIngredients()
 
     const bg = {
         backgroundColor: cardState.color,
     }
-    const border = {
+    const actBorder = {
         outline: `4px solid ${cardState.color}`,
+    }
+    const inactBorder = {
+        outline: `2px solid #ece9e8`,
     }
 
     return (
         <div
-            // style={border}
             onClick={handleIngredientClick}
-            className={`${classes.ingredientCard} ${classes.inputActive} ${cardState.state ? classes.selected : classes.unselected}`}
+            style={cardState.inputActive ? actBorder : inactBorder}
+            className={`${classes.ingredientCard} ${cardState.inputActive ? classes.inputActive : classes.inputInactive} ${cardState.state ? classes.selected : classes.unselected}`}
         >
             <div style={bg} className={classes.header}>
                 <div className={classes.leftItems}>
@@ -60,11 +64,19 @@ export function IngredientCard({
                 </div>
             </div>
             <div className={classes.autocompleteSuggestions}>
-                {ingredients
-                    .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
-                    .map((ingredient) => {
-                        return <p /* onclick */ key={ingredient.id}>{ingredient.name}</p>
-                    })}
+                {suggestions &&
+                    suggestions
+                        .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
+                        .map((ingredient) => {
+                            return (
+                                <p
+                                    onClick={(e) => handleSuggestionClick(e, ingredient.id)}
+                                    key={ingredient.id}
+                                >
+                                    {ingredient.name}
+                                </p>
+                            )
+                        })}
             </div>
         </div>
     )
