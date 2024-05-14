@@ -1,8 +1,11 @@
-const PopupFilter = () => {
+import PopupFilterCategory from "./PopupFilterCategory.jsx";
+
+const PopupFilter = ({ data }) => {
     return (
         <div>
-            <h2>Popup Content</h2>
-            {/* Add content for the popup */}
+            {data.map((filterCategory, index) => (
+                <PopupFilterCategory key={index} categoryName={filterCategory.categoryName} categoryFilters={filterCategory.categoryFilters} />
+            ))}
         </div>
     );
 }
