@@ -1,16 +1,18 @@
 import classes from "./Login.module.scss";
 import { Link } from "react-router-dom";
 import { LoginSocialGoogle } from "reactjs-social-login";
-import GoogleLoginButton from "../../Social Login Buttons/GoogleLoginButton";
+/* import GoogleLoginButton from "../../SocialLoginButtons/GoogleLoginButton"; */
 import { MaterialSymbol } from "react-material-symbols";
 import { Logo } from "../../Logo/Logo";
 import { useForm } from "../../../hooks/Form/useForm";
+import MyFacebookLoginButton from "../../SocialLoginButtons/GoogleLoginButton";
 
 export function Login() {
   const { data, inputRef, handleInput, handleSubmit } = useForm();
 
   return (
     <section className={classes.pageBox}>
+      
       <Logo />
 
       <div className={classes.container}>
@@ -72,7 +74,11 @@ export function Login() {
               console.log(err);
             }}
           >
-            <GoogleLoginButton />
+{/*           <GoogleLoginButton onClick={() => alert("Hello")}>
+  <span>Custom text</span> */}
+{/* </GoogleLoginButton> */}
+
+<MyFacebookLoginButton/>
           </LoginSocialGoogle>
         </footer>
       </div>
