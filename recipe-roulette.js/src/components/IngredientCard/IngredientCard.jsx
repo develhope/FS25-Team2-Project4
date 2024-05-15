@@ -1,8 +1,6 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
-import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import { useEffect } from "react"
 
 export function IngredientCard({
     id,
@@ -33,7 +31,7 @@ export function IngredientCard({
         >
             <div style={bg} className={classes.header} onClick={handleIngredientClick}>
                 <div className={classes.leftItems}>
-                    <MaterialSymbol className={classes.checkIco} icon="lock" size={24} grade={24} />
+                    <MaterialSymbol className={classes.checkIco} icon="check_circle" weight={500} size={24} grade={24} />
 
                     <textarea
                         name="ingredient"
@@ -53,7 +51,7 @@ export function IngredientCard({
                 </div>
 
                 <div className={classes.closeIco} onClick={(e) => handleXClick(e)}>
-                    <MaterialSymbol icon="close" size={24} grade={24} />
+                    <MaterialSymbol className="symbol" icon="close" size={24} grade={24} />
                 </div>
             </div>
             <div className={classes.autocompleteSuggestions}>

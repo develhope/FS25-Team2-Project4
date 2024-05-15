@@ -12,23 +12,17 @@ export const IngredientsProvider = ({ children }) => {
     //variabile di stato per gestire gli slot liberi per generazione di nuovi ingredienti
     const [slots, setSlots] = useState(initialValue)
     //variabile di stato che contiene gli ingredienti generati casualmente che verrano passati a "discovery" e visualizzati a schermo
-    const [randomIngredients, setRandomIngredients] = useState([])
+    const [displayedIngredients, setDisplayedIngredients] = useState([])
     //variabile di stato che contiene gli elementi selezionati (ingredient.isSelected === true)
     const [selectedIngredients, setSelectedIngredients] = useState([])
 
     //prima generazione di ingredienti random
     useEffect(() => {
-        selectRandomIngredients(ingredientsArr, slots, selectedIngredients)
+        selectToDisplay(ingredientsArr, slots, selectedIngredients)
     }, [initialValue])
-
-    //refresha gli ingredienti visualizzati senza modificarli
- /*    useEffect(() => {
-        selectRandomIngredients(randomIngredients, slots, selectedIngredients)
-    }, [ingredientsArr]) */
 
     //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
     const handleIngredientUpdate = (selectState, itemId) => {
-        //mappo l'array per aggiornare il valore dell'ingrediente modificato (selezionato/deselezionato/sostituito)
         const newData = ingredientsArr.map((ingredient) => {
             if (ingredient.id === itemId) {
                 return { ...ingredient, isSelected: selectState }
@@ -50,9 +44,29 @@ export const IngredientsProvider = ({ children }) => {
         })
     }
 
+    function handleDeselectAll() {
+        console.log("i'm running")
+
+        setSelectedIngredients([])
+
+        setIngredientsArr((prevData) => {
+            return prevData.map((ingredient) => {
+                return { ...ingredient, isSelected: false }
+            })
+        })
+
+        setDisplayedIngredients((prevData) => {
+            return prevData.map((ingredient) => {
+                return { ...ingredient, isSelected: false }
+            })
+        })
+        setSlots(initialValue)
+    }
     //funzione che genera randomicamente gli ingredienti
-    const selectRandomIngredients = (ingredientsArr, slots, selectedIngredients) => {
-        const ingredientIds = ingredientsArr.filter(ingredient => !ingredient.isSelected).map((ingredient) => ingredient.id)
+    const selectToDisplay = (ingredientsArr, slots, selectedIngredients) => {
+        const ingredientIds = ingredientsArr
+            .filter((ingredient) => !ingredient.isSelected)
+            .map((ingredient) => ingredient.id)
         const selectedIds = selectedIngredients.map((ingredient) => ingredient.id)
         const randomIds = []
 
@@ -67,20 +81,18 @@ export const IngredientsProvider = ({ children }) => {
             randomIds.includes(ingredient.id)
         )
 
-        setRandomIngredients([...selectedIngredients, ...newRandomIngredients])
-
-        return newRandomIngredients // Restituisci solo gli ingredienti selezionati casualmente
+        setDisplayedIngredients([...selectedIngredients, ...newRandomIngredients])
     }
 
     //funzione che ri esegue la funzione sopra
     const shuffleIngredients = () => {
-        selectRandomIngredients(ingredientsArr, slots, selectedIngredients)
+        selectToDisplay(ingredientsArr, slots, selectedIngredients)
     }
     const handleIngredientsIncrement = () => {
         if (initialValue < 8) {
             setInitialValue((n) => n + 1)
             setSlots((n) => n + 1)
-            selectRandomIngredients(ingredientsArr, slots, selectedIngredients)
+            selectToDisplay(ingredientsArr, slots, selectedIngredients)
         }
     }
     const handleIngredientsDecrement = (id, e) => {
@@ -89,7 +101,7 @@ export const IngredientsProvider = ({ children }) => {
         if (initialValue > 3 && !isTargetSelected.isSelected) {
             setInitialValue((n) => n - 1)
             setSlots((n) => n - 1)
-            selectRandomIngredients(ingredientsArr, slots, selectedIngredients)
+            selectToDisplay(ingredientsArr, slots, selectedIngredients)
         }
     }
     //ritorno tuttle le funzioni e le variabili necessarie
@@ -97,13 +109,14 @@ export const IngredientsProvider = ({ children }) => {
         <IngredientsContext.Provider
             value={{
                 selectedIngredients,
-                randomIngredients,
-                setRandomIngredients,
+                displayedIngredients,
+                setDisplayedIngredients,
                 shuffleIngredients,
                 handleIngredientUpdate,
                 ingredients: ingredientsArr,
                 handleIngredientsIncrement,
                 handleIngredientsDecrement,
+                handleDeselectAll,
             }}
         >
             {children}

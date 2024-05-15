@@ -1,28 +1,27 @@
+@use "../../assets/scss" as *;
+
 .recipeCard {
-    background-color: white;
-    display: block;
-    padding: 0;
-    padding: 0.5rem;
-    border-radius: 1rem;
+    background-color: $third-color;
+    padding: $size-16;
+    border-radius: $size-24;
     box-sizing: border-box;
     box-shadow: 0 0 3px rgba($color: #000000, $alpha: 0.2);
     text-decoration: none;
     color: inherit;
-    margin-bottom: 1rem;
+    margin-bottom: $size-24;
     .topItems {
         position: relative;
         width: 100%;
         height: calc(100vw * 0.5);
         min-height: 12rem;
-        border-radius: 0.75rem;
+        border-radius: $size-16;
         overflow: hidden;
-        border: 1px solid #f7f3f2;
+        outline: 2px solid $lighter-gray;
         box-sizing: border-box;
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border: 1px solid #F7F3F2;
         }
         .favIcon {
             position: absolute;
@@ -36,11 +35,13 @@
         }
     }
     .bottomItems {
-        font-family: "Puritan", sans-serif;
-        font-weight: 700;
-        font-size: 1.25;
+        font-family: $font-title;
+        font-weight: bold;
+        letter-spacing: .025rem;
+        font-size: $size-20;
         line-height: 120%;
-        padding: 1rem 0.5rem 0.5rem 0.5rem;
+        padding: 0 $size-4;
+        padding-top: $size-16;
         p {
             margin: 0;
             padding: 0;
@@ -56,7 +57,9 @@
         "GRAD" 0,
         "opsz" 24;
     color: white;
-    transition: scale, 0.3s ease-in-out;
+    transition:
+        scale,
+        0.3s ease-in-out;
 }
 .isFav {
     font-variation-settings:
@@ -66,5 +69,7 @@
         "opsz" 24;
     color: #fa4d56;
     scale: 1.25;
-    transition: scale, 0.3s ease-in-out;
+    transition:
+        scale,
+        0.3s ease-in-out;
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function useIngredientCard(label, id, isSelected, bgColor) {
-    const { handleIngredientUpdate, ingredients, randomIngredients, handleIngredientsDecrement } =
+    const { handleIngredientUpdate, ingredients, displayedIngredients, handleIngredientsDecrement } =
         useManageIngredients()
 
     const ingredientsArr = ingredients
@@ -25,7 +25,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
     const [suggestions, setSuggestions] = useState(ingredients)
 
     //useEffect
-    //aggiorna i dati della card quando vengono modificati label,id,isSelected,id o randomIngredients
+    //aggiorna i dati della card quando vengono modificati label,id,isSelected,id o displayedIngredients
     useEffect(() => {
         setInputValues((prevData) => {
             return {
@@ -36,13 +36,13 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         setCardState((prevData) => {
             return {
                 ...prevData,
-                ["label"]: label,
-                ["state"]: isSelected,
-                ["id"]: id,
-                ["color"]: bgColor,
+                label: label,
+                state: isSelected,
+                id: id,
+                color: bgColor,
             }
         })
-    }, [label, bgColor, isSelected, id, randomIngredients])
+    }, [label, bgColor, isSelected, id, displayedIngredients])
 
     useEffect(() => {
         setSuggestions(ingredients)
@@ -127,7 +127,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                 ingredient.name.toUpperCase().includes(e.target.value.toUpperCase()) &&
                 !ingredient.isSelected
         )
-        const isInDisplay = randomIngredients.filter((ingredient) => ingredient == isInDatabase)
+        const isInDisplay = displayedIngredients.filter((ingredient) => ingredient == isInDatabase)
 
         if (e.target.value !== "" && isInDatabase.length > 0 && isInDisplay.length === 0) {
             console.log("currentvalue:", inputValues.current)

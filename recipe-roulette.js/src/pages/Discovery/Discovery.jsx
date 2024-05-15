@@ -5,18 +5,24 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 import classes from "./Discovery.module.scss"
 
 function Discovery() {
-    const { randomIngredients, shuffleIngredients, handleIngredientsIncrement } =
+    const { displayedIngredients, shuffleIngredients, handleIngredientsIncrement, handleDeselectAll} =
         useManageIngredients()
 
     return (
         <div className={classes.discoveryPage}>
             <header>
                 <h1>Discovery</h1>
+                <button 
+                onClick={handleDeselectAll}
+                className={classes.sideButton}>
+                    Deselect all
+                    <MaterialSymbol className={classes.ico} icon="deselect"  size={18} grade={18} />
+                </button>
             </header>
 
             <div className={classes.ingredientsWrapper}>
-                {randomIngredients &&
-                    randomIngredients.map((ingredient) => {
+                {displayedIngredients &&
+                    displayedIngredients.map((ingredient) => {
                         return (
                             <IngredientCard
                                 id={ingredient.id}
