@@ -1,10 +1,14 @@
+@use "../../../assets/scss/" as *;
+
+
 .pageBox {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, auto);
-  place-items: center;
-  margin: 0;
-  background-color: rgba(252, 194, 95, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: $size-24;
+  background-color: $main-color;
+  height: 100%;
+  color: $darkest-gray;
 }
 
 .container {
@@ -12,75 +16,80 @@
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, auto);
   place-items: center;
-  background-color: rgba(253, 225, 175, 1);
+  background-color: $accent-color;
   box-sizing: border-box;
-  border-radius: 1.5em;
-  width: 19.5em;
+  border-radius: $size-24;
+  width: $width-320;
   height: fit-content;
-  font-size: 0.85em;
-  box-shadow: 0px 8px rgb(192, 148, 73);
+  font-size: $text-size-14;
+  box-shadow: 0px 8px #71a377;
 }
 
 .title {
   grid-row: 1 / 2;
   place-self: center;
   text-align: start;
-  width: 17em;
+  width: 18rem;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(28, 27, 31, 0.603);
+  border-bottom: 1px solid $main-color;
+  font-size: $text-size-20;
 }
 
 .formBox {
   grid-row: 2 / 3;
   display: grid;
-  gap: 1em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  border-bottom: 1px solid rgba(28, 27, 31, 0.603);
+  gap: 1rem;
+  padding-top: $size-16;
+  padding-bottom: $size-16;
+  border-bottom: 1px solid $main-color;
 
   .inputBox {
     display: grid;
     place-self: start;
-    width: 17em;
+    width: 18rem;
 
     input {
-      border-radius: 1.5em;
-      border: 1px ridge grey;
-      height: fit-content;
+      border-radius: $size-24;
+      border: 1px ridge $light-gray;
+      height: $height-40;
       box-sizing: border-box;
-      padding: 0.5em;
+      padding: $size-8;
       font-style: oblique;
     }
 
     ::placeholder {
-      font-size: 0.8em;
+      font-size: $text-size-12;
+      color: $medium-light-gray;
     }
 
     label {
       display: block;
-      padding: 0.3em;
+      padding: $size-8;
+      font-size: $text-size-16;
     }
   }
 
   .loginBtn {
-    background-color: rgba(245, 222, 98, 1);
+    background-color: $main-color;
     place-self: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     text-align: center;
-    gap: 0.5em;
-    border-radius: 1.5em;
+    gap: 0.5rem;
+    border-radius: $size-24;
     height: fit-content;
-    width: 13em;
-    padding: 0.3em;
-    color: rgba(28, 27, 31, 1);
+    width: 10rem;
+    padding: $size-8;
+    color: $darkest-gray;
     font-weight: 600;
     border: none;
   }
 
   p {
     font-style: oblique;
+    font-size: $text-size-14;
   }
 }
 

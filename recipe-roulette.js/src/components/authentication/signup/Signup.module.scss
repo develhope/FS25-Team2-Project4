@@ -1,10 +1,13 @@
+@use "../../../assets/scss/" as *;
+
 .pageBox {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, auto);
-  place-items: center;
-  margin: 0;
-  background-color: rgba(135, 195, 143, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: $size-24;
+  background-color: $main-color;
+  height: 100%;
+  color: $darkest-gray;
 }
 
 .container {
@@ -12,13 +15,13 @@
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, auto);
   place-items: center;
-  background-color: rgba(249, 247, 235, 1);
+  background-color: $accent-color;
   box-sizing: border-box;
-  border-radius: 1.5em;
-  width: 19.5em;
+  border-radius: $size-24;
+  width: $width-320;
   height: fit-content;
-  font-size: 0.85em;
-  box-shadow: 0px 8px rgb(112, 161, 118);
+  font-size: $text-size-14;
+  box-shadow: 0px 8px #71a377;
 }
 
 .title {
@@ -26,45 +29,48 @@
   place-self: center;
   text-align: start;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(28, 27, 31, 0.603);
-  width: 17em;
-  font-size: 1em;
+  border-bottom: 1px solid $main-color;
+  width: 18rem;
+  font-size: $text-size-20;
 }
 
 .formBox {
   grid-row: 2 / 3;
   display: grid;
-  padding-bottom: 2em;
-  padding-top: 1em;
+  padding-bottom: $size-24;
+  padding-top: $size-16;
+  gap: 1rem;
+
   .inputBox {
     display: grid;
     place-self: start;
-    width: 17em;
+    width: 18rem;
 
     input {
-      border-radius: 1.5em;
-      border: 1px ridge grey;
-      height: fit-content;
+      border-radius: $size-24;
+      border: 1px ridge $light-gray;
+      height: $height-40;
       box-sizing: border-box;
-      padding: 0.5em;
+      padding: $size-8;
       font-style: oblique;
     }
 
     ::placeholder {
-      font-size: 0.8em;
+      font-size: $text-size-12;
+      color: $medium-light-gray;
     }
 
     label {
       display: block;
-      padding: 0.3em;
+      padding: $size-8;
+      font-size: $text-size-16;
     }
 
     .checkLabel {
-      font-size: 0.8em;
+      font-size: $text-size-14;
       display: flex;
       align-items: center;
       gap: 0.2em;
-
       span {
         text-decoration: underline;
         color: blue;
@@ -74,14 +80,13 @@
 
   .signupBtn {
     place-self: center;
-    width: 13em;
-    border-radius: 1.5em;
     height: fit-content;
-    padding: 0.5em;
-    background-color: rgba(135, 195, 143, 1);
-    color: rgba(28, 27, 31, 1);
+    width: 10rem;
+    border-radius: $size-24;
+    padding: $size-8;
+    background-color: $main-color;
+    color: $darkest-gray;
     border: none;
-    margin-top: 1em;
     font-weight: 600;
     text-align: center;
   }

@@ -55,7 +55,7 @@ export function Signup() {
               id="confirmPass"
               value={data.confirmPass}
               onChange={handleInputCheckbox}
-              placeholder="Repeat Password"
+              placeholder="Repeat password"
               required
             />
             <p>{passError}</p>

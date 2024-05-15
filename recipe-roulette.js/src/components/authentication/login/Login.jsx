@@ -49,7 +49,7 @@ export function Login() {
             disabled={!data.username || !data.password}
             className={classes.loginBtn}
           >
-            <MaterialSymbol icon="login" size={22} />
+            <MaterialSymbol icon="login" size={20} />
             Login
           </button>
 
