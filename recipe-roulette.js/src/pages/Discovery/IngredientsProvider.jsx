@@ -1,7 +1,6 @@
-import { useState, useEffect, createContext, useContext } from "react"
-import ingredients from "../../components/IngredientCard/ingredients"
-
-const IngredientsContext = createContext()
+import React, { useEffect, useState } from "react";
+import IngredientsContext from "./IngredientsContext";
+import ingredients from "../../components/IngredientCard/ingredients";
 
 export const IngredientsProvider = ({ children }) => {
     const [ingredientsArr, setIngredientsArr] = useState(ingredients)
@@ -17,7 +16,7 @@ export const IngredientsProvider = ({ children }) => {
 
     useEffect(() => {
         setDisplayedIngredients([...selectedIngredients, ...randomIngredients])
-    }, [randomIngredients])
+    }, [randomIngredients, selectedIngredients])
 
     const handleIngredientUpdate = (selectState, itemId) => {
         const updatedIngredients = ingredientsArr.map((ingredient) =>
@@ -101,13 +100,4 @@ export const IngredientsProvider = ({ children }) => {
             {children}
         </IngredientsContext.Provider>
     )
-}
-
-//non so a che serve questo, messo da ghatGPT
-export const useManageIngredients = () => {
-    const context = useContext(IngredientsContext)
-    if (!context) {
-        throw new Error("useManageIngredients must be used within an IngredientsProvider")
-    }
-    return context
 }
