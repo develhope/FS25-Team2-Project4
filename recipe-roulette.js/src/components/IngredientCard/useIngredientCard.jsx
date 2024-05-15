@@ -63,8 +63,11 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
             ingredient.name.toUpperCase().includes(inputValue) && !ingredient.isSelected
         );
 
-        const isInDisplay = displayedIngredients.filter(ingredient =>
-            isInDatabase.some(dbIngredient => dbIngredient.id === ingredient.id)
+        const isInDisplay = displayedIngredients.filter(displayedIngredient =>
+            isInDatabase.some(dbIngredient =>
+                dbIngredient.id === displayedIngredient.id ||
+                dbIngredient.name.toUpperCase() === displayedIngredient.name.toUpperCase()
+            )
         );
 
         const firstAvailableIngredient = isInDatabase.find(ingredient =>
