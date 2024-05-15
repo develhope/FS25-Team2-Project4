@@ -6,24 +6,27 @@ import RecipeResults from "./pages/RecipesResults/RecipesResults"
 import { Login } from "./components/authentication/login/Login"
 import { Signup } from "./components/authentication/signup/Signup"
 import { Authentication } from "./components/authentication/Authentication"
+import { IngredientsProvider } from "./pages/Discovery/IngredientsContext"
 
 function App() {
     return (
         <div className="appContainer">
-            <Routes>
-                <Route path="/" element={<Discovery />} />
-                <Route path="/favorited" element={<Favorited />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/recipes-results" element={<RecipeResults />}>
-                    <Route path="./:recipeName" element="RecipePage" />
-                </Route>
+            <IngredientsProvider>
+                <Routes>
+                    <Route path="/" element={<Discovery />} />
+                    <Route path="/favorited" element={<Favorited />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/recipes-results" element={<RecipeResults />}>
+                        <Route path="./:recipeName" element="RecipePage" />
+                    </Route>
 
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/auth" element={<Authentication/>}/>
                 
-            </Routes>
-            
+                </Routes>
+            </IngredientsProvider>
+
             <div className="bottomNav">
                 <Link className="pageLink" to="./">
                     Discovery
@@ -35,7 +38,7 @@ function App() {
                     Settings
                 </Link>
                 <Link className="pageLink" to="./recipes-results">
-                    Recipe Results
+                    Recipes
                 </Link>
                 <Link className="pageLink" to="./login">Login</Link>
                 <Link className="pageLink" to="./signup">Signup</Link>

@@ -1,16 +1,88 @@
+@use "../../assets/scss" as *;
 
-
-.ingredientsWrapper {
-    background-color: azure;
-    margin: 0;
-    padding: 0;
+.discoveryPage {
     display: flex;
-    flex-direction: column;
     width: 100%;
+    flex-direction: column;
     height: 100%;
-    border: solid;
     box-sizing: border-box;
-    padding: 1rem;
-
-
+    padding: $size-24;
+    padding-bottom: 0;
+    overflow: hidden;
+    header {
+        display: flex;
+        justify-content: space-between;
+        height: 5rem;
+        align-items: center;
+        padding-left: $size-8;
+        h1 {
+            margin: 0;
+        }
+        .sideButton {
+            display: flex;
+            align-items: center;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: $text-size-14;
+            width: fit-content;
+            height: $height-40;
+            color: $dark-gray;
+            font-weight: 600;
+            border: 1px solid #e5e0df;
+            border-radius: $size-20;
+            background-color: white;
+            padding: 0 $size-16;
+            .ico {
+                padding-top: 3px;
+            }
+        }
+    }
+    .ingredientsWrapper {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        height: 1px;
+        max-height: 100%;
+        box-sizing: border-box;
+        gap: $size-16;
+        align-items: center;
+    }
+    .bottomButtons {
+        background-color: #fff;
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        gap: 1rem;
+        align-items: center;
+        padding: $size-16 0;
+        .cycleButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3.5rem;
+            min-width: 3.5rem;
+            box-sizing: border-box;
+            padding-top: 2px;
+            border: none;
+            border-radius: 2.5rem;
+            color: #3c3838;
+            background-color: #87c38f;
+        }
+        .sideButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: $text-size-14;
+            width: 100%;
+            min-width: max-content;
+            height: 3rem;
+            color: #3c3838;
+            font-weight: 600;
+            border: 1px solid #e5e0df;
+            border-radius: 2.5rem;
+            background-color: white;
+        }
+    }
 }

@@ -4,9 +4,8 @@
 body {
     margin: 0;
     box-sizing: border-box;
-    height: 100vh;
+    height: 100svh;
 }
-
 #root {
     height: 100%;
     box-sizing: border-box;
@@ -20,17 +19,21 @@ body {
     height: 100%;
 }
 .bottomNav {
+    background-color: white;
     display: flex;
+    height: 5rem;
+    min-height: 5rem;
     width: 100%;
     box-sizing: border-box;
-    height: $height-80;
+    outline: 1px solid #E5E0DF;
 }
 .pageLink {
     display: flex;
-    text-decoration: none;
     align-items: center;
+    justify-content: center;
+    text-decoration: none;
     color: inherit;
     padding: 1rem;
-    border-top: 1px gray solid;
+    text-align: center;
     width: 100%;
 }

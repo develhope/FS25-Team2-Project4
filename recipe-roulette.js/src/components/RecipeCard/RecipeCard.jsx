@@ -1,6 +1,8 @@
 import classes from "./RecipeCard.module.scss"
 import { Link } from "react-router-dom"
 import { useFavorite } from "./useFavorite"
+import { MaterialSymbol } from "react-material-symbols"
+
 
 const defaultImg =
     "https://img.freepik.com/free-photo/delicious-mahi-mahi-fish-still-life_23-2150457331.jpg?t=st=1715248356~exp=1715251956~hmac=45d0d10ecc8eb065b7fad68bd57cf951a4e48e4c58c74a1d49bf2783b0d2e9cd&w=740"
@@ -18,9 +20,7 @@ function RecipeCard({ title = defaultTitle, image = defaultImg }) {
                         onClick={(e) => handleFavState(e)}
                         className={`${classes.favIcon} ${favState ? classes.isFav : classes.notFav}`}
                     >
-                        {classes.favIcon && (
-                            <span className="material-symbols-outlined">favorite</span>
-                        )}
+                        {classes.favIcon && <MaterialSymbol icon="favorite" fill size={24} grade={24} />}
                     </div>
                     <img src={image} alt="" />
                 </div>

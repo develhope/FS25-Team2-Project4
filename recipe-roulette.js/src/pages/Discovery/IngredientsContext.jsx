@@ -1,0 +1,134 @@
+import { useState, useEffect, createContext, useContext } from "react"
+import ingredients from "../../components/IngredientCard/ingredients"
+
+//creo il contesto
+const IngredientsContext = createContext()
+
+//creo il provider di contesto (quello che avvolge tutti i componenti a cui verrà resa accessibile questa libreria di variabili e funzioni)
+export const IngredientsProvider = ({ children }) => {
+    //variabile di stato per l'array di ingredeinti
+    const [ingredientsArr, setIngredientsArr] = useState(ingredients)
+    const [initialValue, setInitialValue] = useState(5)
+    //variabile di stato per gestire gli slot liberi per generazione di nuovi ingredienti
+    const [slots, setSlots] = useState(initialValue)
+    //variabile di stato che contiene gli ingredienti generati casualmente che verrano passati a "discovery" e visualizzati a schermo
+    const [displayedIngredients, setDisplayedIngredients] = useState([])
+    //variabile di stato che contiene gli elementi selezionati (ingredient.isSelected === true)
+    const [selectedIngredients, setSelectedIngredients] = useState([])
+
+    //prima generazione di ingredienti random
+    useEffect(() => {
+        selectToDisplay(ingredientsArr, slots, selectedIngredients)
+    }, [initialValue])
+
+    //funzione per modificare l'array di ingredienti quando un ingrediente viene selezionato (imposta ingredient.isSelected a true, il resto dell'array rimane invariato)
+    const handleIngredientUpdate = (selectState, itemId) => {
+        const newData = ingredientsArr.map((ingredient) => {
+            if (ingredient.id === itemId) {
+                return { ...ingredient, isSelected: selectState }
+            } else {
+                return ingredient
+            }
+        })
+        setIngredientsArr(newData)
+
+        const newSelectedIngredients = newData
+            .filter((ingredient) => ingredient.isSelected)
+            .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
+
+        setSelectedIngredients(newSelectedIngredients)
+
+        setSlots(() => {
+            const newN = initialValue - newSelectedIngredients.length
+            return newN
+        })
+    }
+
+    function handleDeselectAll() {
+        console.log("i'm running")
+
+        setSelectedIngredients([])
+
+        setIngredientsArr((prevData) => {
+            return prevData.map((ingredient) => {
+                return { ...ingredient, isSelected: false }
+            })
+        })
+
+        setDisplayedIngredients((prevData) => {
+            return prevData.map((ingredient) => {
+                return { ...ingredient, isSelected: false }
+            })
+        })
+        setSlots(initialValue)
+    }
+    //funzione che genera randomicamente gli ingredienti
+    const selectToDisplay = (ingredientsArr, slots, selectedIngredients) => {
+        const ingredientIds = ingredientsArr
+            .filter((ingredient) => !ingredient.isSelected)
+            .map((ingredient) => ingredient.id)
+        const selectedIds = selectedIngredients.map((ingredient) => ingredient.id)
+        const randomIds = []
+
+        while (randomIds.length < slots) {
+            const randomId = ingredientIds[Math.floor(Math.random() * ingredientIds.length)]
+            if (!randomIds.includes(randomId) && !selectedIds.includes(randomId)) {
+                randomIds.push(randomId)
+            }
+        }
+
+        const newRandomIngredients = ingredientsArr.filter((ingredient) =>
+            randomIds.includes(ingredient.id)
+        )
+
+        setDisplayedIngredients([...selectedIngredients, ...newRandomIngredients])
+    }
+
+    //funzione che ri esegue la funzione sopra
+    const shuffleIngredients = () => {
+        selectToDisplay(ingredientsArr, slots, selectedIngredients)
+    }
+    const handleIngredientsIncrement = () => {
+        if (initialValue < 8) {
+            setInitialValue((n) => n + 1)
+            setSlots((n) => n + 1)
+            selectToDisplay(ingredientsArr, slots, selectedIngredients)
+        }
+    }
+    const handleIngredientsDecrement = (id, e) => {
+        const isTargetSelected = ingredientsArr.find((ingredient) => ingredient.id === id)
+        e.stopPropagation()
+        if (initialValue > 3 && !isTargetSelected.isSelected) {
+            setInitialValue((n) => n - 1)
+            setSlots((n) => n - 1)
+            selectToDisplay(ingredientsArr, slots, selectedIngredients)
+        }
+    }
+    //ritorno tuttle le funzioni e le variabili necessarie
+    return (
+        <IngredientsContext.Provider
+            value={{
+                selectedIngredients,
+                displayedIngredients,
+                setDisplayedIngredients,
+                shuffleIngredients,
+                handleIngredientUpdate,
+                ingredients: ingredientsArr,
+                handleIngredientsIncrement,
+                handleIngredientsDecrement,
+                handleDeselectAll,
+            }}
+        >
+            {children}
+        </IngredientsContext.Provider>
+    )
+}
+
+//non so a che serve questo, messo da ghatGPT
+export const useManageIngredients = () => {
+    const context = useContext(IngredientsContext)
+    if (!context) {
+        throw new Error("useManageIngredients must be used within an IngredientsProvider")
+    }
+    return context
+}
