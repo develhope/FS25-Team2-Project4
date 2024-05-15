@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Puritan:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// font
+$font-logo: "Lilita One";
+$font-title: "Puritan", sans-serif;
+$font-text: "Roboto";
+
+// text dimension
+$text-size-14: .875rem;
+$text-size-16: 1rem;
+$text-size-20: 1.25rem;
+$text-size-24: 1.5rem;
+$text-size-32: 2rem; 
+
+// colors
+$main-color: #87C38F;  
+$second-color: #C5E4C9;
+$third-color: #F8FFF8;
+$accent-color:#F9F7EB;
+$light-red: #FA4D56;
+$red: #DA1E28;
+$green: #24A148;
+$light-gray: #E5E0DF; // outline
+$lighter-gray: #F7F3F2; // outline (when selected)
+$medium-gray: #8F8B8B;  // inactive buttons
+$medium-light-gray: #A2A9B0; //placeholder text
+
+$dark-gray: #343A3F; //text color
+$darkish-gray: #4D5358; //text color
+$darkest-gray: #21272A; //text color
+
+
+
+// layout (border, padding, margin)
+$size-4: .25rem;
+$size-8: .5rem; 
+$size-16: 1rem;
+$size-20: 1.25rem;
+$size-24: 1.5rem;
+
+//dimensions
+$heigth-40: 2.5rem;
+$heigth-80: 5rem;
+$width-320: 20rem;
+$width-360: 22.5rem;
