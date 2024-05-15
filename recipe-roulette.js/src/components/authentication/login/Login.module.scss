@@ -14,7 +14,7 @@
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
   place-items: center;
   background-color: $accent-color;
   box-sizing: border-box;
@@ -22,7 +22,7 @@
   width: $width-320;
   height: fit-content;
   font-size: $text-size-14;
-  box-shadow: 0px 8px #71a377;
+  box-shadow: 0px 16px 16px $green;
 }
 
 .title {
@@ -55,6 +55,7 @@
       box-sizing: border-box;
       padding: $size-8;
       font-style: oblique;
+      box-shadow: 0px 2px 4px $light-gray;
     }
 
     ::placeholder {
@@ -85,17 +86,11 @@
     color: $darkest-gray;
     font-weight: 600;
     border: none;
+    box-shadow: 0px 4px 8px $main-color;
   }
 
   p {
     font-style: oblique;
     font-size: $text-size-14;
   }
-}
-
-.iconsBox {
-  grid-row: 3 / 4;
-  place-items: center;
-  box-sizing: border-box;
-  height: fit-content;
 }

@@ -1,11 +1,8 @@
 import classes from "./Login.module.scss";
 import { Link } from "react-router-dom";
-import { LoginSocialGoogle } from "reactjs-social-login";
-/* import GoogleLoginButton from "../../SocialLoginButtons/GoogleLoginButton"; */
 import { MaterialSymbol } from "react-material-symbols";
 import { Logo } from "../../Logo/Logo";
 import { useForm } from "../../../hooks/Form/useForm";
-import MyFacebookLoginButton from "../../SocialLoginButtons/GoogleLoginButton";
 
 export function Login() {
   const { data, inputRef, handleInput, handleSubmit } = useForm();
@@ -60,27 +57,6 @@ export function Login() {
             </span>
           </p>
         </form>
-
-        <footer className={classes.iconsBox}>
-          <LoginSocialGoogle
-            isOnlyGetToken
-            client_id={
-              "511651854576-4md3njisbf61ha7i2b0hn4nmp7gug82q.apps.googleusercontent.com"
-            }
-            onResolve={({ provider, data }) => {
-              console.log(provider, data);
-            }}
-            onReject={(err) => {
-              console.log(err);
-            }}
-          >
-{/*           <GoogleLoginButton onClick={() => alert("Hello")}>
-  <span>Custom text</span> */}
-{/* </GoogleLoginButton> */}
-
-<MyFacebookLoginButton/>
-          </LoginSocialGoogle>
-        </footer>
       </div>
     </section>
   );

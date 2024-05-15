@@ -5,6 +5,7 @@ import Settings from "./pages/Settings/Settings"
 import RecipeResults from "./pages/RecipesResults/RecipesResults"
 import { Login } from "./components/authentication/login/Login"
 import { Signup } from "./components/authentication/signup/Signup"
+import { Authentication } from "./components/authentication/Authentication"
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
 
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
+                <Route path="/auth" element={<Authentication/>}/>
                 
             </Routes>
             
@@ -37,6 +39,7 @@ function App() {
                 </Link>
                 <Link className="pageLink" to="./login">Login</Link>
                 <Link className="pageLink" to="./signup">Signup</Link>
+                <Link className="pageLink" to="./auth">Authentication</Link>
             </div>
         </div>
     )
