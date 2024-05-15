@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function useIngredientCard(label, id, isSelected, bgColor) {
-    const { handleIngredientUpdate, ingredients, randomIngredients } = useManageIngredients()
+    const { handleIngredientUpdate, ingredients, randomIngredients, handleIngredientsDecrement } =
+        useManageIngredients()
 
     const ingredientsArr = ingredients
 
@@ -21,9 +22,10 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         inputActive: false,
     })
 
-    const [suggestions, setSuggestions] = useState(ingredients) 
+    const [suggestions, setSuggestions] = useState(ingredients)
 
     //useEffect
+    //aggiorna i dati della card quando vengono modificati label,id,isSelected,id o randomIngredients
     useEffect(() => {
         setInputValues((prevData) => {
             return {
@@ -41,9 +43,10 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
             }
         })
     }, [label, bgColor, isSelected, id, randomIngredients])
-    useEffect(()=> {
-        suggestions
-    }, [suggestions])
+
+    useEffect(() => {
+        setSuggestions(ingredients)
+    }, [ingredients])
 
     //funzione 1 seleziona l'elemento e aggiorna l'array di ingredienti di conseguenza
     function handleIngredientClick() {
@@ -58,8 +61,6 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
 
     //funzione 2 gestione dell'input quando viene attivato (click/ focus)
     function handleInputActivation(e) {
-        console.log("im runniiiiiiing")
-        //usiamo stopPropagation perchè in caso contrario il click arriverebbe al componente padre e l'ingrediente verrebbe selezionato
         e.stopPropagation()
         setCardState((prevData) => {
             return {
@@ -67,27 +68,24 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                 ["inputActive"]: true,
             }
         })
-        //se il campo di testo non è vuoto, inputValues.initial viene impostato al valore che si trovava precedentemente in current (ingrediente originale)
         if (inputValues.current !== "") {
             setInputValues((prev) => {
                 return {
                     ...prev,
                     ["initial"]: cardState.label,
-                    //e current viene impostato a stringa vuota per mermettere di scrivervi senza dover cancellare
                     ["current"]: "",
                 }
             })
-
-            //imposto il valore isSelected dell'elemento "precedente" (che vogliamo sovrascrivere) a false, e lascio la variabile di stato invariata.
-            //In questo modo non verrà visualizata l'animazione di deselezione, ma il nuovo ingredeinte prederà comunque il posto di quello precedente.
             handleIngredientUpdate(false, cardState.id)
         }
     }
 
-    //onChange, viene impostato un nuovo valore a inputValues.current (quello mostrato a schermo)
+    //funzione 3 gestione del campo di input quando l'utente digita
     function handleInputChange(e) {
         //filter suggestions
-        const newSuggestions = ingredientsArr.filter((ingredient => !ingredient.isSelected && ingredient.name.toUpperCase().includes(e.target.value.toUpperCase())))
+        const newSuggestions = ingredientsArr.filter((ingredient) =>
+            ingredient.name.toUpperCase().includes(e.target.value.toUpperCase())
+        )
         setInputValues((prev) => {
             return {
                 ...prev,
@@ -95,29 +93,44 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
             }
         })
         setSuggestions(newSuggestions)
-        console.log(suggestions);
     }
 
-    //quando l'input viene disattivato (deselezionato), viene effettuato un filter dell'array contenente i nomi di tutti gli ingredienti in database
-    function handleInputDeactivation() {
+    //funzione 4 gestione del click di un suggerimento
+    function handleSuggestionClick(e, id) {
+        e.stopPropagation()
+        const clickedElement = ingredientsArr.find((ingredient) => ingredient.id === id)
+        if (!clickedElement.isSelected) {
+            setCardState(() => {
+                return {
+                    label: clickedElement.name,
+                    id: clickedElement.id,
+                    state: true,
+                    color: clickedElement.bgColor,
+                    inputActive: false,
+                }
+            })
+            setInputValues((prev) => {
+                return {
+                    ...prev,
+                    ["current"]: clickedElement.name,
+                }
+            })
+            e.target.value = clickedElement.name
+            handleIngredientUpdate(true, clickedElement.id)
+        }
+    }
+
+    //function 5 gestione della disattivazione dell'input
+    function handleInputDeactivation(e) {
         const isInDatabase = ingredientsArr.filter(
             (ingredient) =>
-                ingredient.name.toUpperCase().includes(inputValues.current.toUpperCase())
-                 && !ingredient.isSelected
+                ingredient.name.toUpperCase().includes(e.target.value.toUpperCase()) &&
+                !ingredient.isSelected
         )
-        console.log("in database", isInDatabase);
+        const isInDisplay = randomIngredients.filter((ingredient) => ingredient == isInDatabase)
 
-        let isInDisplay = []
-
-        if (isInDatabase.length > 0) {
-            isInDisplay = randomIngredients.filter((ingredient) => ingredient == isInDatabase[0])
-        }
-        //se il valore all'interno dell'input corrisponde al nome di un ingrediente, e non è già presente tra gli
-        //ingredienti visibili a schermo, il nome dell'ingrediente viene impostato come valore dell'input
-        if (inputValues.current !== "" && isInDatabase.length > 0 && isInDisplay.length === 0) {
-            //imposto la variabile di stato inputValues (quella che renderizza il nome dell'ingrediente)
-
-            //e la variabile di stato con tutte le altre informazioni sulla card
+        if (e.target.value !== "" && isInDatabase.length > 0 && isInDisplay.length === 0) {
+            console.log("currentvalue:", inputValues.current)
             setCardState(() => {
                 return {
                     label: isInDatabase[0].name,
@@ -134,22 +147,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
                 }
             })
             handleIngredientUpdate(true, isInDatabase[0].id)
-        }  
-        /* else if (isInDatabase.length === 1 && isInDisplay.length === 1) {
-            //handleIngredintOnDisplay (spunta una snackbar di avviso oppure selezioniamo quell'elemento al posto di quello selezionato)
-            //...
-            setCardState(() => {
-                return {
-                    label: isInDisplay[0].name,
-                    id: isInDisplay[0].id,
-                    ["state"]: true,
-                    color: isInDisplay[0].bgColor,
-                }
-            })
-            handleIngredientUpdate(true, isInDisplay[0].id)
-            //in caso contrario, l'input viene impostato al suo valore iniziale
-            //ad esempio de prima di cliccare sull'input avevamo l'ingrediente "tomato", il valore dell'input tornerà "tomato"
-        } */ else {
+        } else {
             setInputValues((prev) => {
                 return {
                     ...prev,
@@ -164,36 +162,36 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
             })
             handleIngredientUpdate(cardState.state, cardState.id)
         }
+        setSuggestions(ingredients)
     }
 
-    //anche quando si preme enter, l'input viene deselezionato e quindi viene eseguita la funzione handleInputDeactivation
+    // funnzione 6 quando si preme enter, l'input viene deselezionato e quindi viene eseguita la funzione handleInputDeactivation
     function handlePressEnter(e) {
         if (e.keyCode === 13) {
             e.target.blur()
         }
     }
 
-    function handleSuggestionClick(e, id) {
+    function handleXClick(e) {
         e.stopPropagation()
-        const clickedElement = ingredientsArr.find((ingredient) => ingredient.id === id)
-        setCardState(() => {
-            return {
-                label: clickedElement.name,
-                id: clickedElement.id,
-                ["state"]: true,
-                color: clickedElement.bgColor,
-                ["inputActive"]: false,
-            }
-        })
-        setInputValues((prev) => {
-            return {
-                ...prev,
-                ["current"]: clickedElement.name,
-            }
-        })
-        handleIngredientUpdate(true, clickedElement.id)
+        if (cardState.inputActive) {
+            setInputValues((prevData) => {
+                return {
+                    ...prevData,
+                    current: "",
+                }
+            })
+            setCardState((prevData) => {
+                return {
+                    ...prevData,
+                    inputActive: false,
+                }
+            })
+        } else {
+            handleIngredientsDecrement(cardState.id, e)
+        }
     }
-    
+
     return {
         handleIngredientClick,
         handleInputActivation,
@@ -201,6 +199,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         handleInputDeactivation,
         handleSuggestionClick,
         handlePressEnter,
+        handleXClick,
         inputValues,
         setInputValues,
         setCardState,

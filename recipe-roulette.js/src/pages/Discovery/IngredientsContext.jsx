@@ -36,16 +36,12 @@ export const IngredientsProvider = ({ children }) => {
                 return ingredient
             }
         })
-
-        //impostiamo la variabile di stato uguale all'array mappato sopra
         setIngredientsArr(newData)
 
-        //mappo l'array appena aggiornato per prendere tutti gli ingredienti con valore "isSelected = true"
         const newSelectedIngredients = newData
             .filter((ingredient) => ingredient.isSelected)
             .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
 
-        //e imposto il risultato all'array selectedIngredients (che contiene solo gli elementi con valore "isSelected = true")
         setSelectedIngredients(newSelectedIngredients)
 
         setSlots(() => {
