@@ -5,7 +5,7 @@
     border-radius: 1.5rem;
     overflow: hidden;
     transform: translateY(0);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.4s ease-out;
 }
 .inputInactive {
     box-sizing: border-box;
@@ -100,7 +100,7 @@
     padding: 0;
     height: fit-content;
     outline: 2px solid #ece9e8;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.4s ease-out;
 
     .header {
         height: 4rem;

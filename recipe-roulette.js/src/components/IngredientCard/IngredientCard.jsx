@@ -1,6 +1,8 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
+import { InputSuggestions } from "./InputSuggestions/InputSuggestions"
+import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function IngredientCard({
     id,
@@ -20,18 +22,23 @@ export function IngredientCard({
         cardState,
         suggestions,
     } = useIngredientCard(label, id, isSelected, bgColor)
-
+    const { displayedIngredients } = useManageIngredients()
     const bg = {
         backgroundColor: cardState.color,
     }
-
     return (
         <div
             className={`${classes.ingredientCard} ${cardState.inputActive ? classes.inputActive : classes.ingredientCard} ${cardState.state ? classes.selected : classes.unselected}`}
         >
             <div style={bg} className={classes.header} onClick={handleIngredientClick}>
                 <div className={classes.leftItems}>
-                    <MaterialSymbol className={classes.checkIco} icon="check_circle" weight={500} size={24} grade={24} />
+                    <MaterialSymbol
+                        className={classes.checkIco}
+                        icon="check_circle"
+                        weight={500}
+                        size={24}
+                        grade={24}
+                    />
 
                     <textarea
                         name="ingredient"
@@ -42,7 +49,7 @@ export function IngredientCard({
                         onBlur={(e) =>
                             setTimeout(() => {
                                 handleInputDeactivation(e)
-                            }, 100)
+                            }, 25)
                         }
                         onKeyDown={handlePressEnter}
                         onChange={handleInputChange}
@@ -54,34 +61,11 @@ export function IngredientCard({
                     <MaterialSymbol className="symbol" icon="close" size={24} grade={24} />
                 </div>
             </div>
-            <div className={classes.autocompleteSuggestions}>
-                {suggestions &&
-                    suggestions
-                        .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
-                        .map((ingredient) => {
-                            if (!ingredient.isSelected) {
-                                return (
-                                    <p
-                                        className={classes.active}
-                                        onClick={(e) => handleSuggestionClick(e, ingredient.id)}
-                                        key={ingredient.id}
-                                    >
-                                        {ingredient.name}
-                                    </p>
-                                )
-                            } else {
-                                return (
-                                    <p
-                                        className={classes.inactive}
-                                     
-                                        key={ingredient.id}
-                                    >
-                                        {ingredient.name}
-                                    </p>
-                                )
-                            }
-                        })}
-            </div>
+            <InputSuggestions
+                displayedIngredients={displayedIngredients}
+                suggestions={suggestions}
+                handleSuggestionClick={handleSuggestionClick}
+            />
         </div>
     )
 }
