@@ -4,12 +4,14 @@ import Favorited from "./pages/Favorited/Favorited"
 import Settings from "./pages/Settings/Settings"
 import RecipeResults from "./pages/RecipesResults/RecipesResults"
 import { IngredientsProvider } from "./pages/Discovery/IngredientsContext"
+import { Sidebar } from "./components/Sidebar/Sidebar"
 
 function App() {
     return (
         <div className="appContainer">
             <IngredientsProvider>
                 <Routes>
+                    <Route path="/sidebar" element={<Sidebar />} />
                     <Route path="/" element={<Discovery />} />
                     <Route path="/favorited" element={<Favorited />} />
                     <Route path="/settings" element={<Settings />} />

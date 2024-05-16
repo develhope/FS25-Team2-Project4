@@ -10,6 +10,7 @@ export const IngredientsProvider = ({ children }) => {
     const [displayedIngredients, setDisplayedIngredients] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [randomIngredients, setRandomIngredients] = useState([])
+    const [blackList, setBlackList] = useState([])
 
     useEffect(() => {
         selectToDisplay(ingredientsArr, slots)
@@ -29,10 +30,25 @@ export const IngredientsProvider = ({ children }) => {
             (ingredient) => ingredient.isSelected
         )
         setSelectedIngredients(newSelectedIngredients)
-        
+
+        /*         const updatedRandomIngredients = randomIngredients.map((randomIngredient) => {
+            const updatedIngredient = updatedIngredients.find(
+                (ingredient) => ingredient.id === randomIngredient.id
+            )
+            return updatedIngredient || randomIngredient
+        })
+
+        const newRandomIngredients = updatedRandomIngredients.filter(
+            (ingredient) => !ingredient.isSelected
+        ) */
+
         const newSlots = initialValue - newSelectedIngredients.length
         setSlots(newSlots)
+
+        /*         return [...newSelectedIngredients, ...newRandomIngredients]
+         */
     }
+
     const handleDeselectAll = () => {
         setSelectedIngredients([])
         setIngredientsArr((prevData) =>
@@ -42,6 +58,23 @@ export const IngredientsProvider = ({ children }) => {
             displayedIngredients.map((ingredient) => ({ ...ingredient, isSelected: false }))
         )
         setSlots(initialValue)
+    }
+
+    const handleBlackListUpdate = (state, itemId) => {
+        const updatedIngredients = ingredientsArr.map((ingredient) =>
+            ingredient.id === itemId ? { ...ingredient, isBlackListed: state } : ingredient
+        )
+        setIngredientsArr(updatedIngredients)
+        const newBlackListedIngredients = updatedIngredients.filter(
+            (ingredient) => ingredient.isBlackListed
+        )
+
+        setBlackList(newBlackListedIngredients)
+    }
+
+    const handleBlackListReset = ()=>  {
+        setIngredientsArr(ingredientsArr.map(ing => ({...ing, isBlackListed: false})))
+        setBlackList([])
     }
 
     const selectToDisplay = (ingredientsArr, slots) => {
@@ -96,6 +129,10 @@ export const IngredientsProvider = ({ children }) => {
                 handleIngredientsIncrement,
                 handleIngredientsDecrement,
                 handleDeselectAll,
+                blackList,
+                setBlackList,
+                handleBlackListUpdate,
+                handleBlackListReset,
             }}
         >
             {children}

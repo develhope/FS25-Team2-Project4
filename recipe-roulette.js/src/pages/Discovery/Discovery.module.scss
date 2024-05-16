@@ -1,6 +1,7 @@
 @use "../../assets/scss" as *;
 
 .discoveryPage {
+    background-color: $third-color;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -49,7 +50,7 @@
         align-items: center;
     }
     .bottomButtons {
-        background-color: #fff;
+        background-color: $third-color;
         display: flex;
         width: 100%;
         box-sizing: border-box;

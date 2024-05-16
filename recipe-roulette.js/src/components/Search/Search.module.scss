@@ -1,0 +1,104 @@
+@use "../../assets/scss/" as *;
+
+.search {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+}
+.searchBar {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 3rem;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    input {
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+
+        font-family: inherit;
+        font-size: $text-size-16;
+        line-height: 120%;
+
+        width: 100%;
+        height: 100%;
+        padding-left: $size-24;
+        box-sizing: border-box;
+
+        border: none;
+        background-color: transparent;
+    }
+    ::placeholder {
+        color: $medium-gray;
+        line-height: 120%;
+    }
+    :focus {
+        outline: none;
+    }
+    .ico {
+        color: $dark-gray;
+        position: absolute;
+        left: 0.5 rem;
+        height: 2rem;
+        width: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .searchIco {
+        right: 0.5rem;
+    }
+    .closeIco {
+        right: 0.5em;
+        background-color: transparent;
+        border: none;
+    }
+}
+
+.inputInactive {
+    background-color: $third-color;
+    border-radius: $size-24;
+    outline: 1px solid $lighter-gray;
+    outline-offset: -2px;
+}
+
+.inputActive {
+    border-radius: $size-24 $size-24 0 0;
+    background-color: $second-color;
+}
+
+.suggestions {
+    background-color: $third-color;
+    position: absolute;
+    top: 3rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    height: 312px;
+    overflow-y: scroll;
+    border-radius: 0 0 $size-24 $size-24;
+    outline: 1px solid $lighter-gray;
+    outline-offset: -2px;
+    p {
+        margin: 0;
+        padding: 1rem;
+        background-color: $third-color;
+        border-top: 1px solid #ece9e8;
+    }
+    .active {
+        color: black;
+    }
+    .inactive {
+        color: rgb(198, 198, 198);
+    }
+}

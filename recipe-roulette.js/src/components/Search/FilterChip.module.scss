@@ -1,0 +1,14 @@
+@use "../../assets/scss/" as *;
+
+.filterChip {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    box-sizing: border-box;
+    height: 32px;
+    padding-left: .5rem;
+    padding-right: 1rem;
+    border-radius: $size-8;
+    background-color: $second-color;
+    gap: $size-8;
+}

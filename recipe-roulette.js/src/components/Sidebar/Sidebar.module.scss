@@ -1,0 +1,51 @@
+@use "../../assets/scss/" as *;
+
+.sidebar {
+    position: fixed;
+    padding: $size-24;
+    box-sizing: border-box;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 0 200px rgba($color: #000000, $alpha: 0.2);
+    height: 100%;
+    width: $width-360;
+    border-radius: $size-24 0 0 $size-24;
+}
+.blackListed {
+    display: flex;
+    flex-direction: column;
+    gap: $size-16;
+    h4 {
+        margin: 0;
+    }
+}
+.filterChipWrapper {
+    display: flex;
+    gap: $size-8;
+    flex-wrap: wrap;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .deselectAllButton {
+        display: flex;
+        align-items: center;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: $text-size-14;
+        width: fit-content;
+        height: $height-40;
+        color: $dark-gray;
+        font-weight: 600;
+        border: 1px solid #e5e0df;
+        border-radius: $size-20;
+        background-color: white;
+        padding: 0 $size-16;
+        .ico {
+            padding-top: 3px;
+        }
+    }
+}
