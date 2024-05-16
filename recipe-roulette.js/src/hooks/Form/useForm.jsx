@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
 export function useForm() {
-  const [data, setData] = useState(createData());
+  const [data, setData] = useState(localStorage.getItem("username", "password") || createData());
   const [passError, setPassError] = useState(null);
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
+    inputRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("password", data.password);
+  }, [data]);
+
 
   function createData() {
     return {
@@ -37,9 +43,7 @@ export function useForm() {
     console.log(data);
   }
 
-
   // functions necessarie per la gestione di form con checkbox e verifica password
-
 
   function handleInputCheckbox(e) {
     const name = e.target.name;
