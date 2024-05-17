@@ -47,9 +47,9 @@
         box-sizing: border-box;
         gap: $size-16;
         align-items: center;
+        margin-bottom: 2px;
     }
     .bottomButtons {
-        background-color: $third-color;
         display: flex;
         width: 100%;
         box-sizing: border-box;

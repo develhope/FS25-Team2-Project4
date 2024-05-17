@@ -133,7 +133,6 @@ export const IngredientsProvider = ({ children }) => {
                 setBlackList,
                 handleBlackListUpdate,
                 handleBlackListReset,
-                initialValue,
             }}
         >
             {children}

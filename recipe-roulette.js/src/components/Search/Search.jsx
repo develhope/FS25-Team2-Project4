@@ -3,7 +3,10 @@ import classes from "./Search.module.scss"
 import { useSearch } from "./useSearch"
 import { SearchSuggestions } from "./SearchSuggestions"
 
-export function Search() {
+export function Search({
+    searchCriteria = "isBlackListed",
+    callback,
+}) {
     const {
         inputValues,
         searchState,
@@ -58,9 +61,11 @@ export function Search() {
                 )}
             </div>
             <SearchSuggestions
-                suggestions={suggestions}
+                array={suggestions}
                 handleSuggestionClick={handleSuggestionClick}
                 inputActive={searchState.inputActive}
+                searchCriteria={searchCriteria}
+                callback={callback}
             />
         </div>
     )

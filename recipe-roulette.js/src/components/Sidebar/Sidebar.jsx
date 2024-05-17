@@ -5,9 +5,11 @@ import { Search } from "../Search/Search"
 import classes from "./Sidebar.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { Switch } from "../Search/Switch"
+import { useSearch } from "../Search/useSearch"
 
 export function Sidebar() {
-    const { ingredients, handleBlackListReset } = useManageIngredients()
+    const { handleDeselectAll } = useSearch()
+    const { ingredients, handleBlackListReset, handleBlackListUpdate } = useManageIngredients()
     const [blackList, setBlackList] = useState([])
 
     useEffect(() => {
@@ -19,7 +21,7 @@ export function Sidebar() {
             <header>
                 <h2>Filters</h2>
                 <div className={classes.rightItems}>
-                    <button className={classes.deselectAllButton} onClick={handleBlackListReset}>
+                    <button className={classes.deselectAllButton} onClick={()=>handleDeselectAll(handleBlackListReset) }>
                         <MaterialSymbol
                             className={classes.ico}
                             icon="rotate_left"
@@ -35,7 +37,7 @@ export function Sidebar() {
             <section>
                 <div className={classes.blackListed}>
                     <h4>Black listed ingredients</h4>
-                    <Search />
+                    <Search searchCriteria="isBlackListed" callback={handleBlackListUpdate}/>
                     {blackList.length > 0 && (
                         <div className={classes.filterChipWrapper}>
                             {blackList

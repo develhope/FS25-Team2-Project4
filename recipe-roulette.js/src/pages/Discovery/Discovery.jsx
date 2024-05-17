@@ -4,6 +4,7 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
 import { Search } from "../../components/Search/Search"
+import { useEffect } from "react"
 
 function Discovery() {
     const {
@@ -12,7 +13,11 @@ function Discovery() {
         handleIngredientsIncrement,
         handleDeselectAll,
         initialValue,
+        handleIngredientUpdate
     } = useManageIngredients()
+
+    useEffect
+    console.log("displayed ingred:",displayedIngredients);
     return (
         <div className={classes.discoveryPage}>
             <header>
@@ -24,8 +29,8 @@ function Discovery() {
             </header>
 
             <div className={classes.ingredientsWrapper}>
-                <Search />
-                {displayedIngredients &&
+                <Search searchCriteria="isSelected" callback={handleIngredientUpdate}/>
+                {displayedIngredients.length > 0 &&
                     displayedIngredients.map((ingredient) => {
                         return (
                             <IngredientCard
