@@ -1,14 +1,13 @@
 @use "../../assets/scss" as *;
 
 .discoveryPage {
-    background-color: $third-color;
+    background-color: white;
     display: flex;
     width: 100%;
     flex-direction: column;
     height: 100%;
     box-sizing: border-box;
-    padding: $size-24;
-    padding-bottom: 0;
+    padding: 0 $size-24;
     overflow: hidden;
     header {
         display: flex;
@@ -19,7 +18,7 @@
         h1 {
             margin: 0;
         }
-        .sideButton {
+        .button {
             display: flex;
             align-items: center;
             align-items: center;
@@ -70,7 +69,7 @@
             color: #3c3838;
             background-color: #87c38f;
         }
-        .sideButton {
+        .button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,6 +83,10 @@
             border: 1px solid #e5e0df;
             border-radius: 2.5rem;
             background-color: white;
+        }
+        .disabled {
+            background-color: $lighter-gray;
+            color: $medium-gray;
         }
     }
 }

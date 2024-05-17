@@ -1,14 +1,20 @@
 @use "../../assets/scss/" as *;
 
 .filterChip {
+    scale: 0.1;
     display: flex;
     width: fit-content;
     align-items: center;
     box-sizing: border-box;
     height: 32px;
-    padding-left: .5rem;
+    padding-left: 0.5rem;
     padding-right: 1rem;
     border-radius: $size-8;
     background-color: $second-color;
     gap: $size-8;
+    transition: scale 0.3s ease-in-out;
+}
+.active {
+    scale: 1;
+    transition: scale 0.3s ease-in-out;
 }

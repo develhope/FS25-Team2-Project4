@@ -1,8 +1,9 @@
 import classes from "./Search.module.scss"
 
-export function SearchSuggestions ({suggestions, handleSuggestionClick }) {
+export function SearchSuggestions ({suggestions, handleSuggestionClick , inputActive}) {
+
     return (
-        <div className={classes.suggestions}>
+        <div className={`${classes.suggestions} ${inputActive && classes.active}`}>
 {suggestions &&
     suggestions
         .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))

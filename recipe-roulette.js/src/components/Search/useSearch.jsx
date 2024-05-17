@@ -11,10 +11,6 @@ export function useSearch() {
         setSuggestions(ingredients)
     }, [searchState])
 
-    useEffect(()=> {
-
-    }, [blackList])
-
     function handleInputActivation(e) {
         e.stopPropagation()
         setSearchState({ inputActive: true })

@@ -24,13 +24,14 @@ body {
     width: 100%;
     box-sizing: border-box;
     height: $height-80;
-}
-.pageLink {
-    display: flex;
-    text-decoration: none;
-    align-items: center;
-    color: inherit;
-    padding: 1rem;
-    border-top: 1px gray solid;
-    width: 100%;
+    .pageLink {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        align-items: center;
+        color: inherit;
+        padding: 1rem;
+        flex-grow: 1;
+        border-top: 1px gray solid;
+    }
 }

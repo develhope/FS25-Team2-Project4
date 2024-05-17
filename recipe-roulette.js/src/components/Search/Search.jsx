@@ -57,12 +57,11 @@ export function Search() {
                     />
                 )}
             </div>
-            {searchState.inputActive && (
-                <SearchSuggestions
-                    suggestions={suggestions}
-                    handleSuggestionClick={handleSuggestionClick}
-                />
-            )}
+            <SearchSuggestions
+                suggestions={suggestions}
+                handleSuggestionClick={handleSuggestionClick}
+                inputActive={searchState.inputActive}
+            />
         </div>
     )
 }

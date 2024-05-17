@@ -1,0 +1,50 @@
+@use "../../assets/scss/" as *;
+
+.switchComponent {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    p{
+        margin: 0;
+        color: $darkish-gray;
+        font-size: $text-size-14;
+        font-weight: 500;
+    }
+}
+.switch {
+    position: relative;
+    align-items: center;
+    outline: 2px solid $light-gray;
+    outline-offset: -2px;
+    height: 2rem;
+    width: 3.25rem;
+    border-radius: $size-16;
+
+    .selection {
+        position: absolute;
+        top: 50%;
+        background-color: $medium-gray;
+        border-radius: $size-16;
+    }
+
+    .unselect {
+        left: 8px;
+        transform: translate(0, -50%);
+        height: $size-16;
+        width: $size-16;
+        transition: all .3s ease-in-out;
+    }
+    .select {
+        transform: translate(24px, -50%);
+        background-color: $darkish-gray;
+        height: $size-24;
+        width: $size-24;
+        transition: all .3s ease-in-out;
+    }
+}
+.select{
+    background-color: $second-color;
+    outline: none;
+}

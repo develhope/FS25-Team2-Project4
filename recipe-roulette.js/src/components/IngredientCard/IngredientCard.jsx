@@ -35,7 +35,7 @@ export function IngredientCard({
                     <MaterialSymbol
                         className={classes.checkIco}
                         icon="check_circle"
-                        weight={500}
+                        weight={300}
                         size={24}
                         grade={24}
                     />
@@ -56,9 +56,16 @@ export function IngredientCard({
                         value={inputValues.current}
                     />
                 </div>
+                <div className={classes.rightItems}>
+                    <MaterialSymbol
+                        className={classes.rightIco}
+                        onClick={(e) => handleXClick(e)}
+                        icon="close"
+                        weight={300}
 
-                <div className={classes.closeIco} onClick={(e) => handleXClick(e)}>
-                    <MaterialSymbol className="symbol" icon="close" size={24} grade={24} />
+                        size={24}
+                        grade={24}
+                    />
                 </div>
             </div>
             <InputSuggestions
