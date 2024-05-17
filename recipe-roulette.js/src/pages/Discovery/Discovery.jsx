@@ -4,20 +4,13 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
 import { Search } from "../../components/Search/Search"
-import { useEffect } from "react"
 
 function Discovery() {
-    const {
-        displayedIngredients,
-        shuffleIngredients,
-        handleIngredientsIncrement,
-        handleDeselectAll,
-        initialValue,
-        handleIngredientUpdate
-    } = useManageIngredients()
+    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } =
+        useManageIngredients()
 
-    useEffect
-    console.log("displayed ingred:",displayedIngredients);
+    console.log("displayed ingred:", displayedIng)
+
     return (
         <div className={classes.discoveryPage}>
             <header>
@@ -29,29 +22,22 @@ function Discovery() {
             </header>
 
             <div className={classes.ingredientsWrapper}>
-                <Search searchCriteria="isSelected" callback={handleIngredientUpdate}/>
-                {displayedIngredients.length > 0 &&
-                    displayedIngredients.map((ingredient) => {
-                        return (
-                            <IngredientCard
-                                id={ingredient.id}
-                                key={ingredient.id}
-                                label={ingredient.name}
-                                bgColor={ingredient.bgColor}
-                                isSelected={ingredient.isSelected}
-                            />
-                        )
+                <Search searchCriteria="isSelected" />
+
+                {displayedIng.length > 3 &&
+                    displayedIng.map((ing) => {
+                        return <IngredientCard key={ing.id} ing={ing} />
                     })}
             </div>
             <div className={classes.bottomButtons}>
                 <button
-                    className={`${classes.button} ${(initialValue === 8) && classes.disabled}`}
-                    onClick={() => handleIngredientsIncrement()}
+                    className={`${classes.button} ${ingNum === 8 && classes.disabled}`}
+                    onClick={() => handleIngIncrement()}
                 >
                     <MaterialSymbol className={classes.ico} icon="add" size={18} grade={18} />
                     ingredient
                 </button>
-                <button className={classes.cycleButton} onClick={() => shuffleIngredients()}>
+                <button className={classes.cycleButton} onClick={() => shuffleIng()}>
                     {" "}
                     <MaterialSymbol className={classes.ico} icon="cycle" size={18} grade={18} />
                 </button>

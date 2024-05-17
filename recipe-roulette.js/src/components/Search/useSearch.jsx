@@ -2,15 +2,14 @@ import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function useSearch() {
-    const { ingredients, blackList, handleBlackListUpdate, selectToDisplay } = useManageIngredients()
+    const { ing, blackList, handleDeselectAll, handleIngUpdate } = useManageIngredients()
     const [inputValues, setInputValues] = useState({ initial: "Search", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
-    const [suggestions, setSuggestions] = useState(ingredients)
+    const [suggestions, setSuggestions] = useState(ing)
 
     useEffect(() => {
-        setSuggestions(ingredients)
+        setSuggestions(ing)
     }, [searchState])
-
 
     function handleInputActivation(e) {
         e.stopPropagation()
@@ -18,8 +17,8 @@ export function useSearch() {
     }
 
     useMemo(() => {
-        setSuggestions(ingredients)
-    }, [ingredients])
+        setSuggestions(ing)
+    }, [ing])
 
     //input controls
     function handleInputChange(e) {
@@ -28,13 +27,13 @@ export function useSearch() {
 
         setInputValues((prev) => ({ ...prev, current: e.target.value }))
         setSuggestions(
-            ingredients.filter((ingredient) => ingredient.name.toUpperCase().includes(inputValue))
+            ing.filter((ingredient) => ingredient.name.toUpperCase().includes(inputValue))
         )
     }
 
     function handleInputDeactivation(e) {
         const inputValue = e.target.value.toUpperCase()
-        const isInDatabase = ingredients.filter(
+        const isInDatabase = ing.filter(
             (ingredient) =>
                 ingredient.name.toUpperCase().includes(inputValue) &&
                 !ingredient.isSelected &&
@@ -59,7 +58,7 @@ export function useSearch() {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
         }
-        setSuggestions(ingredients.filter((ing) => !ing.isBlacklisted))
+        setSuggestions(ing.filter((ing) => !ing.isBlacklisted))
     }
 
     function handlePressEnter(e) {
@@ -74,19 +73,15 @@ export function useSearch() {
     }
 
     //handle ingredient updates
-    function handleDeselectAll(callback) {
-        ingredients.forEach((ing) => {
-            callback(false, ing.id)
-        })
+    function handleReset(prop, cardState, setCardState) {
+        handleDeselectAll(prop, cardState, setCardState)
     }
 
-    function handleSuggestionClick(e, id, callback) {
+    function handleSuggestionClick(e, prop, cardState, setCardState) {
         e.stopPropagation()
-        const clickedElement = ingredients.find((ingredient) => ingredient.id === id)
+        handleIngUpdate(prop, cardState, setCardState)
         setSearchState({ inputActive: false })
-        callback(true, clickedElement.id)
         setInputValues((prev) => ({ ...prev, current: "" }))
-        selectToDisplay()
     }
 
     return {
@@ -95,10 +90,10 @@ export function useSearch() {
         handleInputDeactivation,
         handleSuggestionClick,
         handlePressEnter,
+        handleXClick,
+        handleReset,
         inputValues,
         searchState,
         suggestions,
-        handleXClick,
-        handleDeselectAll,
     }
 }

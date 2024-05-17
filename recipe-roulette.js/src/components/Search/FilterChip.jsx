@@ -1,7 +1,7 @@
 import { MaterialSymbol } from "react-material-symbols"
 import classes from "./FilterChip.module.scss"
 import { useFilterChips } from "./useFilterChip"
-import ingredients from "../IngredientCard/ingredients"
+import ingredients from "../../assets/ingredientsArray"
 
 export function FilterChip({ label, id }) {
     const { handleDeselectChip } = useFilterChips(id)

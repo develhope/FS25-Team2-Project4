@@ -5,7 +5,6 @@ import { SearchSuggestions } from "./SearchSuggestions"
 
 export function Search({
     searchCriteria = "isBlackListed",
-    callback,
 }) {
     const {
         inputValues,
@@ -65,7 +64,6 @@ export function Search({
                 handleSuggestionClick={handleSuggestionClick}
                 inputActive={searchState.inputActive}
                 searchCriteria={searchCriteria}
-                callback={callback}
             />
         </div>
     )

@@ -1,32 +1,20 @@
 import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import { useSearch } from "../Search/useSearch"
 
-export function useIngredientCard(label, id, isSelected, bgColor) {
+export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed) {
+    //Card State
     const [cardState, setCardState] = useState({
         label,
-        state: isSelected,
         id,
-        color: bgColor,
-        inputActive: false,
+        bgColor,
+        isSelected,
+        isBlackListed,
     })
-    const { randomIngredients, handleIngredientUpdate, handleIngredientsDecrement } =
-        useManageIngredients()
-
-    useEffect(() => {
-        setCardState((prev) => ({
-            ...prev,
-            label,
-            state: isSelected,
-            id,
-            color: bgColor,
-        }))
-    }, [label, bgColor, isSelected, id, randomIngredients])
+    //Context Provider stuff
+    const { handleIngUpdate, handleIngDecrement } = useManageIngredients()
 
     function handleIngredientClick() {
-        const newState = !cardState.state
-        setCardState((prev) => ({ ...prev, state: newState }))
-        handleIngredientUpdate(newState, cardState.id)
+        handleIngUpdate("isSelected", cardState, setCardState)
     }
 
     function handleXClick(e) {
@@ -34,7 +22,7 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         if (cardState.state) {
             handleIngredientClick()
         } else {
-            handleIngredientsDecrement(cardState.id, e)
+            handleIngDecrement(cardState.id, e)
         }
     }
 

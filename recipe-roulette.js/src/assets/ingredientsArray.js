@@ -1,4 +1,4 @@
-let ingredients = [
+let ingredientsArray = [
     {
         id: 1,
         name: "Potato",
@@ -302,4 +302,4 @@ let ingredients = [
     },
 ]
 
-export default ingredients
+export default ingredientsArray
