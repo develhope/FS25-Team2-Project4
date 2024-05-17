@@ -98,8 +98,11 @@ export function useIngredientCard(label, id, isSelected, bgColor) {
         if (cardState.inputActive) {
             setInputValues(prev => ({ ...prev, current: "" }))
             setCardState(prev => ({ ...prev, inputActive: false }))
+        } else if(cardState.state) {
+            handleIngredientClick()
         } else {
             handleIngredientsDecrement(cardState.id, e)
+
         }
     }
 
