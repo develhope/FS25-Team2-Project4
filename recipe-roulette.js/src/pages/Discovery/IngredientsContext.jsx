@@ -1,4 +1,6 @@
-import { useState, useEffect, createContext, useContext, useMemo } from "react"
+import { useState, useEffect, createContext, useContext } from "react"
+import { useLocation } from "react-router-dom"
+
 import ingredientsArray from "../../assets/ingredientsArray"
 
 const IngredientsContext = createContext()
@@ -17,19 +19,30 @@ export const IngredientsProvider = ({ children }) => {
     const [blackList, setBlackList] = useState([])
     //ingredients placed in free slots
     const [randomIng, setRandomIng] = useState([])
+    //for refresh at path ghange
+    const location = useLocation()
 
     //
     useEffect(() => {
         selectToDisplay()
-    }, [ingNum])
+    }, [ingNum, location.key])
 
     useEffect(() => {
         setDisplayedIng([...selectedIng, ...randomIng])
     }, [randomIng])
     //
 
-    //(() => {
+    //
+    function RenderCurrentIngs() {
+        const newSelectedIng = ing.filter((ing) => ing.isSelected)
+        const newRandomIng = randomIng.filter((ing) => !ing.isSelected)
+        setSelectedIng(newSelectedIng)
+        setRandomIng(newRandomIng)
+        setDisplayedIng(...newSelectedIng, newRandomIng)
+    }
+    //
 
+    //
     const handleIngUpdate = (prop, cardState, setCardState) => {
         {
             let updatedIngredient = null
@@ -63,7 +76,6 @@ export const IngredientsProvider = ({ children }) => {
                 default:
                     break
             }
-            console.log("updateding", updatedIngredient, updatedIng)
             // Aggiornare lo stato del componente card
             setCardState((prevState) => ({
                 ...prevState,
@@ -75,12 +87,11 @@ export const IngredientsProvider = ({ children }) => {
             }))
         }
     }
-
     //
 
     //
     function handleDeselectAll(prop, cardState, setCardState) {
-        console.log("imrunningg");
+        console.log("imrunningg")
         switch (prop) {
             case "isSelected": {
                 setSelectedIng([])
@@ -95,10 +106,11 @@ export const IngredientsProvider = ({ children }) => {
                 break
             }
         }
-
-        setCardState((prevData) => {
-            ;({ ...prevData, [prop]: false })
-        })
+        if (setCardState) {
+            setCardState((prevData) => {
+                ;({ ...prevData, [prop]: false })
+            })
+        }
     }
     //
 
@@ -160,6 +172,7 @@ export const IngredientsProvider = ({ children }) => {
                 handleIngUpdate,
 
                 ing,
+                ingNum,
                 randomIng,
                 selectedIng,
                 displayedIng,

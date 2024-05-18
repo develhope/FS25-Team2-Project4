@@ -4,18 +4,17 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
 import { Search } from "../../components/Search/Search"
+import { useIngredientCard } from "../../components/IngredientCard/useIngredientCard"
+
 
 function Discovery() {
-    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } =
-        useManageIngredients()
-
-    console.log("displayed ingred:", displayedIng)
+    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } = useManageIngredients()
 
     return (
         <div className={classes.discoveryPage}>
             <header>
                 <h1>Discovery</h1>
-                <button onClick={handleDeselectAll} className={classes.button}>
+                <button onClick={() => handleDeselectAll("isSelected")} className={classes.button}>
                     Deselect all
                     <MaterialSymbol className={classes.ico} icon="deselect" size={18} grade={18} />
                 </button>
@@ -24,7 +23,7 @@ function Discovery() {
             <div className={classes.ingredientsWrapper}>
                 <Search searchCriteria="isSelected" />
 
-                {displayedIng.length > 3 &&
+                {displayedIng.length > 0 &&
                     displayedIng.map((ing) => {
                         return <IngredientCard key={ing.id} ing={ing} />
                     })}

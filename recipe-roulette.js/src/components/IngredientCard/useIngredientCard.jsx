@@ -10,8 +10,14 @@ export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed)
         isSelected,
         isBlackListed,
     })
+
+
     //Context Provider stuff
-    const { handleIngUpdate, handleIngDecrement } = useManageIngredients()
+    const { handleIngUpdate, handleIngDecrement, randomIng, displayedIng } = useManageIngredients()
+
+    useEffect(() => {
+        setCardState({ label, id, bgColor, isSelected, isBlackListed })
+    }, [randomIng, displayedIng])
 
     function handleIngredientClick() {
         handleIngUpdate("isSelected", cardState, setCardState)
