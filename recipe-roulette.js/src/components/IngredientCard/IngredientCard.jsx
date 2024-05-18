@@ -1,6 +1,7 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
+import { IngredientSearch } from "./IngredientSearch"
 
 export function IngredientCard({ ing }) {
     const { handleIngredientClick, handleXClick, cardState } = useIngredientCard(
@@ -10,11 +11,10 @@ export function IngredientCard({ ing }) {
         ing.isSelected,
         ing.isBlackListed
     )
-
+    let inputActive = false
     const bg = {
         backgroundColor: cardState.bgColor,
     }
-
     return (
         <div
             onClick={handleIngredientClick}
@@ -45,4 +45,37 @@ export function IngredientCard({ ing }) {
             </div>
         </div>
     )
+}
+
+{
+    /* <div className={`${classes.searchBar} ${searchState.inputActive ? classes.inputActive : classes.inputInactive}`}>
+{searchState.inputActive ? (
+    <input
+        className={classes.header}
+        onClick={handleInputActivation}
+        placeholder="Search an ingredient"
+        name="search"
+        type="text"
+        onBlur={(e) =>
+            setTimeout(() => {
+                handleInputDeactivation(e)
+            }, 25)
+        }
+        onKeyDown={handlePressEnter}
+        onChange={handleInputChange}
+        value={inputValues.current}
+    />
+) : (
+    <p className={classes.header}> {cardState.label} </p>
+)}
+
+{!searchState.inputActive && (
+    <MaterialSymbol
+        className={`${classes.ico} ${classes.searchIco}`}
+        icon="search"
+        weight={400}
+        size={18}
+        grade={18}
+    />
+)} */
 }

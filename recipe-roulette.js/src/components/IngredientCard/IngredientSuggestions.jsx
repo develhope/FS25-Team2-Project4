@@ -1,8 +1,8 @@
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import classes from "./Search.module.scss"
-import { SearchSuggestion } from "./SearchSuggestion"
+import classes from "./IngredientSearch.module.scss"
+import { IngredientSuggestion } from "./IngredientSuggestion"
 
-export function SearchSuggestions({ inputActive, searchCriteria }) {
+export function IngredientSuggestions({ inputActive, searchCriteria }) {
     const { ing } = useManageIngredients()
     return (
         <div className={`${classes.suggestions} ${inputActive && classes.active}`}>
@@ -12,7 +12,7 @@ export function SearchSuggestions({ inputActive, searchCriteria }) {
                     .map((ingredient) => {
                         if (!ingredient[searchCriteria]) {
                             return (
-                                <SearchSuggestion
+                                <IngredientSuggestion
                                     ing={ingredient}
                                     prop={searchCriteria}
                                     className={classes.active}
@@ -20,7 +20,7 @@ export function SearchSuggestions({ inputActive, searchCriteria }) {
                                 />
                             )
                         } else {
-                            return <SearchSuggestion ing={ingredient} className={classes.inactive} key={ingredient.id} />
+                            return <IngredientSuggestion ing={ingredient} className={classes.inactive} key={ingredient.id} />
                         }
                     })}
         </div>

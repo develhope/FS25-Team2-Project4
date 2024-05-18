@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
+import { useIngredientSuggestion } from "./useIngredientSuggestion"
 
 export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed) {
     //Card State
@@ -10,14 +11,14 @@ export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed)
         isSelected,
         isBlackListed,
     })
-
+    const { ingState } = useIngredientSuggestion(id, label, bgColor, isSelected, isBlackListed)
 
     //Context Provider stuff
     const { handleIngUpdate, handleIngDecrement, randomIng, displayedIng } = useManageIngredients()
 
     useEffect(() => {
         setCardState({ label, id, bgColor, isSelected, isBlackListed })
-    }, [randomIng, displayedIng])
+    }, [randomIng, displayedIng, ingState])
 
     function handleIngredientClick() {
         handleIngUpdate("isSelected", cardState, setCardState)
@@ -35,6 +36,7 @@ export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed)
     return {
         handleIngredientClick,
         handleXClick,
+        setCardState,
         cardState,
     }
 }
