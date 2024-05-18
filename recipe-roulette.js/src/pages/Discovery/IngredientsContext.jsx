@@ -1,28 +1,19 @@
 import { useState, useEffect, createContext, useContext } from "react"
 import { useLocation } from "react-router-dom"
-
 import ingredientsArray from "../../assets/ingredientsArray"
 
 const IngredientsContext = createContext()
 
 export const IngredientsProvider = ({ children }) => {
-    //all ingredients
     const [ing, setIng] = useState(ingredientsArray)
-    //number of ingredients shown
     const [ingNum, setIngNum] = useState(5)
-    //number of free slots (ingNum - selectedIngredients)
     const [slots, setSlots] = useState(ingNum)
-    //ingredients currently on display
     const [displayedIng, setDisplayedIng] = useState([])
-    //ingredients with isSelected & isBlackListed
     const [selectedIng, setSelectedIng] = useState([])
     const [blackList, setBlackList] = useState([])
-    //ingredients placed in free slots
     const [randomIng, setRandomIng] = useState([])
-    //for refresh at path ghange
     const location = useLocation()
 
-    //
     useEffect(() => {
         selectToDisplay()
     }, [ingNum, location.key])
@@ -30,96 +21,44 @@ export const IngredientsProvider = ({ children }) => {
     useEffect(() => {
         setDisplayedIng([...selectedIng, ...randomIng])
     }, [randomIng])
-    //
 
-    //
-    function RenderCurrentIngs() {
-        const newSelectedIng = ing.filter((ing) => ing.isSelected)
-        const newRandomIng = randomIng.filter((ing) => !ing.isSelected)
-        setSelectedIng(newSelectedIng)
-        setRandomIng(newRandomIng)
-        setDisplayedIng(...newSelectedIng, newRandomIng)
-    }
-    //
+    function handleIngUpdate(prop, cardState, setCardState) {
+        const updatedIngs = ing.map((item) =>
+            item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item
+        )
+        setIng(updatedIngs)
 
-    //
-    const handleIngUpdate = (prop, cardState, setCardState) => {
-        {
-            let updatedIngredient = null
-            console.log("cardstate", cardState)
-            // Mappare gli ingredienti per aggiornare lo stato dell'ingrediente selezionato
-            const updatedIng = ing.map((item) => {
-                if (item.id === cardState.id) {
-                    updatedIngredient = { ...item, [prop]: !cardState[prop] }
-                    return updatedIngredient
-                }
-                return item
-            })
-            // Aggiornare lo stato degli ingredienti
-            setIng(updatedIng)
-
-            // Filtrare gli ingredienti in base alla proprietà aggiornata
-            const changedIng = updatedIng.filter((item) => item[prop])
-
-            // Gestire l'aggiornamento dello stato in base alla proprietà
-            switch (prop) {
-                case "isSelected": {
-                    setSelectedIng(changedIng)
-                    const newSlots = ingNum - changedIng.length
-                    setSlots(newSlots)
-                    break
-                }
-                case "isBlackListed": {
-                    setBlackList(changedIng)
-                    break
-                }
-                default:
-                    break
-            }
-            // Aggiornare lo stato del componente card
-            setCardState((prevState) => ({
-                ...prevState,
-                id: updatedIngredient.id,
-                label: updatedIngredient.label,
-                bgColor: updatedIngredient.bgColor,
-                isSelected: updatedIngredient.isSelected,
-                isBlackListed: updatedIngredient.isBlackListed,
-            }))
+        const affectedIngs = updatedIngs.filter((item) => item[prop])
+        if (prop === "isSelected") {
+            setSelectedIng(affectedIngs)
+            setSlots(ingNum - affectedIngs.length)
+        } else if (prop === "isBlackListed") {
+            setBlackList(affectedIngs)
         }
-    }
-    //
 
-    //
-    function handleDeselectAll(prop, cardState, setCardState) {
-        console.log("imrunningg")
-        switch (prop) {
-            case "isSelected": {
-                setSelectedIng([])
-                setIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
-                setDisplayedIng(displayedIng.map((ing) => ({ ...ing, [prop]: false })))
-                setSlots(ingNum)
-                break
-            }
-            case "isBlackListed": {
-                setBlackList([])
-                setIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
-                break
-            }
+        setCardState((prevState) => ({
+            ...prevState,
+            ...updatedIngs.find((item) => item.id === cardState.id),
+        }))
+    }
+
+    function handleDeselectAll(prop, setCardState) {
+        if (prop === "isSelected") {
+            setSelectedIng([])
+            setSlots(ingNum)
+        } else if (prop === "isBlackListed") {
+            setBlackList([])
         }
+        setIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
+        setDisplayedIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
         if (setCardState) {
-            setCardState((prevData) => {
-                ;({ ...prevData, [prop]: false })
-            })
+            setCardState((prevData) => ({ ...prevData, [prop]: false }))
         }
     }
-    //
 
-    //
     function selectToDisplay() {
-        const ingredientIds = ing
-            .filter((ingredient) => !ingredient.isSelected)
-            .map((ingredient) => ingredient.id)
-        const selectedIds = selectedIng.map((ingredient) => ingredient.id)
+        const ingredientIds = ing.filter((item) => !item.isSelected).map((item) => item.id)
+        const selectedIds = selectedIng.map((item) => item.id)
         const randomIds = []
 
         while (randomIds.length < slots) {
@@ -129,38 +68,28 @@ export const IngredientsProvider = ({ children }) => {
             }
         }
 
-        const newRandomIng = ing.filter((ing) => randomIds.includes(ing.id))
-        setRandomIng(newRandomIng)
+        setRandomIng(ing.filter((item) => randomIds.includes(item.id)))
     }
-    //
 
-    //
     function shuffleIng() {
         selectToDisplay()
     }
-    //
 
-    //
     function handleIngIncrement() {
         if (ingNum < 8) {
             setIngNum((prev) => prev + 1)
             setSlots((prev) => prev + 1)
         }
     }
-    //
 
-    //
     function handleIngDecrement(id, e) {
-        const isTargetSelected = ing.find((ingredient) => ingredient.id === id)
         e.stopPropagation()
-        if (ingNum > 3 && !isTargetSelected.isSelected) {
+        if (ingNum > 3 && !ing.find((item) => item.id === id).isSelected) {
             setIngNum((prev) => prev - 1)
             setSlots((prev) => prev - 1)
         }
     }
-    //
 
-    //
     return (
         <IngredientsContext.Provider
             value={{
@@ -170,7 +99,6 @@ export const IngredientsProvider = ({ children }) => {
                 setDisplayedIng,
                 shuffleIng,
                 handleIngUpdate,
-
                 ing,
                 ingNum,
                 randomIng,
@@ -184,7 +112,6 @@ export const IngredientsProvider = ({ children }) => {
     )
 }
 
-//non so a che serve questo, messo da ghatGPT
 export const useManageIngredients = () => {
     const context = useContext(IngredientsContext)
     if (!context) {

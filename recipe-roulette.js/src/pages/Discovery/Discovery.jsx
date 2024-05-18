@@ -4,7 +4,6 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
 import { Search } from "../../components/Search/Search"
-import { useIngredientCard } from "../../components/IngredientCard/useIngredientCard"
 
 
 function Discovery() {

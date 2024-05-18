@@ -10,10 +10,13 @@
     justify-content: space-between;
     padding: 0 1rem;
     border-radius: 2rem;
+    overflow: hidden;
     .leftItems {
         display: flex;
         align-items: center;
         height: 100%;
+        transform: translateX(-2rem);
+        transition: transform 0.3s ease;
     }
     p {
         line-height: 110%;
@@ -31,34 +34,29 @@
 .unselected {
     outline: 1px solid #ece9e8;
     .checkIco {
-        transform: translateX(-2.5rem);
-        scale: 0.1;
-        width: 0;
+        transform: translateX(-5rem);
         opacity: 0;
+        scale: .1;
         transition:
             scale,
             opacity,
             0.3s ease-in-out;
     }
     p {
-        transition:
-            scale,
-            opacity,
-            0.3s ease-in-out;
+        transition: font-size 0.3s ease-in-out;
     }
 }
 .selected {
     outline: 3px solid $darkish-gray;
     outline-offset: -2px;
-    transition:
-        font-size,
-        font-weight,
-        0.3s ease-out;
+    .leftItems {
+        transform: translateX(0);
+        transition: transform 0.3s ease;
+    }
+
     p {
         font-size: 1.5rem;
-        transition:
-            font-size,
-            0.3s ease;
+        transition: font-size 0.3s ease;
     }
     .checkIco {
         transform: translateX(0);
