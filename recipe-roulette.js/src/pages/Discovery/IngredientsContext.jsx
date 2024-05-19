@@ -23,9 +23,7 @@ export const IngredientsProvider = ({ children }) => {
     }, [randomIng])
 
     function handleIngUpdate(prop, cardState, setCardState) {
-        const updatedIngs = ing.map((item) =>
-            item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item
-        )
+        const updatedIngs = ing.map((item) => (item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item))
         setIng(updatedIngs)
 
         const affectedIngs = updatedIngs.filter((item) => item[prop])
@@ -99,6 +97,8 @@ export const IngredientsProvider = ({ children }) => {
                 setDisplayedIng,
                 shuffleIng,
                 handleIngUpdate,
+                setBlackList,
+                selectToDisplay,
                 ing,
                 ingNum,
                 randomIng,

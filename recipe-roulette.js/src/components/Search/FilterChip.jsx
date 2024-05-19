@@ -1,10 +1,9 @@
 import { MaterialSymbol } from "react-material-symbols"
 import classes from "./FilterChip.module.scss"
 import { useFilterChips } from "./useFilterChip"
-import ingredients from "../../assets/ingredientsArray"
 
-export function FilterChip({ label, id }) {
-    const { handleDeselectChip } = useFilterChips(id)
+export function FilterChip({ id, label, bgColor, isSelected, isBlackListed }) {
+    const { handleDeselectChip } = useFilterChips(id, label, bgColor, isSelected, isBlackListed)
 
     return (
         <div className={`${classes.filterChip} ${classes.active}`} onClick={handleDeselectChip}>

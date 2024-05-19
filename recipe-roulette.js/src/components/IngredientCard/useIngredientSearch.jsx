@@ -2,10 +2,17 @@ import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function useIngredientSearch() {
-    const { ing, blackList, handleDeselectAll, handleIngUpdate } = useManageIngredients()
+    const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate } = useManageIngredients()
     const [inputValues, setInputValues] = useState({ initial: "Search", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
     const [suggestions, setSuggestions] = useState(ing)
+    const [cardState, setCardState] = useState({
+        id: null,
+        label: null,
+        bgColor: null,
+        isSelected: null,
+        isBlacklisted: null,
+    })
 
     useEffect(() => {
         setSuggestions(ing)
@@ -26,34 +33,47 @@ export function useIngredientSearch() {
         console.log(inputValue)
 
         setInputValues((prev) => ({ ...prev, current: e.target.value }))
-        setSuggestions(
-            ing.filter((ingredient) => ingredient.name.toUpperCase().includes(inputValue))
-        )
+        setSuggestions(ing.filter((ingredient) => ingredient.name.toUpperCase().includes(inputValue)))
     }
 
-    function handleInputDeactivation(e) {
+    function handleInputDeactivation(e, prop) {
+        console.log("gaming");
+        console.log(prop);
+        let firstAvailableIngredient
         const inputValue = e.target.value.toUpperCase()
         const isInDatabase = ing.filter(
             (ingredient) =>
-                ingredient.name.toUpperCase().includes(inputValue) &&
-                !ingredient.isSelected &&
-                !ingredient.isBlacklisted
+                ingredient.name.toUpperCase().includes(inputValue) && !ingredient.isSelected && !ingredient.isBlacklisted
         )
-        const isBlacklisted = blackList.filter((blIngredient) =>
-            isInDatabase.some(
-                (dbIngredient) =>
-                    dbIngredient.id === blIngredient.id ||
-                    dbIngredient.name.toUpperCase() === blIngredient.name.toUpperCase()
+        if (prop === "isBlackListed") {
+            console.log("broo");
+            const isAlreadyBL = blackList.filter((blIngredient) =>
+                isInDatabase.some(
+                    (dbIngredient) =>
+                        dbIngredient.id === blIngredient.id || dbIngredient.name.toUpperCase() === blIngredient.name.toUpperCase()
+                )
             )
-        )
-        const firstAvailableIngredient = isInDatabase.find(
-            (dbIngredient) =>
-                !isBlacklisted.some((blIngredient) => blIngredient.id === dbIngredient.id)
-        )
+            firstAvailableIngredient = isInDatabase.find(
+                (dbIngredient) => !isAlreadyBL.some((blIngredient) => blIngredient.id === dbIngredient.id)
+            )
+        } else if (prop === "isSelected") {
+            console.log("siss");
+
+            const isAlreadySelected = selectedIng.filter((selectedIng) =>
+                isInDatabase.some(
+                    (dbIngredient) =>
+                        dbIngredient.id === selectedIng.id || dbIngredient.name.toUpperCase() === selectedIng.name.toUpperCase()
+                )
+            )
+
+            firstAvailableIngredient = isInDatabase.find(
+                (dbIngredient) => !isAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
+            )
+        }        
         if (inputValue !== "" && firstAvailableIngredient) {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
-            handleBlackListUpdate(true, firstAvailableIngredient.id)
+            handleIngUpdate(prop, firstAvailableIngredient, setCardState)
         } else {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })

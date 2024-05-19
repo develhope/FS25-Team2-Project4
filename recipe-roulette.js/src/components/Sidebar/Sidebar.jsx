@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react"
+import classes from "./Sidebar.module.scss"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 import { FilterChip } from "../Search/FilterChip"
-import { Search } from "../Search/Search"
-import classes from "./Sidebar.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { Switch } from "../Search/Switch"
-import { useSearch } from "../Search/useSearch"
+import { IngredientSearch } from "../IngredientCard/IngredientSearch"
 
 export function Sidebar() {
-    const { handleDeselectAll } = useSearch()
-    const { ingredients, handleBlackListReset, handleBlackListUpdate } = useManageIngredients()
-    const [blackList, setBlackList] = useState([])
-
-    useEffect(() => {
-        setBlackList([...ingredients.filter((ing) => ing.isBlackListed)])
-    }, [ingredients])
+    const { handleDeselectAll, blackList } = useManageIngredients()
 
     return (
         <div className={classes.sidebar}>
             <header>
                 <h2>Filters</h2>
                 <div className={classes.rightItems}>
-                    <button className={classes.deselectAllButton} onClick={()=>handleDeselectAll(handleBlackListReset) }>
+                    <button className={classes.deselectAllButton} onClick={()=>handleDeselectAll("isBlackListed") }>
                         <MaterialSymbol
                             className={classes.ico}
                             icon="rotate_left"
@@ -37,7 +29,7 @@ export function Sidebar() {
             <section>
                 <div className={classes.blackListed}>
                     <h4>Black listed ingredients</h4>
-                    <Search searchCriteria="isBlackListed" callback={handleBlackListUpdate}/>
+                    <IngredientSearch searchCriteria="isBlackListed"/>
                     {blackList.length > 0 && (
                         <div className={classes.filterChipWrapper}>
                             {blackList
@@ -49,7 +41,9 @@ export function Sidebar() {
                                             key={ing.id}
                                             id={ing.id}
                                             label={ing.name}
+                                            bgColor={ing.bgColor}
                                             isBlackListed={ing.isBlackListed}
+                                            isSelected={ing.isSelected}
                                         />
                                     )
                                 })}

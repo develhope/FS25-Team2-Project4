@@ -3,19 +3,18 @@ import classes from "./Search.module.scss"
 import { useSearch } from "./useSearch"
 import { SearchSuggestions } from "./SearchSuggestions"
 
-export function Search({
-    searchCriteria = "isBlackListed",
-}) {
+export function Search({searchCriteria = "isBlackListed"}) {
     const {
+        handleInputActivation,
+        handleInputChange,
+        handleInputDeactivation,
+        handleSuggestionClick,
+        handlePressEnter,
+        handleXClick,
+        handleReset,
         inputValues,
         searchState,
         suggestions,
-        handleSuggestionClick,
-        handlePressEnter,
-        handleInputChange,
-        handleInputActivation,
-        handleInputDeactivation,
-        handleXClick,
     } = useSearch()
 
     return (
@@ -60,8 +59,6 @@ export function Search({
                 )}
             </div>
             <SearchSuggestions
-                array={suggestions}
-                handleSuggestionClick={handleSuggestionClick}
                 inputActive={searchState.inputActive}
                 searchCriteria={searchCriteria}
             />

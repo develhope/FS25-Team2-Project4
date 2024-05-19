@@ -4,11 +4,17 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 
 import classes from "./Discovery.module.scss"
 import { IngredientSearch } from "../../components/IngredientCard/IngredientSearch"
-
-let vare = false
+import { useIngredientSearch } from "../../components/IngredientCard/useIngredientSearch"
+import { useEffect } from "react"
 
 function Discovery() {
-    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } = useManageIngredients()
+    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum, selectToDisplay } = useManageIngredients()
+    const { suggestions } = useIngredientSearch("isSelected")
+
+
+    useEffect(() => {
+        shuffleIng()
+    }, [suggestions])
 
     return (
         <div className={classes.discoveryPage}>
@@ -21,9 +27,10 @@ function Discovery() {
             </header>
 
             <div className={classes.ingredientsWrapper}>
+                <IngredientSearch searchCriteria="isSelected" />
                 {displayedIng.length > 0 &&
                     displayedIng.map((ing) => {
-                       return <IngredientCard key={ing.id} ing={ing} />
+                        return <IngredientCard key={ing.id} ing={ing} />
                     })}
             </div>
             <div className={classes.bottomButtons}>

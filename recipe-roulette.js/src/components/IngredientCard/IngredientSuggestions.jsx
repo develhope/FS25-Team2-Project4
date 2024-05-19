@@ -1,18 +1,19 @@
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 import classes from "./IngredientSearch.module.scss"
-import { IngredientSuggestion } from "./IngredientSuggestion"
+import { IngredientSuggestionActive } from "./IngredientSuggestionActive"
+import { IngredientSuggestionInactive } from "./IngredientSuggestionInactive"
 
-export function IngredientSuggestions({ inputActive, searchCriteria }) {
+export function IngredientSuggestions({ inputActive, searchCriteria, suggestions }) {
     const { ing } = useManageIngredients()
     return (
         <div className={`${classes.suggestions} ${inputActive && classes.active}`}>
-            {ing &&
-                ing
+            {suggestions &&
+                suggestions
                     .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
                     .map((ingredient) => {
-                        if (!ingredient[searchCriteria]) {
+                        if (!ingredient.isSelected && !ingredient.isBlackListed) {
                             return (
-                                <IngredientSuggestion
+                                <IngredientSuggestionActive
                                     ing={ingredient}
                                     prop={searchCriteria}
                                     className={classes.active}
@@ -20,7 +21,7 @@ export function IngredientSuggestions({ inputActive, searchCriteria }) {
                                 />
                             )
                         } else {
-                            return <IngredientSuggestion ing={ingredient} className={classes.inactive} key={ingredient.id} />
+                            return <IngredientSuggestionInactive ing={ingredient} className={classes.inactive} key={ingredient.id} />
                         }
                     })}
         </div>

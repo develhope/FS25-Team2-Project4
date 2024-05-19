@@ -5,10 +5,9 @@ import { IngredientSuggestions } from "./IngredientSuggestions"
 
 export function IngredientSearch({ searchCriteria = "isBlackListed" }) {
     const {
+        suggestions,
         inputValues,
         searchState,
-        suggestions,
-        handleSuggestionClick,
         handlePressEnter,
         handleInputChange,
         handleInputActivation,
@@ -28,7 +27,7 @@ export function IngredientSearch({ searchCriteria = "isBlackListed" }) {
                     type="text"
                     onBlur={(e) =>
                         setTimeout(() => {
-                            handleInputDeactivation(e)
+                            handleInputDeactivation(e, searchCriteria)
                         }, 25)
                     }
                     onKeyDown={handlePressEnter}
@@ -57,10 +56,9 @@ export function IngredientSearch({ searchCriteria = "isBlackListed" }) {
                 )}
             </div>
             <IngredientSuggestions
-                array={suggestions}
-                handleSuggestionClick={handleSuggestionClick}
                 inputActive={searchState.inputActive}
                 searchCriteria={searchCriteria}
+                suggestions={suggestions}
             />
         </div>
     )
