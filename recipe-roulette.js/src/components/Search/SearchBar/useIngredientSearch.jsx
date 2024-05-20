@@ -103,6 +103,7 @@ export function useIngredientSearch() {
             console.log("maximum number of ingredient reached!")
         }
         setInputValues((prev) => ({ ...prev, current: "" }))
+        setRefresh((b) => !b)
     }
 
     return {
