@@ -27,7 +27,7 @@
 .active {
     opacity: 1;
     height: fit-content;
-    max-height: 296px;
+    max-height: 312px;
     transition:
         max-height,
         opacity,
@@ -37,7 +37,7 @@
 .ingredientSuggestion {
     margin: 0;
     padding: 1rem;
-    font-size: $text-size-14;
+    font-size: $text-size-16;
     background-color: $third-color;
     border-top: 1px solid #ece9e8;
 }

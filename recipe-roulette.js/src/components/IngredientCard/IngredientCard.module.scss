@@ -19,9 +19,9 @@
         transition: transform 0.3s ease;
     }
     p {
-        line-height: 110%;
         align-content: center;
         font-family: "Puritan";
+        font-weight: 600;
         font-size: $size-20;
         color: $dark-gray;
     }
@@ -47,7 +47,7 @@
     }
 }
 .selected {
-    outline: 3px solid $darkish-gray;
+    outline: 4px solid $darkish-gray;
     outline-offset: -2px;
     .leftItems {
         transform: translateX(0);
