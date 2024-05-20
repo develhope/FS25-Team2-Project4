@@ -1,9 +1,9 @@
 import { MaterialSymbol } from "react-material-symbols"
 import classes from "./IngredientSearch.module.scss"
 import { useIngredientSearch } from "./useIngredientSearch"
-import { IngredientSuggestions } from "./IngredientSuggestions"
+import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions"
 
-export function IngredientSearch({ searchCriteria = "isBlackListed" }) {
+export function IngredientSearch({ fixedPosition = false, searchCriteria = "isBlackListed" }) {
     const {
         suggestions,
         inputValues,
@@ -16,8 +16,7 @@ export function IngredientSearch({ searchCriteria = "isBlackListed" }) {
     } = useIngredientSearch()
 
     return (
-        <div className={classes.search}>
-            
+        <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>
             <div className={`${classes.searchBar} ${searchState.inputActive ? classes.inputActive : classes.inputInactive}`}>
                 <input
                     className={classes.header}

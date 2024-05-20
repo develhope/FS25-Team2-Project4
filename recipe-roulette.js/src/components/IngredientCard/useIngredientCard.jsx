@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import { useIngredientSuggestion } from "./useIngredientSuggestion"
+import { useIngredientSuggestion } from "../Search/Suggestions/useIngredientSuggestion"
 
 export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed) {
     //Card State

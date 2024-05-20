@@ -1,7 +1,6 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
-import { IngredientSearch } from "./IngredientSearch"
 
 export function IngredientCard({ ing }) {
     const { handleIngredientClick, handleXClick, cardState } = useIngredientCard(
@@ -25,14 +24,6 @@ export function IngredientCard({ ing }) {
                 <p>{ing.name}</p>
             </div>
             <div className={classes.rightItems}>
-                <MaterialSymbol
-                    //onClick function to edit
-                    className={classes.rightIco}
-                    icon="edit_note"
-                    weight={300}
-                    size={24}
-                    grade={24}
-                />
                 <MaterialSymbol
                     onClick={(e) => handleXClick(e)}
                     className={classes.rightIco}

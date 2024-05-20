@@ -1,4 +1,4 @@
-@use "../../assets/scss/" as *;
+@use "../../../assets/scss/" as *;
 
 .search {
     position: relative;
@@ -77,24 +77,14 @@
     background-color: $second-color;
     transition: border-radius 0.3s ease;
 }
-
-.suggestions {
-    height: 0;
-    opacity: 0;
-    background-color: $third-color;
-    top: 3rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    width: 100%;
-    overflow-y: scroll;
-    border-radius: 0 0 $size-24 $size-24;
-    outline: 1px solid $lighter-gray;
+.positionFixed {
+    position: absolute;
+    z-index: 11;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 101%;
+    border-radius: $size-24;
+    outline: 1px solid $light-gray;
     outline-offset: -2px;
-    transition: height, opacity, 0.3s ease-in-out;
-}
-.active {
-    opacity: 1;
-    height: 296px;
-    transition: height, opacity, 0.3s ease-in-out;
 }

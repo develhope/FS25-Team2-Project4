@@ -1,6 +1,6 @@
-import { useIngredientSearch } from "./useIngredientSearch"
+import { useIngredientSearch } from "../SearchBar/useIngredientSearch"
 import { useIngredientSuggestion } from "./useIngredientSuggestion"
-import classes from "./IngredientSuggestion.module.scss"
+import classes from "./IngredientSuggestions.module.scss"
 
 export function IngredientSuggestionActive({ ing, prop }) {
     const { id, name, bgColor, isSelected, isBlackListed } = ing
@@ -9,7 +9,7 @@ export function IngredientSuggestionActive({ ing, prop }) {
 
     return (
         <p
-            className={`${classes.active} ${classes.ingredientSuggestion}`}
+            className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
             onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
         >
             {name}

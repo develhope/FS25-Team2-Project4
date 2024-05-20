@@ -1,21 +1,12 @@
+import classes from "./Discovery.module.scss" 
 import { MaterialSymbol } from "react-material-symbols"
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
+import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 
-import classes from "./Discovery.module.scss"
-import { IngredientSearch } from "../../components/IngredientCard/IngredientSearch"
-import { useIngredientSearch } from "../../components/IngredientCard/useIngredientSearch"
-import { useEffect } from "react"
-
 function Discovery() {
-    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum, selectToDisplay } = useManageIngredients()
-    const { suggestions } = useIngredientSearch("isSelected")
-
-
-    useEffect(() => {
-        shuffleIng()
-    }, [suggestions])
-
+    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } = useManageIngredients()
+    
     return (
         <div className={classes.discoveryPage}>
             <header>
@@ -27,12 +18,13 @@ function Discovery() {
             </header>
 
             <div className={classes.ingredientsWrapper}>
-                <IngredientSearch searchCriteria="isSelected" />
+                <IngredientSearch fixedPosition={true} searchCriteria="isSelected" />
                 {displayedIng.length > 0 &&
                     displayedIng.map((ing) => {
                         return <IngredientCard key={ing.id} ing={ing} />
                     })}
             </div>
+
             <div className={classes.bottomButtons}>
                 <button className={`${classes.button} ${ingNum === 8 && classes.disabled}`} onClick={() => handleIngIncrement()}>
                     <MaterialSymbol className={classes.ico} icon="add" size={18} grade={18} />

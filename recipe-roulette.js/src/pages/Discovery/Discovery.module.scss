@@ -2,10 +2,10 @@
 
 .discoveryPage {
     background-color: white;
-    display: flex;
     width: 100%;
-    flex-direction: column;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 0 $size-24;
     overflow: hidden;
@@ -39,15 +39,15 @@
         }
     }
     .ingredientsWrapper {
+        position: relative;
+        padding-top: 4rem;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        height: 1px;
         max-height: 100%;
         box-sizing: border-box;
         gap: $size-16;
         align-items: center;
-        margin-bottom: 2px;
     }
     .bottomButtons {
         display: flex;
@@ -55,6 +55,7 @@
         box-sizing: border-box;
         gap: 1rem;
         align-items: center;
+        justify-content: center;
         padding: $size-16 0;
         .cycleButton {
             display: flex;

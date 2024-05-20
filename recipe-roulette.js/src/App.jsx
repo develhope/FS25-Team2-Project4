@@ -31,9 +31,6 @@ function App() {
                 <Link className="pageLink" to="./settings">
                     Settings
                 </Link>
-                <Link className="pageLink" to="./recipes-results">
-                    Recipes
-                </Link>
             </div>
         </div>
     )

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react"
-import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
+import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
 
 export function useIngredientSearch() {
-    const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate } = useManageIngredients()
+    const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate, setRefresh } = useManageIngredients()
     const [inputValues, setInputValues] = useState({ initial: "Search", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
     const [suggestions, setSuggestions] = useState(ing)
@@ -16,7 +16,7 @@ export function useIngredientSearch() {
 
     useEffect(() => {
         setSuggestions(ing)
-    }, [searchState])
+    }, [searchState.inputActive])
 
     function handleInputActivation(e) {
         e.stopPropagation()
@@ -30,15 +30,11 @@ export function useIngredientSearch() {
     //input controls
     function handleInputChange(e) {
         const inputValue = e.target.value.toUpperCase()
-        console.log(inputValue)
-
         setInputValues((prev) => ({ ...prev, current: e.target.value }))
         setSuggestions(ing.filter((ingredient) => ingredient.name.toUpperCase().includes(inputValue)))
     }
 
     function handleInputDeactivation(e, prop) {
-        console.log("gaming");
-        console.log(prop);
         let firstAvailableIngredient
         const inputValue = e.target.value.toUpperCase()
         const isInDatabase = ing.filter(
@@ -46,7 +42,6 @@ export function useIngredientSearch() {
                 ingredient.name.toUpperCase().includes(inputValue) && !ingredient.isSelected && !ingredient.isBlacklisted
         )
         if (prop === "isBlackListed") {
-            console.log("broo");
             const isAlreadyBL = blackList.filter((blIngredient) =>
                 isInDatabase.some(
                     (dbIngredient) =>
@@ -56,20 +51,20 @@ export function useIngredientSearch() {
             firstAvailableIngredient = isInDatabase.find(
                 (dbIngredient) => !isAlreadyBL.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
-        } else if (prop === "isSelected") {
-            console.log("siss");
-
+        } else if (prop === "isSelected" && selectedIng.length < 8) {
             const isAlreadySelected = selectedIng.filter((selectedIng) =>
                 isInDatabase.some(
                     (dbIngredient) =>
                         dbIngredient.id === selectedIng.id || dbIngredient.name.toUpperCase() === selectedIng.name.toUpperCase()
                 )
             )
-
             firstAvailableIngredient = isInDatabase.find(
                 (dbIngredient) => !isAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
-        }        
+        } else {
+            //snackbar di avviso che spunta dal basso
+            console.log("maximum number of ingredient reached!")
+        }
         if (inputValue !== "" && firstAvailableIngredient) {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
@@ -79,6 +74,7 @@ export function useIngredientSearch() {
             setSearchState({ inputActive: false })
         }
         setSuggestions(ing.filter((ing) => !ing.isBlacklisted))
+        setRefresh((b) => !b)
     }
 
     function handlePressEnter(e) {
@@ -99,8 +95,13 @@ export function useIngredientSearch() {
 
     function handleSuggestionClick(e, prop, cardState, setCardState) {
         e.stopPropagation()
-        handleIngUpdate(prop, cardState, setCardState)
-        setSearchState({ inputActive: false })
+        if (selectedIng.length < 8) {
+            handleIngUpdate(prop, cardState, setCardState)
+            setSearchState({ inputActive: false })
+        } else {
+            //snackbar di avviso che spunta dal basso
+            console.log("maximum number of ingredient reached!")
+        }
         setInputValues((prev) => ({ ...prev, current: "" }))
     }
 

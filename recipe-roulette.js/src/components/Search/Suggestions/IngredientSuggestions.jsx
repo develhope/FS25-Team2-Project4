@@ -1,5 +1,5 @@
-import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import classes from "./IngredientSearch.module.scss"
+import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
+import classes from "./IngredientSuggestions.module.scss"
 import { IngredientSuggestionActive } from "./IngredientSuggestionActive"
 import { IngredientSuggestionInactive } from "./IngredientSuggestionInactive"
 
@@ -16,12 +16,11 @@ export function IngredientSuggestions({ inputActive, searchCriteria, suggestions
                                 <IngredientSuggestionActive
                                     ing={ingredient}
                                     prop={searchCriteria}
-                                    className={classes.active}
                                     key={ingredient.id}
                                 />
                             )
                         } else {
-                            return <IngredientSuggestionInactive ing={ingredient} className={classes.inactive} key={ingredient.id} />
+                            return <IngredientSuggestionInactive ing={ingredient} key={ingredient.id} />
                         }
                     })}
         </div>

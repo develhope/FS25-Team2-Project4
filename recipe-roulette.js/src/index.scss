@@ -24,6 +24,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     height: $height-80;
+    outline: 1px solid $light-gray;
     .pageLink {
         display: flex;
         justify-content: center;
@@ -32,6 +33,5 @@ body {
         color: inherit;
         padding: 1rem;
         flex-grow: 1;
-        border-top: 1px gray solid;
     }
 }

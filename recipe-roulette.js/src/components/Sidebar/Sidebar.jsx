@@ -1,9 +1,9 @@
 import classes from "./Sidebar.module.scss"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
-import { FilterChip } from "../Search/FilterChip"
+import { FilterChip } from "../FilterChip/FilterChip"
 import { MaterialSymbol } from "react-material-symbols"
-import { Switch } from "../Search/Switch"
-import { IngredientSearch } from "../IngredientCard/IngredientSearch"
+import { Switch } from "../Switch/Switch"
+import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
 
 export function Sidebar() {
     const { handleDeselectAll, blackList } = useManageIngredients()

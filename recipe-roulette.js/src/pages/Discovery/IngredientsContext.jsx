@@ -12,6 +12,7 @@ export const IngredientsProvider = ({ children }) => {
     const [selectedIng, setSelectedIng] = useState([])
     const [blackList, setBlackList] = useState([])
     const [randomIng, setRandomIng] = useState([])
+    const [refresh, setRefresh] = useState(false)
     const location = useLocation()
 
     useEffect(() => {
@@ -19,8 +20,9 @@ export const IngredientsProvider = ({ children }) => {
     }, [ingNum, location.key])
 
     useEffect(() => {
-        setDisplayedIng([...selectedIng, ...randomIng])
-    }, [randomIng])
+        selectToDisplay()
+    }, [refresh])
+
 
     function handleIngUpdate(prop, cardState, setCardState) {
         const updatedIngs = ing.map((item) => (item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item))
@@ -29,6 +31,9 @@ export const IngredientsProvider = ({ children }) => {
         const affectedIngs = updatedIngs.filter((item) => item[prop])
         if (prop === "isSelected") {
             setSelectedIng(affectedIngs)
+            if (affectedIngs.length > ingNum) {
+                setIngNum(affectedIngs.length)
+            }
             setSlots(ingNum - affectedIngs.length)
         } else if (prop === "isBlackListed") {
             setBlackList(affectedIngs)
@@ -41,14 +46,14 @@ export const IngredientsProvider = ({ children }) => {
     }
 
     function handleDeselectAll(prop, setCardState) {
-        if (prop === "isSelected") {
+        if (prop === "isSelected" && selectedIng.length > 0) {
             setSelectedIng([])
             setSlots(ingNum)
+            setDisplayedIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
         } else if (prop === "isBlackListed") {
             setBlackList([])
         }
         setIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
-        setDisplayedIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
         if (setCardState) {
             setCardState((prevData) => ({ ...prevData, [prop]: false }))
         }
@@ -65,8 +70,9 @@ export const IngredientsProvider = ({ children }) => {
                 randomIds.push(randomId)
             }
         }
-
-        setRandomIng(ing.filter((item) => randomIds.includes(item.id)))
+        const newRandomIng = ing.filter((item) => randomIds.includes(item.id))
+        setRandomIng(newRandomIng)
+        setDisplayedIng([...selectedIng, ...newRandomIng])
     }
 
     function shuffleIng() {
@@ -99,6 +105,7 @@ export const IngredientsProvider = ({ children }) => {
                 handleIngUpdate,
                 setBlackList,
                 selectToDisplay,
+                setRefresh,
                 ing,
                 ingNum,
                 randomIng,
