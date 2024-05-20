@@ -1,8 +1,8 @@
 @use "../../../assets/scss/" as *;
 
 .suggestions {
-    max-height: 0;
     opacity: 0;
+    height: 0;
     background-color: $third-color;
     top: 3rem;
     display: flex;
@@ -14,9 +14,9 @@
     outline: 1px solid $lighter-gray;
     outline-offset: -2px;
     transition:
-        max-height,
+        height,
         opacity,
-        0.3s ease-in-out;
+        0.3s ease;
     .activeSuggestion {
         color: $darkish-gray;
     }
@@ -26,12 +26,11 @@
 }
 .active {
     opacity: 1;
-    height: fit-content;
-    max-height: 312px;
+    height: 312px;
     transition:
-        max-height,
+        height,
         opacity,
-        0.3s ease-in-out;
+        0.3s ease;
 }
 
 .ingredientSuggestion {
