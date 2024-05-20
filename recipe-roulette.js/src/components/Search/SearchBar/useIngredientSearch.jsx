@@ -69,12 +69,12 @@ export function useIngredientSearch() {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
             handleIngUpdate(prop, firstAvailableIngredient, setCardState)
+            setRefresh((b) => !b)
         } else {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
         }
         setSuggestions(ing.filter((ing) => !ing.isBlacklisted))
-        setRefresh((b) => !b)
     }
 
     function handlePressEnter(e) {
