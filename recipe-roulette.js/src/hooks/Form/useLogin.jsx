@@ -26,16 +26,16 @@ export function useLogin() {
   }
 
 
-  /* 
-  function getItem(data) {
-    try {
-      const username = window.localStorage.getItem("usernam", JSON.parse(data));
-      const password = window.localStorage.getItem("password", JSON.parse(data.password));
-
-    } catch (error) {
-      console.log(error);
-    }
-  } */
+/*
+    function getItem(data) {
+      try {
+        const username = window.localStorage.getItem("usernam", JSON.parse(data));
+        const password = window.localStorage.getItem("password", JSON.parse(data.password));
+        
+      } catch (error) {
+        console.log(error);
+      }
+    } */
 
   function handleInput(e) {
     const name = e.target.name;
