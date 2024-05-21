@@ -41,8 +41,9 @@ export function useIngredientSearch(isFixed) {
         const inputValue = e.target.value.toUpperCase()
         const isInDatabase = ing.filter(
             (ingredient) =>
-                ingredient.name.toUpperCase().includes(inputValue) && !ingredient.isSelected && !ingredient.isBlacklisted
+                ingredient.name.toUpperCase().includes(inputValue) && !ingredient.isSelected && !ingredient.isBlackListed
         )
+        console.log(isInDatabase);
         if (prop === "isBlackListed") {
             const isAlreadyBL = blackList.filter((blIngredient) =>
                 isInDatabase.some(
