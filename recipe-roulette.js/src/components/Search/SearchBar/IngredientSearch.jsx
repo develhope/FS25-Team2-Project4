@@ -3,17 +3,18 @@ import classes from "./IngredientSearch.module.scss"
 import { useIngredientSearch } from "./useIngredientSearch"
 import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions"
 
-export function IngredientSearch({ fixedPosition = false, searchCriteria = "isBlackListed" }) {
+export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackListed" }) {
     const {
         suggestions,
         inputValues,
         searchState,
+        fixedPosition,
         handlePressEnter,
         handleInputChange,
         handleInputActivation,
         handleInputDeactivation,
         handleXClick,
-    } = useIngredientSearch()
+    } = useIngredientSearch(isFixed)
 
     return (
         <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>

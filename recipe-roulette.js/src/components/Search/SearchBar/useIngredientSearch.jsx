@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
 
-export function useIngredientSearch() {
+export function useIngredientSearch(isFixed) {
     const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate, setRefresh } = useManageIngredients()
     const [inputValues, setInputValues] = useState({ initial: "Search", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
     const [suggestions, setSuggestions] = useState(ing)
+    const [fixedPosition, setFixedPosition] = useState(false)
     const [cardState, setCardState] = useState({
         id: null,
         label: null,
@@ -20,6 +21,7 @@ export function useIngredientSearch() {
 
     function handleInputActivation(e) {
         e.stopPropagation()
+        isFixed && setFixedPosition(true)
         setSearchState({ inputActive: true })
     }
 
@@ -75,6 +77,7 @@ export function useIngredientSearch() {
             setSearchState({ inputActive: false })
         }
         setSuggestions(ing.filter((ing) => !ing.isBlacklisted))
+        isFixed && setFixedPosition(false)
     }
 
     function handlePressEnter(e) {
@@ -117,5 +120,6 @@ export function useIngredientSearch() {
         inputValues,
         searchState,
         suggestions,
+        fixedPosition,
     }
 }

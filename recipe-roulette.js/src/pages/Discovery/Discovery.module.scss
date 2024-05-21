@@ -18,36 +18,40 @@
         h1 {
             margin: 0;
         }
-        .button {
-            display: flex;
-            align-items: center;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: $text-size-14;
-            width: fit-content;
-            height: $height-40;
-            color: $dark-gray;
-            font-weight: 600;
-            border: 1px solid #e5e0df;
-            border-radius: $size-20;
-            background-color: white;
-            padding: 0 $size-16;
-            .ico {
-                padding-top: 3px;
-            }
-        }
     }
     .ingredientsWrapper {
         position: relative;
-        padding-top: 4rem;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
         max-height: 100%;
         box-sizing: border-box;
-        gap: .75rem;
+        gap: 0.75rem;
         align-items: center;
+        padding-top: 3.5rem;
+        .globalActions {
+            position: absolute;
+            top: 0;
+            display: flex;
+            width: 100%;
+            box-sizing: border-box;
+            gap: 0.75rem;
+            .icoButton {
+                display: flex;
+                align-items: center;
+                align-items: center;
+                justify-content: center;
+                height: $height-40;
+                width: $height-40;
+                min-width: $height-40;
+                color: $dark-gray;
+                font-weight: 600;
+                border: 1px solid #e5e0df;
+                border-radius: $size-20;
+                background-color: white;
+                font-size: 18px;
+            }
+        }
     }
     .bottomButtons {
         display: flex;
@@ -56,7 +60,7 @@
         gap: 1rem;
         align-items: center;
         justify-content: center;
-        padding: .75rem 0;
+        padding: 0.75rem 0;
         .cycleButton {
             display: flex;
             align-items: center;
