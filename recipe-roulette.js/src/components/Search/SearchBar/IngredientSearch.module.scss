@@ -5,6 +5,7 @@
     width: 100%;
     height: fit-content;
     box-sizing: border-box;
+    overflow: hidden;
 }
 .searchBar {
     position: relative;
@@ -53,7 +54,7 @@
         justify-content: center;
         padding-bottom: .125rem;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-48%);
     }
     .searchIco {
         right: 0.5rem;

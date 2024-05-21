@@ -41,5 +41,6 @@
     padding: 1rem;
     font-size: $text-size-16;
     background-color: $third-color;
-    border-top: 1px solid #ece9e8;
+    border-bottom: 1px solid #ece9e8;
+    box-sizing: border-box;
 }
