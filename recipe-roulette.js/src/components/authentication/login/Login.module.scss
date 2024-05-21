@@ -94,3 +94,11 @@
     font-size: $text-size-14;
   }
 }
+
+
+.loginBtnBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.5rem;
+}

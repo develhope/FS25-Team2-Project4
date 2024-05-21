@@ -1,18 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useForm() {
-  const [data, setData] = useState(localStorage.getItem("username", "password") || createData());
+export function useSignup() {
+  const [data, setData] = useState(createData());
   const [passError, setPassError] = useState(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("username", data.username);
-    localStorage.setItem("password", data.password);
-  }, [data]);
 
 
   function createData() {
@@ -25,27 +20,7 @@ export function useForm() {
     };
   }
 
-  // functions necessarie per la gestione di form senza checkbox
   function handleInput(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setData((d) => {
-      return {
-        ...d,
-        [name]: value,
-      };
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(data);
-  }
-
-  // functions necessarie per la gestione di form con checkbox e verifica password
-
-  function handleInputCheckbox(e) {
     const name = e.target.name;
     const value = e.target.value;
     const checked = e.target.checked;
@@ -59,7 +34,7 @@ export function useForm() {
     });
   }
 
-  function handleSubmitVerifyPassword(e) {
+  function handleSubmit(e) {
     e.preventDefault();
 
     if (data.password === data.confirmPass) {
@@ -75,7 +50,5 @@ export function useForm() {
     inputRef,
     handleInput,
     handleSubmit,
-    handleInputCheckbox,
-    handleSubmitVerifyPassword,
   };
 }

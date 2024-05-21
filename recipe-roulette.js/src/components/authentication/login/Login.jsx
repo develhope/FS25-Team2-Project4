@@ -2,10 +2,12 @@ import classes from "./Login.module.scss";
 import { Link } from "react-router-dom";
 import { MaterialSymbol } from "react-material-symbols";
 import { Logo } from "../../Logo/Logo";
-import { useForm } from "../../../hooks/Form/useForm";
+import { useLogin } from "../../../hooks/Form/useLogin";
+import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn";
+import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn";
 
 export function Login() {
-  const { data, inputRef, handleInput, handleSubmit } = useForm();
+  const { data, inputRef, handleInput, handleSubmit } = useLogin();
 
   return (
     <section className={classes.pageBox}>
@@ -57,6 +59,11 @@ export function Login() {
             </span>
           </p>
         </form>
+
+        <div className={classes.loginBtnBox}>
+          <GoogleLoginBtn/>
+          <FacebookSocialBtn/>
+        </div>
       </div>
     </section>
   );

@@ -6,7 +6,9 @@ const btnStyle = {
     borderRadius: "1.5rem",
     display: "grid",
     placeItems: "center",
-    width: "10rem"
+    width: "2.5rem",
+    paddingLeft: ".45rem",
+    paddingRight: ".1rem",
 };
 
 const textStyle = {
