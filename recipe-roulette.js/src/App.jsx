@@ -5,7 +5,6 @@ import Settings from "./pages/Settings/Settings"
 import RecipeResults from "./pages/RecipesResults/RecipesResults"
 import { Login } from "./components/authentication/login/Login"
 import { Signup } from "./components/authentication/signup/Signup"
-import { Authentication } from "./components/authentication/Authentication"
 import { IngredientsProvider } from "./pages/Discovery/IngredientsContext"
 import { Sidebar } from "./components/Sidebar/Sidebar"
 
