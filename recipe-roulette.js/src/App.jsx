@@ -3,6 +3,9 @@ import Discovery from "./pages/Discovery/Discovery"
 import Favorited from "./pages/Favorited/Favorited"
 import Settings from "./pages/Settings/Settings"
 import RecipeResults from "./pages/RecipesResults/RecipesResults"
+import { Login } from "./components/authentication/login/Login"
+import { Signup } from "./components/authentication/signup/Signup"
+import { Authentication } from "./components/authentication/Authentication"
 import { IngredientsProvider } from "./pages/Discovery/IngredientsContext"
 import { Sidebar } from "./components/Sidebar/Sidebar"
 
@@ -18,6 +21,10 @@ function App() {
                     <Route path="/recipes-results" element={<RecipeResults />}>
                         <Route path="./:recipeName" element="RecipePage" />
                     </Route>
+
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<Signup/>}/>
+                
                 </Routes>
             </IngredientsProvider>
 
