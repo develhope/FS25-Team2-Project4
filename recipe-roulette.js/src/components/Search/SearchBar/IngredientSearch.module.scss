@@ -13,7 +13,7 @@
     align-items: center;
 
     width: 100%;
-    height: 3rem;
+    height: 2.5rem;
     padding: 0;
     box-sizing: border-box;
     overflow: hidden;
@@ -29,6 +29,7 @@
 
         width: 100%;
         height: 100%;
+        padding: 0;
         padding-left: $size-24;
         box-sizing: border-box;
 
@@ -45,17 +46,18 @@
     .ico {
         color: $dark-gray;
         position: absolute;
-        left: 0.5 rem;
         height: 2rem;
         width: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-bottom: .125rem;
         top: 50%;
         transform: translateY(-50%);
     }
     .searchIco {
         right: 0.5rem;
+
     }
     .closeIco {
         right: 0.5em;
@@ -67,7 +69,7 @@
 .inputInactive {
     background-color: $third-color;
     border-radius: $size-24;
-    outline: 1px solid $lighter-gray;
+    outline: 1px solid $light-gray;
     outline-offset: -2px;
     transition: border-radius 0.3s ease;
 }
@@ -83,7 +85,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 101%;
+    width: 102%;
     border-radius: $size-24;
     outline: 1px solid $light-gray;
     outline-offset: -2px;

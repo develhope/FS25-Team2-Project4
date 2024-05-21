@@ -1,15 +1,40 @@
 @use "../../assets/scss/" as *;
 
-.sidebar {
+.backgroundOverlay {
     position: fixed;
-    box-sizing: border-box;
+    z-index: 12;
+
+    height: 100%;
+    width: 100%;
+    left: 0;
+    transform: translateX(100%);
+
+    background-color: rgba($color: $darkest-gray, $alpha: 0.2);
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+}
+.sidebar {
+    z-index: 13;
+
+    position: fixed;
     bottom: 0;
     right: 0;
-    background-color: white;
-    box-shadow: 0 0 200px rgba($color: #000000, $alpha: 0.2);
+
+    box-sizing: border-box;
     height: 100%;
     width: $width-360;
+
+    background-color: white;
     border-radius: $size-24 0 0 $size-24;
+
+    transform: translateX($width-360);
+    opacity: 0;
+    transition:
+        transform,
+        opacity,
+        0.3s ease;
+
     header {
         padding: 0 $size-24;
         display: flex;
@@ -21,6 +46,15 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+        }
+        .closeIco {
+            display: flex;
+            box-sizing: border-box;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+            height: 2rem;
+            width: 2rem;
         }
         .deselectAllButton {
             display: flex;
@@ -38,7 +72,7 @@
             background-color: white;
             padding: 0 $size-16;
             .ico {
-                padding-bottom: 2px;
+                padding-bottom: 4px;
             }
         }
     }
@@ -72,4 +106,18 @@
     display: flex;
     gap: $size-8;
     flex-wrap: wrap;
+}
+
+.backgroundOverlayToggled {
+    transform: translateX(0);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.sidebarToggled {
+    transform: translateX(0);
+    opacity: 1;
+    transition:
+        transform,
+        opacity,
+        0.3s ease;
 }

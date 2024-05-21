@@ -60,7 +60,7 @@ export const IngredientsProvider = ({ children }) => {
     }
 
     function selectToDisplay() {
-        const ingredientIds = ing.filter((item) => !item.isSelected).map((item) => item.id)
+        const ingredientIds = ing.filter((item) => !item.isSelected && !item.isBlackListed).map((item) => item.id)
         const selectedIds = selectedIng.map((item) => item.id)
         const randomIds = []
 
