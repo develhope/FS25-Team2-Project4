@@ -36,7 +36,7 @@
 .ingredientSuggestion {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
     margin: 0;
     padding: 1rem;
     font-size: $text-size-16;

@@ -20,7 +20,7 @@ export function IngredientCard({ ing }) {
             className={`${classes.ingredientCard} ${cardState.isSelected ? classes.selected : classes.unselected}`}
         >
             <div className={classes.leftItems}>
-                <MaterialSymbol className={classes.checkIco} icon="check_circle" weight={600} size={22} grade={22} />
+                <MaterialSymbol className={classes.checkIco} icon="check_circle" weight={500} size={22} grade={22} />
                 <p>{ing.name}</p>
             </div>
             <div className={classes.rightItems}>
@@ -28,7 +28,7 @@ export function IngredientCard({ ing }) {
                     onClick={(e) => handleXClick(e)}
                     className={classes.rightIco}
                     icon="close"
-                    weight={600}
+                    weight={500}
                     size={22}
                     grade={22}
                 />
