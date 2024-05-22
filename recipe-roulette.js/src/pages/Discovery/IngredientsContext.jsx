@@ -18,7 +18,7 @@ export const IngredientsProvider = ({ children }) => {
 
     useEffect(() => {
         selectToDisplay()
-    }, [ingNum, location.key, filter, refresh])
+    }, [ingNum, location.pathname, filter, refresh])
 
     const toggleFilter = (prop, setState) => {
         const newState = !filter[prop]
