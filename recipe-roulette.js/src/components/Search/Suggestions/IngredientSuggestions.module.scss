@@ -34,6 +34,9 @@
 }
 
 .ingredientSuggestion {
+    width: 100%;
+    height: 100%;
+    background-color: $third-color;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -43,4 +46,7 @@
     background-color: $third-color;
     border-bottom: 1px solid #ece9e8;
     box-sizing: border-box;
+}
+.ingredientSuggestion:hover {
+    cursor: pointer;
 }
