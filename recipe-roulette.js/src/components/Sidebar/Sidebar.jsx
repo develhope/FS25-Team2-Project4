@@ -58,9 +58,9 @@ export function Sidebar({ isToggled = false, handleSidebarToggle }) {
                     <div className={classes.preferences}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
-                            <Switch label={"Gluten free"} />
-                            <Switch label={"Vegetarian"} />
-                            <Switch label={"Vegan"} />
+                            <Switch label={"Gluten free"} prop={"isGlutenFree"} />
+                            <Switch label={"Vegetarian"} prop={"isVegetarian"} />
+                            <Switch label={"Vegan"} prop={"isVegan"}/>
                         </div>
                     </div>
                 </section>

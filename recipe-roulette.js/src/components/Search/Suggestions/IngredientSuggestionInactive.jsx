@@ -5,10 +5,11 @@ export function IngredientSuggestionInactive({ ing }) {
     const { id, name, bgColor, isSelected, isBlackListed } = ing
 
     return (
-        <p className={`${classes.inactiveSuggestion} ${classes.ingredientSuggestion}`}>
+        <p className={`${!ing.isSelected && classes.inactiveSuggestion} ${classes.ingredientSuggestion}`}>
             {name}
-            {ing.isBlackListed && <MaterialSymbol icon="block" grade={18} size={18} />}
-            {ing.isSelected && <MaterialSymbol icon="check_circle" grade={18} size={18} />}
+            {ing.isBlackListed && <MaterialSymbol icon="block" grade={20} size={20} />}
+            {ing.isSelected && <MaterialSymbol icon="task_alt" grade={20} size={20} />}
+            {(!ing.isSelected && !ing.isBlackListed) && <MaterialSymbol icon="instant_mix" grade={20} size={20} />}
         </p>
     )
 }

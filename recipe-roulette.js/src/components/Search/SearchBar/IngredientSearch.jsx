@@ -25,10 +25,10 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                     placeholder="Search an ingredient"
                     name="search"
                     type="text"
-                    onBlur={(e) =>
+                    onBlur={() =>
                         setTimeout(() => {
-                            handleInputDeactivation(e, searchCriteria)
-                        }, 25)
+                            handleInputDeactivation(searchCriteria)
+                        },0)
                     }
                     onKeyDown={handlePressEnter}
                     onChange={handleInputChange}
