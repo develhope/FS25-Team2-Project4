@@ -9,62 +9,62 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    border-radius: 2rem;
+    padding-left: 1rem;
+    border-radius: $size-24;
     overflow: hidden;
     .leftItems {
         display: flex;
         align-items: center;
         height: 100%;
-        transform: translateX(-2rem);
+        transform: translateX(0);
         transition: transform 0.3s ease;
     }
     p {
+        padding-left: 0.5rem;
         align-content: center;
         font-family: "Puritan";
         font-weight: 600;
-        font-size: $size-20;
+        font-size: 18px;
         color: $dark-gray;
     }
     .checkIco {
-        margin-right: 1rem;
         color: $dark-gray;
     }
 }
 
 .unselected {
     outline: 1px solid #ece9e8;
-    .checkIco {
-        transform: translateX(-5rem);
-        opacity: 0;
-        scale: .1;
-        transition:
-            scale,
-            opacity,
-            0.3s ease-in-out;
-    }
     p {
-        transition: font-size 0.3s ease-in-out;
+        transition:
+            size,
+            margin,
+            0.3s ease;
+    }
+    .checkIco {
+        opacity: 1;
+        transition: size 0.2s ease-in-out;
     }
 }
 .selected {
     outline: 3px solid $darkish-gray;
     outline-offset: -2px;
+
     .leftItems {
-        transform: translateX(0);
+        transform: translateX(0.5em);
         transition: transform 0.3s ease;
     }
-
     p {
-        font-size: 1.5rem;
-        transition: font-size 0.3s ease;
+        padding-left: 1rem;
+        font-size: $size-20;
+        font-weight: 600;
+        transition:
+            size,
+            margin,
+            0.3s ease;
     }
     .checkIco {
-        transform: translateX(0);
-        width: 1.5rem;
         opacity: 1;
-        transition:
-            font-size,
-            0.2s ease-in-out;
+        transition: size 0.2s ease-in-out;
     }
 }
 

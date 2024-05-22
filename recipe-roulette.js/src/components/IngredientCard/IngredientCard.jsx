@@ -20,7 +20,11 @@ export function IngredientCard({ ing }) {
             className={`${classes.ingredientCard} ${cardState.isSelected ? classes.selected : classes.unselected}`}
         >
             <div className={classes.leftItems}>
-                <MaterialSymbol className={classes.checkIco} icon="check_circle" weight={500} size={22} grade={22} />
+                {cardState.isSelected ? (
+                    <MaterialSymbol className={classes.checkIco} icon="lock" weight={600} size={22} grade={22} />
+                ) : (
+                    <MaterialSymbol className={classes.checkIco} icon="lock_open" weight={600} size={18} grade={18} />
+                )}
                 <p>{ing.name}</p>
             </div>
             <div className={classes.rightItems}>
