@@ -18,15 +18,11 @@ export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed)
 
     useEffect(() => {
         setCardState({ label, id, bgColor, isSelected, isBlackListed })
-    }, [randomIng, displayedIng, ingState])
+    }, [randomIng, displayedIng])
 
     useEffect(() => {
         setCardState(ingState)
-    }, [ingState, refresh])
-
-    useEffect(() => {
-        setCardState(ingState)
-    }, [refresh])
+    }, [ingState])
 
     function handleIngredientClick() {
         handleIngUpdate("isSelected", cardState, setCardState)

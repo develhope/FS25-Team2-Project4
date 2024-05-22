@@ -34,7 +34,7 @@ export function Sidebar({ isToggled = false, handleSidebarToggle }) {
                 <section>
                     <div className={classes.blackListed}>
                         <h4>Black listed ingredients</h4>
-                        <IngredientSearch searchCriteria="isBlackListed" />
+                        <IngredientSearch isFixed={false} searchCriteria="isBlackListed" />
                         {blackList.length > 0 && (
                             <div className={classes.filterChipWrapper}>
                                 {blackList
