@@ -9,12 +9,25 @@ export function IngredientSuggestionActive({ ing, prop }) {
     const { handleSuggestionClick } = useIngredientSearch()
 
     return (
-        <p
-            className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
-            onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
-        >
-            <MaterialSymbol icon="circle" weight={400} grade={20} size={20}/>
-            {name}
-        </p>
+        <>
+            {prop === "isBlackListed" && (
+                <p
+                    className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
+                    onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
+                >
+                    <MaterialSymbol icon="cancel" weight={400} grade={20} size={20} />
+                    {name}
+                </p>
+            )}
+            {prop === "isSelected" && (
+                <p
+                    className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
+                    onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
+                >
+                    <MaterialSymbol icon="lock_open" weight={400} grade={20} size={20} />
+                    {name}
+                </p>
+            )}
+        </>
     )
 }

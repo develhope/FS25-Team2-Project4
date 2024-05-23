@@ -1,16 +1,16 @@
 import { useState } from "react"
 
-export function useDiscovery() {
+export function useDiscoverySidebar() {
     const [fixedPosition, setFixedPosition] = useState(false)
-    const [isToggled, setIsToggled] = useState(false)
+    const [sidebarState, setsidebarState] = useState(false)
 
     function handleSidebarToggle() {
-        setIsToggled((b) => !b)
+        setsidebarState((b) => !b)
     }
 
     return {
         fixedPosition,
-        isToggled,
+        sidebarState,
         setFixedPosition,
         handleSidebarToggle,
     }

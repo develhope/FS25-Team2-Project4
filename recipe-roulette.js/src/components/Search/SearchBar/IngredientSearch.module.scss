@@ -6,6 +6,9 @@
     height: fit-content;
     box-sizing: border-box;
     overflow: hidden;
+    left: 0;
+    transition: height .3s ease, width .3s ease;
+
 }
 .searchBar {
     position: relative;
@@ -18,6 +21,8 @@
     padding: 0;
     box-sizing: border-box;
     overflow: hidden;
+    transition: height .3s ease, width .3s ease;
+
     input {
         position: absolute;
 
@@ -73,12 +78,14 @@
     outline: 1px solid $light-gray;
     outline-offset: -2px;
     transition: border-radius 0.3s ease;
+
 }
 
 .inputActive {
     border-radius: $size-24 $size-24 0 0;
     background-color: $second-color;
     transition: border-radius 0.3s ease;
+
 }
 .positionFixed {
     position: absolute;
@@ -90,4 +97,5 @@
     border-radius: $size-24;
     outline: 1px solid $light-gray;
     outline-offset: -2px;
+    transition: height .3s ease, width .3s ease;
 }

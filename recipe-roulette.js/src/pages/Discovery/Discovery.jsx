@@ -1,22 +1,14 @@
-import classes from "./Discovery.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
-import { Sidebar } from "../../components/Sidebar/Sidebar"
-import { useDiscovery } from "./useDiscovery"
 
-function Discovery() {
+import classes from "./Discovery.module.scss"
+
+function Discovery({ handleSidebarToggle }) {
     const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } = useManageIngredients()
-    const { handleSidebarToggle, isToggled } = useDiscovery()
-
     return (
         <div className={classes.discoveryPage}>
-            <Sidebar isToggled={isToggled} handleSidebarToggle={handleSidebarToggle} />
-            <header>
-                <h1>Discovery</h1>
-            </header>
-
             <div className={classes.ingredientsWrapper}>
                 <div className={classes.globalActions}>
                     <IngredientSearch isFixed={true} searchCriteria="isSelected" />

@@ -7,10 +7,7 @@ body {
     height: 100svh;
     width: 100vw;
 }
-#root {
-    height: 100%;
-    box-sizing: border-box;
-}
+
 .appContainer {
     display: flex;
     flex-direction: column;

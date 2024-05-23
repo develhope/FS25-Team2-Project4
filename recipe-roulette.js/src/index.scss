@@ -1,15 +1,15 @@
 @use "./assets/scss/" as *;
 @import url(./root.css);
 
-body {
-    margin: 0;
-    box-sizing: border-box;
-    height: 100vh;
-}
-
 #root {
     height: 100%;
     box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    height: 100svh;
 }
 .appContainer {
     display: flex;
