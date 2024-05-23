@@ -32,9 +32,8 @@
     transform: translateX($width-360);
     opacity: 0;
     transition:
-        transform,
-        opacity,
-        0.3s ease;
+        transform 0.4s ease,
+        opacity 0.4s ease;
 
     header {
         padding: 0 $size-24;
@@ -118,7 +117,6 @@
     transform: translateX(0);
     opacity: 1;
     transition:
-        transform,
-        opacity,
-        0.3s ease;
+        transform 0.4s ease,
+        opacity 0.4s ease;
 }
