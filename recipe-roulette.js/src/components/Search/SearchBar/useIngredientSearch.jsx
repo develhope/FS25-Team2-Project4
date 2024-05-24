@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
 
 export function useIngredientSearch(isFixed, searchCriteria) {
-    const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate, setRefresh } = useManageIngredients()
+    const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate, setRefresh, filter } = useManageIngredients()
 
     const [inputValues, setInputValues] = useState({ initial: "", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
@@ -60,12 +60,23 @@ export function useIngredientSearch(isFixed, searchCriteria) {
 
     const handleInputDeactivation = (prop) => {
         let firstAvailableIngredient
-        const isInDatabase = ing.filter(
+
+        let isInDatabase = ing.filter(
             (ingredient) =>
                 ingredient.name.toUpperCase().includes(inputValues.current.toUpperCase()) &&
                 !ingredient.isSelected &&
                 !ingredient.isBlackListed
         )
+        if (filter.isGlutenFree) {
+            isInDatabase = isInDatabase.filter((item) => item.isGlutenFree)
+        }
+        if (filter.isVegetarian) {
+            isInDatabase = isInDatabase.filter((item) => item.isVegetarian)
+        }
+        if (filter.isVegan) {
+            isInDatabase = isInDatabase.filter((item) => item.isVegan)
+        }
+
         if (prop === "isBlackListed") {
             const isAlreadyBL = blackList.filter((blIngredient) =>
                 isInDatabase.some(
@@ -106,6 +117,10 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
             handleInputDeactivation(searchCriteria)
+            //disattiva l'input dopo aver chiamato la funzione (previene comportamenti indesiderati)
+            setTimeout(() => {
+                e.target.blur()
+            }, 0)
         }
     }
 
