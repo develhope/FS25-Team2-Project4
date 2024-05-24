@@ -12,9 +12,9 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
         handlePressEnter,
         handleInputChange,
         handleInputActivation,
-        handleInputDeactivation,
+        handleBlur,
         handleXClick,
-    } = useIngredientSearch(isFixed)
+    } = useIngredientSearch(isFixed, searchCriteria)
 
     return (
         <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>
@@ -25,11 +25,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                     placeholder="Search an ingredient"
                     name="search"
                     type="text"
-                    onBlur={(e) =>
-                        setTimeout(() => {
-                            handleInputDeactivation(e, searchCriteria)
-                        }, 25)
-                    }
+                    onBlur={(e) => setTimeout(() => {handleBlur(e)}, 0)}
                     onKeyDown={handlePressEnter}
                     onChange={handleInputChange}
                     value={inputValues.current}

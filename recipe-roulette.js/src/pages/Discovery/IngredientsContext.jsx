@@ -13,18 +13,20 @@ export const IngredientsProvider = ({ children }) => {
     const [blackList, setBlackList] = useState([])
     const [randomIng, setRandomIng] = useState([])
     const [refresh, setRefresh] = useState(false)
+    const [filter, setFilter] = useState({ isVegetarian: false, isGlutenFree: false, isVegan: false })
     const location = useLocation()
 
     useEffect(() => {
         selectToDisplay()
-    }, [ingNum, location.key])
+    }, [ingNum, location.pathname, filter, refresh])
 
-    useEffect(() => {
-        selectToDisplay()
-    }, [refresh])
+    const toggleFilter = (prop, setState) => {
+        const newState = !filter[prop]
+        setFilter((prevData) => ({ ...prevData, [prop]: newState }))
+        setState(newState)
+    }
 
-
-    function handleIngUpdate(prop, cardState, setCardState) {
+    const handleIngUpdate = (prop, cardState, setCardState) => {
         const updatedIngs = ing.map((item) => (item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item))
         setIng(updatedIngs)
 
@@ -45,22 +47,38 @@ export const IngredientsProvider = ({ children }) => {
         }))
     }
 
-    function handleDeselectAll(prop, setCardState) {
+    const handleDeselectAll = (prop, setCardState, setFilterState) => {
         if (prop === "isSelected" && selectedIng.length > 0) {
             setSelectedIng([])
             setSlots(ingNum)
             setDisplayedIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
         } else if (prop === "isBlackListed") {
             setBlackList([])
+            setFilter({ isGlutenFree: false, isVegan: false, isVegetarian: false })
         }
         setIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
+        if (setFilterState) {
+            setFilterState((prevData) => ({ ...prevData, [prop]: false }))
+        }
         if (setCardState) {
             setCardState((prevData) => ({ ...prevData, [prop]: false }))
         }
     }
 
-    function selectToDisplay() {
-        const ingredientIds = ing.filter((item) => !item.isSelected && !item.isBlackListed).map((item) => item.id)
+    const selectToDisplay = () => {
+        let availableIngs = ing.filter((item) => !item.isSelected && !item.isBlackListed)
+
+        if (filter.isGlutenFree) {
+            availableIngs = availableIngs.filter((item) => item.isGlutenFree)
+        }
+        if (filter.isVegetarian) {
+            availableIngs = availableIngs.filter((item) => item.isVegetarian)
+        }
+        if (filter.isVegan) {
+            availableIngs = availableIngs.filter((item) => item.isVegan)
+        }
+
+        const ingredientIds = availableIngs.filter((item) => !item.isSelected && !item.isBlackListed).map((item) => item.id)
         const selectedIds = selectedIng.map((item) => item.id)
         const randomIds = []
 
@@ -75,18 +93,18 @@ export const IngredientsProvider = ({ children }) => {
         setDisplayedIng([...selectedIng, ...newRandomIng])
     }
 
-    function shuffleIng() {
+    const shuffleIng = () => {
         selectToDisplay()
     }
 
-    function handleIngIncrement() {
+    const handleIngIncrement = () => {
         if (ingNum < 8) {
             setIngNum((prev) => prev + 1)
             setSlots((prev) => prev + 1)
         }
     }
 
-    function handleIngDecrement(id, e) {
+    const handleIngDecrement = (id, e) => {
         e.stopPropagation()
         if (ingNum > 3 && !ing.find((item) => item.id === id).isSelected) {
             setIngNum((prev) => prev - 1)
@@ -106,12 +124,14 @@ export const IngredientsProvider = ({ children }) => {
                 setBlackList,
                 selectToDisplay,
                 setRefresh,
+                toggleFilter,
                 ing,
                 ingNum,
                 randomIng,
                 selectedIng,
                 displayedIng,
                 blackList,
+                filter,
             }}
         >
             {children}
