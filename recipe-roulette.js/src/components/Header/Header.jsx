@@ -24,7 +24,7 @@ export function Header({handleMenuToggle}) {
 
     return (
         <header>
-            <MaterialSymbol onClick={handleMenuToggle} className={classes.menu} icon="menu" size={24} grade={24} />
+            <MaterialSymbol onClick={handleMenuToggle} className={classes.menu} icon="menu" weight={500} size={24} grade={24} />
             <h1>{title}</h1>
         </header>
     )

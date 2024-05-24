@@ -5,13 +5,17 @@
     height: 0;
     flex-grow: 1;
     box-sizing: border-box;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 1rem;
     padding-left: 1rem;
-    border-radius: $size-24;
+    border-radius: 2rem;
     overflow: hidden;
+
+    transition: border-radius 0.3s ease-out;
     .leftItems {
         display: flex;
         align-items: center;
@@ -26,60 +30,65 @@
         font-weight: 600;
         font-size: 18px;
         color: $dark-gray;
+        transition:
+            font-size 0.2s ease,
+            padding 0.3s ease;
     }
     .checkIco {
         color: $dark-gray;
+        transition: font-size 0.2s ease;
+    }
+    .rightItems {
+        display: flex;
+        align-content: center;
+        gap: 0.5rem;
+    }
+    .rightIco {
+        color: $darkish-gray;
+        height: 2rem;
+        width: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: transparent;
     }
 }
 
 .unselected {
     outline: 1px solid #ece9e8;
-    p {
-        transition:
-            size,
-            margin,
-            0.3s ease;
-    }
+    outline-offset: -1px;
+    transition: border-radius 0.3s ease-out;
+
     .checkIco {
         opacity: 1;
-        transition: size 0.2s ease-in-out;
+    }
+    .rightItems {
+        opacity: 1;
+        transition: opacity 0.2s ease-in-out;
     }
 }
 .selected {
     outline: 3px solid $darkish-gray;
-    outline-offset: -2px;
-
+    outline-offset: -3px;
+    transition: border-radius 0.3s ease-out;
     .leftItems {
         transform: translateX(0.5em);
         transition: transform 0.3s ease;
     }
     p {
-        padding-left: 1rem;
+        padding-left: 0.75rem;
         font-size: $size-20;
-        font-weight: 600;
         transition:
-            size,
-            margin,
-            0.3s ease;
+            font-size 0.2s ease,
+            padding 0.3s ease;
     }
     .checkIco {
         opacity: 1;
-        transition: size 0.2s ease-in-out;
+        transition: font-size 0.3s ease;
     }
-}
-
-.rightItems {
-    display: flex;
-    align-content: center;
-    gap: 0.5rem;
-}
-.rightIco {
-    color: $darkish-gray;
-    height: 2rem;
-    width: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: transparent;
+    .rightItems {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
 }
