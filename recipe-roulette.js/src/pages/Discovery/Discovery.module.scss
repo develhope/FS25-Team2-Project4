@@ -9,16 +9,36 @@
     box-sizing: border-box;
     padding: 0 $size-16;
     overflow: hidden;
-    .ingredientsWrapper {
+    header {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0 0.5rem 0;
+        gap: 1rem;
+        h1 {
+            color: $dark-gray;
+            font-weight: 600;
+            margin: 0;
+        }
+        .menu {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            color: $dark-gray;
+            border: none;
+            background-color: transparent;
+        }
+    }
+    .contentWrapper {
         position: relative;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
         max-height: 100%;
         box-sizing: border-box;
-        gap: 0.75rem;
         align-items: center;
-        padding-top: 3.25rem;
+        padding-top: 3.5rem;
         .globalActions {
             position: absolute;
             top: 0;
@@ -41,6 +61,19 @@
                 background-color: white;
                 font-size: 18px;
             }
+        }
+        .ingredientsWrapper {
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            max-height: 100%;
+            box-sizing: border-box;
+            align-items: center;
+            border-radius: $size-24;
+            overflow: hidden;
+            outline: solid 1px $light-gray;
         }
     }
     .bottomButtons {

@@ -9,7 +9,7 @@ function Discovery({ handleSidebarToggle }) {
     const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } = useManageIngredients()
     return (
         <div className={classes.discoveryPage}>
-            <div className={classes.ingredientsWrapper}>
+            <div className={classes.contentWrapper}>
                 <div className={classes.globalActions}>
                     <IngredientSearch isFixed={true} searchCriteria="isSelected" />
                     <button onClick={handleSidebarToggle} className={classes.icoButton}>
@@ -19,11 +19,12 @@ function Discovery({ handleSidebarToggle }) {
                         <MaterialSymbol className={classes.ico} icon="rotate_left" size={18} grade={18} />
                     </button>
                 </div>
-
-                {displayedIng.length > 0 &&
-                    displayedIng.map((ing) => {
-                        return <IngredientCard key={ing.id} ing={ing} />
-                    })}
+                <div className={classes.ingredientsWrapper}>
+                    {displayedIng.length > 0 &&
+                        displayedIng.map((ing) => {
+                            return <IngredientCard key={ing.id} ing={ing} />
+                        })}
+                </div>
             </div>
 
             <div className={classes.bottomButtons}>
