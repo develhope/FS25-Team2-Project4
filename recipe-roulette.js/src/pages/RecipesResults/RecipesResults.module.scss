@@ -10,3 +10,33 @@
     padding: $size-24;
     overflow-y: scroll;
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 $size-8;
+    width: 100%;
+}
+
+.subHeading {
+    box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 $size-8;
+    width: 100%;
+
+    .text {
+        font-weight: 700;
+    }
+
+    .chipBox {
+        display: flex;
+        flex-direction: row;
+        gap: $size-8
+    }
+}
+
+.resultsBox{
+    margin-top: $size-24;
+}
