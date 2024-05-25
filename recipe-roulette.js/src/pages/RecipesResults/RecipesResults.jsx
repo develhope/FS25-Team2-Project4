@@ -2,9 +2,11 @@ import classes from "./RecipesResults.module.scss";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { useState } from "react";
 import { MaterialSymbol } from "react-material-symbols";
+import { useDiscovery } from "../Discovery/useDiscovery";
 
 function RecipeResults() {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
+  const { handleSidebarToggle, isToggled } = useDiscovery()
 
   function handleClick(index) {
     setSelectedButtonIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -14,7 +16,7 @@ function RecipeResults() {
     <div className={classes.recipesResultsPage}>
       <header>
         <h1>Results</h1>
-        <button className={classes.btnFilters}>
+        <button className={classes.btnFilters} onClick={handleSidebarToggle} >
           <MaterialSymbol
             className={classes.icon}
             icon="tune"
