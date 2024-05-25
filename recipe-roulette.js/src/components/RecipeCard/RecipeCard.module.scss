@@ -38,7 +38,7 @@
         font-family: $font-title;
         font-weight: bold;
         letter-spacing: .025rem;
-        font-size: $size-20;
+        font-size: $text-size-16;
         line-height: 120%;
         padding: 0 $size-4;
         padding-top: $size-16;
@@ -47,6 +47,11 @@
             padding: 0;
         }
     }
+}
+
+.recipeCard:hover {
+    box-shadow: 0px 8px 8px $main-color;
+    outline: 1px solid $main-color
 }
 
 /* stato icona favorite */
