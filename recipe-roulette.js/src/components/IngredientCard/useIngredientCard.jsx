@@ -14,11 +14,15 @@ export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed)
     const { ingState } = useIngredientSuggestion(id, label, bgColor, isSelected, isBlackListed)
 
     //Context Provider stuff
-    const { handleIngUpdate, handleIngDecrement, randomIng, displayedIng } = useManageIngredients()
+    const { handleIngUpdate, handleIngDecrement, randomIng, displayedIng, refresh } = useManageIngredients()
 
     useEffect(() => {
         setCardState({ label, id, bgColor, isSelected, isBlackListed })
-    }, [randomIng, displayedIng, ingState])
+    }, [randomIng, displayedIng])
+
+    useEffect(() => {
+        setCardState(ingState)
+    }, [ingState])
 
     function handleIngredientClick() {
         handleIngUpdate("isSelected", cardState, setCardState)

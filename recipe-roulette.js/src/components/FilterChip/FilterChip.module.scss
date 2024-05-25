@@ -13,6 +13,9 @@
     background-color: $second-color;
     gap: $size-8;
     transition: scale 0.3s ease-in-out;
+    .ico{
+        padding-top: .125rem;
+    }
 }
 .active {
     scale: 1;

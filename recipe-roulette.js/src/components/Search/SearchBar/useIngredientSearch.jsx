@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
 
-export function useIngredientSearch(isFixed) {
+export function useIngredientSearch(isFixed, searchCriteria) {
     const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate, setRefresh } = useManageIngredients()
-    const [inputValues, setInputValues] = useState({ initial: "Search", current: "" })
+
+    const [inputValues, setInputValues] = useState({ initial: "", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
     const [suggestions, setSuggestions] = useState(ing)
     const [fixedPosition, setFixedPosition] = useState(false)
@@ -17,31 +18,53 @@ export function useIngredientSearch(isFixed) {
 
     useEffect(() => {
         setSuggestions(ing)
-    }, [searchState.inputActive])
-
-    function handleInputActivation(e) {
-        e.stopPropagation()
-        isFixed && setFixedPosition(true)
-        setSearchState({ inputActive: true })
-    }
+    }, [searchState.inputActive, selectedIng])
 
     useMemo(() => {
         setSuggestions(ing)
     }, [ing])
 
-    //input controls
-    function handleInputChange(e) {
+    const handleInputActivation = (e) => {
+        e.stopPropagation()
+        isFixed && setFixedPosition(true)
+        setSearchState({ inputActive: true })
+    }
+    const handleBlur = (e) => {
+        e.target.blur()
+        setSearchState({ inputActive: false })
+        setInputValues((prev) => ({ ...prev, current: "" }))
+        setFixedPosition(false)
+    }
+
+    const handleInputChange = (e) => {
         const inputValue = e.target.value.toUpperCase()
         setInputValues((prev) => ({ ...prev, current: e.target.value }))
         setSuggestions(ing.filter((ingredient) => ingredient.name.toUpperCase().includes(inputValue)))
     }
 
-    function handleInputDeactivation(e, prop) {
+    const handleSuggestionClick = (e, prop, cardState, setCardState) => {
+        e.stopPropagation()
+        setInputValues((prev) => ({ ...prev, current: cardState.label }))
+        if (prop === "isBlackListed") {
+            handleIngUpdate(prop, cardState, setCardState)
+        } else if (prop === "isSelected" && selectedIng.length < 8) {
+            handleIngUpdate(prop, cardState, setCardState)
+        } else {
+            // snackbar di avviso che spunta dal basso
+            console.log("maximum number of ingredient reached!")
+        }
+        setSearchState({ inputActive: false })
+        setRefresh((b) => !b)
+        setInputValues((prev) => ({ ...prev, current: "" }))
+    }
+
+    const handleInputDeactivation = (prop) => {
         let firstAvailableIngredient
-        const inputValue = e.target.value.toUpperCase()
         const isInDatabase = ing.filter(
             (ingredient) =>
-                ingredient.name.toUpperCase().includes(inputValue) && !ingredient.isSelected && !ingredient.isBlacklisted
+                ingredient.name.toUpperCase().includes(inputValues.current.toUpperCase()) &&
+                !ingredient.isSelected &&
+                !ingredient.isBlackListed
         )
         if (prop === "isBlackListed") {
             const isAlreadyBL = blackList.filter((blIngredient) =>
@@ -64,10 +87,10 @@ export function useIngredientSearch(isFixed) {
                 (dbIngredient) => !isAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
         } else {
-            //snackbar di avviso che spunta dal basso
+            // snackbar di avviso che spunta dal basso
             console.log("maximum number of ingredient reached!")
         }
-        if (inputValue !== "" && firstAvailableIngredient) {
+        if (inputValues.current !== "" && firstAvailableIngredient) {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
             handleIngUpdate(prop, firstAvailableIngredient, setCardState)
@@ -80,33 +103,19 @@ export function useIngredientSearch(isFixed) {
         isFixed && setFixedPosition(false)
     }
 
-    function handlePressEnter(e) {
+    const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
-            e.target.blur()
+            handleInputDeactivation(searchCriteria)
         }
     }
 
-    function handleXClick(e) {
+    const handleXClick = (e) => {
         e.stopPropagation()
         setSearchState({ inputActive: false })
     }
 
-    //handle ingredient updates
-    function handleReset(prop, cardState, setCardState) {
+    const handleReset = (prop, cardState, setCardState) => {
         handleDeselectAll(prop, cardState, setCardState)
-    }
-
-    function handleSuggestionClick(e, prop, cardState, setCardState) {
-        e.stopPropagation()
-        if (selectedIng.length < 8) {
-            handleIngUpdate(prop, cardState, setCardState)
-            setSearchState({ inputActive: false })
-        } else {
-            //snackbar di avviso che spunta dal basso
-            console.log("maximum number of ingredient reached!")
-        }
-        setInputValues((prev) => ({ ...prev, current: "" }))
-        setRefresh((b) => !b)
     }
 
     return {
@@ -117,6 +126,8 @@ export function useIngredientSearch(isFixed) {
         handlePressEnter,
         handleXClick,
         handleReset,
+        setInputValues,
+        handleBlur,
         inputValues,
         searchState,
         suggestions,
