@@ -71,9 +71,7 @@
             max-height: 100%;
             box-sizing: border-box;
             align-items: center;
-            border-radius: $size-24;
-            overflow: hidden;
-            outline: solid 1px $light-gray;
+            gap: 0.5rem;
         }
     }
     .bottomButtons {

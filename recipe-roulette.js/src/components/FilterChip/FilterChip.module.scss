@@ -1,7 +1,6 @@
 @use "../../assets/scss/" as *;
 
 .filterChip {
-    scale: 0.1;
     display: flex;
     width: fit-content;
     align-items: center;
@@ -13,8 +12,19 @@
     background-color: $second-color;
     gap: $size-8;
     transition: scale 0.3s ease-in-out;
-    .ico{
-        padding-top: .125rem;
+    font-family: $font-text;
+    font-size: $text-size-14;
+    .ico {
+        padding-top: 0.125rem;
+    }
+    .label {
+        padding-top: 0.125rem;
+
+        margin: 0;
+        font-weight: 400;
+        line-height: 100%;
+        vertical-align: middle;
+        text-align: center;
     }
 }
 .active {

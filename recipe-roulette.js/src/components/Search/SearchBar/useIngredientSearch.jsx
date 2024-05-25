@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
 
 export function useIngredientSearch(isFixed, searchCriteria) {
-    const { ing, blackList, selectedIng, handleDeselectAll, handleIngUpdate, setRefresh, filter } = useManageIngredients()
+    const { ing, blackList, displayedIng, handleDeselectAll, handleIngUpdate, setRefresh, filteredIng } = useManageIngredients()
 
     const [inputValues, setInputValues] = useState({ initial: "", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
@@ -18,7 +18,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
 
     useEffect(() => {
         setSuggestions(ing)
-    }, [searchState.inputActive, selectedIng])
+    }, [searchState.inputActive])
 
     useMemo(() => {
         setSuggestions(ing)
@@ -45,6 +45,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const handleSuggestionClick = (e, prop, cardState, setCardState) => {
         e.stopPropagation()
         setInputValues((prev) => ({ ...prev, current: cardState.label }))
+        const selectedIng = displayedIng.filter((ing) => ing.isSelected)
         if (prop === "isBlackListed") {
             handleIngUpdate(prop, cardState, setCardState)
         } else if (prop === "isSelected" && selectedIng.length < 8) {
@@ -54,48 +55,39 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             console.log("maximum number of ingredient reached!")
         }
         setSearchState({ inputActive: false })
-        setRefresh((b) => !b)
         setInputValues((prev) => ({ ...prev, current: "" }))
     }
 
     const handleInputDeactivation = (prop) => {
         let firstAvailableIngredient
 
-        let isInDatabase = ing.filter(
+        let isInDatabase = filteredIng.filter(
             (ingredient) =>
                 ingredient.name.toUpperCase().includes(inputValues.current.toUpperCase()) &&
                 !ingredient.isSelected &&
                 !ingredient.isBlackListed
         )
-        if (filter.isGlutenFree) {
-            isInDatabase = isInDatabase.filter((item) => item.isGlutenFree)
-        }
-        if (filter.isVegetarian) {
-            isInDatabase = isInDatabase.filter((item) => item.isVegetarian)
-        }
-        if (filter.isVegan) {
-            isInDatabase = isInDatabase.filter((item) => item.isVegan)
-        }
 
         if (prop === "isBlackListed") {
-            const isAlreadyBL = blackList.filter((blIngredient) =>
+            const notAlreadyBL = blackList.filter((blIngredient) =>
                 isInDatabase.some(
                     (dbIngredient) =>
                         dbIngredient.id === blIngredient.id || dbIngredient.name.toUpperCase() === blIngredient.name.toUpperCase()
                 )
             )
             firstAvailableIngredient = isInDatabase.find(
-                (dbIngredient) => !isAlreadyBL.some((blIngredient) => blIngredient.id === dbIngredient.id)
+                (dbIngredient) => !notAlreadyBL.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
-        } else if (prop === "isSelected" && selectedIng.length < 8) {
-            const isAlreadySelected = selectedIng.filter((selectedIng) =>
+        } else if (prop === "isSelected") {
+            const selectedIngs = displayedIng.filter((ing) => ing.isSelected)
+            const notAlreadySelected = selectedIngs.filter((onDisplay) =>
                 isInDatabase.some(
                     (dbIngredient) =>
-                        dbIngredient.id === selectedIng.id || dbIngredient.name.toUpperCase() === selectedIng.name.toUpperCase()
+                        dbIngredient.id === onDisplay.id || dbIngredient.name.toUpperCase() === onDisplay.name.toUpperCase()
                 )
             )
             firstAvailableIngredient = isInDatabase.find(
-                (dbIngredient) => !isAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
+                (dbIngredient) => !notAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
         } else {
             // snackbar di avviso che spunta dal basso

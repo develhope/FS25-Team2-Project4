@@ -6,7 +6,7 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 import classes from "./Discovery.module.scss"
 
 function Discovery({ handleSidebarToggle }) {
-    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll, ingNum } = useManageIngredients()
+    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll} = useManageIngredients()
     return (
         <div className={classes.discoveryPage}>
             <div className={classes.contentWrapper}>
@@ -28,7 +28,7 @@ function Discovery({ handleSidebarToggle }) {
             </div>
 
             <div className={classes.bottomButtons}>
-                <button className={`${classes.button} ${ingNum === 8 && classes.disabled}`} onClick={() => handleIngIncrement()}>
+                <button className={`${classes.button} ${displayedIng.length === 8 && classes.disabled}`} onClick={() => handleIngIncrement()}>
                     <MaterialSymbol className={classes.ico} icon="add" size={18} grade={18} />
                     ingredient
                 </button>

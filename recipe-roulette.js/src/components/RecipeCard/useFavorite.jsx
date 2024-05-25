@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-export function useFavorite() {
-    const [favState, setFavState] = useState(false)
+export function useFavorite(isFav) {
+    const [favState, setFavState] = useState(isFav)
 
     function handleFavState(e) {
         e.preventDefault()
