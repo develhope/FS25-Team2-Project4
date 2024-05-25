@@ -68,6 +68,17 @@
       padding: $size-8;
       font-size: $text-size-16;
     }
+
+    .passwordIcon {
+      border: none;
+      width: 12%;
+      height: $height-40;
+      background-color: transparent; 
+      position: relative;
+      bottom: 100%;
+      left: 80%;
+      color: $medium-light-gray;
+    }
   }
 
   .loginBtn {

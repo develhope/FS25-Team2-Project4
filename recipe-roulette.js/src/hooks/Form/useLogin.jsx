@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function useLogin() {
   const [data, setData] = useState(createData());
+  const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -18,8 +19,8 @@ export function useLogin() {
 
   function setItem(data) {
     try {
-      window.localStorage.setItem("username", JSON.stringify(data.username));
-      window.localStorage.setItem("password", JSON.stringify(data.password));
+      window.localStorage.setItem("username", data.username);
+      window.localStorage.setItem("password", data.password);
     } catch (error) {
       console.log(error);
     }
@@ -27,14 +28,11 @@ export function useLogin() {
 
   function getItem(data) {
     try {
-      const username = window.localStorage.getItem("username", JSON.parse(data));
-      const password = window.localStorage.getItem(
-        "password",
-        JSON.parse(data.password)
-      );
+      const username = window.localStorage.getItem("username");
+      const password = window.localStorage.getItem("password");
 
       if (username && password) {
-        setData({ ...data, username, password });
+        setData({ ...data, username, password});
       }
     } catch (error) {
       console.log(error);
@@ -63,10 +61,16 @@ export function useLogin() {
     console.log(data);
   }
 
+  function handleShowPassword () {
+    setShowPassword(!showPassword)
+  }
+
   return {
     data,
     inputRef,
+    showPassword,
     handleInput,
     handleSubmit,
+    handleShowPassword,
   };
 }

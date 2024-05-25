@@ -7,7 +7,7 @@ import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn";
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn";
 
 export function Login() {
-  const { data, inputRef, handleInput, handleSubmit } = useLogin();
+  const { data, inputRef, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin();
 
   return (
     <section className={classes.pageBox}>
@@ -34,14 +34,16 @@ export function Login() {
             />
             <label htmlFor="password">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password" }
               name="password"
               id="password"
               value={data.password}
               placeholder="Insert password here"
               onChange={handleInput}
+              className={classes.passInput}
               required
             />
+            {showPassword ? <MaterialSymbol icon="visibility_off" size={20}  onClick={handleShowPassword} className={classes.passwordIcon}/> : <MaterialSymbol icon="Visibility" size={20}  onClick={handleShowPassword} className={classes.passwordIcon}/>}
           </div>
 
           <button
