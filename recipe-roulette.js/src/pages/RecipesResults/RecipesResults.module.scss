@@ -5,35 +5,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   box-sizing: border-box;
   padding: 0 $size-24;
-  overflow-y: scroll;
   font-size: $text-size-16;
   font-style: $font-text;
   color: $darkest-gray;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-  font-style: $font-title;
-
-  .btnFilters {
-    border-radius: $size-24;
-    box-sizing: border-box;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: $size-8;
-    font-size: $text-size-14;
-    padding: $size-8 $size-16;
-    border: 1px ridge $light-gray;
-  }
 }
 
 .subHeading {
@@ -42,38 +18,21 @@ header {
     font-weight: 700;
   }
 
-  .chipBox {
+  .chipWrapper {
     display: flex;
     flex-direction: row;
     gap: $size-8;
     box-sizing: border-box;
     width: 100%;
-
-    button {
-      border-radius: $size-8;
-      padding: 0 $size-16;
-      text-align: center;
-      background-color: transparent;
-      border: 1px ridge $light-gray;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: $size-4;
-      font-size: $text-size-14;
-      color: $medium-gray;
-    }
-
-    .selected {
-        background-color: $second-color;
-        font-weight: 600;
-        border: 1 px ridge $lighter-gray;
-        color: $dark-gray;
-    }
   }
 }
 
-.resultsBox {
+.resultsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $size-16;
   margin-top: $size-24;
   box-sizing: border-box;
   width: 100%;
+  height: fit-content;
 }

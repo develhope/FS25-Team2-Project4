@@ -31,3 +31,9 @@
     scale: 1;
     transition: scale 0.3s ease-in-out;
 }
+
+.inactive {
+    background-color: white;
+    border: 1px solid $light-gray;
+    color: $medium-gray;
+}
