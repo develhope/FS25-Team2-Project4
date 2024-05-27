@@ -14,10 +14,10 @@ export function Discovery({ handleSidebarToggle }) {
                 <div className={classes.globalActions}>
                     <IngredientSearch isFixed={true} searchCriteria="isSelected" />
                     <button onClick={handleSidebarToggle} className={classes.icoButton}>
-                        <MaterialSymbol className={classes.ico} icon="tune" size={18} grade={18} />
+                        <MaterialSymbol className={classes.ico} icon="tune" weight={500} size={20} grade={20} />
                     </button>
                     <button onClick={() => handleDeselectAll("isSelected")} className={classes.icoButton}>
-                        <MaterialSymbol className={classes.ico} icon="rotate_left" size={18} grade={18} />
+                        <MaterialSymbol className={classes.ico} icon="lock_reset" weight={500} size={22} grade={2} />
                     </button>
                 </div>
                 <div className={classes.ingredientsWrapper}>
