@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MaterialSymbol } from "react-material-symbols";
 import { useDiscovery } from "../Discovery/useDiscovery";
 
-function RecipeResults() {
+export function RecipeResults() {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
   const { handleSidebarToggle, isToggled } = useDiscovery()
 
@@ -83,4 +83,3 @@ function RecipeResults() {
   );
 }
 
-export default RecipeResults;

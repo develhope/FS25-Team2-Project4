@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 import { useIngredientSuggestion } from "../Search/Suggestions/useIngredientSuggestion"
+import { useSnackbar } from "../Snackbar/useSnackbar"
 
-export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed) {
+export function useIngredientCard(ing) {
     //Card State
+    const {id, label, bgColor, isBlackListed, isSelected} = ing
     const [cardState, setCardState] = useState({
         label,
         id,
@@ -14,23 +16,30 @@ export function useIngredientCard(id, label, bgColor, isSelected, isBlackListed)
     const { ingState } = useIngredientSuggestion(id, label, bgColor, isSelected, isBlackListed)
 
     //Context Provider stuff
-    const { handleIngUpdate, handleIngDecrement, randomIng, displayedIng, refresh } = useManageIngredients()
+    const { handleIngUpdate, handleIngDecrement, displayedIng } = useManageIngredients()
+
+    //Snackbar
+    const {handleOpenSnackbar} = useSnackbar()
 
     useEffect(() => {
         setCardState({ label, id, bgColor, isSelected, isBlackListed })
-    }, [randomIng, displayedIng])
+    }, [displayedIng])
 
     useEffect(() => {
         setCardState(ingState)
     }, [ingState])
 
     function handleIngredientClick() {
-        handleIngUpdate("isSelected", cardState, setCardState)
+        if (cardState.isBlackListed) {
+            handleOpenSnackbar("The ingredient is blacklisted")
+        } else {
+            handleIngUpdate("isSelected", cardState, setCardState)
+        }
     }
 
     function handleXClick(e) {
         e.stopPropagation()
-        if (cardState.state) {
+        if (cardState.isSelected) {
             handleIngredientClick()
         } else {
             handleIngDecrement(cardState.id, e)

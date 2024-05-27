@@ -8,7 +8,7 @@ export function FilterChip({ id, label, bgColor, isSelected, isBlackListed }) {
     return (
         <div className={`${classes.filterChip} ${classes.active}`} onClick={handleDeselectChip}>
             <MaterialSymbol className={classes.ico} icon="check" size={18} grade={18} />
-            <p>{label}</p>
+            <p className={classes.label}>{label}</p>
         </div>
     )
 }

@@ -5,16 +5,16 @@ import { MaterialSymbol } from "react-material-symbols"
 import { Switch } from "../Switch/Switch"
 import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
 
-export function Sidebar({ isToggled = false, handleSidebarToggle }) {
+export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
     const { handleDeselectAll, blackList } = useManageIngredients()
 
     return (
         <div>
             <div
                 onClick={handleSidebarToggle}
-                className={`${classes.backgroundOverlay} ${isToggled && classes.backgroundOverlayToggled}`}
+                className={`${classes.backgroundOverlay} ${sidebarState && classes.backgroundOverlayToggled}`}
             ></div>
-            <div className={`${classes.sidebar} ${isToggled && classes.sidebarToggled}`}>
+            <div className={`${classes.sidebar} ${sidebarState && classes.sidebarToggled}`}>
                 <header>
                     <h2>Filters</h2>
                     <div className={classes.rightItems}>
@@ -33,7 +33,7 @@ export function Sidebar({ isToggled = false, handleSidebarToggle }) {
                 </header>
                 <section>
                     <div className={classes.blackListed}>
-                        <h4>Black listed ingredients</h4>
+                        <h4>Add ingredeints to black list</h4>
                         <IngredientSearch isFixed={false} searchCriteria="isBlackListed" />
                         {blackList.length > 0 && (
                             <div className={classes.filterChipWrapper}>

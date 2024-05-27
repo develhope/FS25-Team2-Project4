@@ -1,20 +1,20 @@
 @use "../../assets/scss" as *;
 
 .recipeCard {
+    display: block;
+    width: 100%;
     background-color: white;
-    padding: $size-16;
-    border-radius: $size-24;
+    border-radius: $size-16;
     box-sizing: border-box;
     outline: 1px solid $light-gray;
     text-decoration: none;
     color: inherit;
-    margin-bottom: $size-24;
+    overflow: hidden;
     .topItems {
         position: relative;
         width: 100%;
         height: calc(100vw * 0.5);
         min-height: 12rem;
-        border-radius: $size-16;
         overflow: hidden;
         outline: 2px solid $lighter-gray;
         box-sizing: border-box;
@@ -35,16 +35,27 @@
         }
     }
     .bottomItems {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        gap: $size-8;
+        width: 100%;
         font-family: $font-title;
         font-weight: bold;
-        letter-spacing: .025rem;
+        letter-spacing: 0.025rem;
         font-size: $text-size-16;
         line-height: 120%;
-        padding: 0 $size-4;
+        padding: .75rem;
         padding-top: $size-16;
-        p {
+        .chipsWrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $size-8;
+        }
+        .title {
             margin: 0;
             padding: 0;
+            padding-left: .25rem;
         }
     }
 }

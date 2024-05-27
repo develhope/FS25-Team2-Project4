@@ -22,7 +22,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                 <input
                     className={classes.header}
                     onClick={handleInputActivation}
-                    placeholder="Search an ingredient"
+                    placeholder="Add an ingredient"
                     name="search"
                     type="text"
                     onBlur={(e) => setTimeout(() => {handleBlur(e)}, 0)}

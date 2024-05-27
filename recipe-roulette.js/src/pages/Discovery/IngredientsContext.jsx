@@ -6,19 +6,34 @@ const IngredientsContext = createContext()
 
 export const IngredientsProvider = ({ children }) => {
     const [ing, setIng] = useState(ingredientsArray)
-    const [ingNum, setIngNum] = useState(5)
-    const [slots, setSlots] = useState(ingNum)
     const [displayedIng, setDisplayedIng] = useState([])
-    const [selectedIng, setSelectedIng] = useState([])
     const [blackList, setBlackList] = useState([])
-    const [randomIng, setRandomIng] = useState([])
     const [refresh, setRefresh] = useState(false)
     const [filter, setFilter] = useState({ isVegetarian: false, isGlutenFree: false, isVegan: false })
+    const [filteredIng, setFilteredIng] = useState(ing)
     const location = useLocation()
 
     useEffect(() => {
-        selectToDisplay()
-    }, [ingNum, location.pathname, filter, refresh])
+        generateIngredients()
+    }, [])
+
+    useEffect(() => {
+        if (filteredIng) {
+            setFilteredIng(() => {
+                let newData = ing
+                if (filter.isGlutenFree) {
+                    newData = ing.filter((item) => item.isGlutenFree)
+                }
+                if (filter.isVegetarian) {
+                    newData = ing.filter((item) => item.isVegetarian)
+                }
+                if (filter.isVegan) {
+                    newData = ing.filter((item) => item.isVegan)
+                }
+                return newData
+            })
+        }
+    }, [filter, displayedIng, ing])
 
     const toggleFilter = (prop, setState) => {
         const newState = !filter[prop]
@@ -28,29 +43,52 @@ export const IngredientsProvider = ({ children }) => {
 
     const handleIngUpdate = (prop, cardState, setCardState) => {
         const updatedIngs = ing.map((item) => (item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item))
+        const updatedDisplayedIngs = displayedIng.map((item) =>
+            item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item
+        )
+        const isDisplayed = displayedIng.some((ingredient) => ingredient.id === cardState.id)
+        const updatedIng = updatedIngs.find((ingredient) => ingredient.id === cardState.id)
+
         setIng(updatedIngs)
-
-        const affectedIngs = updatedIngs.filter((item) => item[prop])
         if (prop === "isSelected") {
-            setSelectedIng(affectedIngs)
-            if (affectedIngs.length > ingNum) {
-                setIngNum(affectedIngs.length)
+            if (isDisplayed) {
+                setDisplayedIng(updatedDisplayedIngs)
+            } else {
+                if (displayedIng.length === 8) {
+                    setDisplayedIng((prevData) => {
+                        let firstUnselected = true
+                        const newData = []
+                        prevData.forEach((ingredient) => {
+                            if (!ingredient.isSelected && firstUnselected) {
+                                newData.push(updatedIng)
+                                firstUnselected = false
+                            } else {
+                                newData.push(ingredient)
+                            }
+                        })
+                        return newData
+                    })
+                } else {
+                    setDisplayedIng((prevData) => [updatedIng, ...prevData])
+                }
             }
-            setSlots(ingNum - affectedIngs.length)
-        } else if (prop === "isBlackListed") {
-            setBlackList(affectedIngs)
         }
-
-        setCardState((prevState) => ({
-            ...prevState,
-            ...updatedIngs.find((item) => item.id === cardState.id),
-        }))
+        const newBlacklistedIngs = updatedIngs.filter((item) => item[prop])
+        if (prop === "isBlackListed") {
+            setBlackList(newBlacklistedIngs)
+            setDisplayedIng(updatedDisplayedIngs)
+        }
+        if (setCardState) {
+            setCardState((prevState) => ({
+                ...prevState,
+                ...updatedIng,
+            }))
+        }
     }
 
     const handleDeselectAll = (prop, setCardState, setFilterState) => {
+        const selectedIng = displayedIng.filter((ing) => ing.isSelected)
         if (prop === "isSelected" && selectedIng.length > 0) {
-            setSelectedIng([])
-            setSlots(ingNum)
             setDisplayedIng((prevData) => prevData.map((ing) => ({ ...ing, [prop]: false })))
         } else if (prop === "isBlackListed") {
             setBlackList([])
@@ -65,50 +103,70 @@ export const IngredientsProvider = ({ children }) => {
         }
     }
 
-    const selectToDisplay = () => {
-        let availableIngs = ing.filter((item) => !item.isSelected && !item.isBlackListed)
-
-        if (filter.isGlutenFree) {
-            availableIngs = availableIngs.filter((item) => item.isGlutenFree)
-        }
-        if (filter.isVegetarian) {
-            availableIngs = availableIngs.filter((item) => item.isVegetarian)
-        }
-        if (filter.isVegan) {
-            availableIngs = availableIngs.filter((item) => item.isVegan)
-        }
-
-        const ingredientIds = availableIngs.filter((item) => !item.isSelected && !item.isBlackListed).map((item) => item.id)
-        const selectedIds = selectedIng.map((item) => item.id)
+    const generateIngredients = () => {
+        const ingredientIds = filteredIng
+            .filter((ingredient) => !ingredient.isSelected && !ingredient.isBlackListed)
+            .map((item) => item.id)
         const randomIds = []
 
-        while (randomIds.length < slots) {
+        while (randomIds.length < 5) {
             const randomId = ingredientIds[Math.floor(Math.random() * ingredientIds.length)]
-            if (!randomIds.includes(randomId) && !selectedIds.includes(randomId)) {
+            if (!randomIds.includes(randomId)) {
                 randomIds.push(randomId)
             }
         }
-        const newRandomIng = ing.filter((item) => randomIds.includes(item.id))
-        setRandomIng(newRandomIng)
-        setDisplayedIng([...selectedIng, ...newRandomIng])
+        const randomIng = filteredIng.filter((item) => randomIds.includes(item.id))
+        setDisplayedIng([...randomIng])
+    }
+
+    const swapIngredient = () => {
+        setDisplayedIng((prevData) => {
+            const newData = []
+            let availableIngs = filteredIng.filter((item) => !item.isSelected && !item.isBlackListed)
+            prevData.forEach((ingredient) => {
+                if (!ingredient.isSelected) {
+                    const ingredientIds = availableIngs.map((item) => item.id)
+                    let newRandomIng = null
+                    while (!newRandomIng) {
+                        const randomId = ingredientIds[Math.floor(Math.random() * ingredientIds.length)]
+                        const isUnique = prevData.find((ingredient) => ingredient.id === randomId)
+                        if (ingredient.id !== randomId && !isUnique) {
+                            newRandomIng = ing.find((item) => item.id === randomId)
+                            newData.push(newRandomIng)
+                            availableIngs = availableIngs.filter((ingredient) => ingredient.id !== newRandomIng.id)
+                        }
+                    }
+                } else {
+                    newData.push(ingredient)
+                }
+            })
+            return newData
+        })
     }
 
     const shuffleIng = () => {
-        selectToDisplay()
+        swapIngredient()
     }
 
     const handleIngIncrement = () => {
-        if (ingNum < 8) {
-            setIngNum((prev) => prev + 1)
-            setSlots((prev) => prev + 1)
+        const availableIngs = filteredIng.filter((ingredient) => !ingredient.isSelected && !ingredient.isBlackListed)
+        if (displayedIng.length < 8) {
+            displayedIng.forEach((ingB) => {
+                availableIngs.forEach((ingA, index) => {
+                    if (ingA.id === ingB.id) {
+                        availableIngs.splice(index, 1)
+                    }
+                })
+            })
+            const newIng = availableIngs.find((ingredient) => ingredient)
+            setDisplayedIng((prevData) => [...prevData, newIng])
         }
     }
 
     const handleIngDecrement = (id, e) => {
         e.stopPropagation()
-        if (ingNum > 3 && !ing.find((item) => item.id === id).isSelected) {
-            setIngNum((prev) => prev - 1)
-            setSlots((prev) => prev - 1)
+        if (displayedIng.length > 3) {
+            setDisplayedIng((prevData) => prevData.filter((ingredient) => ingredient.id !== id))
         }
     }
 
@@ -122,16 +180,14 @@ export const IngredientsProvider = ({ children }) => {
                 shuffleIng,
                 handleIngUpdate,
                 setBlackList,
-                selectToDisplay,
+                generateIngredients,
                 setRefresh,
                 toggleFilter,
                 ing,
-                ingNum,
-                randomIng,
-                selectedIng,
                 displayedIng,
                 blackList,
                 filter,
+                filteredIng,
             }}
         >
             {children}

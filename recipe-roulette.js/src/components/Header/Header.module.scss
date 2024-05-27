@@ -1,0 +1,46 @@
+@use "../../assets/scss/" as *;
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    .leftItems {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        h1 {
+            color: $dark-gray;
+            font-weight: 600;
+            margin: 0;
+        }
+        .menu {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            color: $dark-gray;
+            border: none;
+            background-color: transparent;
+        }
+    }
+        .leftIcoButton {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                font-size: $text-size-14;
+                width: fit-content;
+                min-width: max-content;
+                height: $height-40;
+                color: #3c3838;
+                font-weight: 600;
+                border: 1px solid #e5e0df;
+                border-radius: 2.5rem;
+                background-color: white;
+                padding: 0 1rem 0 .75rem;
+                box-sizing: border-box;
+        }
+}

@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom"
-import 'react-material-symbols/rounded'
+import 'react-material-symbols/outlined'
 
 import App from "./App"
 
