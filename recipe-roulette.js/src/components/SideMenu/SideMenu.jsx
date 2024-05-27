@@ -2,9 +2,6 @@ import { MaterialSymbol } from "react-material-symbols"
 import { Link } from "react-router-dom"
 
 import classes from "./SideMenu.module.scss"
-import Discovery from "../../pages/Discovery/Discovery"
-import Favorited from "../../pages/Favorited/Favorited"
-import { Settings } from "../../pages/Settings/Settings"
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
     return (
