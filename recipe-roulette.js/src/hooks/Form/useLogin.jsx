@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function useLogin() {
   const [data, setData] = useState(createData());
+  const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -18,24 +19,29 @@ export function useLogin() {
 
   function setItem(data) {
     try {
-      window.localStorage.setItem("username", JSON.stringify(data.username));
-      window.localStorage.setItem("password", JSON.stringify(data.password));
+      window.localStorage.setItem("username", data.username);
+      window.localStorage.setItem("password", data.password);
     } catch (error) {
       console.log(error);
     }
   }
 
+  function getItem(data) {
+    try {
+      const username = window.localStorage.getItem("username");
+      const password = window.localStorage.getItem("password");
 
-/*
-    function getItem(data) {
-      try {
-        const username = window.localStorage.getItem("usernam", JSON.parse(data));
-        const password = window.localStorage.getItem("password", JSON.parse(data.password));
-        
-      } catch (error) {
-        console.log(error);
+      if (username && password) {
+        setData({ ...data, username, password});
       }
-    } */
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getItem()
+  }, [])
 
   function handleInput(e) {
     const name = e.target.name;
@@ -55,10 +61,16 @@ export function useLogin() {
     console.log(data);
   }
 
+  function handleShowPassword () {
+    setShowPassword(!showPassword)
+  }
+
   return {
     data,
     inputRef,
+    showPassword,
     handleInput,
     handleSubmit,
+    handleShowPassword,
   };
 }
