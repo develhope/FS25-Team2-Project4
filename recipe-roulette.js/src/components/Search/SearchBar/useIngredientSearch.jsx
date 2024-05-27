@@ -52,7 +52,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             handleIngUpdate(prop, cardState, setCardState)
         } else if (prop === "isSelected") {
             if (selectedIngs.length === 8 && !cardState.isSelected) {
-                handleOpenSnackbar("Maximum number of ingredients reached")
+                handleOpenSnackbar("You've reached the maximum number of ingredients!")
             } else {
                 handleIngUpdate(prop, cardState, setCardState)
             }

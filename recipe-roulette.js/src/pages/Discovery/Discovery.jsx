@@ -38,7 +38,7 @@ export function Discovery({ handleSidebarToggle }) {
                 </button>
                 <button className={classes.cycleButton} onClick={() => shuffleIng()}>
                     {" "}
-                    <MaterialSymbol className={classes.ico} icon="cycle" weight={500} size={24} grade={24} />
+                    <MaterialSymbol className={classes.ico} icon="cycle" weight={600} size={18} grade={18} />
                 </button>
                 <button className={classes.button}>
                     <MaterialSymbol className={classes.ico} icon="done_all" size={18} grade={18} />
