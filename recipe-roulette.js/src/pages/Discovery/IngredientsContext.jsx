@@ -42,7 +42,6 @@ export const IngredientsProvider = ({ children }) => {
     }
 
     const handleIngUpdate = (prop, cardState, setCardState) => {
-        console.log(prop)
         const updatedIngs = ing.map((item) => (item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item))
         const updatedDisplayedIngs = displayedIng.map((item) =>
             item.id === cardState.id ? { ...item, [prop]: !cardState[prop] } : item
@@ -77,6 +76,7 @@ export const IngredientsProvider = ({ children }) => {
         const newBlacklistedIngs = updatedIngs.filter((item) => item[prop])
         if (prop === "isBlackListed") {
             setBlackList(newBlacklistedIngs)
+            setDisplayedIng(updatedDisplayedIngs)
         }
         if (setCardState) {
             setCardState((prevState) => ({
@@ -101,11 +101,12 @@ export const IngredientsProvider = ({ children }) => {
         if (setCardState) {
             setCardState((prevData) => ({ ...prevData, [prop]: false }))
         }
-        console.log(displayedIng);
     }
 
     const generateIngredients = () => {
-        const ingredientIds = ing.map((item) => item.id)
+        const ingredientIds = filteredIng
+            .filter((ingredient) => !ingredient.isSelected && !ingredient.isBlackListed)
+            .map((item) => item.id)
         const randomIds = []
 
         while (randomIds.length < 5) {
@@ -114,7 +115,7 @@ export const IngredientsProvider = ({ children }) => {
                 randomIds.push(randomId)
             }
         }
-        const randomIng = ing.filter((item) => randomIds.includes(item.id))
+        const randomIng = filteredIng.filter((item) => randomIds.includes(item.id))
         setDisplayedIng([...randomIng])
     }
 
@@ -122,7 +123,6 @@ export const IngredientsProvider = ({ children }) => {
         setDisplayedIng((prevData) => {
             const newData = []
             let availableIngs = filteredIng.filter((item) => !item.isSelected && !item.isBlackListed)
-            console.log(availableIngs)
             prevData.forEach((ingredient) => {
                 if (!ingredient.isSelected) {
                     const ingredientIds = availableIngs.map((item) => item.id)

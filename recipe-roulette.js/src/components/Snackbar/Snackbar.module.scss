@@ -1,0 +1,46 @@
+@use "../../assets/scss/" as *;
+
+.snackbar {
+    z-index: 10;
+    position: fixed;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 95%;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.3);
+    box-sizing: border-box;
+    color: $darkish-gray;
+    background-color: $third-color;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.snackbar .leftItems {
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.snackbar p {
+    margin: 0;
+    font-weight: 500;
+}
+.snackbar .ico {
+    border: none;
+    background-color: transparent;
+    padding-top: 2px;
+    color: $darkish-gray;
+}
+.snackbarInactive {
+    bottom: -5rem;
+    transition: bottom 0.3s ease;
+}
+.snackbarActive {
+    bottom: 1rem;
+    transition: bottom 0.3s ease;
+}

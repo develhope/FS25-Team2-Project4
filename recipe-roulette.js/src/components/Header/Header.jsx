@@ -13,6 +13,9 @@ export function Header({ handleMenuToggle }) {
             case "/":
                 setTitle("Discovery")
                 break
+            case "/discovery":
+                setTitle("Discovery")
+                break
             case "/favorited":
                 setTitle("Favorited")
                 break

@@ -1,7 +1,7 @@
 import classes from "./RecipesResults.module.scss"
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 
-function RecipeResults() {
+export function RecipeResults() {
     return (
         <div className={classes.recipesResultsPage}>
             <h1>Recipe Results</h1>

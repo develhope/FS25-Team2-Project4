@@ -15,7 +15,7 @@ import classes from "./Favorite.module.scss"
 //     }
 // }
 
-function Favorited() {
+export function Favorited() {
     return (
         <div className={classes.favoritePage}>
             <section></section>
@@ -42,4 +42,3 @@ function Favorited() {
         </div>
     )
 }
-export default Favorited

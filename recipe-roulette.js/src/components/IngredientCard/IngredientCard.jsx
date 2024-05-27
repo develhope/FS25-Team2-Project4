@@ -1,15 +1,10 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
+import { useSnackbar } from "../Snackbar/useSnackbar"
 
 export function IngredientCard({ ing }) {
-    const { handleIngredientClick, handleXClick, cardState } = useIngredientCard(
-        ing.id,
-        ing.name,
-        ing.bgColor,
-        ing.isSelected,
-        ing.isBlackListed
-    )
+    const { handleIngredientClick, handleXClick, cardState } = useIngredientCard(ing)
     const bg = {
         backgroundColor: cardState.bgColor,
     }

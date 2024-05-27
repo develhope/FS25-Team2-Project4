@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react"
 import { useManageIngredients } from "../../../pages/Discovery/IngredientsContext"
+import { useSnackbar } from "../../Snackbar/useSnackbar"
 
 export function useIngredientSearch(isFixed, searchCriteria) {
     const { ing, blackList, displayedIng, handleDeselectAll, handleIngUpdate, setRefresh, filteredIng } = useManageIngredients()
+    const { handleOpenSnackbar } = useSnackbar()
 
     const [inputValues, setInputValues] = useState({ initial: "", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
@@ -45,14 +47,18 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const handleSuggestionClick = (e, prop, cardState, setCardState) => {
         e.stopPropagation()
         setInputValues((prev) => ({ ...prev, current: cardState.label }))
-        const selectedIng = displayedIng.filter((ing) => ing.isSelected)
+        const selectedIngs = displayedIng.filter((ing) => ing.isSelected)
         if (prop === "isBlackListed") {
             handleIngUpdate(prop, cardState, setCardState)
-        } else if (prop === "isSelected" && selectedIng.length < 8) {
-            handleIngUpdate(prop, cardState, setCardState)
+        } else if (prop === "isSelected") {
+            if (selectedIngs.length === 8 && !cardState.isSelected) {
+                handleOpenSnackbar("Maximum number of ingredients reached")
+            } else {
+                handleIngUpdate(prop, cardState, setCardState)
+            }
         } else {
             // snackbar di avviso che spunta dal basso
-            console.log("maximum number of ingredient reached!")
+            handleOpenSnackbar("maximum number of ingredient reached!")
         }
         setSearchState({ inputActive: false })
         setInputValues((prev) => ({ ...prev, current: "" }))
@@ -60,6 +66,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
 
     const handleInputDeactivation = (prop) => {
         let firstAvailableIngredient
+        const selectedIngs = displayedIng.filter((ing) => ing.isSelected)
 
         let isInDatabase = filteredIng.filter(
             (ingredient) =>
@@ -79,7 +86,6 @@ export function useIngredientSearch(isFixed, searchCriteria) {
                 (dbIngredient) => !notAlreadyBL.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
         } else if (prop === "isSelected") {
-            const selectedIngs = displayedIng.filter((ing) => ing.isSelected)
             const notAlreadySelected = selectedIngs.filter((onDisplay) =>
                 isInDatabase.some(
                     (dbIngredient) =>
@@ -89,15 +95,15 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             firstAvailableIngredient = isInDatabase.find(
                 (dbIngredient) => !notAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
-        } else {
-            // snackbar di avviso che spunta dal basso
-            console.log("maximum number of ingredient reached!")
+            if (firstAvailableIngredient && selectedIngs.length === 8) {
+                handleOpenSnackbar("Maximum number of ingredients reached")
+            }
         }
         if (inputValues.current !== "" && firstAvailableIngredient) {
-            setInputValues((prev) => ({ ...prev, current: "" }))
-            setSearchState({ inputActive: false })
-            handleIngUpdate(prop, firstAvailableIngredient, setCardState)
-            setRefresh((b) => !b)
+                setInputValues((prev) => ({ ...prev, current: "" }))
+                setSearchState({ inputActive: false })
+                handleIngUpdate(prop, firstAvailableIngredient, setCardState)
+                setRefresh((b) => !b)
         } else {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
