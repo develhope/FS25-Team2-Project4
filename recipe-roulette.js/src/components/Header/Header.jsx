@@ -11,7 +11,7 @@ export function Header({ handleMenuToggle }) {
     useEffect(() => {
         switch (location.pathname) {
             case "/":
-                setTitle("Discovery")
+                setTitle("Welcome!")
                 break
             case "/discovery":
                 setTitle("Discovery")

@@ -13,5 +13,5 @@ export function useSideMenu() {
     function handleMenuToggle() {
         setMenuState((b) => !b)
     }
-    return { handleMenuToggle, path, menuState }
+    return { handleMenuToggle, setPath, path, menuState }
 }

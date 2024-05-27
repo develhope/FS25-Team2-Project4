@@ -14,10 +14,17 @@ import { Header } from "./components/Header/Header"
 import { useDiscoverySidebar } from "./hooks/DiscoverySidebar/useDiscoverySidebar"
 import { useSideMenu } from "./hooks/SideMenu/useSideMenu"
 import { SnackbarProvider } from "./components/Snackbar/useSnackbar"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
     const { handleMenuToggle, path, menuState } = useSideMenu()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate("/")
+    }, [])
 
     return (
         <div className="appContainer">

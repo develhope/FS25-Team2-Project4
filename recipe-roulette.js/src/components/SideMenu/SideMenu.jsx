@@ -22,7 +22,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                     />
                 </header>
                 <section className={classes.links}>
-                    <Link className={`${classes.link} ${path === "/" && classes.activeLink}`} to="/">
+                    <Link className={`${classes.link} ${path === "/discovery" && classes.activeLink}`} to="/discovery">
                         <MaterialSymbol className={classes.ico} icon="explore" weight={500} size={24} grade={24} />
                         Discovery
                     </Link>
