@@ -28,8 +28,8 @@
 }
 
 .resultsWrapper {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: repeat(auto, 1fr);
   gap: $size-16;
   margin-top: $size-24;
   box-sizing: border-box;

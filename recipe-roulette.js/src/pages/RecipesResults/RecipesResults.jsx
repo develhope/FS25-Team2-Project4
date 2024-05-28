@@ -1,7 +1,6 @@
 import classes from "./RecipesResults.module.scss";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
-/* import { useState } from "react";
-import { useDiscoverySidebar } from "../../hooks/DiscoverySidebar/useDiscoverySidebar"; */
+/* import { useDiscoverySidebar } from "../../hooks/DiscoverySidebar/useDiscoverySidebar"; */
 import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes";
 
 export function RecipeResults() {
@@ -10,18 +9,6 @@ export function RecipeResults() {
 
   return (
     <div className={classes.recipesResultsPage}>
-{/*       <header>
-        <h1>Results</h1>
-        <button className={classes.btnFilters} onClick={handleSidebarToggle} >
-          <MaterialSymbol
-            className={classes.icon}
-            icon="tune"
-            size={20}
-            grade={18}
-          />
-          Filters
-        </button>
-      </header> */}
       <div className={classes.subHeading}>
         <p className={classes.text}>Preparation time</p>
         
@@ -32,7 +19,7 @@ export function RecipeResults() {
         </div>
       </div>
 
-      <div className={classes.resultsWrapper}></div>
+      <div className={classes.resultsWrapper}>
       <RecipeCard
                     title="Lemon and Green Pepper Salmon"
                     image="https://img.freepik.com/free-photo/delicious-mahi-mahi-fish-still-life_23-2150457374.jpg?size=626&ext=jpg%C3%B9"
@@ -51,6 +38,9 @@ export function RecipeResults() {
                     chips={["Vegetarian", "45 min"]}
                     isFav={true}
                 />
+
+      </div>
+
     </div>
   );
 }
