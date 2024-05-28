@@ -34,6 +34,18 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                         <MaterialSymbol className={classes.ico} icon="settings" weight={500} size={24} grade={24} />
                         Settings
                     </Link>
+                    <Link className={`${classes.link} ${path === "/login" && classes.activeLink}`} to="/login">
+                        <MaterialSymbol className={classes.ico} icon="login" weight={500} size={24} grade={24} />
+                        Login
+                    </Link>
+                    <Link className={`${classes.link} ${path === "/signup" && classes.activeLink}`} to="/signup">
+                        <MaterialSymbol className={classes.ico} icon="app_registration" weight={500} size={24} grade={24} />
+                        Sign up
+                    </Link>
+                    <Link className={`${classes.link} ${path === "/recipes-results" && classes.activeLink}`} to="/recipes-results">
+                        <MaterialSymbol className={classes.ico} icon="menu_book" weight={500} size={24} grade={24} />
+                        Results
+                    </Link>
                 </section>
             </div>
         </div>
