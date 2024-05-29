@@ -21,7 +21,7 @@ function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
     const { handleMenuToggle, path, menuState } = useSideMenu()
     const navigate = useNavigate()
-/* 
+    /* 
     useEffect(() => {
         navigate("/")
     }, []) */
@@ -31,7 +31,10 @@ function App() {
             <IngredientsProvider>
                 <SnackbarProvider>
                     <Sidebar sidebarState={sidebarState} handleSidebarToggle={handleSidebarToggle} />
-                    <Header handleMenuToggle={handleMenuToggle} sidebarState={sidebarState} />
+                    <Header
+                        handleMenuToggle={handleMenuToggle}
+                        handleSidebarToggle={handleSidebarToggle}
+                    />
                     <Routes>
                         <Route path="/" element={<DiscoveryPreview />} />
                         <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
