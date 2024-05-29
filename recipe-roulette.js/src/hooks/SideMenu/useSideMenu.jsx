@@ -11,7 +11,10 @@ export function useSideMenu() {
     }, [location.pathname])
 
     function handleMenuToggle() {
-        setMenuState((b) => !b)
+        setTimeout(() => {
+            setMenuState((b) => !b)
+        }, 0)
     }
+
     return { handleMenuToggle, setPath, path, menuState }
 }

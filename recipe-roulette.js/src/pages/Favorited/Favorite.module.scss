@@ -1,4 +1,7 @@
 .favoritePage {
+    transform: translateX(50%);
+    transition: transform .3s ease-in-out;
+
     background-color: white;
     margin: 0;
     padding: 0;
@@ -8,10 +11,14 @@
     box-sizing: border-box;
     padding: 0 1.25rem 2rem;
     .recipesWrapper {
-        padding-top: .75rem;
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 1.25rem;
     }
+}
+
+.animateFavorite {
+    transform: translateX(0);
+    transition: transform .3s ease-in-out;
 }

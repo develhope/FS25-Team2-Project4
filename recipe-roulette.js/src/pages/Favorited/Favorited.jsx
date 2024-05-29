@@ -1,4 +1,5 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
+import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import classes from "./Favorite.module.scss"
 
 //esempio di oggetto ricetta
@@ -16,8 +17,9 @@ import classes from "./Favorite.module.scss"
 // }
 
 export function Favorited() {
+    const { animate } = useAnimate()
     return (
-        <div className={classes.favoritePage}>
+        <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
             <section></section>
             <section className={classes.recipesWrapper}>
                 <RecipeCard
