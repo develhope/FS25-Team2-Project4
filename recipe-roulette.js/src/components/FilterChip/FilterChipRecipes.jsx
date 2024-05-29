@@ -1,14 +1,9 @@
 import { MaterialSymbol } from "react-material-symbols"
 import classes from "./FilterChip.module.scss"
-import { useState } from "react"
+import { useFilterChipRecipes } from "./useFilterChipRecipes"
 
 export function FilterChipRecipes({ label }) {
-
-    const [selectedState, setSelectedState] = useState(false)
-
-    function handleSelected () {
-        setSelectedState(prevState => !prevState)
-    }
+    const { selectedState, handleSelected } = useFilterChipRecipes()
 
     return (
         <div className={`${classes.filterChip} ${selectedState ? classes.active : classes.inactive}`} onClick={handleSelected}>

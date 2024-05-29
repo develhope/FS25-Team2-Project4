@@ -3,10 +3,16 @@ import { useState, useEffect } from "react";
 
 import classes from "./Header.module.scss";
 import { MaterialSymbol } from "react-material-symbols";
+import { SideBarRecipes } from "../Sidebar/SideBarRecipes";
 
 export function Header({ handleMenuToggle }) {
   const [title, setTitle] = useState("/");
   const location = useLocation();
+  const [sideBarState, setSideBarState] = useState(false)
+
+  function toggleSidebarRecipes () {
+    setSideBarState(prev => !prev)
+  }
 
   useEffect(() => {
     switch (location.pathname) {
@@ -49,10 +55,13 @@ export function Header({ handleMenuToggle }) {
         </button>
       )}
       {location.pathname === "/recipes-results" && (
-        <button className={classes.leftIcoButton}>
+        <div>
+        <button className={classes.leftIcoButton} onClick={toggleSidebarRecipes}>
           <MaterialSymbol icon="tune" />
           Filters
+          <SideBarRecipes isOpen={sideBarState} toggleSidebarRecipes={toggleSidebarRecipes} />
         </button>
+        </div>
       )}
     </header>
   );
