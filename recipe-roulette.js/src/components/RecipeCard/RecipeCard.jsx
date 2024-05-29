@@ -4,8 +4,6 @@ import { MaterialSymbol } from "react-material-symbols"
 import { FilterChip } from "../FilterChip/FilterChip"
 import Skeleton from "@mui/material/Skeleton"
 
-import { useState } from "react"
-
 import classes from "./RecipeCard.module.scss"
 
 const defaultTitle = "Card Title"
