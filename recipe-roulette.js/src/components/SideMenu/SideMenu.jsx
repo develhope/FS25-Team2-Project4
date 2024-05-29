@@ -1,5 +1,6 @@
 import { MaterialSymbol } from "react-material-symbols"
 import { Link } from "react-router-dom"
+import { NavigationLink } from "./NavigationLink/NavigationLink"
 
 import classes from "./SideMenu.module.scss"
 
@@ -22,18 +23,9 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                     />
                 </header>
                 <section className={classes.links}>
-                    <Link className={`${classes.link} ${path === "/discovery" && classes.activeLink}`} to="/discovery">
-                        <MaterialSymbol className={classes.ico} icon="explore" weight={500} size={24} grade={24} />
-                        Discovery
-                    </Link>
-                    <Link className={`${classes.link} ${path === "/favorited" && classes.activeLink}`} to="/favorited">
-                        <MaterialSymbol className={classes.ico} icon="bookmarks" weight={500} size={24} grade={24} />
-                        Favorited
-                    </Link>
-                    <Link className={`${classes.link} ${path === "/settings" && classes.activeLink}`} to="/settings">
-                        <MaterialSymbol className={classes.ico} icon="settings" weight={500} size={24} grade={24} />
-                        Settings
-                    </Link>
+                    <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Discovery" destination="/discovery" icon="explore" />
+                    <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Favorited" destination="/favorited" icon="bookmarks" />
+                    <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Settings" destination="/settings" icon="settings" />
                 </section>
             </div>
         </div>

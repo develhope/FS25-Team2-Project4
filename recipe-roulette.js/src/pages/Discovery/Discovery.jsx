@@ -5,11 +5,14 @@ import { useManageIngredients } from "../Discovery/IngredientsContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
 
 import classes from "./Discovery.module.scss"
+import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
 export function Discovery({ handleSidebarToggle }) {
     const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll } = useManageIngredients()
+    const { animate } = useAnimate()
+
     return (
-        <div className={classes.discoveryPage}>
+        <div className={`${classes.discoveryPage} ${animate && classes.animateDiscovery}`}>
             <div className={classes.contentWrapper}>
                 <div className={classes.globalActions}>
                     <IngredientSearch isFixed={true} searchCriteria="isSelected" />
@@ -23,7 +26,7 @@ export function Discovery({ handleSidebarToggle }) {
                 <div className={classes.ingredientsWrapper}>
                     {displayedIng.length > 0 &&
                         displayedIng.map((ing) => {
-                            return <IngredientCard key={ing.id} ing={ing}/>
+                            return <IngredientCard key={ing.id} ing={ing} />
                         })}
                 </div>
             </div>

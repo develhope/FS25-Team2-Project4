@@ -1,6 +1,9 @@
 @use "../../assets/scss" as *;
 
 .discoveryPage {
+    transform: translateX(50%);
+    transition: transform .3s ease-in-out;
+
     background-color: white;
     width: 100%;
     height: 100%;
@@ -116,4 +119,9 @@
             color: $medium-gray;
         }
     }
+}
+
+.animateDiscovery {
+    transform: translateX(0);
+    transition: transform .3s ease-in-out;
 }

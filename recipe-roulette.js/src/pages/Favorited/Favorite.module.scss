@@ -1,4 +1,7 @@
 .favoritePage {
+    transform: translateX(50%);
+    transition: transform .3s ease-in-out;
+
     background-color: white;
     margin: 0;
     padding: 0;
@@ -14,4 +17,9 @@
         flex-direction: column;
         gap: 1.25rem;
     }
+}
+
+.animateFavorite {
+    transform: translateX(0);
+    transition: transform .3s ease-in-out;
 }
