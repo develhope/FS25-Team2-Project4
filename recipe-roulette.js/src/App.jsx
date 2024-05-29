@@ -14,6 +14,7 @@ import { Header } from "./components/Header/Header"
 import { useDiscoverySidebar } from "./hooks/DiscoverySidebar/useDiscoverySidebar"
 import { useSideMenu } from "./hooks/SideMenu/useSideMenu"
 import { SnackbarProvider } from "./components/Snackbar/useSnackbar"
+import { SideBarRecipes } from "./components/Sidebar/SideBarRecipes"
 /* import { useEffect } from "react"
 import { useNavigate } from "react-router-dom" */
 
@@ -43,6 +44,7 @@ function App() {
 
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<Signup />} />
+                        <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
                     </Routes>
                 </SnackbarProvider>
             </IngredientsProvider>
