@@ -1,6 +1,7 @@
 @use "../../../assets/scss/" as *;
 
 .search {
+    z-index: 1;
     position: relative;
     width: 100%;
     height: fit-content;

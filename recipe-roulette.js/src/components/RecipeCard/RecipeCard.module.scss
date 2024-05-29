@@ -58,6 +58,9 @@
             padding-left: .25rem;
         }
     }
+    & :active {
+        background-color: $lighter-gray;
+    }
 }
 
 /* stato icona favorite */
@@ -84,3 +87,4 @@
         scale,
         0.3s ease-in-out;
 }
+

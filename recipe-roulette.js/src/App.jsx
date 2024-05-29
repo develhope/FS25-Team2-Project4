@@ -21,10 +21,10 @@ function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
     const { handleMenuToggle, path, menuState } = useSideMenu()
     const navigate = useNavigate()
-
+/* 
     useEffect(() => {
         navigate("/")
-    }, [])
+    }, []) */
 
     return (
         <div className="appContainer">
