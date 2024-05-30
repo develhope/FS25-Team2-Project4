@@ -1,0 +1,27 @@
+@use "../../../assets/scss/" as *;
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    min-width: 3rem;
+    height: 3rem;
+    color: $dark-gray;
+    border: 1px solid #e5e0df;
+    border-radius: 1.5rem;
+    background-color: white;
+}
+
+button:active {
+    background-color: $third-color;
+}
+
+.disabled {
+    background-color: $lighter-gray;
+    color: $medium-gray;
+}
+.disabled:active {
+    background-color: $lighter-gray;
+    color: $medium-gray;
+}

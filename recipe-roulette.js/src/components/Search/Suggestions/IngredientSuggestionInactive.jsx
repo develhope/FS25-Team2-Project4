@@ -19,7 +19,7 @@ export function IngredientSuggestionInactive({ ing, prop = "isSelected" }) {
             )}
             {ing.isSelected && (
                 <p
-                    onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
+                onMouseDown={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
                     className={`${!ing.isSelected && classes.inactiveSuggestion} ${classes.lockedSuggestion} ${classes.ingredientSuggestion}`}
                 >
                     <MaterialSymbol icon="lock" weight={600} grade={20} size={20} />

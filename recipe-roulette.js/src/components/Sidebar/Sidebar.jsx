@@ -4,6 +4,7 @@ import { FilterChip } from "../FilterChip/FilterChip"
 import { MaterialSymbol } from "react-material-symbols"
 import { Switch } from "../Switch/Switch"
 import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
+import { Button } from "../Buttons/Button/Button"
 
 export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
     const { handleDeselectAll, blackList } = useManageIngredients()
@@ -18,10 +19,12 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                 <header>
                     <h2>Filters</h2>
                     <div className={classes.rightItems}>
-                        <button className={classes.deselectAllButton} onClick={() => handleDeselectAll("isBlackListed")}>
-                            <MaterialSymbol className={classes.ico} icon="rotate_left" weight={500} size={18} grade={18} />
-                            Reset all
-                        </button>
+                        <Button
+                            label="Reset All"
+                            icon="rotate_left"
+                            size={18}
+                            action={() => handleDeselectAll("isBlackListed")}
+                        />
                         <MaterialSymbol
                             onClick={handleSidebarToggle}
                             className={classes.closeIco}
@@ -60,7 +63,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                         <div className={classes.switchesWrapper}>
                             <Switch label={"Gluten free"} prop={"isGlutenFree"} />
                             <Switch label={"Vegetarian"} prop={"isVegetarian"} />
-                            <Switch label={"Vegan"} prop={"isVegan"}/>
+                            <Switch label={"Vegan"} prop={"isVegan"} />
                         </div>
                     </div>
                 </section>

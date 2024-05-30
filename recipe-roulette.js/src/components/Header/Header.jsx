@@ -1,59 +1,57 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import classes from "./Header.module.scss";
-import { MaterialSymbol } from "react-material-symbols";
+import classes from "./Header.module.scss"
+import { MaterialSymbol } from "react-material-symbols"
+import { Button } from "../Buttons/Button/Button"
 
-export function Header({ handleMenuToggle }) {
-  const [title, setTitle] = useState("/");
-  const location = useLocation();
+export function Header({ handleMenuToggle, handleSidebarToggle }) {
+    const [title, setTitle] = useState("/")
+    const location = useLocation()
 
-  useEffect(() => {
-    switch (location.pathname) {
-      case "/":
-        setTitle("Welcome!");
-        break;
-      case "/discovery":
-        setTitle("Discovery");
-        break;
-      case "/favorited":
-        setTitle("Favorited");
-        break;
-      case "/settings":
-        setTitle("Settings");
-        break;
-      case "/recipes-results":
-        setTitle("Results");
-        break;
-    }
-  }, [location.pathname]);
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/":
+                setTitle("Welcome!")
+                break
+            case "/discovery":
+                setTitle("Discovery")
+                break
+            case "/favorited":
+                setTitle("Favorited")
+                break
+            case "/settings":
+                setTitle("Settings")
+                break
+            case "/recipes-results":
+                    setTitle("Results")
+                    break
+        }
+    }, [location.pathname])
+    console.log(location.pathname);
 
-  return (
-    <header>
-      <div className={classes.leftItems}>
-        <MaterialSymbol
-          onClick={handleMenuToggle}
-          className={classes.menu}
-          icon="menu"
-          weight={500}
-          size={24}
-          grade={24}
-        />
-        <h1>{title}</h1>
-      </div>
+    return (
+        (location.pathname !== "/login" && location.pathname !== "/signup") && 
+            <header>
+                <div className={classes.leftItems}>
+                    <MaterialSymbol
+                        onClick={handleMenuToggle}
+                        className={classes.menu}
+                        icon="menu"
+                        weight={500}
+                        size={24}
+                        grade={24}
+                    />
+                    <h1>{title}</h1>
+                </div>
 
-      {location.pathname === "/favorited" && (
-        <button className={classes.leftIcoButton}>
-          <MaterialSymbol icon="tune" />
-          Filters
-        </button>
-      )}
-      {location.pathname === "/recipes-results" && (
-        <button className={classes.leftIcoButton}>
-          <MaterialSymbol icon="tune" />
-          Filters
-        </button>
-      )}
-    </header>
-  );
+                {location.pathname === "/favorited" && (
+                    <Button action={handleSidebarToggle} label="Filters" icon="tune" size={18} />
+                )}
+                {location.pathname === "/recipes-results" && (
+                    <Button action={handleSidebarToggle} label="Filters" icon="tune" size={18} />
+                )}
+            </header>
+        )
+    
 }

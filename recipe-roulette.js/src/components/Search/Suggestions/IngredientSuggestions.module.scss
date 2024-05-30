@@ -1,6 +1,7 @@
 @use "../../../assets/scss/" as *;
 
 .suggestions {
+    z-index: 11;
     top: 3rem;
 
     width: 100%;
