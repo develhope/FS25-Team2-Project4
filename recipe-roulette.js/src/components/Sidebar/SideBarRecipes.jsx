@@ -4,7 +4,7 @@ import { FilterChipRecipes } from "../FilterChip/FilterChipRecipes";
 import classes from "./SideBarRecipes.module.scss";
 import { useFilterChipRecipes } from "../FilterChip/useFilterChipRecipes";
 
-export function SideBarRecipes({ isOpen, toggleSidebarRecipes }) {
+export function SideBarRecipes({ state, toggleSidebarRecipes }) {
   const { handleSelected } = useFilterChipRecipes()
 
   function handleSidebarClick(e) {
@@ -16,11 +16,11 @@ export function SideBarRecipes({ isOpen, toggleSidebarRecipes }) {
       <div
         onClick={toggleSidebarRecipes}
         className={`${classes.backgroundOverlay} ${
-          isOpen && classes.backgroundOverlayToggled
+          state && classes.backgroundOverlayToggled
         }`}
       ></div>
       <div
-        className={`${classes.sidebar} ${isOpen && classes.sidebarToggled}`}
+        className={`${classes.sidebar} ${state && classes.sidebarToggled}`}
         onClick={handleSidebarClick}
       >
         <header>

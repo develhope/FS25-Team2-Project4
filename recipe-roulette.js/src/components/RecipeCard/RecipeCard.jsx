@@ -2,13 +2,13 @@ import { Link } from "react-router-dom"
 import { useFavorite } from "./useFavorite"
 import { MaterialSymbol } from "react-material-symbols"
 import { FilterChip } from "../FilterChip/FilterChip"
-import Skeleton from "@mui/material/Skeleton"
+/* import Skeleton from "@mui/material/Skeleton" */
 
 import classes from "./RecipeCard.module.scss"
 
 const defaultTitle = "Card Title"
 
-function RecipeCard({ title = defaultTitle, image = null, chips, isFav = false }) {
+function RecipeCard({ title = defaultTitle, /* image = null, */ chips, isFav = false }) {
     const { handleFavState, favState } = useFavorite(isFav)
 
     return (
@@ -22,11 +22,11 @@ function RecipeCard({ title = defaultTitle, image = null, chips, isFav = false }
                     {classes.favIcon && <MaterialSymbol icon="favorite" fill size={24} grade={24} />}
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
-                {false ? (
+{/*                 {false ? (
                     <Skeleton sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
                 ) : (
                     <img src={image} alt="" />
-                )}
+                )} */}
             </div>
 
             {/* bottomItems */}
