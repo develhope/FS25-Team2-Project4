@@ -58,6 +58,9 @@
             padding-left: .25rem;
         }
     }
+    & :active {
+        background-color: $lighter-gray;
+    }
 }
 
 .recipeCard:hover {
@@ -89,3 +92,4 @@
         scale,
         0.3s ease-in-out;
 }
+
