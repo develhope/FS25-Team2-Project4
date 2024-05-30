@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import classes from "./Header.module.scss"
-import { MaterialSymbol } from "react-material-symbols"
+import classes from "./Header.module.scss";
+import { MaterialSymbol } from "react-material-symbols";
 import { Button } from "../Buttons/Button/Button"
 
-export function Header({ handleMenuToggle, handleSidebarToggle }) {
+export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
     const location = useLocation()
 
@@ -49,7 +49,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle }) {
                     <Button action={handleSidebarToggle} label="Filters" icon="tune" size={18} />
                 )}
                 {location.pathname === "/recipes-results" && (
-                    <Button action={handleSidebarToggle} label="Filters" icon="tune" size={18} />
+                    <Button action={handleRecipesSidebarToggle} label="Filters" icon="tune" size={18} />
                 )}
             </header>
         )

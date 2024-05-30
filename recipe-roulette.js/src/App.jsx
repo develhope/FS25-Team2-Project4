@@ -14,14 +14,16 @@ import { Header } from "./components/Header/Header"
 import { useDiscoverySidebar } from "./hooks/DiscoverySidebar/useDiscoverySidebar"
 import { useSideMenu } from "./hooks/SideMenu/useSideMenu"
 import { SnackbarProvider } from "./components/Snackbar/useSnackbar"
+import { SideBarRecipes } from "./components/Sidebar/SideBarRecipes"
+import { useRecipesResultsSideBar } from "./hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
 /* import { useEffect } from "react"
 import { useNavigate } from "react-router-dom" */
 
 function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
     const { handleMenuToggle, path, menuState } = useSideMenu()
-    
-    const navigate = useNavigate()
+    const { toggleSidebarRecipes, sideBarState } = useRecipesResultsSideBar()
+    /* const navigate = useNavigate() */
     /* 
     useEffect(() => {
         navigate("/")
@@ -32,12 +34,13 @@ function App() {
             <IngredientsProvider>
                 <SnackbarProvider>
                     <SideMenu handleMenuToggle={handleMenuToggle} menuState={menuState} path={path} />
-
+                    <SideBarRecipes state={sideBarState} toggleSidebarRecipes={toggleSidebarRecipes} />
                     <Sidebar sidebarState={sidebarState} handleSidebarToggle={handleSidebarToggle} />
 
                     <Header
                         handleMenuToggle={handleMenuToggle}
                         handleSidebarToggle={handleSidebarToggle}
+                        handleRecipesSidebarToggle={toggleSidebarRecipes}
                     />
 
                     <Routes>
@@ -51,6 +54,7 @@ function App() {
 
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<Signup />} />
+                        <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
                     </Routes>
                 </SnackbarProvider>
             </IngredientsProvider>

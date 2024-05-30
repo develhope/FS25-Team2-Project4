@@ -25,6 +25,9 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                     <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Discovery" destination="/discovery" icon="explore" />
                     <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Favorited" destination="/favorited" icon="bookmarks" />
                     <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Settings" destination="/settings" icon="settings" />
+                    <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Login" destination="/login" icon="login" />
+                    <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Sign up" destination="/signup" icon="app_registration" />
+                    <NavigationLink path={path} handleMenuToggle={handleMenuToggle} label="Results" destination="/recipes-results" icon="menu_book" />
                 </section>
             </div>
         </div>
