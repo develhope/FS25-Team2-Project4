@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom"
 function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
     const { handleMenuToggle, path, menuState } = useSideMenu()
+    
     const navigate = useNavigate()
     /* 
     useEffect(() => {
@@ -30,11 +31,15 @@ function App() {
         <div className="appContainer">
             <IngredientsProvider>
                 <SnackbarProvider>
+                    <SideMenu handleMenuToggle={handleMenuToggle} menuState={menuState} path={path} />
+
                     <Sidebar sidebarState={sidebarState} handleSidebarToggle={handleSidebarToggle} />
+
                     <Header
                         handleMenuToggle={handleMenuToggle}
                         handleSidebarToggle={handleSidebarToggle}
                     />
+
                     <Routes>
                         <Route path="/" element={<DiscoveryPreview />} />
                         <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
@@ -49,8 +54,6 @@ function App() {
                     </Routes>
                 </SnackbarProvider>
             </IngredientsProvider>
-
-            <SideMenu handleMenuToggle={handleMenuToggle} menuState={menuState} path={path} />
         </div>
     )
 }
