@@ -1,13 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useLogin() {
   const [data, setData] = useState(createData());
   const [showPassword, setShowPassword] = useState(false)
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   function createData() {
     return {
@@ -67,7 +62,6 @@ export function useLogin() {
 
   return {
     data,
-    inputRef,
     showPassword,
     handleInput,
     handleSubmit,

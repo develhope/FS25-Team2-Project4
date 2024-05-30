@@ -7,7 +7,7 @@ import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn";
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn";
 
 export function Login() {
-  const { data, inputRef, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin();
+  const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin();
 
   return (
     <section className={classes.pageBox}>
@@ -29,7 +29,6 @@ export function Login() {
               value={data.username}
               placeholder="Insert username here"
               onChange={handleInput}
-              ref={inputRef}
               required
             />
             <label htmlFor="password">Password</label>

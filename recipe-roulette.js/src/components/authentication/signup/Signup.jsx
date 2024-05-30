@@ -4,7 +4,7 @@ import {useSignup} from "../../../hooks/Form/useSignup"
 
 export function Signup() {
 
-  const { data, passError, inputRef, handleInput, handleSubmit} = useSignup()
+  const { data, passError, handleInput, handleSubmit} = useSignup()
 
 
   return (
@@ -25,7 +25,6 @@ export function Signup() {
               id="username"
               value={data.username}
               onChange={handleInput}
-              ref={inputRef}
               placeholder="Insert your username"
               required
             />

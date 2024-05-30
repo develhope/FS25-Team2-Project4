@@ -1,13 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 export function useSignup() {
   const [data, setData] = useState(createData());
   const [passError, setPassError] = useState(null);
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
 
   function createData() {
@@ -47,7 +42,6 @@ export function useSignup() {
   return {
     data,
     passError,
-    inputRef,
     handleInput,
     handleSubmit,
   };
