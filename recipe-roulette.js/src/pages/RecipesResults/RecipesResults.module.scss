@@ -1,6 +1,9 @@
 @use "../../assets/scss/" as *;
 
 .recipesResultsPage {
+  transform: translateX(50%);
+  transition: transform .3s ease-in-out;
+
   background-color: $third-color;
   display: flex;
   flex-direction: column;
@@ -35,4 +38,9 @@
   box-sizing: border-box;
   width: 100%;
   height: fit-content;
+}
+
+.animateFavorite {
+  transform: translateX(0);
+  transition: transform .3s ease-in-out;
 }

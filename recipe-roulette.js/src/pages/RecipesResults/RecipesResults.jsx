@@ -2,13 +2,14 @@ import classes from "./RecipesResults.module.scss";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 /* import { useDiscoverySidebar } from "../../hooks/DiscoverySidebar/useDiscoverySidebar"; */
 import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes";
+import { useAnimate } from "../../hooks/animatePages/useAnimate";
 
 export function RecipeResults() {
 /*   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar() */
-
+  const { animate } = useAnimate()
 
   return (
-    <div className={classes.recipesResultsPage}>
+    <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} ` }>
       <div className={classes.subHeading}>
         <p className={classes.text}>Preparation time</p>
         
