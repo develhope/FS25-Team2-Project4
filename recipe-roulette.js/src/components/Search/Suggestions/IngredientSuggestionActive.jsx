@@ -13,7 +13,7 @@ export function IngredientSuggestionActive({ ing, prop }) {
             {prop === "isBlackListed" && (
                 <p
                     className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
-                    onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
+                    onMouseDown={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
                 >
                     <MaterialSymbol icon="cancel" weight={400} grade={20} size={20} />
                     {name}
@@ -22,7 +22,7 @@ export function IngredientSuggestionActive({ ing, prop }) {
             {prop === "isSelected" && (
                 <p
                     className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
-                    onClick={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
+                    onMouseDown={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
                 >
                     <MaterialSymbol icon="lock_open" weight={400} grade={20} size={20} />
                     {name}

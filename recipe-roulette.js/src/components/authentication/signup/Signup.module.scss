@@ -15,7 +15,6 @@
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, auto);
   place-items: center;
   background-color: $accent-color;
   box-sizing: border-box;
@@ -23,39 +22,41 @@
   width: $width-320;
   height: fit-content;
   font-size: $text-size-14;
-  box-shadow: 0px 16px 16px $green;
 }
 
 .title {
-  grid-row: 1 / 2;
   place-self: center;
   text-align: start;
   box-sizing: border-box;
-  border-bottom: 1px solid $main-color;
-  width: 18rem;
+  width: 100%;
   font-size: $text-size-20;
+  padding: 1.5rem;
+  padding-bottom: 1rem;
+  h1{
+    margin: 0;
+  }
 }
 
 .formBox {
-  grid-row: 2 / 3;
   display: grid;
-  padding-bottom: $size-24;
-  padding-top: $size-16;
+  width: 100%;
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+  box-sizing: border-box;
   gap: 1rem;
+
 
   .inputBox {
     display: grid;
     place-self: start;
-    width: 18rem;
+    width: 100%;
 
     input {
       border-radius: $size-24;
       border: 1px ridge $light-gray;
       height: $height-40;
       box-sizing: border-box;
-      padding: $size-8;
-      font-style: oblique;
-      box-shadow: 0px 2px 4px $light-gray;
+      padding-left: $size-16;
     }
 
     ::placeholder {
@@ -65,7 +66,8 @@
 
     label {
       display: block;
-      padding: $size-8;
+      padding: .25rem;
+      padding-top: .5rem;
       font-size: $text-size-16;
     }
 
@@ -83,15 +85,13 @@
 
   .signupBtn {
     place-self: center;
-    height: fit-content;
-    width: 10rem;
+    height: $height-40;
+    width: 100%;
     border-radius: $size-24;
-    padding: $size-8;
     background-color: $main-color;
     color: $darkest-gray;
     border: none;
     font-weight: 600;
     text-align: center;
-    box-shadow: 0px 4px 8px $main-color;
   }
 }

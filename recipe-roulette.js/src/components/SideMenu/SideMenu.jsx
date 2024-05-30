@@ -1,5 +1,4 @@
 import { MaterialSymbol } from "react-material-symbols"
-import { Link } from "react-router-dom"
 import { NavigationLink } from "./NavigationLink/NavigationLink"
 
 import classes from "./SideMenu.module.scss"

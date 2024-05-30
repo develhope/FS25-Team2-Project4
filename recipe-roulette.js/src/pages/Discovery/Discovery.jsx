@@ -6,22 +6,32 @@ import { Snackbar } from "../../components/Snackbar/Snackbar"
 
 import classes from "./Discovery.module.scss"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
+import { Button } from "../../components/Buttons/Button/Button"
+import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
+
+import { useButtonState } from "../../hooks/ButtonState/useButtonState"
+import { useMemo } from "react"
 
 export function Discovery({ handleSidebarToggle }) {
     const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll } = useManageIngredients()
     const { animate } = useAnimate()
+    const { isActive, setIsActive } = useButtonState(true)
+
+    const setButtonState = useMemo(() => {
+        if (displayedIng.length === 8) {
+            setIsActive(false)
+        } else {
+            setIsActive(true)
+        }
+    }, [displayedIng.length])
 
     return (
         <div className={`${classes.discoveryPage} ${animate && classes.animateDiscovery}`}>
             <div className={classes.contentWrapper}>
                 <div className={classes.globalActions}>
                     <IngredientSearch isFixed={true} searchCriteria="isSelected" />
-                    <button onClick={handleSidebarToggle} className={classes.icoButton}>
-                        <MaterialSymbol className={classes.ico} icon="tune" weight={500} size={20} grade={20} />
-                    </button>
-                    <button onClick={() => handleDeselectAll("isSelected")} className={classes.icoButton}>
-                        <MaterialSymbol className={classes.ico} icon="lock_reset" weight={500} size={22} grade={2} />
-                    </button>
+                    <IcoButton action={() => handleSidebarToggle()} icon="tune" size={20} />
+                    <IcoButton action={() => handleDeselectAll("isSelected")} icon="lock_reset" size={22} />
                 </div>
                 <div className={classes.ingredientsWrapper}>
                     {displayedIng.length > 0 &&
@@ -32,21 +42,33 @@ export function Discovery({ handleSidebarToggle }) {
             </div>
 
             <div className={classes.bottomButtons}>
-                <button
-                    className={`${classes.button} ${displayedIng.length === 8 && classes.disabled}`}
-                    onClick={() => handleIngIncrement()}
-                >
-                    <MaterialSymbol className={classes.ico} icon="add" size={18} grade={18} />
-                    Ingredient
-                </button>
+                <Button
+                    width={"fill"}
+                    active={isActive}
+                    action={() => handleIngIncrement()}
+                    label="Ingredient"
+                    icon="add"
+                    size={18}
+                    iconWheight={600}
+                />
                 <button className={classes.cycleButton} onClick={() => shuffleIng()}>
                     {" "}
                     <MaterialSymbol className={classes.ico} icon="cycle" weight={600} size={18} grade={18} />
                 </button>
-                <button className={classes.button}>
-                    <MaterialSymbol className={classes.ico} icon="done_all" size={18} grade={18} />
-                    Find recipes
-                </button>
+
+                <Button
+                    width={"fill"}
+                    active={true}
+                    action={() =>
+                        console.log(
+                            `Find 5 ${["(filters)"]} recipes with these ingredients`,
+                            displayedIng.map((ing) => ing.name)
+                        )
+                    }
+                    label="Recipes"
+                    icon="frame_inspect"
+                    size={20}
+                />
             </div>
             <Snackbar />
         </div>

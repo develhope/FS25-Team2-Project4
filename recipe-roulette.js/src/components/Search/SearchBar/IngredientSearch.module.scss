@@ -1,6 +1,7 @@
 @use "../../../assets/scss/" as *;
 
 .search {
+    z-index: 1;
     position: relative;
     width: 100%;
     height: fit-content;
@@ -73,7 +74,7 @@
 }
 
 .inputInactive {
-    background-color: $third-color;
+    background-color: white;
     border-radius: $size-24;
     outline: 1px solid $light-gray;
     outline-offset: -2px;
