@@ -28,7 +28,6 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                     break
         }
     }, [location.pathname])
-    console.log(location.pathname);
 
     return (
         (location.pathname !== "/login" && location.pathname !== "/signup") && 
