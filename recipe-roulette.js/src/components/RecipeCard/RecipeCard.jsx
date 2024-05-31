@@ -8,18 +8,18 @@ import classes from "./RecipeCard.module.scss"
 
 const defaultTitle = "Card Title"
 
-function RecipeCard({ title = defaultTitle, image = null, chips, isFav = false }) {
+function RecipeCard({ title = defaultTitle, image = null, attributes, isFav = false }) {
     const { handleFavState, favState } = useFavorite(isFav)
 
     return (
-        <Link to="recipeName" className={classes.recipeCard}>
+        <Link to="" className={classes.recipeCard}>
             {/* topItems */}
             <div className={classes.topItems}>
                 <div
                     onClick={(e) => handleFavState(e)}
-                    className={`${classes.favIcon} ${favState ? classes.isFav : classes.notFav}`}
+                    className={`${classes.favIcon}`}
                 >
-                    {classes.favIcon && <MaterialSymbol icon="favorite" fill size={24} grade={24} />}
+                <MaterialSymbol className={`${favState ? classes.isFav : classes.notFav}`} icon="favorite" fill size={24} grade={24} />
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {false ? (
@@ -32,7 +32,7 @@ function RecipeCard({ title = defaultTitle, image = null, chips, isFav = false }
             {/* bottomItems */}
             <div className={classes.bottomItems}>
                 <section className={classes.chipsWrapper}>
-                    {chips && chips.length > 0 && chips.map((chip, index) => <FilterChip key={index} label={chip} />)}
+                    {attributes && attributes.length > 0 && attributes.map((chip, index) => <FilterChip key={index} label={chip} />)}
                 </section>
                 <p className={classes.title}>{title}</p>
             </div>

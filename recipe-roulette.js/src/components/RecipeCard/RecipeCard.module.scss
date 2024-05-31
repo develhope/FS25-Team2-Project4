@@ -32,6 +32,7 @@
             align-items: center;
             height: 4rem;
             width: 4rem;
+            background-color: transparent;
         }
     }
     .bottomItems {
@@ -64,32 +65,24 @@
 }
 
 .recipeCard:hover {
-    box-shadow: 0px 8px 8px $main-color;
-    outline: 1px solid $main-color
+    box-shadow: 0px 0px 16px rgba($color: $dark-gray, $alpha: .25);
 }
 
 /* stato icona favorite */
 .notFav {
-    font-variation-settings:
-        "FILL" 1,
-        "wght" 400,
-        "GRAD" 0,
-        "opsz" 24;
+    scale: 1;
+    background-color: transparent;
     color: white;
     transition:
-        scale,
+        all
         0.3s ease-in-out;
 }
 .isFav {
-    font-variation-settings:
-        "FILL" 1,
-        "wght" 400,
-        "GRAD" 0,
-        "opsz" 24;
+    background-color: transparent;
     color: #fa4d56;
     scale: 1.25;
     transition:
-        scale,
+    all
         0.3s ease-in-out;
 }
 

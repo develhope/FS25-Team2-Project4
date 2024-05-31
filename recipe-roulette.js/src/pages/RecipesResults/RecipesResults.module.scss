@@ -4,18 +4,26 @@
   transform: translateX(50%);
   transition: transform .3s ease-in-out;
 
-  background-color: $third-color;
   display: flex;
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 $size-24;
+  padding: 0 $size-16;
+  padding-bottom: $size-24;
   font-size: $text-size-16;
   font-style: $font-text;
   color: $darkest-gray;
+
+  overflow-y: scroll;
 }
 
 .subHeading {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  p{
+    margin: 0;
+  }
   box-sizing: border-box;
   .text {
     font-weight: 700;
@@ -23,7 +31,7 @@
 
   .chipWrapper {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: $size-8;
     box-sizing: border-box;
     width: 100%;
@@ -34,7 +42,7 @@
   display: grid;
   grid-template-rows: repeat(auto, 1fr);
   gap: $size-16;
-  margin-top: $size-24;
+  margin-top: $size-16;
   box-sizing: border-box;
   width: 100%;
   height: fit-content;

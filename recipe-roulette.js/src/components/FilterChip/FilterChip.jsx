@@ -6,8 +6,9 @@ export function FilterChip({ id, label, bgColor, isSelected, isBlackListed }) {
     const { handleDeselectChip } = useFilterChips(id, label, bgColor, isSelected, isBlackListed)
 
     return (
-        <div className={`${classes.filterChip} ${isSelected ? classes.active : classes.inactive}`} onClick={handleDeselectChip}>
-            <MaterialSymbol className={classes.ico} icon="check" size={18} grade={18} />
+        <div className={`${classes.filterChip} ${isSelected || isBlackListed ? classes.active : classes.inactive}`} onClick={handleDeselectChip}>
+            {isSelected && <MaterialSymbol className={classes.ico} icon="check" size={16} grade={16} />}
+            {isBlackListed && <MaterialSymbol className={classes.ico} icon="block" size={16} grade={16} />}
             <p className={classes.label}>{label}</p>
         </div>
     )

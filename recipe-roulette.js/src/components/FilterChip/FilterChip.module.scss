@@ -2,15 +2,15 @@
 
 .filterChip {
     display: flex;
-    width: fit-content;
+    width: max-content;
     align-items: center;
     box-sizing: border-box;
     height: 32px;
     padding-left: 0.5rem;
-    padding-right: 1rem;
+    padding-right: 0.75rem;
     border-radius: $size-8;
     background-color: $second-color;
-    gap: $size-8;
+    gap: .25rem;
     transition: scale 0.3s ease-in-out;
     font-family: $font-text;
     font-size: $text-size-14;
@@ -35,5 +35,6 @@
 .inactive {
     background-color: white;
     border: 1px solid $light-gray;
-    color: $medium-gray;
+    color: $darkish-gray;
+    padding: 0 .75rem;
 }

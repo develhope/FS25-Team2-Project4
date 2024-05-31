@@ -4,13 +4,14 @@ import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSe
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
 
-import classes from "./Discovery.module.scss"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { Button } from "../../components/Buttons/Button/Button"
 import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import { useButtonState } from "../../hooks/ButtonState/useButtonState"
 import { useMemo } from "react"
+
+import classes from "./Discovery.module.scss"
 
 export function Discovery({ handleSidebarToggle }) {
     const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll } = useManageIngredients()
