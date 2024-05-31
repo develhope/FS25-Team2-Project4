@@ -2,7 +2,7 @@
 
 .discoveryPage {
     transform: translateX(50%);
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 
     background-color: white;
     width: 100%;
@@ -20,7 +20,7 @@
         max-height: 100%;
         box-sizing: border-box;
         align-items: center;
-        padding-top: 4rem;
+        padding-top: 3.75rem;
         .globalActions {
             position: absolute;
             top: 0;
@@ -63,7 +63,7 @@
         gap: 1rem;
         align-items: center;
         justify-content: center;
-        padding: .75rem 0;
+        padding: 0.75rem 0;
         .cycleButton {
             display: flex;
             align-items: center;
@@ -73,15 +73,23 @@
             box-sizing: border-box;
             padding-top: 2px;
             border: none;
-            border-radius: 1.5rem;
+            border-radius: 2rem;
             color: white;
-            background: rgb(0, 200, 99);
             background: linear-gradient(87deg, rgba(0, 200, 99, 1) 0%, rgba(4, 171, 160, 1) 100%, rgba(0, 138, 165, 1) 100%);
+            transition:
+                scale 0.2s ease-in-out,
+                transform 0.2s ease-in-out;
         }
     }
 }
-
+.cycleButtonAnimation {
+    scale: 1.05;
+    transform: rotate(90deg);
+    transition:
+        scale 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
+}
 .animateDiscovery {
     transform: translateX(0);
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }

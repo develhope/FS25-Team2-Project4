@@ -26,16 +26,18 @@
         padding-left: 0.5rem;
         align-content: center;
         font-family: "Puritan";
-        font-weight: 600;
+        font-weight: 400;
         font-size: 18px;
         color: $dark-gray;
         transition:
-            font-size 0.2s ease,
+            font-size .3s ease,
             padding 0.3s ease;
     }
+
     .checkIco {
         color: $dark-gray;
-        transition: font-size 0.2s ease;
+        font-size:18px;
+        transition: font-size .3s ease;
     }
     .rightItems {
         height: 2rem;
@@ -50,9 +52,7 @@
 
         min-width: fit-content;
         .rightIco {
-            padding: 0;
-            padding-top: .125rem;
-            padding-left: .125rem;
+            padding: .5rem;
             margin: 0;
             border: none;
             color: $darkish-gray;
@@ -63,10 +63,6 @@
 
 .unselected {
     transition: border-radius 0.3s ease-out;
-
-    .checkIco {
-        opacity: 1;
-    }
     .rightItems {
         opacity: 1;
         transition: opacity 0.2s ease-in-out;
@@ -77,19 +73,20 @@
     outline-offset: -2px;
     transition: border-radius 0.3s ease-out;
     .leftItems {
-        transform: translateX(0.5em);
+        transform: translateX(0.25em);
         transition: transform 0.3s ease;
     }
     p {
-        padding-left: 1rem;
+        letter-spacing: -0.0025rem;
+        padding-left: .75rem;
         font-size: 22px;
         transition:
             font-size 0.2s ease,
             padding 0.3s ease;
     }
     .checkIco {
-        opacity: 1;
-        transition: font-size 0.3s ease;
+        font-size: 22px;
+        transition: all 0.3s ease;
     }
     .rightItems {
         opacity: 0;

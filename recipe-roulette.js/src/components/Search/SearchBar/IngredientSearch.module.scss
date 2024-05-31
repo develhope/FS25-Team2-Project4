@@ -51,7 +51,7 @@
         outline: none;
     }
     .ico {
-        color: $dark-gray;
+        color: $darkish-gray;
         position: absolute;
         height: 2rem;
         width: 2rem;
@@ -74,7 +74,7 @@
 }
 
 .inputInactive {
-    background-color: white;
+    background-color: #F8FFF8;
     border-radius: $size-24;
     outline: 1px solid $light-gray;
     outline-offset: -2px;
@@ -84,7 +84,7 @@
 
 .inputActive {
     border-radius: $size-24 $size-24 0 0;
-    background-color: $second-color;
+    background-color: #D3E4C5;
     transition: border-radius 0.3s ease;
 
 }

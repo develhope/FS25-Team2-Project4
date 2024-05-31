@@ -1,6 +1,9 @@
-import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientSuggestion } from "./useIngredientSuggestion"
 import { useIngredientSearch } from "../SearchBar/useIngredientSearch"
+
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import NoMealsOutlinedIcon from '@mui/icons-material/NoMealsOutlined';
 
 import classes from "./IngredientSuggestions.module.scss"
 
@@ -13,7 +16,7 @@ export function IngredientSuggestionInactive({ ing, prop = "isSelected" }) {
         <>
             {ing.isBlackListed && (
                 <p className={`${!ing.isSelected && classes.inactiveSuggestion} ${classes.ingredientSuggestion}`}>
-                    <MaterialSymbol icon="block" grade={20} size={20} />
+                    <BlockOutlinedIcon fontSize="small" />
                     {name}
                 </p>
             )}
@@ -22,13 +25,13 @@ export function IngredientSuggestionInactive({ ing, prop = "isSelected" }) {
                 onMouseDown={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
                     className={`${!ing.isSelected && classes.inactiveSuggestion} ${classes.lockedSuggestion} ${classes.ingredientSuggestion}`}
                 >
-                    <MaterialSymbol icon="lock" weight={600} grade={20} size={20} />
+                    <LockOutlinedIcon fontSize="small" />
                     {name}{" "}
                 </p>
             )}
             {!ing.isSelected && !ing.isBlackListed && (
                 <p className={`${!ing.isSelected && classes.inactiveSuggestion} ${classes.ingredientSuggestion}`}>
-                    <MaterialSymbol icon="no_meals" grade={20} size={20} />
+                    <NoMealsOutlinedIcon fontSize="small" />
                     {name}
                 </p>
             )}

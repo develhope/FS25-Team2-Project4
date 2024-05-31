@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
 import { useFavorite } from "./useFavorite"
 import { MaterialSymbol } from "react-material-symbols"
+
+import FavoriteIcon from "@mui/icons-material/Favorite"
+
 import { FilterChip } from "../FilterChip/FilterChip"
 import Skeleton from "@mui/material/Skeleton"
 
@@ -15,11 +18,8 @@ function RecipeCard({ title = defaultTitle, image = null, attributes, isFav = fa
         <Link to="" className={classes.recipeCard}>
             {/* topItems */}
             <div className={classes.topItems}>
-                <div
-                    onClick={(e) => handleFavState(e)}
-                    className={`${classes.favIcon}`}
-                >
-                <MaterialSymbol className={`${favState ? classes.isFav : classes.notFav}`} icon="favorite" fill size={24} grade={24} />
+                <div onClick={(e) => handleFavState(e)} className={`${classes.favIcon} ${!favState ? classes.notFav : classes.isFav }`}>
+                    <FavoriteIcon />
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {false ? (
@@ -32,7 +32,9 @@ function RecipeCard({ title = defaultTitle, image = null, attributes, isFav = fa
             {/* bottomItems */}
             <div className={classes.bottomItems}>
                 <section className={classes.chipsWrapper}>
-                    {attributes && attributes.length > 0 && attributes.map((chip, index) => <FilterChip key={index} label={chip} />)}
+                    {attributes &&
+                        attributes.length > 0 &&
+                        attributes.map((chip, index) => <FilterChip key={index} label={chip} />)}
                 </section>
                 <p className={classes.title}>{title}</p>
             </div>

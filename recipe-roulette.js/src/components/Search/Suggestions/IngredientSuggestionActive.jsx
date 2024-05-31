@@ -1,7 +1,9 @@
 import { useIngredientSearch } from "../SearchBar/useIngredientSearch"
 import { useIngredientSuggestion } from "./useIngredientSuggestion"
+
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import classes from "./IngredientSuggestions.module.scss"
-import { MaterialSymbol } from "react-material-symbols"
 
 export function IngredientSuggestionActive({ ing, prop }) {
     const { id, name, bgColor, isSelected, isBlackListed } = ing
@@ -15,7 +17,7 @@ export function IngredientSuggestionActive({ ing, prop }) {
                     className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
                     onMouseDown={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
                 >
-                    <MaterialSymbol icon="cancel" weight={400} grade={20} size={20} />
+                    <CancelOutlinedIcon fontSize="small" />
                     {name}
                 </p>
             )}
@@ -24,7 +26,7 @@ export function IngredientSuggestionActive({ ing, prop }) {
                     className={`${classes.activeSuggestion} ${classes.ingredientSuggestion}`}
                     onMouseDown={(e) => handleSuggestionClick(e, prop, ingState, setIngState)}
                 >
-                    <MaterialSymbol icon="lock_open" weight={400} grade={20} size={20} />
+                    <LockOpenOutlinedIcon fontSize="small" />
                     {name}
                 </p>
             )}

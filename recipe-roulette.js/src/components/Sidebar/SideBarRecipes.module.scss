@@ -41,6 +41,10 @@
     justify-content: space-between;
     height: $height-80;
     border-bottom: 1px solid $light-gray;
+    h2{
+      font-family: $header-text;
+      color: $dark-gray;
+    }
     .rightItems {
       display: flex;
       align-items: center;
@@ -69,19 +73,18 @@
       border-radius: $size-20;
       background-color: white;
       padding: 0 $size-16;
-      .ico {
-        padding-bottom: 4px;
-      }
     }
   }
   section {
-    padding: $size-16;
     display: flex;
     flex-direction: column;
+    padding: $size-16;
     gap: 1.5rem;
     text-align: left;
-    .preferences {
+    box-sizing: border-box;
+    padding-bottom: $size-24;
       h4 {
+        color: $dark-gray;
         margin: 0;
         margin-bottom: $size-8;
       }
@@ -90,7 +93,6 @@
         flex-direction: column;
         gap: 0.75rem;
       }
-    }
   }
 }
 
