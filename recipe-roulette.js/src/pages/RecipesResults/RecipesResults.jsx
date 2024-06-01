@@ -1,27 +1,27 @@
-import classes from "./RecipesResults.module.scss";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import classes from "./RecipesResults.module.scss"
+import RecipeCard from "../../components/RecipeCard/RecipeCard"
 /* import { useDiscoverySidebar } from "../../hooks/DiscoverySidebar/useDiscoverySidebar"; */
-import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes";
-import { useAnimate } from "../../hooks/animatePages/useAnimate";
+import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes"
+import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
 export function RecipeResults() {
-/*   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar() */
-  const { animate } = useAnimate()
+    /*   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar() */
+    const { animate } = useAnimate()
 
-  return (
-    <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} ` }>
-      <div className={classes.subHeading}>
-        <p className={classes.text}>Preparation time</p>
-        
-        <div className={classes.chipWrapper}>
-          <FilterChipRecipes label="30min"/>
-          <FilterChipRecipes label="45min"/>
-          <FilterChipRecipes label="60min +"/>
-        </div>
-      </div>
+    return (
+        <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
+            <div className={classes.subHeading}>
+                <p className={classes.text}>Preparation time</p>
 
-      <div className={classes.resultsWrapper}>
-      <RecipeCard
+                <div className={classes.chipWrapper}>
+                    <FilterChipRecipes label="30min" />
+                    <FilterChipRecipes label="45min" />
+                    <FilterChipRecipes label="60min +" />
+                </div>
+            </div>
+
+            <div className={classes.resultsWrapper}>
+                <RecipeCard
                     title="Lemon and Green Pepper Salmon"
                     image="https://img.freepik.com/free-photo/delicious-mahi-mahi-fish-still-life_23-2150457374.jpg?size=626&ext=jpg%C3%B9"
                     chips={["Gluten Free", "30 min", "Fresh"]}
@@ -39,10 +39,7 @@ export function RecipeResults() {
                     chips={["Vegetarian", "45 min"]}
                     isFav={true}
                 />
-
-      </div>
-
-    </div>
-  );
+            </div>
+        </div>
+    )
 }
-
