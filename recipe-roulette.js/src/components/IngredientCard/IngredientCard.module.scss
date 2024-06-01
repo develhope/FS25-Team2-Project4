@@ -12,7 +12,7 @@
 
     padding: 0 1rem;
     padding-right: .5rem;
-    border-radius: $size-16;
+    border-radius: .5rem;
 
     transition: border-radius 0.3s ease-out;
     .leftItems {
@@ -59,6 +59,11 @@
             background-color: transparent;
         }
     }
+} :last-child {
+    border-radius: 8px 8px 16px 16px;
+} :first-child {
+    border-radius: 16px 16px 8px 8px;
+
 }
 
 .unselected {
@@ -69,7 +74,7 @@
     }
 }
 .selected {
-    outline: 2px solid $dark-gray;
+    outline: 2px solid $darkish-gray;
     outline-offset: -2px;
     transition: border-radius 0.3s ease-out;
     .leftItems {

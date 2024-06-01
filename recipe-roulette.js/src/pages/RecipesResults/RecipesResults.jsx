@@ -5,16 +5,27 @@ import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
 import recipes from "../../assets/recipes/recipes"
+import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
+import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
-export function RecipeResults() {
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
+
+
+export function RecipeResults({handleRecipesSidebarToggle}) {
     /*   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar() */
     const { animate } = useAnimate()
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
+            <section className={classes.search}>
+                <IngredientSearch isFixed={true} />
+                <IcoButton
+                    action={handleRecipesSidebarToggle}
+                    label="Filters"
+                    icon={<TuneOutlinedIcon fontSize="small" />}
+                />{" "}
+            </section>
             <div className={classes.subHeading}>
-                <p className={classes.text}>Preparation time</p>
-
                 <div className={classes.chipWrapper}>
                     <FilterChipRecipes label="All" />
                     <FilterChipRecipes label="30m" />

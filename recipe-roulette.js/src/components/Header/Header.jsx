@@ -6,7 +6,7 @@ import { Button } from "../Buttons/Button/Button"
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import WavingHandRoundedIcon from '@mui/icons-material/WavingHandRounded';
+import WavingHandRoundedIcon from "@mui/icons-material/WavingHandRounded"
 export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
     const location = useLocation()
@@ -17,7 +17,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 setTitle("Welcome!")
                 break
             case "/discovery":
-                setTitle("Discovery")
+                setTitle("RecipeRoulette")
                 break
             case "/favorited":
                 setTitle("Favorited")
@@ -35,19 +35,23 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
         location.pathname !== "/login" &&
         location.pathname !== "/signup" && (
             <header>
-                <div className={classes.leftItems}>
+                <h1>{title}</h1>
+
+                <div className={classes.rightItems}>
+                    {/* {location.pathname === "/favorited" && (
+                        <Button action={handleSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
+                    )}
+                    {location.pathname === "/recipes-results" && (
+                        <Button
+                            action={handleRecipesSidebarToggle}
+                            label="Filters"
+                            icon={<TuneOutlinedIcon fontSize="small" />}
+                        />
+                    )} */}
                     <div className={classes.menu}>
                         {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : <WavingHandRoundedIcon />}
                     </div>
-                    <h1>{title}</h1>
                 </div>
-
-                {location.pathname === "/favorited" && (
-                    <Button action={handleSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
-                )}
-                {location.pathname === "/recipes-results" && (
-                    <Button action={handleRecipesSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
-                )}
             </header>
         )
     )

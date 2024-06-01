@@ -46,9 +46,9 @@ function App() {
                     <Routes>
                         <Route path="/" element={<DiscoveryPreview />} />
                         <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
-                        <Route path="/favorited" element={<Favorited />} />
+                        <Route path="/favorited" element={<Favorited handleRecipesSidebarToggle={toggleSidebarRecipes}/>} />
                         <Route path="/settings" element={<Settings />} />
-                        <Route path="/recipes-results" element={<RecipeResults />}>
+                        <Route path="/recipes-results" element={<RecipeResults handleRecipesSidebarToggle={toggleSidebarRecipes}/>}>
                             <Route path="./:recipeName" element="RecipePage" />
                         </Route>
 

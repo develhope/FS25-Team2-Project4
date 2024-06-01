@@ -7,6 +7,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
 import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
 
 import classes from "./SideBarRecipes.module.scss"
+import { Button } from "../Buttons/Button/Button"
 
 export function SideBarRecipes({ state, toggleSidebarRecipes }) {
     const { handleSelected } = useFilterChipRecipes()
@@ -25,10 +26,14 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                 <header>
                     <h2>Filters</h2>
                     <div className={classes.rightItems}>
-                        <button className={classes.deselectAllButton} onClick={handleSelected}>
-                            <RotateLeftOutlinedIcon className={classes.ico} fontSize="small" />
-                            Reset all
-                        </button>
+                        <Button
+                            label="Reset All"
+                            action={handleSelected}
+                            icon={<RotateLeftOutlinedIcon className={classes.ico} fontSize="small" />}
+                        />
+                        <div onClick={toggleSidebarRecipes} className={classes.closeIco}>
+                            <CloseOutlinedIcon />
+                        </div>
                     </div>
                 </header>
 
