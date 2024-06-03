@@ -1,21 +1,28 @@
-import { MaterialSymbol } from "react-material-symbols"
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
 
-import classes from "./Discovery.module.scss"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { Button } from "../../components/Buttons/Button/Button"
 import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import { useButtonState } from "../../hooks/ButtonState/useButtonState"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
+
+import TuneIcon from "@mui/icons-material/Tune"
+import LockResetIcon from "@mui/icons-material/LockReset"
+import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined"
+import AddIcon from "@mui/icons-material/Add"
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
+
+import classes from "./Discovery.module.scss"
 
 export function Discovery({ handleSidebarToggle }) {
     const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll } = useManageIngredients()
     const { animate } = useAnimate()
     const { isActive, setIsActive } = useButtonState(true)
+    const [animateButton, seAnimateButton] = useState(false)
 
     const setButtonState = useMemo(() => {
         if (displayedIng.length === 8) {
@@ -30,8 +37,8 @@ export function Discovery({ handleSidebarToggle }) {
             <div className={classes.contentWrapper}>
                 <div className={classes.globalActions}>
                     <IngredientSearch isFixed={true} searchCriteria="isSelected" />
-                    <IcoButton action={() => handleSidebarToggle()} icon="tune" size={20} />
-                    <IcoButton action={() => handleDeselectAll("isSelected")} icon="lock_reset" size={22} />
+                    <IcoButton action={() => handleSidebarToggle()} icon={<TuneIcon fontSize={"small"} />} />
+                    <IcoButton action={() => handleDeselectAll("isSelected")} icon={<LockResetIcon fontSize={"medium"} />} />
                 </div>
                 <div className={classes.ingredientsWrapper}>
                     {displayedIng.length > 0 &&
@@ -40,23 +47,29 @@ export function Discovery({ handleSidebarToggle }) {
                         })}
                 </div>
             </div>
-
             <div className={classes.bottomButtons}>
                 <Button
                     width={"fill"}
                     active={isActive}
                     action={() => handleIngIncrement()}
                     label="Ingredient"
-                    icon="add"
+                    icon={<AddIcon fontSize="small" />}
                     size={18}
                     iconWheight={600}
                 />
-                <button className={classes.cycleButton} onClick={() => shuffleIng()}>
+                <button
+                    className={`${classes.cycleButton} ${animateButton && classes.cycleButtonAnimation}`}
+                    onClick={() => {
+                        seAnimateButton((b) => !b)
+                        shuffleIng()
+                    }}
+                >
                     {" "}
-                    <MaterialSymbol className={classes.ico} icon="cycle" weight={600} size={18} grade={18} />
+                    <LoopOutlinedIcon fontSize="medium" />
                 </button>
 
                 <Button
+                    link={"recipes-results"}
                     width={"fill"}
                     active={true}
                     action={() =>
@@ -66,7 +79,7 @@ export function Discovery({ handleSidebarToggle }) {
                         )
                     }
                     label="Recipes"
-                    icon="frame_inspect"
+                    icon={<ManageSearchOutlinedIcon fontSize="small" />}
                     size={20}
                 />
             </div>

@@ -1,6 +1,14 @@
+import recipes from "../../assets/recipes/recipes"
+
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
+import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
+import { Button } from "../../components/Buttons/Button/Button"
+import { useRecipesResultsSideBar } from "../../hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
+
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
 import classes from "./Favorite.module.scss"
+import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 //esempio di oggetto ricetta
 // const recipe = {
@@ -15,31 +23,35 @@ import classes from "./Favorite.module.scss"
 //         paragraph2,
 //     }
 // }
-
-export function Favorited() {
+export function Favorited({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
+
     return (
         <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
-            <section></section>
+            <section className={classes.search}>
+                <IngredientSearch isFixed={true} />
+                <IcoButton
+                    action={handleRecipesSidebarToggle}
+                    label="Filters"
+                    icon={<TuneOutlinedIcon fontSize="small" />}
+                />{" "}
+            </section>
             <section className={classes.recipesWrapper}>
-                <RecipeCard
-                    title="Lemon and Green Pepper Salmon"
-                    image="https://img.freepik.com/free-photo/delicious-mahi-mahi-fish-still-life_23-2150457374.jpg?size=626&ext=jpg%C3%B9"
-                    chips={["Gluten Free", "30 min", "Fresh"]}
-                    isFav={true}
-                />
-                <RecipeCard
-                    title="Gyoza Dumplings"
-                    image="https://img.freepik.com/free-photo/flat-lay-japanese-dumplings-assortment_23-2148809862.jpg?t=st=1716615398~exp=1716618998~hmac=e433b90bd901df6cedcf882fc2e1212ab5fd6010d88534dfe815fc22b8da4a7d&w=740"
-                    chips={["Vegan", "45 min", "Light"]}
-                    isFav={true}
-                />
-                <RecipeCard
-                    title="Chocolate and blueberry pancakes"
-                    image="https://img.freepik.com/free-photo/front-view-sweet-pancakes-tower-arrangement_23-2148654085.jpg?t=st=1716615037~exp=1716618637~hmac=dbe8de11f0add1e852353069591021ccdeb9a8b61ae358f89177244cdccac430&w=740"
-                    chips={["Vegetarian", "45 min"]}
-                    isFav={true}
-                />
+                {recipes &&
+                    recipes.length > 0 &&
+                    recipes.map((result) => {
+                        return (
+                            <RecipeCard
+                                key={result.id}
+                                title={result.title}
+                                image={result.image}
+                                attributes={result.attributes}
+                                isFav={result.isFavorited}
+                                preparation={result.preparation}
+                                ingredients={result.ingredients}
+                            />
+                        )
+                    })}
             </section>
         </div>
     )

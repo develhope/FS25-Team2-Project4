@@ -17,6 +17,7 @@ import { SnackbarProvider } from "./components/Snackbar/useSnackbar"
 import { SideBarRecipes } from "./components/Sidebar/SideBarRecipes"
 import { useRecipesResultsSideBar } from "./hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
 import { AuthProvider } from "./components/authentication/AuthContext"
+import { Recipe } from "./pages/Recipe/Recipe"
 /* import { useEffect } from "react"
 import { useNavigate } from "react-router-dom" */
 
@@ -41,17 +42,15 @@ function App() {
 
                     <Header
                         handleMenuToggle={handleMenuToggle}
-                        handleSidebarToggle={handleSidebarToggle}
-                        handleRecipesSidebarToggle={toggleSidebarRecipes}
                     />
 
                     <Routes>
                         <Route path="/" element={<DiscoveryPreview />} />
                         <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
-                        <Route path="/favorited" element={<Favorited />} />
+                        <Route path="/favorited" element={<Favorited handleRecipesSidebarToggle={toggleSidebarRecipes}/>} />
                         <Route path="/settings" element={<Settings />} />
-                        <Route path="/recipes-results" element={<RecipeResults />}>
-                            <Route path="./:recipeName" element="RecipePage" />
+                        <Route path="/recipes-results" element={<RecipeResults handleRecipesSidebarToggle={toggleSidebarRecipes}/>}>
+                            <Route path={`./:${"recipe.title"}`} element={<Recipe/>} />
                         </Route>
 
                         <Route path="/login" element={<Login />} />

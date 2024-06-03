@@ -32,6 +32,7 @@
             align-items: center;
             height: 4rem;
             width: 4rem;
+            background-color: transparent;
         }
     }
     .bottomItems {
@@ -45,7 +46,7 @@
         letter-spacing: 0.025rem;
         font-size: $text-size-16;
         line-height: 120%;
-        padding: .75rem;
+        padding: 0.75rem;
         padding-top: $size-16;
         .chipsWrapper {
             display: flex;
@@ -55,41 +56,130 @@
         .title {
             margin: 0;
             padding: 0;
-            padding-left: .25rem;
+            padding-left: 0.25rem;
+            font-size: $size-20;
+            color: $dark-gray;
+            font-family: $font-title;
         }
     }
-    & :active {
-        background-color: $lighter-gray;
-    }
 }
-
+.reciperCard:active {
+    background-color: $lighter-gray;
+}
 .recipeCard:hover {
-    box-shadow: 0px 8px 8px $main-color;
-    outline: 1px solid $main-color
+    box-shadow: 0px 0px 16px rgba($color: $dark-gray, $alpha: 0.25);
 }
 
 /* stato icona favorite */
 .notFav {
-    font-variation-settings:
-        "FILL" 1,
-        "wght" 400,
-        "GRAD" 0,
-        "opsz" 24;
     color: white;
-    transition:
-        scale,
-        0.3s ease-in-out;
+    scale: 1;
+    transition: scale 0.3s ease-in-out;
 }
 .isFav {
-    font-variation-settings:
-        "FILL" 1,
-        "wght" 400,
-        "GRAD" 0,
-        "opsz" 24;
     color: #fa4d56;
     scale: 1.25;
-    transition:
-        scale,
-        0.3s ease-in-out;
+    transition: scale 0.3s ease-in-out;
 }
 
+/* --------------------------------------------------------------- */
+.recipeCardExpanded {
+    outline: none;
+    .bottomItems {
+        padding: 0;
+        padding-top: 1rem;
+    }
+    img {
+        border-radius: 1rem;
+    }
+    .topItems {
+        outline: none;
+    }
+    overflow: visible;
+}
+.recipeCardExpanded:hover {
+    box-shadow: none;
+}
+.recipeCardExpanded:active {
+    background-color: white;
+}
+
+.recipeCard .ingredientsHeader {
+    display: flex;
+    width: 100%;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.recipeCard .ingredientsHeader h4 {
+    font-size: $size-16;
+}
+.recipeCard .ingredients {
+    font-family: $header-text;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    outline: 1px solid $light-gray;
+}
+.recipeCard .ingredients > ul {
+    list-style: initial;
+    padding: 0 1.25rem;
+    padding-bottom: 1rem;
+}
+
+.recipeCard .ingredients > ul > li {
+    padding-bottom: 0.5rem;
+}
+.recipeCard .ingredientsCollapsed {
+    max-height: 3.5rem;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    .ico {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+}
+.recipeCard .ingredientsExpanded {
+    overflow: hidden;
+    max-height: 40rem;
+    transition: max-height 0.8s ease;
+    .ico {
+        transform: rotate(0);
+        transition: transform 0.3s ease;
+    }
+}
+
+.recipeCard .preparation h2 {
+    font-size: $text-size-32;
+    color: $dark-gray;
+    margin: 12px 0;
+    margin-top: 24px;
+}
+.recipeCard .preparation ol {
+    font-family: $font-text;
+    font-weight: 400;
+    padding-left: 1.25rem;
+    color: $dark-gray;
+    margin: 0;
+}
+.recipeCard .preparation ol > li {
+    font-family: $font-text;
+    font-weight: 600;
+}
+.recipeCard .preparation ul > li {
+    font-weight: 400;
+}
+
+.recipeCard .preparation .step {
+    margin-bottom: 1rem;
+}
+.recipeCard .preparation .step ul {
+    padding-left: 0.25rem;
+    list-style: initial;
+}
+.recipeCard .preparation .step .detail {
+    line-height: 155%;
+    margin: 0;
+    padding: 0;
+    margin-top: 0.5rem;
+}

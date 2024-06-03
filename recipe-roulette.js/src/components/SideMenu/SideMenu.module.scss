@@ -44,14 +44,16 @@
         h4 {
             margin: 0;
             color: $dark-gray;
-            font-family: $font-text;
+            font-family: $header-text;
             letter-spacing: 0.05rem;
+            font-size: $text-size-16;
         }
         .closeIco {
             color: $dark-gray;
             display: flex;
             box-sizing: border-box;
             align-items: center;
+            justify-content: center;
             background-color: transparent;
             border: none;
             height: 2rem;
@@ -64,7 +66,7 @@
         flex-direction: column;
         .link {
             width: 75%;
-            font-family: $font-text;
+            font-family: $header-text;
             border-radius: 2rem;
             font-size: $size-16;
             font-weight: 500;
@@ -78,7 +80,6 @@
             letter-spacing: 0.025rem;
             transition: width 0.4s ease;
         }
-
         .activeLink {
             background-color: $second-color;
             transition: width 0.4s ease;
