@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom"
-
 import { DiscoveryPreview } from "./pages/DiscoveryPreview/DiscoveryPreview"
 import { Discovery } from "./pages/Discovery/Discovery"
 import { Favorited } from "./pages/Favorited/Favorited"
