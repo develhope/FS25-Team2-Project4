@@ -24,7 +24,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                 <input
                     className={classes.header}
                     onClick={handleInputActivation}
-                    placeholder="Add an ingredient"
+                    placeholder={`${searchCriteria === "isSelected" ? "Add an ingredient" : "Blacklist and ingredient"}`}
                     name="search"
                     type="text"
                     onBlur={(e) =>

@@ -38,18 +38,8 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 <h1>{title}</h1>
 
                 <div className={classes.rightItems}>
-                    {/* {location.pathname === "/favorited" && (
-                        <Button action={handleSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
-                    )}
-                    {location.pathname === "/recipes-results" && (
-                        <Button
-                            action={handleRecipesSidebarToggle}
-                            label="Filters"
-                            icon={<TuneOutlinedIcon fontSize="small" />}
-                        />
-                    )} */}
                     <div className={classes.menu}>
-                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : <WavingHandRoundedIcon />}
+                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null }
                     </div>
                 </div>
             </header>

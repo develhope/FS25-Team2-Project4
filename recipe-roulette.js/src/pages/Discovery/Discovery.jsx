@@ -61,7 +61,7 @@ export function Discovery({ handleSidebarToggle }) {
                 <button
                     className={`${classes.cycleButton} ${animateButton && classes.cycleButtonAnimation}`}
                     onClick={() => {
-                        seAnimateButton((b => !b))
+                        seAnimateButton((b) => !b)
                         shuffleIng()
                     }}
                 >
@@ -70,6 +70,7 @@ export function Discovery({ handleSidebarToggle }) {
                 </button>
 
                 <Button
+                    link={"recipes-results"}
                     width={"fill"}
                     active={true}
                     action={() =>

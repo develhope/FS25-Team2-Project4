@@ -73,8 +73,8 @@ function RecipeCard({
                         </div>
                         <ul>
                             {ingredients.length > 0 &&
-                                ingredients.map((ingredient) => {
-                                    return <li>{ingredient}</li>
+                                ingredients.map((ingredient, index) => {
+                                    return <li key={index}>{ingredient}</li>
                                 })}
                         </ul>
                     </ul>
@@ -83,15 +83,19 @@ function RecipeCard({
                         <h2>{title}</h2>
                         {preparation.length > 0 && (
                             <ol>
-                                {preparation.map((steps) => {
+                                {preparation.map((steps, index) => {
                                     return (
-                                        <li className={classes.step}>
+                                        <li key={index} className={classes.step}>
                                             <ul>
                                                 {steps[0]}
                                                 {steps.length > 0 &&
                                                     steps.map((step, index) => {
                                                         if (index > 0) {
-                                                            return <li className={classes.detail}>{step}</li>
+                                                            return (
+                                                                <li key={index} className={classes.detail}>
+                                                                    {step}
+                                                                </li>
+                                                            )
                                                         }
                                                     })}
                                             </ul>

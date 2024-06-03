@@ -2,7 +2,7 @@ const recipes = [
     {
         id: 1,
         title: "Salmone al Limone con Piselli",
-        attributes: ["facile", "secondo piatto", "30 m"],
+        attributes: ["facile", "secondo piatto", "medio"],
         ingredients: [
             "2 filetti di salmone",
             "1 limone (succo e scorza)",
@@ -51,11 +51,13 @@ const recipes = [
         isVegan: false,
         isGlutenFree: true,
         isVegetarian: false,
+        cuisineEthnicity: "Italiana",
+        caloricApport: 450,
     },
     {
-        id: 1,
+        id: 2,
         title: "Salmone al Limone con Piselli",
-        attributes: ["facile", "secondo piatto", "30 m"],
+        attributes: ["facile", "secondo piatto", "medio"],
         ingredients: [
             "2 filetti di salmone",
             "1 limone (succo e scorza)",
@@ -104,11 +106,13 @@ const recipes = [
         isVegan: false,
         isGlutenFree: true,
         isVegetarian: false,
+        cuisineEthnicity: "Italiana",
+        caloricApport: 450,
     },
     {
-        id: 1,
+        id: 3,
         title: "Salmone al Limone con Piselli",
-        attributes: ["facile", "secondo piatto", "30 m"],
+        attributes: ["facile", "secondo piatto", "medio"],
         ingredients: [
             "2 filetti di salmone",
             "1 limone (succo e scorza)",
@@ -157,7 +161,10 @@ const recipes = [
         isVegan: false,
         isGlutenFree: true,
         isVegetarian: false,
+        cuisineEthnicity: "Italiana",
+        caloricApport: 450,
     },
+
     /*     {
         id: 2,
         title: "Lemon and Green Pepper Salmon",
