@@ -1,7 +1,10 @@
 import classes from "./IngredientCard.module.scss"
 import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
-import { useSnackbar } from "../Snackbar/useSnackbar"
+
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import CloseIcon from "@mui/icons-material/Close"
 
 export function IngredientCard({ ing }) {
     const { handleIngredientClick, handleXClick, cardState } = useIngredientCard(ing)
@@ -15,22 +18,15 @@ export function IngredientCard({ ing }) {
             className={`${classes.ingredientCard} ${cardState.isSelected ? classes.selected : classes.unselected}`}
         >
             <div className={classes.leftItems}>
-                {cardState.isSelected ? (
-                    <MaterialSymbol className={classes.checkIco} icon="lock" weight={600} size={20} grade={20} />
+                {!cardState.isSelected ? (
+                    <LockOpenIcon className={classes.checkIco} />
                 ) : (
-                    <MaterialSymbol className={classes.checkIco} icon="lock_open" weight={600} size={18} grade={18} />
+                    <LockOutlinedIcon className={classes.checkIco} />
                 )}
                 <p>{ing.name}</p>
             </div>
             <div className={classes.rightItems}>
-                <MaterialSymbol
-                    onClick={(e) => handleXClick(e)}
-                    className={classes.rightIco}
-                    icon="close"
-                    weight={500}
-                    size={22}
-                    grade={22}
-                />
+                <CloseIcon onClick={(e) => handleXClick(e)} className={classes.rightIco} />
             </div>
         </div>
     )

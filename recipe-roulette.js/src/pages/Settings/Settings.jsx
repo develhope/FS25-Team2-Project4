@@ -5,9 +5,9 @@ export function Settings() {
     const { animate } = useAnimate()
     return (
         <div className={`${classes.settingsPage} ${animate && classes.animateSettings}`}>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div className={classes.fakeContent}></div>
+            <div className={classes.fakeContent}></div>
+            <div className={classes.fakeContent}></div>
         </div>
     )
 }

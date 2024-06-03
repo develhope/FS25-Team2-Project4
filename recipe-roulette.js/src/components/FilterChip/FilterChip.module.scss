@@ -2,38 +2,50 @@
 
 .filterChip {
     display: flex;
-    width: fit-content;
+    width: max-content;
     align-items: center;
     box-sizing: border-box;
     height: 32px;
-    padding-left: 0.5rem;
-    padding-right: 1rem;
+    padding: 0 0.75rem;
     border-radius: $size-8;
     background-color: $second-color;
-    gap: $size-8;
-    transition: scale 0.3s ease-in-out;
     font-family: $font-text;
-    font-size: $text-size-14;
-    .ico {
-        padding-top: 0.125rem;
-    }
     .label {
-        padding-top: 0.125rem;
+        color: $darkish-gray;
+        font-size: $text-size-14;
 
         margin: 0;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 100%;
         vertical-align: middle;
         text-align: center;
     }
+    .ico {
+        color: $darkish-gray;
+        font-size: 18px;
+        opacity: 0;
+        width: 0;
+        transition:
+            opacity 0.2s ease-out,
+            width 0.2s ease-out;
+    }
 }
 .active {
     scale: 1;
-    transition: scale 0.3s ease-in-out;
+    padding-left: 0.5rem;
+    gap: 0.25rem;
+    .ico {
+        opacity: 1;
+        width: 18px;
+        transition:
+            opacity 0.2s ease-out,
+            width 0.2s ease-out;
+    }
 }
 
 .inactive {
     background-color: white;
     border: 1px solid $light-gray;
-    color: $medium-gray;
+    color: $dark-gray;
+    padding: 0 0.75rem;
 }

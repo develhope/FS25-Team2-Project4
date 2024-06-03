@@ -1,19 +1,27 @@
 @use "../../assets/scss/" as *;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .75rem 1rem;
-    .leftItems {
+    padding: 1rem 1.25rem;
+    padding-right: 1rem;
+    padding-bottom: 0.75rem;
+    h1 {
+        font-family: "Poppins";
+        font-size: $text-size-24;
+        line-height: 100%;
+        color: $dark-gray;
+        font-weight: 600;
+        margin: 0;
+    }
+    .rightItems {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        h1 {
-            color: $dark-gray;
-            font-weight: 600;
-            margin: 0;
-        }
+        justify-content: flex-end;
+        gap: .5rem;
+
         .menu {
             display: flex;
             height: 40px;
@@ -25,21 +33,4 @@ header {
             background-color: transparent;
         }
     }
-        .leftIcoButton {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.5rem;
-                font-size: $text-size-14;
-                width: fit-content;
-                min-width: max-content;
-                height: $height-40;
-                color: #3c3838;
-                font-weight: 600;
-                border: 1px solid #e5e0df;
-                border-radius: 2.5rem;
-                background-color: white;
-                padding: 0 1rem 0 .75rem;
-                box-sizing: border-box;
-        }
 }

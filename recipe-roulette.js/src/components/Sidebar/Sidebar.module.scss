@@ -37,11 +37,17 @@
 
     header {
         padding: 0 $size-24;
+        padding-right: $size-8 ;
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: $height-80;
         border-bottom: 1px solid $light-gray;
+        h2 {
+            color: $dark-gray;
+            font-family: $header-text;
+            font-weight: 600;
+        }
         .rightItems {
             display: flex;
             align-items: center;
@@ -51,10 +57,12 @@
             display: flex;
             box-sizing: border-box;
             align-items: center;
+            justify-content: center;
             background-color: transparent;
             border: none;
             height: 2rem;
             width: 2rem;
+            color: $darkish-gray;
         }
         .deselectAllButton {
             display: flex;
@@ -71,12 +79,9 @@
             border-radius: $size-20;
             background-color: white;
             padding: 0 $size-16;
-            .ico {
-                padding-bottom: 4px;
-            }
         }
     }
-    section {
+    .sidebarBody {
         padding: $size-16;
         display: flex;
         flex-direction: column;
@@ -94,13 +99,15 @@
         }
     }
 }
+.blackListedWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
 .blackListed {
     display: flex;
     flex-direction: column;
-    gap: $size-16;
-    h4 {
-        margin: 0;
-    }
+    gap: .75rem;
 }
 .filterChipWrapper {
     display: flex;
@@ -119,4 +126,11 @@
     transition:
         transform 0.4s ease,
         opacity 0.4s ease;
+}
+
+h4 {
+    color: $dark-gray;
+    font-family: $header-text;
+    font-size: $text-size-14;
+    margin: 0;
 }
