@@ -16,6 +16,7 @@ import { useSideMenu } from "./hooks/SideMenu/useSideMenu"
 import { SnackbarProvider } from "./components/Snackbar/useSnackbar"
 import { SideBarRecipes } from "./components/Sidebar/SideBarRecipes"
 import { useRecipesResultsSideBar } from "./hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
+import { AuthProvider } from "./components/authentication/AuthContext"
 /* import { useEffect } from "react"
 import { useNavigate } from "react-router-dom" */
 
@@ -31,6 +32,7 @@ function App() {
 
     return (
         <div className="appContainer">
+            <AuthProvider>
             <IngredientsProvider>
                 <SnackbarProvider>
                     <SideMenu handleMenuToggle={handleMenuToggle} menuState={menuState} path={path} />
@@ -58,6 +60,7 @@ function App() {
                     </Routes>
                 </SnackbarProvider>
             </IngredientsProvider>
+            </AuthProvider>
         </div>
     )
 }
