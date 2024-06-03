@@ -16,22 +16,3 @@ body {
     box-sizing: border-box;
     height: 100%;
 }
-.bottomNav {
-    background-color: white;
-    display: flex;
-    height: 5rem;
-    min-height: 5rem;
-    width: 100%;
-    box-sizing: border-box;
-    outline: 1px solid #E5E0DF;
-}
-.pageLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: inherit;
-    padding: 1rem;
-    text-align: center;
-    width: 100%;
-}
