@@ -6,7 +6,6 @@ import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSe
 import { Button } from "../../components/Buttons/Button/Button"
 import { useRecipesResultsSideBar } from "../../hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
 
-
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
 import classes from "./Favorite.module.scss"
 import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
@@ -24,14 +23,18 @@ import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 //         paragraph2,
 //     }
 // }
-export function Favorited({handleRecipesSidebarToggle}) {
+export function Favorited({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
 
     return (
         <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
             <section className={classes.search}>
-                <IngredientSearch isFixed={true}/>
-                <IcoButton action={handleRecipesSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />{" "}
+                <IngredientSearch isFixed={true} />
+                <IcoButton
+                    action={handleRecipesSidebarToggle}
+                    label="Filters"
+                    icon={<TuneOutlinedIcon fontSize="small" />}
+                />{" "}
             </section>
             <section className={classes.recipesWrapper}>
                 {recipes &&
@@ -44,6 +47,8 @@ export function Favorited({handleRecipesSidebarToggle}) {
                                 image={result.image}
                                 attributes={result.attributes}
                                 isFav={result.isFavorited}
+                                preparation={result.preparation}
+                                ingredients={result.ingredients}
                             />
                         )
                     })}

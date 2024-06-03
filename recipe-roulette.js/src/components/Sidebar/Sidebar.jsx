@@ -32,7 +32,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                         </div>
                     </div>
                 </header>
-                <section>
+                <section className={classes.sidebarBody}>
                     <div className={classes.blackListedWrapper}>
                         <h4>Add ingredeints to black list</h4>
                         <div className={classes.blackListed}>

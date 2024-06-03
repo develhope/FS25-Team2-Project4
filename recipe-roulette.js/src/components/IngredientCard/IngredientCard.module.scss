@@ -59,11 +59,12 @@
             background-color: transparent;
         }
     }
-} :last-child {
+} 
+.ingredientCard:last-child {
     border-radius: 8px 8px 16px 16px;
-} :first-child {
+} 
+.ingredientCard:first-child {
     border-radius: 16px 16px 8px 8px;
-
 }
 
 .unselected {

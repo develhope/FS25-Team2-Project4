@@ -1,18 +1,15 @@
-import classes from "./RecipesResults.module.scss"
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
-/* import { useDiscoverySidebar } from "../../hooks/DiscoverySidebar/useDiscoverySidebar"; */
 import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
-
-import recipes from "../../assets/recipes/recipes"
 import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
+import recipes from "../../assets/recipes/recipes"
+import classes from "./RecipesResults.module.scss"
 
 
 export function RecipeResults({handleRecipesSidebarToggle}) {
-    /*   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar() */
     const { animate } = useAnimate()
 
     return (
@@ -23,7 +20,7 @@ export function RecipeResults({handleRecipesSidebarToggle}) {
                     action={handleRecipesSidebarToggle}
                     label="Filters"
                     icon={<TuneOutlinedIcon fontSize="small" />}
-                />{" "}
+                />
             </section>
             <div className={classes.subHeading}>
                 <div className={classes.chipWrapper}>
@@ -45,6 +42,8 @@ export function RecipeResults({handleRecipesSidebarToggle}) {
                                 image={result.image}
                                 attributes={result.attributes}
                                 isFav={result.isFavorited}
+                                preparation={result.preparation}
+                                ingredients={result.ingredients}
                             />
                         )
                     })}

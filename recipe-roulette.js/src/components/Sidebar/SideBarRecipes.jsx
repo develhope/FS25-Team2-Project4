@@ -37,7 +37,7 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                     </div>
                 </header>
 
-                <section>
+                <section className={classes.sidebarBody}>
                     <div className={classes.preparationTime}>
                         <h4>Preparation Time</h4>
                         <div className={classes.filterChipWrapper}>

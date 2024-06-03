@@ -16,6 +16,7 @@ import { useSideMenu } from "./hooks/SideMenu/useSideMenu"
 import { SnackbarProvider } from "./components/Snackbar/useSnackbar"
 import { SideBarRecipes } from "./components/Sidebar/SideBarRecipes"
 import { useRecipesResultsSideBar } from "./hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
+import { Recipe } from "./pages/Recipe/Recipe"
 /* import { useEffect } from "react"
 import { useNavigate } from "react-router-dom" */
 
@@ -49,7 +50,7 @@ function App() {
                         <Route path="/favorited" element={<Favorited handleRecipesSidebarToggle={toggleSidebarRecipes}/>} />
                         <Route path="/settings" element={<Settings />} />
                         <Route path="/recipes-results" element={<RecipeResults handleRecipesSidebarToggle={toggleSidebarRecipes}/>}>
-                            <Route path="./:recipeName" element="RecipePage" />
+                            <Route path={`./:${"recipe.title"}`} element={<Recipe/>} />
                         </Route>
 
                         <Route path="/login" element={<Login />} />

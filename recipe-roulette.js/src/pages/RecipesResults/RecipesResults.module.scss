@@ -8,7 +8,7 @@
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 $size-16;
+    padding: 0 $size-24;
     padding-bottom: $size-24;
     font-size: $text-size-16;
     font-style: $font-text;
@@ -35,7 +35,6 @@
     .text {
         font-weight: 700;
     }
-
     .chipWrapper {
         display: flex;
         flex-wrap: wrap;
