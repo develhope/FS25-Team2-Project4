@@ -40,8 +40,6 @@ function App() {
 
                     <Header
                         handleMenuToggle={handleMenuToggle}
-                        handleSidebarToggle={handleSidebarToggle}
-                        handleRecipesSidebarToggle={toggleSidebarRecipes}
                     />
 
                     <Routes>

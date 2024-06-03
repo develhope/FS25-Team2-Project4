@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import classes from "./Button.module.scss"
 
 export function Button({ width = "fitContent", label = "label", icon = "circle", action, active = true, link = null }) {

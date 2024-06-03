@@ -1,4 +1,3 @@
-import { MaterialSymbol } from "react-material-symbols"
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
