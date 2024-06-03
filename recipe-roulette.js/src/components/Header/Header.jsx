@@ -17,7 +17,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 setTitle("Welcome!")
                 break
             case "/discovery":
-                setTitle("RecipeRoulette")
+                setTitle("Roulette")
                 break
             case "/favorited":
                 setTitle("Favorited")

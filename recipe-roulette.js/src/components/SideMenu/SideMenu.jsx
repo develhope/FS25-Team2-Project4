@@ -1,13 +1,13 @@
 import { MaterialSymbol } from "react-material-symbols"
 import { NavigationLink } from "./NavigationLink/NavigationLink"
 
-import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined"
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined"
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined"
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined"
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined"
 import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined"
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 import classes from "./SideMenu.module.scss"
 
@@ -30,9 +30,9 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                     <NavigationLink
                         path={path}
                         handleMenuToggle={handleMenuToggle}
-                        label="Discovery"
+                        label="Roulette"
                         destination="/discovery"
-                        icon={<ExploreOutlinedIcon fontSize="small" />}
+                        icon={<AutorenewIcon fontSize="small" />}
                     />
                     <NavigationLink
                         path={path}
