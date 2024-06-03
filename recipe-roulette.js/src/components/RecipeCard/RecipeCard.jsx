@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import { useFavorite } from "./useFavorite"
-import { MaterialSymbol } from "react-material-symbols"
+import { useRecipeCard } from "./useRecipeCard"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
+import ExpandLessIcon from "@mui/icons-material/ExpandLess"
 
 import { FilterChip } from "../FilterChip/FilterChip"
 import Skeleton from "@mui/material/Skeleton"
@@ -11,21 +11,44 @@ import classes from "./RecipeCard.module.scss"
 
 const defaultTitle = "Card Title"
 
-function RecipeCard({ title = defaultTitle, image = null, attributes, isFav = false }) {
-    const { handleFavState, favState } = useFavorite(isFav)
+function RecipeCard({
+    isExpanded = false,
+    title = defaultTitle,
+    images = [
+        "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC",
+    ],
+    attributes,
+    isFav = false,
+    isGlutenFree = false,
+    isVegetarian = false,
+    isVegan = false,
+    ingredients = [],
+    preparation = [],
+}) {
+    const { handleFavState, favState, expandedCard, expandedIngredients, handleCardState, handleIngWrapperState } = useRecipeCard(
+        isFav,
+        isExpanded
+    )
 
     return (
-        <Link to="" className={classes.recipeCard}>
+        <Link
+            onClick={(e) => handleCardState(e)}
+            to={`${""}`}
+            className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded}`}
+        >
             {/* topItems */}
             <div className={classes.topItems}>
-                <div onClick={(e) => handleFavState(e)} className={`${classes.favIcon} ${!favState ? classes.notFav : classes.isFav }`}>
+                <div
+                    onClick={(e) => handleFavState(e)}
+                    className={`${classes.favIcon} ${!favState ? classes.notFav : classes.isFav}`}
+                >
                     <FavoriteIcon />
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {false ? (
                     <Skeleton sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
                 ) : (
-                    <img src={image} alt="" />
+                    <img src={images[0]} alt="" />
                 )}
             </div>
 
@@ -36,8 +59,50 @@ function RecipeCard({ title = defaultTitle, image = null, attributes, isFav = fa
                         attributes.length > 0 &&
                         attributes.map((chip, index) => <FilterChip key={index} label={chip} />)}
                 </section>
-                <p className={classes.title}>{title}</p>
+                {!expandedCard && <p className={classes.title}>{title}</p>}
             </div>
+
+            {expandedCard && (
+                <div className={classes.recipeBody}>
+                    <ul
+                        className={`${classes.ingredients} ${expandedIngredients ? classes.ingredientsExpanded : classes.ingredientsCollapsed}`}
+                    >
+                        <div onClick={(e) => handleIngWrapperState(e)} className={classes.ingredientsHeader}>
+                            <h4>Ingredients</h4>
+                            <ExpandLessIcon className={classes.ico} fontSize="small" />
+                        </div>
+                        <ul>
+                            {ingredients.length > 0 &&
+                                ingredients.map((ingredient) => {
+                                    return <li>{ingredient}</li>
+                                })}
+                        </ul>
+                    </ul>
+
+                    <div className={classes.preparation}>
+                        <h2>{title}</h2>
+                        {preparation.length > 0 && (
+                            <ol>
+                                {preparation.map((steps) => {
+                                    return (
+                                        <li className={classes.step}>
+                                            <ul>
+                                                {steps[0]}
+                                                {steps.length > 0 &&
+                                                    steps.map((step, index) => {
+                                                        if (index > 0) {
+                                                            return <li className={classes.detail}>{step}</li>
+                                                        }
+                                                    })}
+                                            </ul>
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        )}
+                    </div>
+                </div>
+            )}
         </Link>
     )
 }
