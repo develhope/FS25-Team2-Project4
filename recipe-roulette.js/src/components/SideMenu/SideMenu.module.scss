@@ -64,6 +64,8 @@
         padding: 0.75rem;
         display: flex;
         flex-direction: column;
+        box-sizing: border-box;
+        width: 100%;
         .link {
             width: 75%;
             font-family: $header-text;
@@ -88,8 +90,8 @@
         }
     }
 
-    .logoutBtn{
-        display: flex;  
+    .logoutBtn {
+        display: flex;
         justify-content: center;
         padding: $size-24;
     }
@@ -107,4 +109,12 @@
     transition:
         transform 0.4s ease,
         opacity 0.4s ease;
+}
+
+.sidebar .separator {
+    width: 100%;
+    height: 1px;
+    background-color: $light-gray;
+    margin: .5rem 0;
+    box-sizing: border-box;
 }
