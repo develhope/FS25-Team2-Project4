@@ -1,5 +1,15 @@
 @use "../../assets/scss/" as *;
 
 .recipePage {
-    padding: 0 $size-24;
+    padding: 0 $size-20;
+    padding-bottom: $size-24;
+    height: 100%;
+    overflow-y: scroll;
+    transform: translateX(65%);
+    transition: transform .3s ease-in-out;
+}
+
+.animateRecipePage {
+    transform: translateX(0);
+    transition: transform .3s ease-in-out;
 }

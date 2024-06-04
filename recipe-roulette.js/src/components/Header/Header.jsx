@@ -1,14 +1,13 @@
 import { useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
-
-import classes from "./Header.module.scss"
-import { Button } from "../Buttons/Button/Button"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import WavingHandRoundedIcon from "@mui/icons-material/WavingHandRounded"
-export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
+import classes from "./Header.module.scss"
+
+export function Header({ handleMenuToggle }) {
     const [title, setTitle] = useState("/")
+    const { targetedRecipe } = useRecipesContext()
     const location = useLocation()
 
     useEffect(() => {
@@ -28,6 +27,8 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
             case "/recipes-results":
                 setTitle("Results")
                 break
+            case "/recipe":
+                setTitle(targetedRecipe.title)
         }
     }, [location.pathname])
 
@@ -39,7 +40,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
 
                 <div className={classes.rightItems}>
                     <div className={classes.menu}>
-                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null }
+                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null}
                     </div>
                 </div>
             </header>

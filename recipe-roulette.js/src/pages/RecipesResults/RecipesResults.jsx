@@ -5,22 +5,17 @@ import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSe
 import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import recipes from "../../assets/recipes/recipes"
+import recipesArray from "../../assets/recipes/recipes"
 import classes from "./RecipesResults.module.scss"
 
-
-export function RecipeResults({handleRecipesSidebarToggle}) {
+export function RecipeResults({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
             <section className={classes.search}>
                 <IngredientSearch isFixed={true} />
-                <IcoButton
-                    action={handleRecipesSidebarToggle}
-                    label="Filters"
-                    icon={<TuneOutlinedIcon fontSize="small" />}
-                />
+                <IcoButton action={handleRecipesSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
             </section>
             <div className={classes.subHeading}>
                 <div className={classes.chipWrapper}>
@@ -32,12 +27,13 @@ export function RecipeResults({handleRecipesSidebarToggle}) {
             </div>
 
             <div className={classes.resultsWrapper}>
-                {recipes &&
-                    recipes.length > 0 &&
-                    recipes.map((result) => {
+                {recipesArray &&
+                    recipesArray.length > 0 &&
+                    recipesArray.map((result) => {
                         return (
                             <RecipeCard
                                 key={result.id}
+                                recipeId={result.id}
                                 title={result.title}
                                 image={result.image}
                                 attributes={result.attributes}

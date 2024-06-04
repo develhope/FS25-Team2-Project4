@@ -1,4 +1,4 @@
-const recipes = [
+const recipesArray = [
     {
         id: 1,
         title: "Salmone al Limone con Piselli",
@@ -188,4 +188,4 @@ const recipes = [
     }, */
 ]
 
-export default recipes
+export default recipesArray

@@ -30,9 +30,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 4rem;
-            width: 4rem;
-            background-color: transparent;
+            height: 3.5rem;
+            width: 3.5rem;
         }
     }
     .bottomItems {
@@ -164,19 +163,23 @@
 }
 .recipeCard .preparation ol > li {
     font-family: $font-text;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 18px;
 }
 .recipeCard .preparation ul > li {
+    font-family: $font-text;
+    font-size: $text-size-16;
     font-weight: 400;
 }
 
 .recipeCard .preparation .step {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
-.recipeCard .preparation .step ul {
+.recipeCard .preparation .step > ul {
     padding-left: 0.25rem;
     list-style: initial;
 }
+
 .recipeCard .preparation .step .detail {
     line-height: 155%;
     margin: 0;

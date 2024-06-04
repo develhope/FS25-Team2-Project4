@@ -1,28 +1,13 @@
-import recipes from "../../assets/recipes/recipes"
+import recipesArray from "../../assets/recipes/recipes"
 
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
-import { Button } from "../../components/Buttons/Button/Button"
-import { useRecipesResultsSideBar } from "../../hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
+import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
 import classes from "./Favorite.module.scss"
-import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
-//esempio di oggetto ricetta
-// const recipe = {
-//     title,
-//     coverImage,
-//     attributes,
-//     ingredients,
-//     preparation: {
-//         image1,
-//         paragraph1,
-//         image2,
-//         paragraph2,
-//     }
-// }
 export function Favorited({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
 
@@ -37,11 +22,12 @@ export function Favorited({ handleRecipesSidebarToggle }) {
                 />{" "}
             </section>
             <section className={classes.recipesWrapper}>
-                {recipes &&
-                    recipes.length > 0 &&
-                    recipes.map((result) => {
+                {recipesArray &&
+                    recipesArray.length > 0 &&
+                    recipesArray.map((result) => {
                         return (
                             <RecipeCard
+                                recipeId={result.id}
                                 key={result.id}
                                 title={result.title}
                                 image={result.image}
@@ -49,6 +35,9 @@ export function Favorited({ handleRecipesSidebarToggle }) {
                                 isFav={result.isFavorited}
                                 preparation={result.preparation}
                                 ingredients={result.ingredients}
+                                isGlutenFree={result.isGlutenFree}
+                                isVegetarian={result.isVegetarian}
+                                isVegan={result.isVegan}
                             />
                         )
                     })}

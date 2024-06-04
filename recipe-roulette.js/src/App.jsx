@@ -17,47 +17,48 @@ import { SideBarRecipes } from "./components/Sidebar/SideBarRecipes"
 import { useRecipesResultsSideBar } from "./hooks/RecipesResultsSideBar/useRecipesResultsSideBar"
 import { AuthProvider } from "./components/authentication/AuthContext"
 import { Recipe } from "./pages/Recipe/Recipe"
-/* import { useEffect } from "react"
-import { useNavigate } from "react-router-dom" */
+import { RecipesProvider } from "./contexts/RecipesContext"
 
 function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
     const { handleMenuToggle, path, menuState } = useSideMenu()
     const { toggleSidebarRecipes, sideBarState } = useRecipesResultsSideBar()
-    /* const navigate = useNavigate() */
-    /* 
-    useEffect(() => {
-        navigate("/")
-    }, []) */
 
     return (
         <div className="appContainer">
             <AuthProvider>
-            <IngredientsProvider>
-                <SnackbarProvider>
-                    <SideMenu handleMenuToggle={handleMenuToggle} menuState={menuState} path={path} />
-                    <SideBarRecipes state={sideBarState} toggleSidebarRecipes={toggleSidebarRecipes} />
-                    <Sidebar sidebarState={sidebarState} handleSidebarToggle={handleSidebarToggle} />
+                <IngredientsProvider>
+                    <RecipesProvider>
+                        <SnackbarProvider>
+                            <SideMenu handleMenuToggle={handleMenuToggle} menuState={menuState} path={path} />
+                            <SideBarRecipes state={sideBarState} toggleSidebarRecipes={toggleSidebarRecipes} />
+                            <Sidebar sidebarState={sidebarState} handleSidebarToggle={handleSidebarToggle} />
 
-                    <Header
-                        handleMenuToggle={handleMenuToggle}
-                    />
+                            <Header handleMenuToggle={handleMenuToggle} />
 
-                    <Routes>
-                        <Route path="/" element={<DiscoveryPreview />} />
-                        <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
-                        <Route path="/favorited" element={<Favorited handleRecipesSidebarToggle={toggleSidebarRecipes}/>} />
-                        <Route path="/settings" element={<Settings />} />
-                        <Route path="/recipes-results" element={<RecipeResults handleRecipesSidebarToggle={toggleSidebarRecipes}/>}>
-                            <Route path={`./:${"recipe.title"}`} element={<Recipe/>} />
-                        </Route>
+                            <Routes>
+                                <Route path="/" element={<DiscoveryPreview />} />
+                                <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
+                                <Route
+                                    path="/favorited"
+                                    element={<Favorited handleRecipesSidebarToggle={toggleSidebarRecipes} />}
+                                />
+                                <Route path="/settings" element={<Settings />} />
+                                <Route
+                                    path="/recipes-results"
+                                    element={
+                                        <RecipeResults handleRecipesSidebarToggle={toggleSidebarRecipes} />
+                                    }
+                                />
+                                <Route path={`/recipe`} element={<Recipe />} />
 
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<Signup />} />
-                        <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
-                    </Routes>
-                </SnackbarProvider>
-            </IngredientsProvider>
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/signup" element={<Signup />} />
+                                <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
+                            </Routes>
+                        </SnackbarProvider>
+                    </RecipesProvider>
+                </IngredientsProvider>
             </AuthProvider>
         </div>
     )

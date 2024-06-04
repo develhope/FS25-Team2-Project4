@@ -12,6 +12,7 @@ import classes from "./RecipeCard.module.scss"
 const defaultTitle = "Card Title"
 
 function RecipeCard({
+    recipeId,
     isExpanded = false,
     title = defaultTitle,
     images = [
@@ -25,24 +26,20 @@ function RecipeCard({
     ingredients = [],
     preparation = [],
 }) {
-    const { handleFavState, favState, expandedCard, expandedIngredients, handleCardState, handleIngWrapperState } = useRecipeCard(
-        isFav,
-        isExpanded
-    )
+    const { handleCardState,handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
+        useRecipeCard(recipeId, isFav, isExpanded)
 
     return (
-        <Link
-            onClick={(e) => handleCardState(e)}
-            to={`${""}`}
-            className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded}`}
-        >
+        <div 
+        onClick={handleOpenRecipePage}
+        className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded}`}>
             {/* topItems */}
             <div className={classes.topItems}>
                 <div
-                    onClick={(e) => handleFavState(e)}
-                    className={`${classes.favIcon} ${!favState ? classes.notFav : classes.isFav}`}
+                    onClick={(e) => handleCardState(e)}
+                    className={`${classes.favIcon} ${!cardState.isFavorited ? classes.notFav : classes.isFav}`}
                 >
-                    <FavoriteIcon />
+                    <FavoriteIcon stroke={"#3C3838"}  strokeWidth={"1.5px"}/>
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {false ? (
@@ -55,6 +52,10 @@ function RecipeCard({
             {/* bottomItems */}
             <div className={classes.bottomItems}>
                 <section className={classes.chipsWrapper}>
+                    {isVegan && <FilterChip label={"Vegan"} />}
+                    {isVegetarian && <FilterChip label={"Vegetarian"} />}
+                    {isGlutenFree && <FilterChip label={"GlutenFree"} />}
+
                     {attributes &&
                         attributes.length > 0 &&
                         attributes.map((chip, index) => <FilterChip key={index} label={chip} />)}
@@ -80,14 +81,14 @@ function RecipeCard({
                     </ul>
 
                     <div className={classes.preparation}>
-                        <h2>{title}</h2>
+                        <h2>Preparazione</h2>
                         {preparation.length > 0 && (
                             <ol>
                                 {preparation.map((steps, index) => {
                                     return (
                                         <li key={index} className={classes.step}>
-                                            <ul>
                                                 {steps[0]}
+                                            <ul>
                                                 {steps.length > 0 &&
                                                     steps.map((step, index) => {
                                                         if (index > 0) {
@@ -107,7 +108,7 @@ function RecipeCard({
                     </div>
                 </div>
             )}
-        </Link>
+        </div>
     )
 }
 
