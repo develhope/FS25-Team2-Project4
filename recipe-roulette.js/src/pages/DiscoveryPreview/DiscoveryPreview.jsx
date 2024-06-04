@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
-import { MaterialSymbol } from "react-material-symbols"
 import classes from "./DiscoveryPreview.module.scss"
+
+import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
+import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
 
 export function DiscoveryPreview() {
     return (
@@ -314,12 +316,12 @@ export function DiscoveryPreview() {
                     Reduce food wastes and get inspired by <span>RecipeRoulette!</span>
                 </h2>
                 <Link className={classes.cta} to={"./discovery"}>
-                    <MaterialSymbol icon="cycle" size={18} grade={18} weight={600} />
+                    <LoopOutlinedIcon />
                     <p>Start Ingredients Shuffle</p>
                 </Link>
 
                 <Link className={classes.button} to={"./discovery"}>
-                    <MaterialSymbol icon="volunteer_activism" size={18} grade={18} weight={600} />
+                    <VolunteerActivismOutlinedIcon />
                     <p>Support the Developers</p>
                 </Link>
             </div>

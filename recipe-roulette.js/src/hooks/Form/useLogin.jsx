@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../Auth/useAuth";
+import { useNavigate } from "react-router";
 
 export function useLogin() {
   const [data, setData] = useState(createData());
   const [showPassword, setShowPassword] = useState(false)
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   function createData() {
     return {
@@ -53,7 +57,9 @@ export function useLogin() {
   function handleSubmit(e) {
     e.preventDefault();
     setItem(data);
+    login()
     console.log(data);
+    navigate("/")
   }
 
   function handleShowPassword () {

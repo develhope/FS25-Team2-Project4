@@ -1,10 +1,12 @@
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"
+import { useState, useEffect } from "react"
 
-import classes from "./Header.module.scss";
-import { MaterialSymbol } from "react-material-symbols";
+import classes from "./Header.module.scss"
 import { Button } from "../Buttons/Button/Button"
 
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
+import WavingHandRoundedIcon from "@mui/icons-material/WavingHandRounded"
 export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
     const location = useLocation()
@@ -15,7 +17,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 setTitle("Welcome!")
                 break
             case "/discovery":
-                setTitle("Discovery")
+                setTitle("Roulette")
                 break
             case "/favorited":
                 setTitle("Favorited")
@@ -24,34 +26,23 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 setTitle("Settings")
                 break
             case "/recipes-results":
-                    setTitle("Results")
-                    break
+                setTitle("Results")
+                break
         }
     }, [location.pathname])
-    console.log(location.pathname);
 
     return (
-        (location.pathname !== "/login" && location.pathname !== "/signup") && 
+        location.pathname !== "/login" &&
+        location.pathname !== "/signup" && (
             <header>
-                <div className={classes.leftItems}>
-                    <MaterialSymbol
-                        onClick={handleMenuToggle}
-                        className={classes.menu}
-                        icon="menu"
-                        weight={500}
-                        size={24}
-                        grade={24}
-                    />
-                    <h1>{title}</h1>
-                </div>
+                <h1>{title}</h1>
 
-                {location.pathname === "/favorited" && (
-                    <Button action={handleSidebarToggle} label="Filters" icon="tune" size={18} />
-                )}
-                {location.pathname === "/recipes-results" && (
-                    <Button action={handleRecipesSidebarToggle} label="Filters" icon="tune" size={18} />
-                )}
+                <div className={classes.rightItems}>
+                    <div className={classes.menu}>
+                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null }
+                    </div>
+                </div>
             </header>
         )
-    
+    )
 }

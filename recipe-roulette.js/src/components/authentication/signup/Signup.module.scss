@@ -4,12 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: $size-16;
-  padding-bottom: $size-16;
+  justify-content: center;
   background-color: $main-color;
   height: 100%;
   color: $darkest-gray;
-  overflow-y: scroll;
 }
 
 .container {

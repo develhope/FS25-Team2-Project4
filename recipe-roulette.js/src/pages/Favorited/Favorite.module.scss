@@ -1,6 +1,8 @@
+@use "../../assets/scss/" as *;
+
 .favoritePage {
     transform: translateX(50%);
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 
     overflow-y: scroll;
 
@@ -9,18 +11,28 @@
     padding: 0;
     display: flex;
     flex-direction: column;
+    gap: $size-16;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 1.25rem 2rem;
+    padding: 1px $size-20 2rem;
+    border-radius: 0;
+    .search {
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        gap: $size-8;
+    }
     .recipesWrapper {
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        box-sizing: border-box;
+        gap: $size-20;
     }
 }
 
 .animateFavorite {
     transform: translateX(0);
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
