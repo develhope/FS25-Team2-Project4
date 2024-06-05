@@ -1,95 +1,105 @@
 @use "../../../assets/scss/" as *;
 
 .pageBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: $main-color;
-  height: 100%;
-  color: $darkest-gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $main-color;
+    height: 100%;
+    width: 100%;
+    color: $darkest-gray;
+    padding: 0 $size-24;
+    overflow-y: scroll;
+    box-sizing: border-box;
 }
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr;
-  place-items: center;
-  background-color: $accent-color;
-  box-sizing: border-box;
-  border-radius: $size-24;
-  width: $width-320;
-  height: fit-content;
-  font-size: $text-size-14;
+    display: flex;
+    flex-direction: column;
+    background-color: $accent-color;
+    box-sizing: border-box;
+    border-radius: $size-16;
+    width: 100%;
+    font-size: $text-size-14;
 }
 
 .title {
-  place-self: center;
-  text-align: start;
-  box-sizing: border-box;
-  width: 100%;
-  font-size: $text-size-20;
-  padding: 1.5rem;
-  padding-bottom: 1rem;
-  h1{
-    margin: 0;
-  }
+    box-sizing: border-box;
+    width: 100%;
+    font-size: $text-size-20;
+    padding: 1.5rem;
+    padding-bottom: 0;
+    h1 {
+        margin: 0;
+    }
 }
 
 .formBox {
-  display: grid;
-  width: 100%;
-  padding: 0 1.5rem;
-  padding-bottom: 1.5rem;
-  box-sizing: border-box;
-  gap: 1rem;
-
-
-  .inputBox {
-    display: grid;
-    place-self: start;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    padding: 0 1.5rem;
+    padding-bottom: 1.5rem;
+    box-sizing: border-box;
+    gap: 1rem;
 
-    input {
-      border-radius: $size-24;
-      border: 1px ridge $light-gray;
-      height: $height-40;
-      box-sizing: border-box;
-      padding-left: $size-16;
+    .inputBox {
+        display: flex;
+        flex-direction: column;
+        place-self: start;
+        width: 100%;
+
+        input {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            width: 100%;
+            border-radius: $size-24;
+            border: 1px ridge $light-gray;
+            height: 3rem;
+            box-sizing: border-box;
+            padding-left: $size-16;
+            font-size: $text-size-16;
+            font-family: $header-text;
+        }
+        ::placeholder {
+          font-size: $text-size-16;
+          color: $medium-light-gray;
+        }
+
+        label {
+            font-family: $font-text;
+            display: block;
+            padding-top: .75rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0.25rem;
+            font-size: $text-size-16;
+            font-family: $header-text;
+            font-weight: 500;
+            color: $dark-gray;
+        }
+
+        .checkLabel {
+            font-size: $text-size-14;
+            display: flex;
+            align-items: center;
+            gap: 0.2em;
+            padding-bottom: 0;
+            span {
+                text-decoration: underline;
+            }
+            input {
+                height: fit-content;
+                width: fit-content;
+            }
+        }
     }
+}
 
-    ::placeholder {
-      font-size: $text-size-12;
-      color: $medium-light-gray;
-    }
-
-    label {
-      display: block;
-      padding: .25rem;
-      padding-top: .5rem;
-      font-size: $text-size-16;
-    }
-
-    .checkLabel {
-      font-size: $text-size-14;
-      display: flex;
-      align-items: center;
-      gap: 0.2em;
-      span {
-        text-decoration: underline;
-        color: blue;
-      }
-    }
-  }
-
-  .signupBtn {
-    place-self: center;
-    height: $height-40;
+.buttonsWrapper {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    border-radius: $size-24;
-    background-color: $main-color;
-    color: $darkest-gray;
-    border: none;
-    font-weight: 600;
-    text-align: center;
-  }
+    gap: 0.75rem;
 }

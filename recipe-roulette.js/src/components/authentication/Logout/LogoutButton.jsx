@@ -8,8 +8,6 @@ export function LogoutButton () {
     const navigate = useNavigate()
 
     function handleLogout () {
-        window.localStorage.removeItem(`username`)
-        window.localStorage.removeItem(`password`)
         logout()
         navigate("./")
     }

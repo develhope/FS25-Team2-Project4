@@ -1,12 +1,23 @@
 @use "../../assets/scss/" as *;
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Poetsen+One&display=swap");
 
+
 .meriendaBold {
-    font-size: $text-size-32;
+    width: 100%;
+    text-align: center;
+    font-size: $text-size-24;
     margin: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-family: $font-logo;
     font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
+    font-weight: 600;
+}
+.span {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: $text-size-32;
+    padding: 0.5rem 1rem;
+    background-color: $second-color;
+    border-radius: 1rem;
 }
