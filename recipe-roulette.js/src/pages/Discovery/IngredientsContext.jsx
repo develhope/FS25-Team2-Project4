@@ -14,8 +14,29 @@ export const IngredientsProvider = ({ children }) => {
     const location = useLocation()
 
     useEffect(() => {
-        generateIngredients()
+        try {
+            const sessionIng = JSON.parse(window.sessionStorage.getItem("displayedIng", displayedIng))
+            if (sessionIng && sessionIng.length > 0) {
+                setDisplayedIng(sessionIng)
+            } else {
+                generateIngredients()
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }, [])
+
+    useEffect(() => {
+        try {
+            if (displayedIng.length > 0) {
+                console.log("session storage updated")
+                const jsonDisplayedIngs = JSON.stringify(displayedIng)
+                window.sessionStorage.setItem("displayedIng", jsonDisplayedIngs)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }, [displayedIng])
 
     useEffect(() => {
         if (filteredIng) {
