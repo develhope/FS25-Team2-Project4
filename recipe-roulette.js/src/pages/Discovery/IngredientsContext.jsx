@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext, useContext } from "react"
-import { useLocation } from "react-router-dom"
 import ingredientsArray from "../../assets/ingredientsArray"
 
 const IngredientsContext = createContext()
@@ -11,7 +10,6 @@ export const IngredientsProvider = ({ children }) => {
     const [refresh, setRefresh] = useState(false)
     const [filter, setFilter] = useState({ isVegetarian: false, isGlutenFree: false, isVegan: false })
     const [filteredIng, setFilteredIng] = useState(ing)
-    const location = useLocation()
 
     useEffect(() => {
         try {
@@ -43,23 +41,22 @@ export const IngredientsProvider = ({ children }) => {
             setFilteredIng(() => {
                 let newData = ing
                 if (filter.isGlutenFree) {
-                    newData = ing.filter((item) => item.isGlutenFree)
+                    newData = newData.filter((item) => item.isGlutenFree)
                 }
                 if (filter.isVegetarian) {
-                    newData = ing.filter((item) => item.isVegetarian)
+                    newData = newData.filter((item) => item.isVegetarian)
                 }
                 if (filter.isVegan) {
-                    newData = ing.filter((item) => item.isVegan)
+                    newData = newData.filter((item) => item.isVegan)
                 }
                 return newData
             })
         }
     }, [filter, displayedIng, ing])
 
-    const toggleFilter = (prop, setState) => {
+    const toggleFilter = (prop) => {
         const newState = !filter[prop]
         setFilter((prevData) => ({ ...prevData, [prop]: newState }))
-        setState(newState)
     }
 
     const handleIngUpdate = (prop, cardState, setCardState) => {

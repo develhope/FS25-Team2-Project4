@@ -1,4 +1,3 @@
-import { MaterialSymbol } from "react-material-symbols"
 import { Switch } from "../Switch/Switch"
 import { FilterChipRecipes } from "../FilterChip/FilterChipRecipes"
 import { useFilterChipRecipes } from "../FilterChip/useFilterChipRecipes"
@@ -8,9 +7,11 @@ import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
 
 import classes from "./SideBarRecipes.module.scss"
 import { Button } from "../Buttons/Button/Button"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
 export function SideBarRecipes({ state, toggleSidebarRecipes }) {
     const { handleSelected } = useFilterChipRecipes()
+    const { toggleRecipeFilter, recipeFilter } = useRecipesContext()
 
     function handleSidebarClick(e) {
         e.stopPropagation()
@@ -51,9 +52,9 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                     <div className={classes.preferences}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
-                            <Switch label={"Gluten free"} prop={"isGlutenFree"} />
-                            <Switch label={"Vegetarian"} prop={"isVegetarian"} />
-                            <Switch label={"Vegan"} prop={"isVegan"} />
+                            <Switch action={toggleRecipeFilter} state={recipeFilter.isGlutenFree} filterWhat="recipes" label={"Gluten free"} prop={"isGlutenFree"} />
+                            <Switch action={toggleRecipeFilter} state={recipeFilter.isVegetarian} filterWhat="recipes" label={"Vegetarian"} prop={"isVegetarian"} />
+                            <Switch action={toggleRecipeFilter} state={recipeFilter.isVegan} filterWhat="recipes" label={"Vegan"} prop={"isVegan"} />
                         </div>
                     </div>
                     <div className={classes.cousineEtnicity}>

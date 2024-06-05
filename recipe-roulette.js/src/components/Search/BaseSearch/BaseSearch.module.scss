@@ -1,0 +1,22 @@
+@use "../../../assets/scss/" as *;
+
+.baseSearch {
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    input {
+        height: 100%;
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid $light-gray;
+        border-radius: 2rem;
+        padding: 0 1rem;
+        font-style: $font-text;
+        font-size: $size-16;
+    }
+    :focus {
+        outline: none;
+        border: none;
+        background-color: $second-color;
+    }
+}

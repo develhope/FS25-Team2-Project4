@@ -10,6 +10,7 @@ import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
 
 export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
     const { handleDeselectAll, blackList } = useManageIngredients()
+    const { toggleFilter, filter } = useManageIngredients()
 
     return (
         <div>
@@ -61,9 +62,9 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                     <div className={classes.preferences}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
-                            <Switch label={"Gluten free"} prop={"isGlutenFree"} />
-                            <Switch label={"Vegetarian"} prop={"isVegetarian"} />
-                            <Switch label={"Vegan"} prop={"isVegan"} />
+                            <Switch state={filter.isGlutenFree} action={toggleFilter} label={"Gluten free"} prop={"isGlutenFree"} />
+                            <Switch state={filter.isVegetarian} action={toggleFilter} label={"Vegetarian"} prop={"isVegetarian"} />
+                            <Switch state={filter.isVegan} action={toggleFilter} label={"Vegan"} prop={"isVegan"} />
                         </div>
                     </div>
                 </section>

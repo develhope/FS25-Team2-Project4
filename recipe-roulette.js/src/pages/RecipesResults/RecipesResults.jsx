@@ -1,20 +1,23 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
-import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import recipesArray from "../../assets/recipes/recipes"
 import classes from "./RecipesResults.module.scss"
+import { BaseSearch } from "../../components/Search/BaseSearch/BaseSearch"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
 export function RecipeResults({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
+    const { filteredRecipes } = useRecipesContext()
+    console.log(filteredRecipes);
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
             <section className={classes.search}>
-                <IngredientSearch isFixed={true} />
+                {/* <IngredientSearch isFixed={true} /> */}
+                <BaseSearch data={filteredRecipes} />
                 <IcoButton action={handleRecipesSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
             </section>
             <div className={classes.subHeading}>
@@ -27,9 +30,9 @@ export function RecipeResults({ handleRecipesSidebarToggle }) {
             </div>
 
             <div className={classes.resultsWrapper}>
-                {recipesArray &&
-                    recipesArray.length > 0 &&
-                    recipesArray.map((result) => {
+                {filteredRecipes &&
+                    filteredRecipes.length > 0 &&
+                    filteredRecipes.map((result) => {
                         return (
                             <RecipeCard
                                 key={result.id}
