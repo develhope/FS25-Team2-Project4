@@ -9,7 +9,7 @@ export function Button({
     action,
     active = true,
     link = null,
-    color = "secondary"
+    style = "secondary"
 }) {
     const navigate = useNavigate()
 
@@ -22,7 +22,7 @@ export function Button({
             }}
             className={`${classes.button} ${!active && classes.disabled} 
             ${width === "fill" && classes.wideButton}
-            ${color === "primary" && classes.primaryColor}`}
+            ${style === "primary" && classes.primaryColor}`}
         >
             {icon}
             {label}

@@ -77,7 +77,7 @@ export function Signup() {
 
           <div className={classes.buttonsWrapper}>
                         <Button
-                        color="primary"
+                        style="primary"
                         width="fill"
                             type="submit"
                             label="Sign up"

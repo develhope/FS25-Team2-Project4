@@ -60,7 +60,7 @@ export function Login() {
 
                     <div className={classes.buttonsWrapper}>
                         <Button
-                            color="primary"
+                            style="primary"
                             type="submit"
                             label="Login"
                             icon={<LoginIcon fontSize="small" />}
