@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
+import { useLocation } from "react-router-dom"
 
 const RecipesContext = createContext()
 
@@ -14,10 +15,14 @@ export const RecipesProvider = ({ children }) => {
     })
     const [inputValue, setInputValue] = useState("")
     const [filteredRecipes, setFilteredRecipes] = useState(recipesArray)
+    const location = useLocation()
+
+    useEffect(() => {
+        setInputValue("")
+    }, [location.pathname])
 
     useEffect(() => {
         let filtering = recipes
-        console.log(recipeFilter)
         if (recipeFilter.isGlutenFree) {
             filtering = filtering.filter((item) => item.isGlutenFree)
         }

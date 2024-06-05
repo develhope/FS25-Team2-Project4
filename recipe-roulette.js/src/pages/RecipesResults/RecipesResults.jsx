@@ -11,7 +11,6 @@ import { useRecipesContext } from "../../contexts/RecipesContext"
 export function RecipeResults({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
     const { filteredRecipes } = useRecipesContext()
-    console.log(filteredRecipes);
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>

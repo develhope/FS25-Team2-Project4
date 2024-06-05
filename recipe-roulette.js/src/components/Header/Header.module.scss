@@ -17,6 +17,21 @@ header {
         font-weight: 700;
         margin: 0;
     }
+    .leftItems{
+        display: flex;
+        align-items: center;
+        color: $dark-gray;
+        .backIcon {
+            display: flex;
+            align-items: center;
+            height: 2rem;
+            width: 2rem;
+            svg {
+                stroke: $dark-gray;
+                stroke-width: 1;
+            }
+        }
+    }
     .rightItems {
         display: flex;
         align-items: center;

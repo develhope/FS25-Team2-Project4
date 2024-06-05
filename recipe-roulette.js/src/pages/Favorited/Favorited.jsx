@@ -1,5 +1,3 @@
-import recipesArray from "../../assets/recipes/recipes"
-
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
@@ -7,14 +5,17 @@ import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
 import classes from "./Favorite.module.scss"
+import { useRecipesContext } from "../../contexts/RecipesContext"
+import { BaseSearch } from "../../components/Search/BaseSearch/BaseSearch"
 
 export function Favorited({ handleRecipesSidebarToggle }) {
     const { animate } = useAnimate()
+    const {filteredRecipes } = useRecipesContext()
 
     return (
         <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
             <section className={classes.search}>
-                <IngredientSearch isFixed={true} />
+                <BaseSearch />
                 <IcoButton
                     action={handleRecipesSidebarToggle}
                     label="Filters"
@@ -22,9 +23,9 @@ export function Favorited({ handleRecipesSidebarToggle }) {
                 />{" "}
             </section>
             <section className={classes.recipesWrapper}>
-                {recipesArray &&
-                    recipesArray.length > 0 &&
-                    recipesArray.map((result) => {
+                {filteredRecipes &&
+                    filteredRecipes.length > 0 &&
+                    filteredRecipes.map((result) => {
                         return (
                             <RecipeCard
                                 recipeId={result.id}

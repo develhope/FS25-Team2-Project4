@@ -1,9 +1,13 @@
 @use "../../../assets/scss/" as *;
 
 .baseSearch {
+    position: inherit;
     height: 40px;
     width: 100%;
     box-sizing: border-box;
+    transition: width .3s ease;
+    transform: translateX(0);
+
     input {
         height: 100%;
         box-sizing: border-box;
@@ -19,4 +23,13 @@
         border: none;
         background-color: $second-color;
     }
+}
+
+.baseSearchActive {
+    width: 105%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width .3s ease;
+
 }
