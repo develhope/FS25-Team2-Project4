@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
-import { useLocation } from "react-router-dom"
 
 const RecipesContext = createContext()
 
@@ -14,7 +13,6 @@ export const RecipesProvider = ({ children }) => {
         cuisineEthnicity: [],
     })
     const [filteredRecipes, setFilteredRecipes] = useState([])
-    const location = useLocation()
 
     //localstorage useeffect
     useEffect(() => {
