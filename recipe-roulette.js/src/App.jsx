@@ -18,6 +18,7 @@ import { Recipe } from "./pages/Recipe/Recipe";
 import { RecipesProvider } from "./contexts/RecipesContext";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
+import { PopupLogin } from "./components/Pop-up/PopupLogin";
 
 function App() {
   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar();
@@ -74,6 +75,7 @@ function App() {
                 <Route path={`/recipe`} element={<Recipe />} />
 
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/popup" element={<PopupLogin />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
               </Routes>
