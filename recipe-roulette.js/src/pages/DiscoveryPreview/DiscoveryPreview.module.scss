@@ -12,6 +12,9 @@
 
     height: 100%;
     overflow: hidden;
+
+    transform: translateX(65%);
+    transition: transform .3s ease-in-out;
 }
 
 .discoveryPreview .mainContent {
@@ -91,4 +94,9 @@
     box-sizing: border-box;
 
     border: 1px solid #007E2B;
+}
+
+.discoveryPreviewAnimate{
+    transform: translateX(0);
+    transition: transform .3s ease-in-out;
 }

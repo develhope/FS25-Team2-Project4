@@ -1,6 +1,10 @@
 import classes from "./Signup.module.scss";
 import { Logo } from "../../Logo/Logo";
 import {useSignup} from "../../../hooks/Form/useSignup"
+import { Button } from "../../Buttons/Button/Button";
+
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import StartIcon from "@mui/icons-material/Start"
 
 export function Signup() {
 
@@ -9,8 +13,6 @@ export function Signup() {
 
   return (
     <section className={classes.pageBox}>
-      <Logo />
-
       <div className={classes.container}>
         <header className={classes.title}>
           <h1>Signup</h1>
@@ -45,7 +47,7 @@ export function Signup() {
               id="password"
               value={data.password}
               onChange={handleInput}
-              placeholder="Insert a valid password"
+              placeholder="Insert password"
               required
             />
             <label htmlFor="confirmPass">Confirm password</label>
@@ -58,7 +60,7 @@ export function Signup() {
               placeholder="Repeat password"
               required
             />
-            <p>{passError}</p>
+            {passError && <p>{passError}</p>}
 
             <label htmlFor="check" className={classes.checkLabel}>
               I Agree with<span>Terms & Conditions</span>
@@ -73,7 +75,17 @@ export function Signup() {
             </label>
           </div>
 
-          <button className={classes.signupBtn}>Sign Up</button>
+          <div className={classes.buttonsWrapper}>
+                        <Button
+                        style="primary"
+                        width="fill"
+                            type="submit"
+                            label="Sign up"
+                            icon={<EditNoteIcon fontSize="small" />}
+                            active={data.username && data.password && data.confirmPass && data.email}
+                        />
+                        <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />
+                    </div>
         </form>
       </div>
     </section>

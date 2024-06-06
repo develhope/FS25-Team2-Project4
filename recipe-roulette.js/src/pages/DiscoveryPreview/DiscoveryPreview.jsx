@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom"
 import classes from "./DiscoveryPreview.module.scss"
 
-import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
-import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
+import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined"
+import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
 export function DiscoveryPreview() {
+    const { animate } = useAnimate()
     return (
-        <div className={classes.discoveryPreview}>
+        <div className={`${classes.discoveryPreview} ${animate && classes.discoveryPreviewAnimate}`}>
             <div className={classes.mainContent}>
                 <svg width="2102" height="2975" viewBox="0 0 2102 2975" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
