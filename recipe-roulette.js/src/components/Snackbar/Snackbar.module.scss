@@ -7,8 +7,8 @@
     left: 50%;
     transform: translateX(-50%);
 
-    width: 95%;
-    padding: 1rem;
+    width: 91%;
+    padding: 2rem 1rem;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.3);
     box-sizing: border-box;
@@ -37,12 +37,12 @@
     color: $darkish-gray;
 }
 .snackbarInactive {
-    bottom: -5rem;
+    bottom: -7rem;
     transition:
         bottom 0.3s ease;
 }
 .snackbarActive {
-    bottom: 1rem;
+    bottom: 1.5rem;
     transition:
         bottom 0.3s ease;
 }

@@ -1,8 +1,8 @@
 @use "../../assets/scss" as *;
 
 .discoveryPage {
-    transform: translateX(65%);
-    transition: transform 0.3s ease-in-out;
+    scale: .8;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 
     background-color: white;
     width: 100%;
@@ -90,6 +90,6 @@
         transform 0.2s ease-in-out;
 }
 .animateDiscovery {
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }
