@@ -1,6 +1,5 @@
 import classes from "./Login.module.scss"
 import { Link } from "react-router-dom"
-import { Logo } from "../../Logo/Logo"
 import { useLogin } from "../../../hooks/Form/useLogin"
 import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn"
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn"
@@ -67,7 +66,7 @@ export function Login() {
                             active={!data.username || data.password}
                         />
                         <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />
-                        
+
                     </div>
 
                     <p>

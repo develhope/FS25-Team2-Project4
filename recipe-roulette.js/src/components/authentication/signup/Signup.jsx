@@ -1,5 +1,4 @@
 import classes from "./Signup.module.scss";
-import { Logo } from "../../Logo/Logo";
 import {useSignup} from "../../../hooks/Form/useSignup"
 import { Button } from "../../Buttons/Button/Button";
 
