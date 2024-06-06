@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom"
 const RecipesContext = createContext()
 
 export const RecipesProvider = ({ children }) => {
-    const [recipes, setRecipes] = useState(recipesArray)
+    const [recipes, setRecipes] = useState([])
     const [targetedRecipe, setTargetedRecipe] = useState()
     const [recipeFilter, setRecipeFilter] = useState({
         isVegetarian: false,
@@ -14,12 +14,44 @@ export const RecipesProvider = ({ children }) => {
         cuisineEthnicity: [],
     })
     const [inputValue, setInputValue] = useState("")
-    const [filteredRecipes, setFilteredRecipes] = useState(recipesArray)
+    const [filteredRecipes, setFilteredRecipes] = useState([])
     const location = useLocation()
 
     useEffect(() => {
         setInputValue("")
     }, [location.pathname])
+
+    //localstorage useeffect
+    useEffect(() => {
+        try {
+            const localRecipes = JSON.parse(window.localStorage.getItem("filteredRecipes"))
+            console.log("localrecipes", localRecipes)
+            console.log(localRecipes.length)
+            if (localRecipes && localRecipes.length > 0) {
+                console.log("recipes retrieved")
+                setRecipes(localRecipes)
+                setFilteredRecipes(localRecipes)
+            } else {
+                setRecipes(recipesArray)
+                setFilteredRecipes(recipesArray)
+            }
+            return
+        } catch (error) {
+            console.log(error)
+        }
+    }, [])
+
+    useEffect(() => {
+        try {
+            if (filteredRecipes && filteredRecipes.length > 0) {
+                console.log("local storage updated")
+                const jsonFilteredRecipes = JSON.stringify(filteredRecipes)
+                window.localStorage.setItem("filteredRecipes", jsonFilteredRecipes)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }, [filteredRecipes])
 
     useEffect(() => {
         let filtering = recipes
@@ -63,6 +95,7 @@ export const RecipesProvider = ({ children }) => {
         //guarda qui in caso di bug
         setTimeout(() => {
             setRecipes(updatedRecipes)
+            setFilteredRecipes(updatedRecipes)
         }, 300)
         setRecipeState((prevData) => {
             return {

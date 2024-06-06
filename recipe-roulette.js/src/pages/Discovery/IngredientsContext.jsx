@@ -13,7 +13,7 @@ export const IngredientsProvider = ({ children }) => {
 
     useEffect(() => {
         try {
-            const sessionIng = JSON.parse(window.sessionStorage.getItem("displayedIng", displayedIng))
+            const sessionIng = JSON.parse(window.sessionStorage.getItem("displayedIng"))
             if (sessionIng && sessionIng.length > 0) {
                 setDisplayedIng(sessionIng)
             } else {

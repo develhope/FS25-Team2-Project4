@@ -39,7 +39,7 @@ function RecipeCard({
                     onClick={(e) => handleCardState(e)}
                     className={`${classes.favIcon} ${!cardState.isFavorited ? classes.notFav : classes.isFav}`}
                 >
-                    <FavoriteIcon stroke={"#3C3838"}  strokeWidth={"1.5px"}/>
+                    <FavoriteIcon stroke={"#3C3838"}  strokeWidth={"1px"}/>
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {false ? (
