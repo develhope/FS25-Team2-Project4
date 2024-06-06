@@ -57,7 +57,11 @@
     }
 }
 .placeholderSearch {
-    padding-bottom:2rem;
+    padding:2rem 0;
+    justify-content: flex-start;
+    .placeholderImage{
+        padding-top: 0;
+    }
 }
 .placeholder h2 {
     color: $dark-gray;

@@ -61,9 +61,11 @@
     gap: 2rem;
     box-sizing: border-box;
     overflow: hidden;
+    padding: 1.5rem;
     .placeholderImage {
         box-sizing: border-box;
         padding: 2rem;
+        padding-top: 0;
         padding-bottom: 0;
         border-radius: 1.5rem;
         svg {

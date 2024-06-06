@@ -59,6 +59,10 @@ export function RecipeResults({ handleRecipesSidebarToggle }) {
                     </section>
                 ) : (
                     <div className={classes.placeholder}>
+                        <h2>
+                            There is <span>no recipe</span> <br />
+                            matching your search!
+                        </h2>
                         <div className={classes.placeholderImage}>
                             <svg width="587" height="660" viewBox="0 0 587 660" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clipPath="url(#clip0_289_2368)">
@@ -198,10 +202,6 @@ export function RecipeResults({ handleRecipesSidebarToggle }) {
                                 </defs>
                             </svg>
                         </div>
-                        <h2>
-                            There is <span>no recipe</span> <br />
-                            matching your search!
-                        </h2>
                     </div>
                 )}
             </div>
