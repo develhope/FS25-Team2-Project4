@@ -14,7 +14,6 @@ export function Login() {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
 
     return (
-        <section className={classes.pageBox}>
             <div className={classes.container}>
                 <header className={classes.title}>
                     <h1>Login</h1>
@@ -82,6 +81,5 @@ export function Login() {
                     <FacebookSocialBtn />
                 </div>
             </div>
-        </section>
     )
 }

@@ -11,7 +11,6 @@ export function Signup() {
 
 
   return (
-    <section className={classes.pageBox}>
       <div className={classes.container}>
         <header className={classes.title}>
           <h1>Signup</h1>
@@ -87,6 +86,5 @@ export function Signup() {
                     </div>
         </form>
       </div>
-    </section>
   );
 }
