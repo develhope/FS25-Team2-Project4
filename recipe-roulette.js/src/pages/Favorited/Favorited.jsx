@@ -62,7 +62,7 @@ export function Favorited({ handleRecipesSidebarToggle }) {
                             })}
                         </section>
                     ) : (
-                        <div className={classes.placeholder}>
+                        <div className={`${classes.placeholder} ${classes.placeholderSearch}`}>
                             <div className={classes.placeholderImage}>
                                 <svg
                                     width="587"
