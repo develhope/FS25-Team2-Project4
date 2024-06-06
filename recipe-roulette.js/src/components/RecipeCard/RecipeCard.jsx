@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useRecipeCard } from "./useRecipeCard"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
@@ -26,20 +26,25 @@ function RecipeCard({
     ingredients = [],
     preparation = [],
 }) {
-    const { handleCardState,handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
+    const { handleCardState, handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
         useRecipeCard(recipeId, isFav, isExpanded)
+    const location = useLocation()
 
     return (
-        <div 
-        onClick={handleOpenRecipePage}
-        className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded}`}>
+        <div
+            onClick={() => {
+                localStorage.setItem("prevPath", location.pathname)
+                handleOpenRecipePage()
+            }}
+            className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded}`}
+        >
             {/* topItems */}
             <div className={classes.topItems}>
                 <div
                     onClick={(e) => handleCardState(e)}
                     className={`${classes.favIcon} ${!cardState.isFavorited ? classes.notFav : classes.isFav}`}
                 >
-                    <FavoriteIcon stroke={"#3C3838"}  strokeWidth={"1.5px"}/>
+                    <FavoriteIcon stroke={"#3C3838"} strokeWidth={"1px"} />
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {false ? (
@@ -87,7 +92,7 @@ function RecipeCard({
                                 {preparation.map((steps, index) => {
                                     return (
                                         <li key={index} className={classes.step}>
-                                                {steps[0]}
+                                            {steps[0]}
                                             <ul>
                                                 {steps.length > 0 &&
                                                     steps.map((step, index) => {
