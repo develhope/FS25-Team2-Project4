@@ -26,9 +26,7 @@ export const RecipesProvider = ({ children }) => {
         try {
             const localRecipes = JSON.parse(window.localStorage.getItem("filteredRecipes"))
             console.log("localrecipes", localRecipes)
-            console.log(localRecipes.length)
             if (localRecipes && localRecipes.length > 0) {
-                console.log("recipes retrieved")
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)
             } else {
@@ -44,7 +42,6 @@ export const RecipesProvider = ({ children }) => {
     useEffect(() => {
         try {
             if (filteredRecipes && filteredRecipes.length > 0) {
-                console.log("local storage updated")
                 const jsonFilteredRecipes = JSON.stringify(filteredRecipes)
                 window.localStorage.setItem("filteredRecipes", jsonFilteredRecipes)
             }
