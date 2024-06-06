@@ -27,11 +27,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                     placeholder={`${searchCriteria === "isSelected" ? "Add an ingredient" : "Blacklist and ingredient"}`}
                     name="search"
                     type="text"
-                    onBlur={(e) =>
-                        setTimeout(() => {
-                            handleBlur(e)
-                        }, 0)
-                    }
+                    onBlur={(e) => handleBlur(e)}
                     onKeyDown={handlePressEnter}
                     onChange={handleInputChange}
                     value={inputValues.current}
@@ -44,7 +40,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
 
                 {searchState.inputActive && (
                     <div onClick={(e) => handleXClick(e)} className={`${classes.ico} ${classes.closeIco}`}>
-                        <CloseOutlinedIcon fontSize="small"/>
+                        <CloseOutlinedIcon fontSize="small" />
                     </div>
                 )}
             </div>

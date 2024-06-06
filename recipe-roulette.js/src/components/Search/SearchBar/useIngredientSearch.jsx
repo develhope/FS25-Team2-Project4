@@ -116,9 +116,9 @@ export function useIngredientSearch(isFixed, searchCriteria) {
         if (e.keyCode === 13) {
             handleInputDeactivation(searchCriteria)
             //disattiva l'input dopo aver chiamato la funzione (previene comportamenti indesiderati)
-            setTimeout(() => {
+ /*            setTimeout(() => {
                 e.target.blur()
-            }, 0)
+            }, 0) */
         }
     }
 
