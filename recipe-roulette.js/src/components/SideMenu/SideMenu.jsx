@@ -9,9 +9,22 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import { useAuth } from "../../hooks/Auth/useAuth"
 
 import classes from "./SideMenu.module.scss"
+import { Snackbar } from "../Snackbar/Snackbar"
+import { useState } from "react"
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
     const { logout, isAuthenticated } = useAuth()
+    const [showSnackbar, setShowSnackbar] = useState(false);
+
+    function handleSnackBar () {
+        if (isAuthenticated) {
+            setShowSnackbar(false)
+        } else {
+            setShowSnackbar(true)
+            console.log(`ciao`);
+        }
+    }
+
     return (
         <div>
             <div
@@ -37,8 +50,9 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                         path={path}
                         handleMenuToggle={handleMenuToggle}
                         label="Favorited"
-                        destination="/favorited"
+                        destination={isAuthenticated && "/favorited"}
                         icon={<BookmarksOutlinedIcon fontSize="small" />}
+                        action={handleSnackBar}
                     />
                     <NavigationLink
                         path={path}
@@ -68,6 +82,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                     )}
                 </section>
             </div>
+            {showSnackbar && <Snackbar/>}
         </div>
     )
 }
