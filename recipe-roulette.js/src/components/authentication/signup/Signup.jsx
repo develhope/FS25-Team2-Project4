@@ -1,5 +1,4 @@
 import classes from "./Signup.module.scss";
-import { Logo } from "../../Logo/Logo";
 import {useSignup} from "../../../hooks/Form/useSignup"
 import { Button } from "../../Buttons/Button/Button";
 
@@ -12,7 +11,6 @@ export function Signup() {
 
 
   return (
-    <section className={classes.pageBox}>
       <div className={classes.container}>
         <header className={classes.title}>
           <h1>Signup</h1>
@@ -88,6 +86,5 @@ export function Signup() {
                     </div>
         </form>
       </div>
-    </section>
   );
 }

@@ -1,19 +1,5 @@
 @use "../../../assets/scss/" as *;
 
-.pageBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: $main-color;
-    height: 100%;
-    width: 100%;
-    color: $darkest-gray;
-    padding: 0 $size-24;
-    overflow-y: scroll;
-    box-sizing: border-box;
-}
-
 .container {
     display: flex;
     flex-direction: column;

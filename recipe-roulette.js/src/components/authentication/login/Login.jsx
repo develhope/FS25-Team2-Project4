@@ -1,6 +1,5 @@
 import classes from "./Login.module.scss"
 import { Link } from "react-router-dom"
-import { Logo } from "../../Logo/Logo"
 import { useLogin } from "../../../hooks/Form/useLogin"
 import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn"
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn"
@@ -15,7 +14,6 @@ export function Login() {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
 
     return (
-        <section className={classes.pageBox}>
             <div className={classes.container}>
                 <header className={classes.title}>
                     <h1>Login</h1>
@@ -83,6 +81,5 @@ export function Login() {
                     <FacebookSocialBtn />
                 </div>
             </div>
-        </section>
     )
 }
