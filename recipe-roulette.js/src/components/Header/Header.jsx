@@ -45,7 +45,7 @@ export function Header({ handleMenuToggle }) {
                         </div>
                     ) : null}
                     {location.pathname === "/recipe" ? (
-                        <div onClick={() => navigate("/recipes-results")} className={classes.backIcon}>
+                        <div onClick={() => navigate(-1)} className={classes.backIcon}>
                             <ArrowBackIcon stroke={2} fontSize="small" />
                         </div>
                     ) : null}
