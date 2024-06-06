@@ -19,6 +19,7 @@ export const RecipesProvider = ({ children }) => {
     //localstorage useeffect
     useEffect(() => {
         try {
+            const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
             const localRecipes = JSON.parse(window.localStorage.getItem("filteredRecipes"))
             console.log("localrecipes", localRecipes)
             if (localRecipes && localRecipes.length > 0) {
@@ -28,7 +29,9 @@ export const RecipesProvider = ({ children }) => {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
             }
-            return
+            if (currentTargetedRecipe) {
+                setTargetedRecipe(currentTargetedRecipe)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -94,7 +97,14 @@ export const RecipesProvider = ({ children }) => {
     }
 
     const handleTargetedRecipe = (recipeState) => {
-        setTargetedRecipe(recipes.find((recipe) => recipe.id === recipeState.id))
+        const currentTargetedRecipe = recipes.find((recipe) => recipe.id === recipeState.id)
+        setTargetedRecipe(currentTargetedRecipe)
+        try {
+            const jsonTargetedRecipe = JSON.stringify(currentTargetedRecipe)
+            window.localStorage.setItem("targetedRecipe", jsonTargetedRecipe)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -105,6 +115,7 @@ export const RecipesProvider = ({ children }) => {
                 targetedRecipe,
                 recipeFilter,
                 setRecipes,
+                setTargetedRecipe,
                 handleRecipesUpdate,
                 handleTargetedRecipe,
                 toggleRecipeFilter,

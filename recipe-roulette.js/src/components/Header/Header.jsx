@@ -8,9 +8,11 @@ import classes from "./Header.module.scss"
 
 export function Header({ handleMenuToggle }) {
     const [title, setTitle] = useState("/")
-    const { targetedRecipe } = useRecipesContext()
+    const { targetedRecipe, setTargetedRecipe } = useRecipesContext()
     const navigate = useNavigate()
     const location = useLocation()
+
+    useEffect(() => {}, [])
 
     useEffect(() => {
         switch (location.pathname) {
@@ -30,7 +32,15 @@ export function Header({ handleMenuToggle }) {
                 setTitle("Results")
                 break
             case "/recipe":
-                setTitle(targetedRecipe.title)
+                try {
+                    const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
+                    if (currentTargetedRecipe) {
+                        setTargetedRecipe(currentTargetedRecipe)
+                        setTitle(currentTargetedRecipe.title)
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
         }
     }, [location.pathname])
 
