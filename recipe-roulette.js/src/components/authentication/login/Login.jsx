@@ -67,7 +67,7 @@ export function Login() {
                             active={!data.username || data.password}
                         />
                         <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />
-                        
+
                     </div>
 
                     <p>

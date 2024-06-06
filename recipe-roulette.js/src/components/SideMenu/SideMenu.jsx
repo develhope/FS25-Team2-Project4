@@ -18,7 +18,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
 
     function handleClickSnackBar () {
         if (!isAuthenticated) {
-            handleOpenSnackbar("Log")
+            handleOpenSnackbar("To access your favorites, you need to log in.")
         }
     }
 
