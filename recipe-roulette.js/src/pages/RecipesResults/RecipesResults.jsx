@@ -61,7 +61,7 @@ export function RecipeResults({ handleRecipesSidebarToggle }) {
                     <div className={classes.placeholder}>
                         <div className={classes.placeholderImage}>
                             <svg width="587" height="660" viewBox="0 0 587 660" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_289_2368)">
+                                <g clipPath="url(#clip0_289_2368)">
                                     <path
                                         d="M332.479 508C472.759 508 586.479 394.28 586.479 254C586.479 113.72 472.759 0 332.479 0C192.198 0 78.4786 113.72 78.4786 254C78.4786 394.28 192.198 508 332.479 508Z"
                                         fill="#CDE4C5"

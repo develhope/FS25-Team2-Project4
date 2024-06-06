@@ -21,7 +21,6 @@ export const RecipesProvider = ({ children }) => {
         try {
             const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
             const localRecipes = JSON.parse(window.localStorage.getItem("filteredRecipes"))
-            console.log("localrecipes", localRecipes)
             if (localRecipes && localRecipes.length > 0) {
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)
@@ -82,7 +81,6 @@ export const RecipesProvider = ({ children }) => {
             return recipe.id === recipeState.id ? { ...recipe, isFavorited: !recipeState.isFavorited } : recipe
         })
         const updatedRecipe = updatedRecipes.find((recipe) => recipe.id === recipeState.id)
-        console.log(updatedRecipe)
         //guarda qui in caso di bug
         setTimeout(() => {
             setRecipes(updatedRecipes)
