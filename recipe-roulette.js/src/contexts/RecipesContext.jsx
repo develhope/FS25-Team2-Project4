@@ -47,7 +47,7 @@ export const RecipesProvider = ({ children }) => {
                 return recipe.title.toUpperCase().includes(inputValue.toUpperCase())
             })
         )
-    }, [inputValue, recipeFilter])
+    }, [inputValue, recipeFilter, recipes])
 
     const toggleRecipeFilter = (prop) => {
         const newState = !recipeFilter[prop]
@@ -59,7 +59,11 @@ export const RecipesProvider = ({ children }) => {
             return recipe.id === recipeState.id ? { ...recipe, isFavorited: !recipeState.isFavorited } : recipe
         })
         const updatedRecipe = updatedRecipes.find((recipe) => recipe.id === recipeState.id)
-        setRecipes(updatedRecipes)
+        console.log(updatedRecipe)
+        //guarda qui in caso di bug
+        setTimeout(() => {
+            setRecipes(updatedRecipes)
+        }, 300)
         setRecipeState((prevData) => {
             return {
                 ...prevData,

@@ -1,8 +1,8 @@
 @use "../../assets/scss/" as *;
 
 .favoritePage {
-    transform: translateX(65%);
-    transition: transform 0.3s ease-in-out;
+    scale: .8;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 
     overflow-y: scroll;
 
@@ -13,8 +13,9 @@
     flex-direction: column;
     gap: $size-16;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    padding: 1px $size-20 2rem;
+    padding: 1px $size-20 $size-20;
     border-radius: 0;
     .search {
         position: relative;
@@ -32,7 +33,63 @@
     }
 }
 
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    gap: 1.5rem;
+    .placeholderImage {
+        border: 1px solid $light-gray;
+        background-color: $accent-color;
+        box-sizing: border-box;
+        padding: 1.5rem;
+        padding-bottom: 0;
+        border-radius: 1.5rem;
+        height: 100%;
+        img {
+            object-fit: contain;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.placeholder h2 {
+    color: $dark-gray;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    
+    font-family: $font-title;
+    font-weight: 700;
+    font-size: $size-20;
+    span {
+        background-color: #00a538;
+        border-radius: .5rem;
+        padding: 0 .5rem;
+        color: white;
+    }
+}
+.placeholder .cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    
+    text-decoration: none;
+    color: white;
+    background-color: #00a538;
+    
+    height: 120px;
+    min-height: 120px;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+}
+
 .animateFavorite {
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }

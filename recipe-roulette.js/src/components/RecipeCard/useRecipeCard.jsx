@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
-import recipesArray from "../../assets/recipes/recipes"
 import { useNavigate } from "react-router-dom"
 
 export function useRecipeCard(recipeId, isFav, isExpanded) {
@@ -18,12 +17,6 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
         e.stopPropagation()
         handleRecipesUpdate(cardState, setCardState)
     }
-
-/*     function handleShowFullDetails(e) {
-        e.stopPropagation()
-        e.preventDefault()
-        setExpandedCard((b) => !b)
-    } */
 
     function handleIngWrapperState(e) {
         e.stopPropagation()
