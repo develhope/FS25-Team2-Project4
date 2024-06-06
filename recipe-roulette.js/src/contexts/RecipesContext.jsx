@@ -13,13 +13,8 @@ export const RecipesProvider = ({ children }) => {
         isVegan: false,
         cuisineEthnicity: [],
     })
-    const [inputValue, setInputValue] = useState("")
     const [filteredRecipes, setFilteredRecipes] = useState([])
     const location = useLocation()
-
-    useEffect(() => {
-        setInputValue("")
-    }, [location.pathname])
 
     //localstorage useeffect
     useEffect(() => {
@@ -71,12 +66,8 @@ export const RecipesProvider = ({ children }) => {
                 }
             })
         }
-        setFilteredRecipes(
-            filtering.filter((recipe) => {
-                return recipe.title.toUpperCase().includes(inputValue.toUpperCase())
-            })
-        )
-    }, [inputValue, recipeFilter, recipes])
+        setFilteredRecipes(filtering)
+    }, [recipeFilter, recipes])
 
     const toggleRecipeFilter = (prop) => {
         const newState = !recipeFilter[prop]
@@ -111,10 +102,8 @@ export const RecipesProvider = ({ children }) => {
             value={{
                 recipes,
                 filteredRecipes,
-                inputValue,
                 targetedRecipe,
                 recipeFilter,
-                setInputValue,
                 setRecipes,
                 handleRecipesUpdate,
                 handleTargetedRecipe,
