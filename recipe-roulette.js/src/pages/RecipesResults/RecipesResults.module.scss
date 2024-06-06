@@ -1,8 +1,8 @@
 @use "../../assets/scss/" as *;
 
 .recipesResultsPage {
-    transform: translateX(65%);
-    transition: transform 0.3s ease-in-out;
+    scale: .8;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 
     display: flex;
     flex-direction: column;
@@ -54,6 +54,6 @@
 }
 
 .animateFavorite {
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }
