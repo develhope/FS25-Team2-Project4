@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react"
+import { useAuth } from "../../hooks/Auth/useAuth"
 
 // Creare il contesto
 const SnackbarContext = createContext()
@@ -11,8 +12,11 @@ export const SnackbarProvider = ({ children }) => {
     const [isActive, setIsActive] = useState(false)
     const [message, setMessage] = useState("")
     const [intervalId, setIntervalId] = useState(null)
+    const { isAuthenticated } = useAuth();
+    const [showBtn, setShowBtn] = useState(false);
 
     const handleOpenSnackbar = (message) => {
+        setShowBtn(false)
         setMessage(message)
         if (!isActive) {
             setIntervalId(
@@ -29,8 +33,15 @@ export const SnackbarProvider = ({ children }) => {
         setIsActive(false)
     }
 
+    function handleClickSnackBar () {
+        if (!isAuthenticated) {
+            handleOpenSnackbar("To access your favorites, you need to log in.")
+            setShowBtn(true)
+        }
+    }
+
     return (
-        <SnackbarContext.Provider value={{ isActive, message, handleCloseSnackbar, handleOpenSnackbar }}>
+        <SnackbarContext.Provider value={{ isActive, message, showBtn, handleCloseSnackbar, handleOpenSnackbar, handleClickSnackBar }}>
             {children}
         </SnackbarContext.Provider>
     )

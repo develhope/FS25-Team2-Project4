@@ -12,3 +12,12 @@
     justify-content: center;
     z-index: 1000;
 }
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $size-8;
+    width: 80%;
+}

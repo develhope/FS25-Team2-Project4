@@ -14,13 +14,8 @@ import { useSnackbar } from "../Snackbar/useSnackbar";
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
   const { logout, isAuthenticated } = useAuth();
-  const { handleOpenSnackbar } = useSnackbar();
+  const { handleClickSnackBar } = useSnackbar();
 
-    function handleClickSnackBar () {
-        if (!isAuthenticated) {
-            handleOpenSnackbar("To access your favorites, you need to log in.")
-        }
-    }
 
   return (
     <div>

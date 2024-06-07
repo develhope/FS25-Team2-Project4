@@ -1,29 +1,17 @@
-import classes from "./PopupLogin.module.scss"
-import { useState } from "react";
+import classes from "./PopupLogin.module.scss";
 import { Login } from "../authentication/login/Login";
 
-export function PopupLogin() {
-  const [showPopup, setShowPopup] = useState(false);
+export function PopupLogin({ onClose }) {
 
-  function handleShow() {
-    setShowPopup(true);
-  }
-
-  function handleClosePopup () {
-    setShowPopup(false)
+  function stopPropagation (e) {
+    e.stopPropagation()
   }
 
   return (
-  <div>
-    <div>
-        <button onClick={handleShow}>Show</button>
-        {showPopup &&
-        <div className={classes.overlay} onClick={handleClosePopup} >
-            <div className={classes.popup}>
-                <Login/>
-            </div>
-        </div>}
+    <div className={classes.overlay} onClick={onClose}>
+      <div className={classes.popup} onClick={stopPropagation}>
+        <Login />
+      </div>
     </div>
-    </div>
-        );
+  );
 }
