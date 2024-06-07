@@ -9,6 +9,7 @@
     box-sizing: border-box;
     border-radius: $size-16;
     width: 100%;
+    animation: fadeIn 0.5s ease-in-out forwards
 }
 
 .title {
@@ -104,4 +105,14 @@
     gap: 0.5rem;
     padding: 1.5rem;
     box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+         opacity: 1;
+    }
 }
