@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../hooks/Auth/useAuth"
 
 export function useRecipeCard(recipeId, isFav, isExpanded) {
     const [cardState, setCardState] = useState({
@@ -10,6 +11,7 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     const [expandedCard, setExpandedCard] = useState(isExpanded)
     const [expandedIngredients, setExpandedIngredients] = useState(true)
     const { handleRecipesUpdate, handleTargetedRecipe } = useRecipesContext()
+    const { isAuthenticated } = useAuth();
     const navigate = useNavigate()
 
     function handleCardState(e) {
@@ -25,7 +27,9 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     }
 
     function handleOpenRecipePage() {
-        navigate("/recipe")
+        if (isAuthenticated) {
+            navigate("/recipe")
+        }
         handleTargetedRecipe(cardState)
     }
 

@@ -16,7 +16,7 @@ export function Snackbar() {
             <div className={classes.leftItems}>
                 <MaterialSymbol icon="error" weight={600} size={18} grade={18} />
                 <p>{message}</p>
-                {showBtn && <Button label="Click here" action={() => setShowPopup(true)} /> }
+                {showBtn && <Button label="Log in" action={() => setShowPopup(true)} /> }
             </div>
             <div tabIndex={-1} onClick={handleCloseSnackbar} className={classes.rightItems}>
                 <MaterialSymbol className={classes.ico} icon="close" size={24} grade={24} />

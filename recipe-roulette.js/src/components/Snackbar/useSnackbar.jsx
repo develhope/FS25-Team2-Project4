@@ -33,15 +33,16 @@ export const SnackbarProvider = ({ children }) => {
         setIsActive(false)
     }
 
-    function handleClickSnackBar () {
+    function handleClickLoginSnackBar (e) {
+        e.preventDefault()
         if (!isAuthenticated) {
-            handleOpenSnackbar("To access your favorites, you need to log in.")
+            handleOpenSnackbar("To add a recipe to your favorites, you need to log in.")
             setShowBtn(true)
         }
     }
 
     return (
-        <SnackbarContext.Provider value={{ isActive, message, showBtn, handleCloseSnackbar, handleOpenSnackbar, handleClickSnackBar }}>
+        <SnackbarContext.Provider value={{ isActive, message, showBtn, handleCloseSnackbar, handleOpenSnackbar, handleClickLoginSnackBar }}>
             {children}
         </SnackbarContext.Provider>
     )

@@ -1,5 +1,4 @@
 import { NavigationLink } from "./NavigationLink/NavigationLink";
-
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
@@ -7,15 +6,10 @@ import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../../hooks/Auth/useAuth";
-
 import classes from "./SideMenu.module.scss";
-import { Snackbar } from "../Snackbar/Snackbar";
-import { useSnackbar } from "../Snackbar/useSnackbar";
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
   const { logout, isAuthenticated } = useAuth();
-  const { handleClickSnackBar } = useSnackbar();
-
 
   return (
     <div>
@@ -46,9 +40,8 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             path={path}
             handleMenuToggle={handleMenuToggle}
             label="Favorited"
-            destination={isAuthenticated && "/favorited"}
+            destination="/favorited"
             icon={<BookmarksOutlinedIcon fontSize="small" />}
-            action={handleClickSnackBar}
           />
           <NavigationLink
             path={path}
@@ -78,7 +71,6 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
           )}
         </section>
       </div>
-      <Snackbar />
     </div>
   );
 }
