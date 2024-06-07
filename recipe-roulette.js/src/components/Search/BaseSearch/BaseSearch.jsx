@@ -1,3 +1,4 @@
+import React, { useEffect, useCallback, useRef } from "react"
 import { useBaseSearch } from "./useBaseSearch"
 import CloseIcon from "@mui/icons-material/Close"
 import SearchIcon from "@mui/icons-material/Search"
@@ -8,10 +9,38 @@ import { BaseSearchSuggestion } from "./BaseSearchSuggestion"
 export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
     const { handleBlur, handlePressEnter, handleInputActivation, isFocused } = useBaseSearch(setInputValue)
 
+    const inputRef = useRef(null)
+
+    const handleBackButton = useCallback(
+        (event) => {
+            if (isFocused) {
+                event.preventDefault()
+                window.history.pushState(null, document.title, window.location.href)
+                console.log("Back button pressed, but navigation prevented due to focus on input.")
+                if (inputRef.current) {
+                    inputRef.current.blur()
+                }
+            }
+        },
+        [isFocused]
+    )
+
+    useEffect(() => {
+        if (isFocused) {
+            window.history.pushState(null, document.title, window.location.href)
+            window.addEventListener("popstate", handleBackButton)
+        }
+
+        return () => {
+            window.removeEventListener("popstate", handleBackButton)
+        }
+    }, [isFocused, handleBackButton])
+
     return (
         <div className={`${classes.baseSearch} ${isFocused && classes.baseSearchActive}`}>
             <div className={classes.searchBar}>
                 <input
+                    ref={inputRef}
                     autoComplete="off"
                     className={classes.input}
                     onKeyDown={(e) => handlePressEnter(e)}
@@ -38,16 +67,15 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
             </div>
             <div className={classes.suggestionsWrapper}>
                 {data.length > 0 ? (
-                    data.map((recipe) => {
-                        return (
-                            <BaseSearchSuggestion
-                                id={recipe.id}
-                                handleBlur={handleBlur}
-                                setInputValue={setInputValue}
-                                title={recipe.title}
-                            />
-                        )
-                    })
+                    data.map((recipe) => (
+                        <BaseSearchSuggestion
+                            key={recipe.id}
+                            id={recipe.id}
+                            handleBlur={handleBlur}
+                            setInputValue={setInputValue}
+                            title={recipe.title}
+                        />
+                    ))
                 ) : (
                     <div className={classes.placeholder}>
                         <h2>

@@ -1,9 +1,10 @@
-import classes from "./IngredientSearch.module.scss"
-import { useIngredientSearch } from "./useIngredientSearch"
-import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions"
+import React, { useEffect, useCallback, useRef } from "react";
+import classes from "./IngredientSearch.module.scss";
+import { useIngredientSearch } from "./useIngredientSearch";
+import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions";
 
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined"
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackListed" }) {
     const {
@@ -16,24 +17,49 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
         handleInputActivation,
         handleBlur,
         handleXClick,
-    } = useIngredientSearch(isFixed, searchCriteria)
+    } = useIngredientSearch(isFixed, searchCriteria);
+
+    const inputRef = useRef(null);
+
+    // Handle back button when fixedPosition is true
+    const handleBackButton = useCallback((event) => {
+        if (fixedPosition) {
+            event.preventDefault();
+            window.history.pushState(null, document.title, window.location.href);
+            console.log('Back button pressed, but navigation prevented due to fixed position.');
+            if (inputRef.current) {
+                inputRef.current.blur();
+            }
+        }
+    }, [fixedPosition]);
+
+    useEffect(() => {
+        if (fixedPosition) {
+            window.history.pushState(null, document.title, window.location.href);
+            window.addEventListener('popstate', handleBackButton);
+        }
+
+        return () => {
+            window.removeEventListener('popstate', handleBackButton);
+        };
+    }, [fixedPosition, handleBackButton]);
 
     return (
         <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>
             <div className={`${classes.searchBar} ${searchState.inputActive ? classes.inputActive : classes.inputInactive}`}>
                 <input
-                autoComplete="off"
+                    ref={inputRef}
+                    autoComplete="off"
                     className={classes.header}
                     onClick={handleInputActivation}
-                    placeholder={`${searchCriteria === "isSelected" ? "Add an ingredient" : "Blacklist and ingredient"}`}
+                    placeholder={`${searchCriteria === "isSelected" ? "Add an ingredient" : "Blacklist an ingredient"}`}
                     name="search"
                     type="text"
                     onBlur={(e) =>
                         setTimeout(() => {
-                            handleBlur(e)
+                            handleBlur(e);
                         }, 0)
                     }
-                    ontouch
                     onKeyDown={(e) => handlePressEnter(e)}
                     onChange={handleInputChange}
                     value={inputValues.current}
@@ -56,5 +82,5 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                 suggestions={suggestions}
             />
         </div>
-    )
+    );
 }
