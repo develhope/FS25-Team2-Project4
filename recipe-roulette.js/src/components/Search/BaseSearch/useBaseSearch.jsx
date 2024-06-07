@@ -12,6 +12,7 @@ export function useBaseSearch(setInputValue) {
         setIsFocused(false)
     }
     const handlePressEnter = (e) => {
+        console.log(e);
         if (e.keyCode === 13) {
             handleBlur(e)
         } else if (e.keyCode === 27) {

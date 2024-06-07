@@ -118,6 +118,8 @@
     transition: all 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .baseSearchActive .suggestionsWrapper {
-    height: 16rem;
+    height: 100svh;
     overflow-y: scroll;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
 }

@@ -37,7 +37,9 @@
 .active {
     opacity: 1;
     padding: 0.75rem;
-    height: 16rem;
+    height: 100svh;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
     transition:
         opacity 0.4s ease,
         padding 0.4s ease,

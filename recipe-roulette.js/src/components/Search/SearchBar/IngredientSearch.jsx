@@ -33,6 +33,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                             handleBlur(e)
                         }, 0)
                     }
+                    ontouch
                     onKeyDown={(e) => handlePressEnter(e)}
                     onChange={handleInputChange}
                     value={inputValues.current}
