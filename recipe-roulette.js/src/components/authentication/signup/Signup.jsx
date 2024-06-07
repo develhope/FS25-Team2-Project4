@@ -4,11 +4,11 @@ import { Button } from "../../Buttons/Button/Button";
 
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import StartIcon from "@mui/icons-material/Start"
+import { Snackbar } from "../../Snackbar/Snackbar";
 
 export function Signup() {
 
   const { data, passError, handleInput, handleSubmit} = useSignup()
-
 
   return (
       <div className={classes.container}>
@@ -80,11 +80,12 @@ export function Signup() {
                             type="submit"
                             label="Sign up"
                             icon={<EditNoteIcon fontSize="small" />}
-                            active={data.username && data.password && data.confirmPass && data.email}
+                            active={data.username && data.password && data.confirmPass && data.email && data.check}
                         />
                         <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />
                     </div>
         </form>
+        <Snackbar/>
       </div>
   );
 }

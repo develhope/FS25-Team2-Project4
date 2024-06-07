@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../components/Snackbar/useSnackbar";
 
 export function useSignup() {
   const [data, setData] = useState(createData());
   const [passError, setPassError] = useState(null);
-
+  const [isRegistered, setIsRegistered] = useState(false)
+  const {handleOpenSnackbar} = useSnackbar()
+  const navigate = useNavigate();
 
   function createData() {
     return {
@@ -34,6 +38,12 @@ export function useSignup() {
 
     if (data.password === data.confirmPass) {
       console.log(data);
+      setTimeout(() => {
+        navigate("/login")
+      }, 2000);
+      setIsRegistered(true)
+      handleOpenSnackbar("Registration successful")
+      handle
     } else {
       setPassError(`Please, confirm your password correctly`);
     }
@@ -42,6 +52,7 @@ export function useSignup() {
   return {
     data,
     passError,
+    isRegistered,
     handleInput,
     handleSubmit,
   };

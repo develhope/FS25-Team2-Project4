@@ -1,7 +1,6 @@
-import classes from "./PopupLogin.module.scss";
-import { Login } from "../authentication/login/Login";
+import classes from "./Popup.module.scss";
 
-export function PopupLogin({ onClose }) {
+export function PopupLogin({ onClose, children }) {
 
   function stopPropagation (e) {
     e.stopPropagation()
@@ -10,7 +9,7 @@ export function PopupLogin({ onClose }) {
   return (
     <div className={classes.overlay} onClick={onClose}>
       <div className={classes.popup} onClick={stopPropagation}>
-        <Login />
+        {children}
       </div>
     </div>
   );
