@@ -50,6 +50,47 @@
 .baseSearch .searchBar {
     height: 40px;
 }
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem;
+    padding-top: 3rem;
+    .placeholderImage {
+        box-sizing: border-box;
+        padding: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-radius: 1.5rem;
+        height: 100%;
+        svg {
+            object-fit: cover;
+            height: 90%;
+            width: 100%;
+        }
+    }
+}
+
+.placeholder h2 {
+    color: $dark-gray;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+
+    font-family: $font-title;
+    font-weight: 700;
+    font-size: $size-20;
+    span {
+        background-color: #DA1E28;
+        border-radius: 0.5rem;
+        padding: 0 0.5rem;
+        color: white;
+    }
+}
 .baseSearch .suggestionsWrapper {
     display: flex;
     flex-direction: column;
