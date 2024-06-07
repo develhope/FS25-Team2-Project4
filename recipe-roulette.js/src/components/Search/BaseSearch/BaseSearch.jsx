@@ -1,9 +1,7 @@
-import { useRecipesContext } from "../../../contexts/RecipesContext"
 import { useBaseSearch } from "./useBaseSearch"
 import classes from "./BaseSearch.module.scss"
 
-export function BaseSearch() {
-    const { inputValue, setInputValue } = useRecipesContext()
+export function BaseSearch({inputValue, setInputValue}) {
     const { handleBlur, handlePressEnter, handleInputActivation, isFocused } = useBaseSearch()
 
     return (
