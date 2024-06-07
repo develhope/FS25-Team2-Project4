@@ -1,46 +1,30 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
-import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
-
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
-
-import classes from "./Favorite.module.scss"
 import { useRecipesContext } from "../../contexts/RecipesContext"
-import { BaseSearch } from "../../components/Search/BaseSearch/BaseSearch"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo } from "react"
 import { Link } from "react-router-dom"
 
-export function Favorited({ handleRecipesSidebarToggle }) {
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
+import classes from "./Favorite.module.scss"
+
+export function Favorited() {
     const { animate } = useAnimate()
-    const { filteredRecipes, recipes } = useRecipesContext()
-    const [inputValue, setInputValue] = useState("")
-
-    useEffect(() => {
-        setInputValue("")
-    }, [location.pathname])
-
-    const favoriteRecipes = useMemo(() => {
-        return filteredRecipes.filter((recipe) => recipe.isFavorited)
-    }, [recipes, filteredRecipes])
+    const { searchFilteredRecipes, filteredRecipes, recipes, inputValue } = useRecipesContext()
 
     const filterFavoritecipes = useMemo(() => {
-        return favoriteRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase()))
-    }, [inputValue, favoriteRecipes])
+        return searchFilteredRecipes.filter((recipe) => recipe.isFavorited)
+    }, [inputValue, filteredRecipes, searchFilteredRecipes])
 
-    console.log(favoriteRecipes)
+    const favoriteRecipes = useMemo(() => {
+        return recipes.filter((recipe) => recipe.isFavorited)
+    }, [recipes])
+    console.log(favoriteRecipes);
+    console.log(filterFavoritecipes);
+    console.log(inputValue);
     return (
         <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
             {favoriteRecipes.length > 0 ? (
                 <>
-                    <section className={classes.search}>
-                        <BaseSearch inputValue={inputValue} setInputValue={setInputValue} />
-                        <IcoButton
-                            action={handleRecipesSidebarToggle}
-                            label="Filters"
-                            icon={<TuneOutlinedIcon fontSize="small" />}
-                        />{" "}
-                    </section>
                     {favoriteRecipes && filterFavoritecipes.length > 0 ? (
                         <section className={classes.recipesWrapper}>
                             {filterFavoritecipes.map((recipe) => {

@@ -8,8 +8,9 @@
     box-sizing: border-box;
     overflow: hidden;
     left: 0;
-    transition: height .3s ease, width .3s ease;
-
+    transition:
+        height 0.3s ease,
+        width 0.3s ease;
 }
 .searchBar {
     position: relative;
@@ -22,7 +23,9 @@
     padding: 0;
     box-sizing: border-box;
     overflow: hidden;
-    transition: height .3s ease, width .3s ease;
+    transition:
+        height 0.3s ease,
+        width 0.3s ease;
 
     input {
         position: absolute;
@@ -58,13 +61,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-bottom: .125rem;
+        padding-bottom: 0.125rem;
         top: 50%;
         transform: translateY(-48%);
     }
     .searchIco {
         right: 0.5rem;
-
     }
     .closeIco {
         right: 0.5em;
@@ -79,23 +81,23 @@
     outline: 1px solid $light-gray;
     outline-offset: -2px;
     transition: border-radius 0.3s ease;
-
 }
 
 .inputActive {
-    border-radius: $size-24 $size-24 0 0;
-    background-color: #D3E4C5;
+    height: 3rem;
+    border-radius: 0;
+    background-color: $second-color;
     transition: border-radius 0.3s ease;
 }
 .positionFixed {
-    position: absolute;
+    position: fixed;
     z-index: 11;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 102%;
-    border-radius: $size-24;
-    outline: 1px solid $light-gray;
-    outline-offset: -2px;
-    transition: height .3s ease, width .3s ease;
+    transform: translateY(0);
+    width: 100%;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: .20);
+    transition:
+        height 0.3s ease,
+        width 0.3s ease,
+        transform 0.3s ease;
 }

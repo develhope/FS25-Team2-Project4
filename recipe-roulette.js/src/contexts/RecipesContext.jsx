@@ -13,18 +13,31 @@ export const RecipesProvider = ({ children }) => {
         cuisineEthnicity: [],
     })
     const [filteredRecipes, setFilteredRecipes] = useState([])
+    const [searchFilteredRecipes, setSeatchFilteredRecipes] = useState([])
+    const [inputValue, setInputValue] = useState("")
+
+    useEffect(() => {
+        setInputValue("")
+    }, [location.pathname])
+
+    useEffect(() => {
+        console.log("fr",filteredRecipes);
+        setSeatchFilteredRecipes(filteredRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase())))
+    }, [inputValue, filteredRecipes])
 
     //localstorage useeffect
     useEffect(() => {
         try {
             const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
-            const localRecipes = JSON.parse(window.localStorage.getItem("filteredRecipes"))
+            const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
             if (localRecipes && localRecipes.length > 0) {
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)
+                setSeatchFilteredRecipes(localRecipes)
             } else {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
+                setSeatchFilteredRecipes(recipesArray)
             }
             if (currentTargetedRecipe) {
                 setTargetedRecipe(currentTargetedRecipe)
@@ -36,14 +49,14 @@ export const RecipesProvider = ({ children }) => {
 
     useEffect(() => {
         try {
-            if (filteredRecipes && filteredRecipes.length > 0) {
-                const jsonFilteredRecipes = JSON.stringify(filteredRecipes)
-                window.localStorage.setItem("filteredRecipes", jsonFilteredRecipes)
+            if (recipes && recipes.length > 0) {
+                const jsonRecipes = JSON.stringify(recipes)
+                window.localStorage.setItem("recipes", jsonRecipes)
             }
         } catch (error) {
             console.log(error)
         }
-    }, [filteredRecipes])
+    }, [recipes])
 
     useEffect(() => {
         let filtering = recipes
@@ -56,7 +69,7 @@ export const RecipesProvider = ({ children }) => {
         if (recipeFilter.isVegan) {
             filtering = filtering.filter((item) => item.isVegan)
         }
-        //da verificare  se funziona questa parte
+        /* //da verificare  se funziona questa parte
         if (recipeFilter.cuisineEthnicity.length > 0) {
             filtering = recipes.filter((item) => {
                 if (item.cuisineEthnicity.length > 0) {
@@ -65,7 +78,8 @@ export const RecipesProvider = ({ children }) => {
                     return item
                 }
             })
-        }
+        } */
+        console.log(filtering);
         setFilteredRecipes(filtering)
     }, [recipeFilter, recipes])
 
@@ -110,11 +124,14 @@ export const RecipesProvider = ({ children }) => {
                 filteredRecipes,
                 targetedRecipe,
                 recipeFilter,
+                inputValue,
+                searchFilteredRecipes,
                 setRecipes,
                 setTargetedRecipe,
                 handleRecipesUpdate,
                 handleTargetedRecipe,
                 toggleRecipeFilter,
+                setInputValue,
             }}
         >
             {children}

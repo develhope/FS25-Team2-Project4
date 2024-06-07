@@ -5,7 +5,7 @@ import { useSnackbar } from "../Snackbar/useSnackbar"
 
 export function useIngredientCard(ing) {
     //Card State
-    const {id, label, bgColor, isBlackListed, isSelected} = ing
+    const { id, label, bgColor, isBlackListed, isSelected } = ing
     const [cardState, setCardState] = useState({
         label,
         id,
@@ -16,10 +16,10 @@ export function useIngredientCard(ing) {
     const { ingState } = useIngredientSuggestion(id, label, bgColor, isSelected, isBlackListed)
 
     //Context Provider stuff
-    const { handleIngUpdate, handleIngDecrement, displayedIng } = useManageIngredients()
+    const { handleIngUpdate, handleIngDecrement, displayedIng, filteredIng } = useManageIngredients()
 
     //Snackbar
-    const {handleOpenSnackbar} = useSnackbar()
+    const { handleOpenSnackbar } = useSnackbar()
 
     useEffect(() => {
         setCardState({ label, id, bgColor, isSelected, isBlackListed })
@@ -31,7 +31,9 @@ export function useIngredientCard(ing) {
 
     function handleIngredientClick() {
         if (cardState.isBlackListed) {
-            handleOpenSnackbar("The ingredient is blacklisted")
+            handleOpenSnackbar("The ingredient is blacklisted!")
+        } else if (!filteredIng.find((ing) => ing.id === cardState.id) && cardState.isSelected === false) {
+            handleOpenSnackbar("You have filtered this type of ingredeints!")
         } else {
             handleIngUpdate("isSelected", cardState, setCardState)
         }

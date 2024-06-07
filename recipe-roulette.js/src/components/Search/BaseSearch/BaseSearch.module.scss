@@ -1,22 +1,35 @@
 @use "../../../assets/scss/" as *;
 
 .baseSearch {
-    position: inherit;
     height: 40px;
     width: 100%;
     box-sizing: border-box;
     transition: width .3s ease;
     transform: translateX(0);
+    border-radius: 2rem;
+    border: 1px solid $light-gray;
+    overflow: hidden;
+    .ico{
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2rem;
+        width: 2rem;
+        right: .5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $medium-gray;
+    }
 
     input {
         height: 100%;
         box-sizing: border-box;
         width: 100%;
-        border: 1px solid $light-gray;
-        border-radius: 2rem;
         padding: 0 1rem;
         font-style: $font-text;
         font-size: $size-16;
+        border: none;
     }
     :focus {
         outline: none;
@@ -26,8 +39,11 @@
 }
 
 .baseSearchActive {
-    width: 105%;
     position: absolute;
+    top: 0;
+    width: 100%;
+    height: 3rem;
+    border-radius: 0;
     left: 50%;
     transform: translateX(-50%);
     transition: width .3s ease;

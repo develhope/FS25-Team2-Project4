@@ -1,34 +1,17 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
-import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
 import classes from "./RecipesResults.module.scss"
-import { BaseSearch } from "../../components/Search/BaseSearch/BaseSearch"
 import { useRecipesContext } from "../../contexts/RecipesContext"
-import { useEffect, useMemo, useState } from "react"
 
-export function RecipeResults({ handleRecipesSidebarToggle }) {
+export function RecipeResults() {
     const { animate } = useAnimate()
-    const { filteredRecipes } = useRecipesContext()
-    const [inputValue, setInputValue] = useState("")
-
-    useEffect(() => {
-        setInputValue("")
-    }, [location.pathname])
-
-    const searchFilteredRecipes = useMemo(() => {
-        return filteredRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase()))
-    }, [inputValue, filteredRecipes])
+    const { searchFilteredRecipes } = useRecipesContext()
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
-            <section className={classes.search}>
-                {/* <IngredientSearch isFixed={true} /> */}
-                <BaseSearch data={filteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
-                <IcoButton action={handleRecipesSidebarToggle} label="Filters" icon={<TuneOutlinedIcon fontSize="small" />} />
-            </section>
+
             <div className={classes.subHeading}>
                 <div className={classes.chipWrapper}>
                     <FilterChipRecipes label="All" />

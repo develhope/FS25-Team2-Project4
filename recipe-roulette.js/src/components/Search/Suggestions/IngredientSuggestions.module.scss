@@ -9,11 +9,8 @@
     padding: 0 .75rem;
     box-sizing: border-box;
     opacity: 0;
-    background-color: $third-color;
+    background-color: white;
     overflow-y: scroll;
-    border-radius: 0 0 $size-24 $size-24;
-    outline: 1px solid $lighter-gray;
-    outline-offset: -2px;
 
     display: flex;
     flex-direction: column;
@@ -40,16 +37,15 @@
 .active {
     opacity: 1;
     padding: 0.75rem;
-
-    height: 312px;
+    height: 16rem;
     transition:
-        opacity 0.3s ease,
-        padding 0.3s ease,
-        height 0.3s ease;
+        opacity 0.4s ease,
+        padding 0.4s ease,
+        height 0.4s ease;
 }
 
 .ingredientSuggestion {
-    border-radius: 2rem;
+    border-radius: 1rem;
     width: 100%;
     min-height: 2.5rem;
     display: flex;
@@ -58,7 +54,7 @@
     margin: 0;
     padding: 0 1rem;
     font-size: $text-size-16;
-    background-color: $third-color;
+    background-color: white;
     box-sizing: border-box;
 }
 .lockedSuggestion {
