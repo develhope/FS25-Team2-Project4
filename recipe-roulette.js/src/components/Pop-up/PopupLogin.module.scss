@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    animation: fadeIn 0.5s ;
 }
 
 .popup {
@@ -20,4 +21,23 @@
     justify-content: center;
     gap: $size-8;
     width: 87%;
+    animation: slideUp 0.5s ;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
