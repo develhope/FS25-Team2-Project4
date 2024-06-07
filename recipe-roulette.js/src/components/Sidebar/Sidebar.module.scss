@@ -27,7 +27,7 @@
     max-width: 90%;
 
     background-color: white;
-    border-radius: $size-24 0 0 $size-24;
+    border-radius: $size-16 0 0 $size-16;
 
     transform: translateX($width-360);
     opacity: 0;
@@ -36,17 +36,22 @@
         opacity 0.4s ease;
 
     header {
-        padding: 0 $size-24;
+        padding: 0 $size-20;
         padding-right: $size-8 ;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: $height-80;
-        border-bottom: 1px solid $light-gray;
+        height: 3.75rem;
+        button {
+            border: none;
+            height: 32px;
+        }
         h2 {
             color: $dark-gray;
             font-family: $header-text;
-            font-weight: 600;
+            font-size: $text-size-20;
+            font-weight: 700;
+            margin: 0;
         }
         .rightItems {
             display: flex;
@@ -59,7 +64,6 @@
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            border: none;
             height: 2rem;
             width: 2rem;
             color: $darkish-gray;
@@ -82,11 +86,15 @@
         }
     }
     .sidebarBody {
-        padding: $size-16;
+        position: relative;
+        padding: $size-16 0;
+        padding-top: 0;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
         .preferences {
+            padding: 0 $size-16;
+
             h4 {
                 margin: 0;
                 margin-bottom: $size-8;
@@ -100,9 +108,12 @@
     }
 }
 .blackListedWrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    padding: 0 $size-16;
+    box-sizing: border-box;
 }
 .blackListed {
     display: flex;
@@ -110,6 +121,7 @@
     gap: .75rem;
 }
 .filterChipWrapper {
+    
     display: flex;
     gap: $size-8;
     flex-wrap: wrap;

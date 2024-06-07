@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export function useBaseSearch() {
+export function useBaseSearch(setInputValue) {
     const [isFocused, setIsFocused] = useState(false)
 
     function handleInputActivation() {
@@ -14,7 +14,9 @@ export function useBaseSearch() {
     const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
             handleBlur(e)
-            //disattiva l'input dopo aver chiamato la funzione (previene comportamenti indesiderati)
+        } else if (e.keyCode === 27) {
+            handleBlur(e)
+            setInputValue("")
         }
     }
 

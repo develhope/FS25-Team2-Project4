@@ -16,7 +16,8 @@ import { BaseSearch } from "../Search/BaseSearch/BaseSearch"
 
 export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
-    const { targetedRecipe, setTargetedRecipe, filteredRecipes, setInputValue, inputValue } = useRecipesContext()
+    const { targetedRecipe, setTargetedRecipe, filteredRecipes, searchFilteredRecipes, setInputValue, inputValue } =
+        useRecipesContext()
     const { handleDeselectAll } = useManageIngredients()
 
     const navigate = useNavigate()
@@ -95,7 +96,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 {location.pathname === "/recipes-results" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch data={filteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
+                        <BaseSearch data={searchFilteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"
@@ -106,7 +107,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 {location.pathname === "/favorited" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch data={filteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
+                        <BaseSearch data={searchFilteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"
@@ -117,8 +118,8 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 {location.pathname === "/discovery" && (
                     <div className={classes.globalActions}>
                         <IngredientSearch isFixed={true} searchCriteria="isSelected" />
-                        <IcoButton action={() => handleSidebarToggle()} icon={<TuneIcon fontSize={"small"} />} />
                         <IcoButton action={() => handleDeselectAll("isSelected")} icon={<LockResetIcon fontSize={"medium"} />} />
+                        <IcoButton action={() => handleSidebarToggle()} icon={<TuneIcon fontSize={"small"} />} />
                     </div>
                 )}
             </header>

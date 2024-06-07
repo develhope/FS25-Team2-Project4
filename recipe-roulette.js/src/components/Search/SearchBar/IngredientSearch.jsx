@@ -22,6 +22,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
         <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>
             <div className={`${classes.searchBar} ${searchState.inputActive ? classes.inputActive : classes.inputInactive}`}>
                 <input
+                autoComplete="off"
                     className={classes.header}
                     onClick={handleInputActivation}
                     placeholder={`${searchCriteria === "isSelected" ? "Add an ingredient" : "Blacklist and ingredient"}`}
@@ -32,7 +33,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                             handleBlur(e)
                         }, 0)
                     }
-                    onKeyDown={handlePressEnter}
+                    onKeyDown={(e) => handlePressEnter(e)}
                     onChange={handleInputChange}
                     value={inputValues.current}
                 />
@@ -44,7 +45,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
 
                 {searchState.inputActive && (
                     <div onClick={(e) => handleXClick(e)} className={`${classes.ico} ${classes.closeIco}`}>
-                        <CloseOutlinedIcon fontSize="small"/>
+                        <CloseOutlinedIcon fontSize="small" />
                     </div>
                 )}
             </div>

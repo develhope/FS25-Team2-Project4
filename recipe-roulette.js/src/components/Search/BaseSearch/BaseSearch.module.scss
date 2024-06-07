@@ -1,51 +1,82 @@
 @use "../../../assets/scss/" as *;
 
 .baseSearch {
-    height: 40px;
+    position: relative;
+    height: fit-content;
     width: 100%;
+    transform: translateY(0);
     box-sizing: border-box;
-    transition: width .3s ease;
-    transform: translateX(0);
+    transition: width 0.3s ease;
     border-radius: 2rem;
-    border: 1px solid $light-gray;
+    outline: 1px solid $light-gray;
     overflow: hidden;
-    .ico{
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 2rem;
-        width: 2rem;
-        right: .5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: $medium-gray;
-    }
 
-    input {
-        height: 100%;
+    transition: all 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+
+    .searchBar {
+        position: relative;
         box-sizing: border-box;
         width: 100%;
-        padding: 0 1rem;
-        font-style: $font-text;
-        font-size: $size-16;
-        border: none;
+        .input {
+            width: 90%;
+            background-color: transparent;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 1.25rem;
+            border: none;
+            font-family: $header-text;
+            font-size: $text-size-14;
+            font-weight: 500;
+        }
+        .ico {
+            color: $darkish-gray;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2rem;
+            width: 2rem;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
+
     :focus {
         outline: none;
         border: none;
-        background-color: $second-color;
     }
 }
-
+.baseSearch .searchBar {
+    height: 40px;
+}
+.baseSearch .suggestionsWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    background-color: white;
+    transition: all 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
 .baseSearchActive {
-    position: fixed;
+    position: absolute;
+    transform: translateY(-3.75rem);
     top: 0;
+    left: 0;
     width: 100%;
-    height: 3rem;
+    height: fit-content;
     border-radius: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: width .3s ease;
 
+    transition: all 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.baseSearchActive .searchBar {
+    background-color: $second-color;
+    height: 3rem;
+    transition: all 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+.baseSearchActive .suggestionsWrapper {
+    height: 16rem;
+    overflow-y: scroll;
 }

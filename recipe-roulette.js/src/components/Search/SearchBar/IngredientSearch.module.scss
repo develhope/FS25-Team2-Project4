@@ -9,8 +9,8 @@
     overflow: hidden;
     left: 0;
     transition:
-        height 0.3s ease,
-        width 0.3s ease;
+        height 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        width 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .searchBar {
     position: relative;
@@ -23,8 +23,8 @@
     box-sizing: border-box;
     overflow: hidden;
     transition:
-        height 0.3s ease,
-        width 0.3s ease;
+        height 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        width 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 
     input {
         position: absolute;
@@ -32,14 +32,16 @@
         display: flex;
         align-items: center;
 
-        font-family: inherit;
-        font-size: $text-size-16;
+        font-family: $header-text;
+        font-size: $text-size-14;
+        font-weight: 500;
         line-height: 120%;
+        color: $dark-gray;
 
         width: 100%;
         height: 100%;
         padding: 0;
-        padding-left: $size-24;
+        padding-left: $size-20;
         box-sizing: border-box;
 
         border: none;
@@ -47,7 +49,6 @@
     }
     ::placeholder {
         color: $medium-gray;
-        line-height: 120%;
     }
     :focus {
         outline: none;
@@ -62,7 +63,7 @@
         justify-content: center;
         padding-bottom: 0.125rem;
         top: 50%;
-        transform: translateY(-48%);
+        transform: translateY(-50%);
     }
     .searchIco {
         right: 0.5rem;
@@ -79,23 +80,24 @@
     border-radius: $size-24;
     outline: 1px solid $light-gray;
     outline-offset: -2px;
-    transition: border-radius 0.3s ease;
+    transition: border-radius 0.75s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 
 .inputActive {
     height: 3rem;
     border-radius: 0;
     background-color: $second-color;
-    transition: border-radius 0.3s ease;
+    transition: border-radius 0.75s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .positionFixed {
-    position: fixed;
+    position: absolute;
+    transform: translateY(-3.75rem);
     z-index: 11;
     top: 0;
     width: 100%;
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: .20);
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
     transition:
-        height 0.3s ease,
-        width 0.3s ease,
-        transform 0.3s ease;
+        height 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        width 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        transform 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

@@ -56,10 +56,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             } else {
                 handleIngUpdate(prop, cardState, setCardState)
             }
-        } else {
-            // snackbar di avviso che spunta dal basso
-            handleOpenSnackbar("maximum number of ingredient reached!")
-        }
+        } 
         setSearchState({ inputActive: false })
         setInputValues((prev) => ({ ...prev, current: "" }))
     }
@@ -96,7 +93,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
                 (dbIngredient) => !notAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
             if (firstAvailableIngredient && selectedIngs.length === 8) {
-                handleOpenSnackbar("Maximum number of ingredients reached")
+                handleOpenSnackbar("You've reached the maximum number of ingredients!")
             }
         }
         if (inputValues.current !== "" && firstAvailableIngredient) {
@@ -115,10 +112,8 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
             handleInputDeactivation(searchCriteria)
-            //disattiva l'input dopo aver chiamato la funzione (previene comportamenti indesiderati)
-            setTimeout(() => {
-                e.target.blur()
-            }, 0)
+        } else if (e.keyCode === 27) {
+            handleBlur(e)
         }
     }
 

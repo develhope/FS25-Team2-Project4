@@ -21,7 +21,6 @@ export const RecipesProvider = ({ children }) => {
     }, [location.pathname])
 
     useEffect(() => {
-        console.log("fr",filteredRecipes);
         setSeatchFilteredRecipes(filteredRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase())))
     }, [inputValue, filteredRecipes])
 

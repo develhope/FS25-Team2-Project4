@@ -1,0 +1,14 @@
+@use "../../../assets/scss/" as *;
+
+.suggestion {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    height: 3.5rem;
+    min-height: 3.5rem;
+    border-bottom: 1px solid $light-gray;
+    padding: 0 1.5rem;
+    background-color: white;
+    font-family: $header-text;
+    font-size: 14px;
+} 

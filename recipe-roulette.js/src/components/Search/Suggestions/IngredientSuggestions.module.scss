@@ -45,6 +45,7 @@
 }
 
 .ingredientSuggestion {
+    font-family: $header-text;
     border-radius: 1rem;
     width: 100%;
     min-height: 2.5rem;
@@ -53,12 +54,13 @@
     gap: 0.75rem;
     margin: 0;
     padding: 0 1rem;
-    font-size: $text-size-16;
+    font-size: $text-size-14;
     background-color: white;
     box-sizing: border-box;
+    font-weight: 500;
+
 }
 .lockedSuggestion {
-    font-weight: 500;
     color: $dark-gray;
     background-color: $second-color;
 }
