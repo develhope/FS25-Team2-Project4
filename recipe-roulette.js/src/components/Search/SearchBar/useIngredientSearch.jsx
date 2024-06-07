@@ -112,6 +112,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
             handleInputDeactivation(searchCriteria)
+            handleBlur(e)
         } else if (e.keyCode === 27) {
             handleBlur(e)
         }
