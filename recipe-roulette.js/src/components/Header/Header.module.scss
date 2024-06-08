@@ -25,6 +25,9 @@
         padding-bottom: .75rem;
     }
     .topItem{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         box-sizing: border-box;
         padding: 0 1.25rem;
         padding-right: 1rem;
