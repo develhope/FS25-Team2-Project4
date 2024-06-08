@@ -2,17 +2,18 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import classes from "./Header.module.scss"
 import TuneIcon from "@mui/icons-material/Tune"
 import LockResetIcon from "@mui/icons-material/LockReset"
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
 import { IcoButton } from "../Buttons/IcoButton/IcoButton"
 import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 import { BaseSearch } from "../Search/BaseSearch/BaseSearch"
+
+import classes from "./Header.module.scss"
 
 export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
@@ -89,7 +90,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
 
                     <div className={classes.rightItems}>
                         <div className={classes.menu}>
-                            {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null}
+                            {location.pathname !== "/" ? <MenuOpenIcon onClick={handleMenuToggle} /> : null}
                         </div>
                     </div>
                 </div>
