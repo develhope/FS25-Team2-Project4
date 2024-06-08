@@ -6,6 +6,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const { ing, blackList, displayedIng, handleDeselectAll, handleIngUpdate, setRefresh, filteredIng } = useManageIngredients()
     const { handleOpenSnackbar } = useSnackbar()
 
+    const [condition, setCondition] = useState(true)
     const [inputValues, setInputValues] = useState({ initial: "", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
     const [suggestions, setSuggestions] = useState(ing)
@@ -56,7 +57,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             } else {
                 handleIngUpdate(prop, cardState, setCardState)
             }
-        } 
+        }
         setSearchState({ inputActive: false })
         setInputValues((prev) => ({ ...prev, current: "" }))
     }
@@ -97,10 +98,10 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             }
         }
         if (inputValues.current !== "" && firstAvailableIngredient) {
-                setInputValues((prev) => ({ ...prev, current: "" }))
-                setSearchState({ inputActive: false })
-                handleIngUpdate(prop, firstAvailableIngredient, setCardState)
-                setRefresh((b) => !b)
+            setInputValues((prev) => ({ ...prev, current: "" }))
+            setSearchState({ inputActive: false })
+            handleIngUpdate(prop, firstAvailableIngredient, setCardState)
+            setRefresh((b) => !b)
         } else {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
@@ -137,9 +138,11 @@ export function useIngredientSearch(isFixed, searchCriteria) {
         handleReset,
         setInputValues,
         handleBlur,
+        setCondition,
         inputValues,
         searchState,
         suggestions,
         fixedPosition,
+        condition,
     }
 }

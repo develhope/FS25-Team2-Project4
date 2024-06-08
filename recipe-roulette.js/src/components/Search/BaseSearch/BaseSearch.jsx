@@ -1,24 +1,26 @@
-import React, { useEffect, useCallback, useRef } from "react"
+import React, { useCallback, useEffect, useRef } from "react"
+
 import { useBaseSearch } from "./useBaseSearch"
 import CloseIcon from "@mui/icons-material/Close"
 import SearchIcon from "@mui/icons-material/Search"
 
 import classes from "./BaseSearch.module.scss"
 import { BaseSearchSuggestion } from "./BaseSearchSuggestion"
-import { useNavigate } from "react-router-dom"
 
 export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
-    const { handleBlur, handlePressEnter, handleInputActivation, isFocused } = useBaseSearch(setInputValue)
+    const { handleBlur, handlePressEnter, handleInputActivation, setCondition, condition, isFocused } =
+        useBaseSearch(setInputValue)
 
     const inputRef = useRef(null)
 
+    // Handle back button when fixedPosition is true
     const handleBackButton = useCallback(
-        (e) => {
+        (event) => {
             if (isFocused) {
-                e.preventDefault()
-                console.log("Back gesture detected, but navigation prevented due to focus on input.")
+                event.preventDefault()
                 if (inputRef.current) {
-                    handleBlur(e) // Update the focus state
+                    inputRef.current.blur()
+                    handleBlur(event) // Update the focus state
                 }
             }
         },
@@ -26,8 +28,12 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
     )
 
     useEffect(() => {
-        if (isFocused) {
+        if (isFocused && condition) {
             window.history.pushState(null, document.title, window.location.href)
+            window.addEventListener("popstate", handleBackButton)
+            setCondition(false)
+        } else if (isFocused) {
+            window.history.replaceState(null, document.title, window.location.href)
             window.addEventListener("popstate", handleBackButton)
         } else {
             window.removeEventListener("popstate", handleBackButton)

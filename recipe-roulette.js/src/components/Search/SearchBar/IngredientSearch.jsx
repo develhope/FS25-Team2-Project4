@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
 import classes from "./IngredientSearch.module.scss";
 import { useIngredientSearch } from "./useIngredientSearch";
 import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions";
@@ -12,6 +12,8 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
         inputValues,
         searchState,
         fixedPosition,
+        condition,
+        setCondition,
         handlePressEnter,
         handleInputChange,
         handleInputActivation,
@@ -33,10 +35,15 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
     }, [searchState.inputActive]);
 
     useEffect(() => {
-        if (searchState.inputActive) {
+        if (searchState.inputActive && condition) {
             window.history.pushState(null, document.title, window.location.href);
             window.addEventListener('popstate', handleBackButton);
-        } else {
+            setCondition(false)
+        } else if (searchState.inputActive) {
+            window.history.replaceState(null, document.title, window.location.href);
+            window.addEventListener('popstate', handleBackButton);
+        }
+        else {
             window.removeEventListener('popstate', handleBackButton);
         }
 
