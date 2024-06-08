@@ -23,26 +23,27 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
 
     // Handle back button when fixedPosition is true
     const handleBackButton = useCallback((event) => {
-        if (fixedPosition) {
+        if (searchState.inputActive) {
             event.preventDefault();
-            window.history.pushState(null, document.title, window.location.href);
-            console.log('Back button pressed, but navigation prevented due to fixed position.');
             if (inputRef.current) {
                 inputRef.current.blur();
+                handleBlur(event); // Update the focus state
             }
         }
-    }, [fixedPosition]);
+    }, [searchState.inputActive]);
 
     useEffect(() => {
-        if (fixedPosition) {
+        if (searchState.inputActive) {
             window.history.pushState(null, document.title, window.location.href);
             window.addEventListener('popstate', handleBackButton);
+        } else {
+            window.removeEventListener('popstate', handleBackButton);
         }
 
         return () => {
             window.removeEventListener('popstate', handleBackButton);
         };
-    }, [fixedPosition, handleBackButton]);
+    }, [searchState.inputActive, handleBackButton]);
 
     return (
         <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>
@@ -55,11 +56,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                     placeholder={`${searchCriteria === "isSelected" ? "Add an ingredient" : "Blacklist an ingredient"}`}
                     name="search"
                     type="text"
-                    onBlur={(e) =>
-                        setTimeout(() => {
-                            handleBlur(e);
-                        }, 0)
-                    }
+                    onBlur={(e) => handleBlur(e)}
                     onKeyDown={(e) => handlePressEnter(e)}
                     onChange={handleInputChange}
                     value={inputValues.current}

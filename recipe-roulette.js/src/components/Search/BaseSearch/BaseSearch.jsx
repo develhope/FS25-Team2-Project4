@@ -1,40 +1,38 @@
-import React, { useEffect, useCallback, useRef } from "react"
-import { useBaseSearch } from "./useBaseSearch"
-import CloseIcon from "@mui/icons-material/Close"
-import SearchIcon from "@mui/icons-material/Search"
+import React, { useEffect, useCallback, useRef } from "react";
+import { useBaseSearch } from "./useBaseSearch";
+import CloseIcon from "@mui/icons-material/Close";
+import SearchIcon from "@mui/icons-material/Search";
 
-import classes from "./BaseSearch.module.scss"
-import { BaseSearchSuggestion } from "./BaseSearchSuggestion"
+import classes from "./BaseSearch.module.scss";
+import { BaseSearchSuggestion } from "./BaseSearchSuggestion";
 
 export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
-    const { handleBlur, handlePressEnter, handleInputActivation, isFocused } = useBaseSearch(setInputValue)
+    const { handleBlur, handlePressEnter, handleInputActivation, isFocused } = useBaseSearch(setInputValue);
 
-    const inputRef = useRef(null)
+    const inputRef = useRef(null);
 
-    const handleBackButton = useCallback(
-        (event) => {
-            if (isFocused) {
-                event.preventDefault()
-                window.history.pushState(null, document.title, window.location.href)
-                console.log("Back button pressed, but navigation prevented due to focus on input.")
-                if (inputRef.current) {
-                    inputRef.current.blur()
-                }
+    const handleBackButton = useCallback((e) => {
+        if (isFocused) {
+            e.preventDefault();
+            if (inputRef.current) {
+                inputRef.current.blur();
+                handleBlur(e); // Update the focus state
             }
-        },
-        [isFocused]
-    )
+        }
+    }, [isFocused]);
 
     useEffect(() => {
         if (isFocused) {
-            window.history.pushState(null, document.title, window.location.href)
-            window.addEventListener("popstate", handleBackButton)
+            window.history.pushState(null, document.title, window.location.href);
+            window.addEventListener('popstate', handleBackButton);
+        } else {
+            window.removeEventListener('popstate', handleBackButton);
         }
 
         return () => {
-            window.removeEventListener("popstate", handleBackButton)
-        }
-    }, [isFocused, handleBackButton])
+            window.removeEventListener('popstate', handleBackButton);
+        };
+    }, [isFocused, handleBackButton]);
 
     return (
         <div className={`${classes.baseSearch} ${isFocused && classes.baseSearchActive}`}>
@@ -46,7 +44,9 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
                     onKeyDown={(e) => handlePressEnter(e)}
                     onClick={handleInputActivation}
                     onChange={(e) => setInputValue(e.target.value)}
-                    onBlur={(e) => handleBlur(e)}
+                    onBlur={(e) => {
+                        handleBlur(e);
+                    }}
                     value={inputValue}
                     type="text"
                     placeholder="Search a recipe"
@@ -54,10 +54,10 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
                 <div
                     onMouseDown={(e) => {
                         if (isFocused) {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            setInputValue("")
-                            handleBlur(e)
+                            e.stopPropagation();
+                            e.preventDefault();
+                            setInputValue("");
+                            handleBlur(e);
                         }
                     }}
                     className={classes.ico}
@@ -225,5 +225,6 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
                 )}
             </div>
         </div>
-    )
+    );
 }
+

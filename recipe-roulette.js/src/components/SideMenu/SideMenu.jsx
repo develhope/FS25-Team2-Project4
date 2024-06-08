@@ -3,9 +3,10 @@ import { NavigationLink } from "./NavigationLink/NavigationLink"
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined"
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined"
-import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined"
 import AutorenewIcon from "@mui/icons-material/Autorenew"
 import LogoutIcon from "@mui/icons-material/Logout"
+import CloseIcon from '@mui/icons-material/Close'
+
 import { useAuth } from "../../hooks/Auth/useAuth"
 
 import classes from "./SideMenu.module.scss"
@@ -22,7 +23,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                 <header>
                     <h4>Browse</h4>
                     <div onClick={handleMenuToggle} className={classes.closeIco}>
-                        <MenuOpenOutlinedIcon />
+                        <CloseIcon fontSize="small" />
                     </div>
                 </header>
                 <section className={classes.links}>

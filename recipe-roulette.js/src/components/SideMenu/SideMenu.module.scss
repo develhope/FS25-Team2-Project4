@@ -6,9 +6,9 @@
 
     height: 100%;
     width: 100%;
-    right: 0;
+    left: 0;
     top: 0;
-    transform: translateX(-100%);
+    transform: translateX(100%);
 
     background-color: rgba($color: $darkest-gray, $alpha: 0.2);
     opacity: 0;
@@ -20,7 +20,7 @@
 
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
 
     box-sizing: border-box;
     height: 100%;
@@ -28,9 +28,9 @@
     max-width: 90%;
 
     background-color: white;
-    border-radius: 0 $size-24 $size-24 0;
+    border-radius: $size-24 0 0 $size-24 ;
 
-    transform: translateX(-$width-360);
+    transform: translateX($width-360);
     transition:
         transform 0.4s ease,
         opacity 0.4s ease;
@@ -58,6 +58,10 @@
             border: none;
             height: 2rem;
             width: 2rem;
+            svg{
+                stroke-width: .5px;
+                stroke: $dark-gray;
+            }
         }
     }
     .links {

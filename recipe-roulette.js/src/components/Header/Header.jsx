@@ -80,7 +80,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                                 }}
                                 className={classes.backIcon}
                             >
-                                <ArrowBackIcon stroke={2} fontSize="small" />
+                                <ArrowBackIcon fontSize="small" />
                             </div>
                         ) : null}
 
@@ -107,7 +107,11 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 {location.pathname === "/favorited" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch data={searchFilteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
+                        <BaseSearch
+                            data={searchFilteredRecipes.filter((rec) => rec.isFavorited)}
+                            inputValue={inputValue}
+                            setInputValue={setInputValue}
+                        />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"

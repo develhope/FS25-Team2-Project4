@@ -33,7 +33,7 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                             icon={<RotateLeftOutlinedIcon className={classes.ico} fontSize="small" />}
                         />
                         <div onClick={toggleSidebarRecipes} className={classes.closeIco}>
-                            <CloseOutlinedIcon />
+                            <CloseOutlinedIcon fontSize="small" />
                         </div>
                     </div>
                 </header>

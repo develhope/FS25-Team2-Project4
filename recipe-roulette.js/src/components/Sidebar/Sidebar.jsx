@@ -29,7 +29,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                             action={() => handleDeselectAll("isBlackListed")}
                         />
                         <div onClick={handleSidebarToggle} className={classes.closeIco}>
-                            <CloseIcon stroke={2} fontSize="medium" />
+                            <CloseIcon stroke={2} fontSize="small" />
                         </div>
                     </div>
                 </header>
