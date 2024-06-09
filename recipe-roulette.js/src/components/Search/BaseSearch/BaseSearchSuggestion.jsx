@@ -1,5 +1,4 @@
 import classes from "./BaseSearchSuggestion.module.scss"
-import { useBaseSearch } from "./useBaseSearch"
 
 export function BaseSearchSuggestion({ handleBlur = null, title = "", setInputValue }) {
     function handleSuggestionClick(e) {
@@ -12,7 +11,7 @@ export function BaseSearchSuggestion({ handleBlur = null, title = "", setInputVa
         }
     }
     return (
-        <div onClick={(e) => handleSuggestionClick(e)} className={classes.suggestion}>
+        <div onMouseDown={(e) => handleSuggestionClick(e)} className={classes.suggestion}>
             <p>{title}</p>
         </div>
     )

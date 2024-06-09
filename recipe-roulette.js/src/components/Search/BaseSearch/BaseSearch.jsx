@@ -1,25 +1,27 @@
 import React, { useCallback, useEffect, useRef } from "react"
 
+import { BaseSearchSuggestion } from "./BaseSearchSuggestion"
 import { useBaseSearch } from "./useBaseSearch"
+
 import CloseIcon from "@mui/icons-material/Close"
 import SearchIcon from "@mui/icons-material/Search"
 
 import classes from "./BaseSearch.module.scss"
-import { BaseSearchSuggestion } from "./BaseSearchSuggestion"
 
 export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
     const { handleBlur, handlePressEnter, handleInputActivation, setCondition, condition, isFocused } =
         useBaseSearch(setInputValue)
 
     const inputRef = useRef(null)
-
     // Handle back button when fixedPosition is true
     const handleBackButton = useCallback(
         (event) => {
             if (isFocused) {
                 event.preventDefault()
                 if (inputRef.current) {
+                    console.log("pd")
                     handleBlur(event) // Update the focus state
+                    setCondition(true)
                 }
             }
         },
