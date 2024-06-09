@@ -19,7 +19,6 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
             if (isFocused) {
                 event.preventDefault()
                 if (inputRef.current) {
-                    inputRef.current.blur()
                     handleBlur(event) // Update the focus state
                 }
             }
@@ -54,9 +53,7 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
                     onKeyDown={(e) => handlePressEnter(e)}
                     onClick={handleInputActivation}
                     onChange={(e) => setInputValue(e.target.value)}
-                    onBlur={(e) => {
-                        handleBlur(e)
-                    }}
+                    onBlur={(e) => handleBlur(e)}
                     value={inputValue}
                     type="text"
                     placeholder="Search a recipe"
