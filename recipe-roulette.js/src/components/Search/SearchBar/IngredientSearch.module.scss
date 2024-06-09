@@ -9,6 +9,7 @@
     overflow: hidden;
     left: 0;
     transition:
+        transform 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
         height 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
         width 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
@@ -80,14 +81,14 @@
     border-radius: $size-24;
     outline: 1px solid $light-gray;
     outline-offset: -2px;
-    transition: border-radius 0.75s cubic-bezier(0.08, 0.82, 0.17, 1);
+    transition: border-radius 1s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 
 .inputActive {
     height: 3rem;
     border-radius: 0;
     background-color: $second-color;
-    transition: border-radius 0.75s cubic-bezier(0.08, 0.82, 0.17, 1);
+    transition: border-radius 1s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .positionFixed {
     position: absolute;

@@ -10,39 +10,58 @@ export const RecipesProvider = ({ children }) => {
         isVegetarian: false,
         isGlutenFree: false,
         isVegan: false,
-        cuisineEthnicity: [],
+        cuisineEthnicity: [
+            "all",
+            "italian",
+            "french",
+            "chinese",
+            "japanese",
+            "indian",
+            "greek",
+            "spanish",
+            "mexican",
+            "thai",
+            "middle eastern",
+        ],
+        preparationTime: 9999,
+        caloricApport: 9999,
     })
     const [filteredRecipes, setFilteredRecipes] = useState([])
     const [searchFilteredRecipes, setSeatchFilteredRecipes] = useState([])
     const [inputValue, setInputValue] = useState("")
+    const [recipeAnimation, setRecipeAnimation] = useState(true)
 
     useEffect(() => {
         setInputValue("")
     }, [location.pathname])
 
     useEffect(() => {
-        setSeatchFilteredRecipes(filteredRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase())))
+        setSeatchFilteredRecipes(
+            filteredRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase()))
+        )
     }, [inputValue, filteredRecipes])
 
-    //localstorage useeffect
+    //sessionStorage useffect
     useEffect(() => {
         try {
-            const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
-            const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
-            if (localRecipes && localRecipes.length > 0) {
-                setRecipes(localRecipes)
-                setFilteredRecipes(localRecipes)
-                setSeatchFilteredRecipes(localRecipes)
+            if (location.pathname === "/recipe") {
+                const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
+                currentTargetedRecipe && setTargetedRecipe(currentTargetedRecipe)
+            }
+            const sessionRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+            const sessionFilter = JSON.parse(window.sessionStorage.getItem("recipeFilter"))
+            if (sessionRecipes && sessionRecipes.length > 0) {
+                setRecipes(sessionRecipes)
+                setFilteredRecipes(sessionRecipes)
+                setSeatchFilteredRecipes(sessionRecipes)
             } else {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
                 setSeatchFilteredRecipes(recipesArray)
             }
-            if (currentTargetedRecipe) {
-                setTargetedRecipe(currentTargetedRecipe)
-            }
+            sessionFilter && setRecipeFilter(sessionFilter)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }, [])
 
@@ -50,15 +69,40 @@ export const RecipesProvider = ({ children }) => {
         try {
             if (recipes && recipes.length > 0) {
                 const jsonRecipes = JSON.stringify(recipes)
-                window.localStorage.setItem("recipes", jsonRecipes)
+                window.sessionStorage.setItem("recipes", jsonRecipes)
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }, [recipes])
 
     useEffect(() => {
-        let filtering = recipes
+        try {
+            setTimeout(() => {
+                const jsonFilter = JSON.stringify(recipeFilter)
+                window.sessionStorage.setItem("recipeFilter", jsonFilter)
+            }, 0)
+        } catch (error) {
+            console.error(error)
+        }
+
+        //animazoni card quando si cambiano i filtr
+        if (recipeAnimation) {
+            setTimeout(() => {
+                setRecipeAnimation(false)
+            }, 0)
+        }
+        setTimeout(() => {
+            setRecipeAnimation(true)
+        }, 300)
+    }, [recipeFilter])
+
+    useEffect(() => {
+        let filtering = recipes.filter(
+            (recipe) =>
+                recipe.caloricApport <= recipeFilter.caloricApport && recipe.preparationTime <= recipeFilter.preparationTime
+        )
+
         if (recipeFilter.isGlutenFree) {
             filtering = filtering.filter((item) => item.isGlutenFree)
         }
@@ -68,17 +112,15 @@ export const RecipesProvider = ({ children }) => {
         if (recipeFilter.isVegan) {
             filtering = filtering.filter((item) => item.isVegan)
         }
-        /* //da verificare  se funziona questa parte
-        if (recipeFilter.cuisineEthnicity.length > 0) {
-            filtering = recipes.filter((item) => {
-                if (item.cuisineEthnicity.length > 0) {
-                    return recipeFilter.cuisineEthnicity.some((cousine) => cousine === item.cuisineEthnicity)
-                } else {
-                    return item
-                }
-            })
-        } */
-        console.log(filtering);
+        if (recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
+        } else {
+            filtering = filtering.filter((item) =>
+                recipeFilter.cuisineEthnicity.some((cuisine) => {
+                    return cuisine.toLowerCase() === item.cuisineEthnicity.toLowerCase()
+                })
+            )
+        }
+
         setFilteredRecipes(filtering)
     }, [recipeFilter, recipes])
 
@@ -96,7 +138,7 @@ export const RecipesProvider = ({ children }) => {
         setTimeout(() => {
             setRecipes(updatedRecipes)
             setFilteredRecipes(updatedRecipes)
-        }, 300)
+        }, 150)
         setRecipeState((prevData) => {
             return {
                 ...prevData,
@@ -112,8 +154,90 @@ export const RecipesProvider = ({ children }) => {
             const jsonTargetedRecipe = JSON.stringify(currentTargetedRecipe)
             window.localStorage.setItem("targetedRecipe", jsonTargetedRecipe)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
+    }
+
+    const handlePreferencesToggle = (filterType, value, handleSelected, selectedState) => {
+        if (filterType === "caloricApport" || filterType === "preparationTime") {
+            if (!selectedState) {
+                setRecipeFilter((prevData) => ({
+                    ...prevData,
+                    [filterType]: value,
+                }))
+            } else {
+                setRecipeFilter((prevData) => ({
+                    ...prevData,
+                    [filterType]: 9999,
+                }))
+            }
+        }
+        if (filterType === "cuisineEthnicity") {
+            let updatedEthnicity = [...recipeFilter.cuisineEthnicity] // Copia l'array originale
+            const alreadyThere = updatedEthnicity.find((cuisine) => cuisine.toLowerCase() === value)
+            if (value === "all") {
+                if (recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
+                    updatedEthnicity = []
+                    handleSelected(false)
+                } else {
+                    updatedEthnicity = [
+                        "all",
+                        "italian",
+                        "french",
+                        "chinese",
+                        "japanese",
+                        "indian",
+                        "greek",
+                        "spanish",
+                        "mexican",
+                        "thai",
+                        "middle eastern",
+                    ]
+                    handleSelected(true)
+                }
+            } else {
+                // Rimuovi l'elemento se è presente
+                if (alreadyThere) {
+                    updatedEthnicity = updatedEthnicity.filter((item) => item !== value.toLowerCase() && item !== "all")
+                    handleSelected && handleSelected(false)
+                } else {
+                    // Aggiungi l'elemento se non è presente
+                    updatedEthnicity.push(value.toLowerCase())
+                    if (updatedEthnicity.length === 10) {
+                        updatedEthnicity.push("all")
+                    }
+                }
+            }
+
+            // Aggiorna lo stato con il nuovo array
+            setRecipeFilter((prevData) => ({
+                ...prevData,
+                cuisineEthnicity: updatedEthnicity,
+            }))
+        }
+    }
+
+    const handleDeselectRecipeFilters = () => {
+        setRecipeFilter({
+            isVegetarian: false,
+            isGlutenFree: false,
+            isVegan: false,
+            cuisineEthnicity: [
+                "all",
+                "italian",
+                "french",
+                "chinese",
+                "japanese",
+                "indian",
+                "greek",
+                "spanish",
+                "mexican",
+                "thai",
+                "middle eastern",
+            ],
+            preparationTime: 9999,
+            caloricApport: 9999,
+        })
     }
 
     return (
@@ -125,12 +249,15 @@ export const RecipesProvider = ({ children }) => {
                 recipeFilter,
                 inputValue,
                 searchFilteredRecipes,
+                recipeAnimation,
                 setRecipes,
                 setTargetedRecipe,
                 handleRecipesUpdate,
                 handleTargetedRecipe,
                 toggleRecipeFilter,
                 setInputValue,
+                handlePreferencesToggle,
+                handleDeselectRecipeFilters,
             }}
         >
             {children}

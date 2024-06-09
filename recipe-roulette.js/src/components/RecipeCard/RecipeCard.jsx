@@ -1,23 +1,20 @@
-import { Link, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useRecipeCard } from "./useRecipeCard"
+import { useRecipesContext } from "../../contexts/RecipesContext"
+import { FilterChip } from "../FilterChip/FilterChip"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import ExpandLessIcon from "@mui/icons-material/ExpandLess"
-
-import { FilterChip } from "../FilterChip/FilterChip"
 import Skeleton from "@mui/material/Skeleton"
 
 import classes from "./RecipeCard.module.scss"
-
-const defaultTitle = "Card Title"
+import { useState } from "react"
 
 function RecipeCard({
     recipeId,
     isExpanded = false,
-    title = defaultTitle,
-    images = [
-        "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC",
-    ],
+    title = "Card Title",
+    image = "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC",
     attributes,
     isFav = false,
     isGlutenFree = false,
@@ -28,7 +25,13 @@ function RecipeCard({
 }) {
     const { handleCardState, handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
         useRecipeCard(recipeId, isFav, isExpanded)
+    const { recipeAnimation } = useRecipesContext()
+    const [animateMe, setAnimateMe] = useState(false)
     const location = useLocation()
+
+    setTimeout(() => {
+        setAnimateMe(true)
+    }, 0)
 
     return (
         <div
@@ -36,7 +39,7 @@ function RecipeCard({
                 localStorage.setItem("prevPath", location.pathname)
                 handleOpenRecipePage()
             }}
-            className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded}`}
+            className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded} ${recipeAnimation && classes.animateRecipeCard}`}
         >
             {/* topItems */}
             <div className={classes.topItems}>
@@ -47,10 +50,10 @@ function RecipeCard({
                     <FavoriteIcon stroke={"#3C3838"} strokeWidth={"1px"} />
                 </div>
                 {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
-                {false ? (
-                    <Skeleton sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
+                {!image ? (
+                    <Skeleton className={classes.skeleton} sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
                 ) : (
-                    <img src={images[0]} alt="" />
+                    <img className={`${classes.imageInactive} ${animateMe && classes.imageActive}`} src={image} alt="" />
                 )}
             </div>
 

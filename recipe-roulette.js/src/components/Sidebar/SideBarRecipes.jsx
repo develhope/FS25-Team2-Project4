@@ -1,6 +1,5 @@
 import { Switch } from "../Switch/Switch"
 import { FilterChipRecipes } from "../FilterChip/FilterChipRecipes"
-import { useFilterChipRecipes } from "../FilterChip/useFilterChipRecipes"
 
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
 import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
@@ -10,8 +9,8 @@ import { Button } from "../Buttons/Button/Button"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 
 export function SideBarRecipes({ state, toggleSidebarRecipes }) {
-    const { handleSelected } = useFilterChipRecipes()
     const { toggleRecipeFilter, recipeFilter } = useRecipesContext()
+    const { handleDeselectRecipeFilters } = useRecipesContext()
 
     function handleSidebarClick(e) {
         e.stopPropagation()
@@ -29,7 +28,7 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                     <div className={classes.rightItems}>
                         <Button
                             label="Reset All"
-                            action={handleSelected}
+                            action={handleDeselectRecipeFilters}
                             icon={<RotateLeftOutlinedIcon className={classes.ico} fontSize="small" />}
                         />
                         <div onClick={toggleSidebarRecipes} className={classes.closeIco}>
@@ -42,39 +41,62 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                     <div className={classes.preparationTime}>
                         <h4>Preparation Time</h4>
                         <div className={classes.filterChipWrapper}>
-                            <FilterChipRecipes label="All" />
-                            <FilterChipRecipes label="30m" />
-                            <FilterChipRecipes label="45m" />
-                            <FilterChipRecipes label="60m +" />
+                            <FilterChipRecipes filterType={"preparationTime"} label="All" />
+                            <FilterChipRecipes filterType={"preparationTime"} numericValue={30} label="30m or less" />
+                            <FilterChipRecipes filterType={"preparationTime"} numericValue={45} label="45m or less" />
+                            <FilterChipRecipes filterType={"preparationTime"} numericValue={60} label="60m or less" />
                         </div>
                     </div>
 
                     <div className={classes.preferences}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
-                            <Switch action={toggleRecipeFilter} state={recipeFilter.isGlutenFree} filterWhat="recipes" label={"Gluten free"} prop={"isGlutenFree"} />
-                            <Switch action={toggleRecipeFilter} state={recipeFilter.isVegetarian} filterWhat="recipes" label={"Vegetarian"} prop={"isVegetarian"} />
-                            <Switch action={toggleRecipeFilter} state={recipeFilter.isVegan} filterWhat="recipes" label={"Vegan"} prop={"isVegan"} />
+                            <Switch
+                                action={toggleRecipeFilter}
+                                state={recipeFilter.isGlutenFree}
+                                filterWhat="recipes"
+                                label={"Gluten free"}
+                                prop={"isGlutenFree"}
+                            />
+                            <Switch
+                                action={toggleRecipeFilter}
+                                state={recipeFilter.isVegetarian}
+                                filterWhat="recipes"
+                                label={"Vegetarian"}
+                                prop={"isVegetarian"}
+                            />
+                            <Switch
+                                action={toggleRecipeFilter}
+                                state={recipeFilter.isVegan}
+                                filterWhat="recipes"
+                                label={"Vegan"}
+                                prop={"isVegan"}
+                            />
                         </div>
                     </div>
                     <div className={classes.cousineEtnicity}>
                         <h4>Cousine Etnicity</h4>
                         <div className={classes.filterChipWrapper}>
-                            <FilterChipRecipes label="All" />
-                            <FilterChipRecipes label="Italian" />
-                            <FilterChipRecipes label="French" />
-                            <FilterChipRecipes label="British" />
-                            <FilterChipRecipes label="Japanese" />
-                            <FilterChipRecipes label="Korean" />
-                            <FilterChipRecipes label="Chinese" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="All" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Italian" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="French" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Chinese" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Japanese" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Indian" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Greek" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Spanish" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Mexican" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Thai" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Middle Eastern" />
                         </div>
                     </div>
                     <div className={classes.caloricApport}>
                         <h4>Caloric Apport</h4>
                         <div className={classes.filterChipWrapper}>
-                            <FilterChipRecipes label="250 kcal" />
-                            <FilterChipRecipes label="300 to 500 kcal" />
-                            <FilterChipRecipes label="500 kcal +" />
+                            <FilterChipRecipes filterType={"caloricApport"} label="All" />
+                            <FilterChipRecipes numericValue={250} filterType={"caloricApport"} label="250 kcal or less" />
+                            <FilterChipRecipes numericValue={350} filterType={"caloricApport"} label="350 kcal of less" />
+                            <FilterChipRecipes numericValue={500} filterType={"caloricApport"} label="500 kcal or less" />
                         </div>
                     </div>
                 </section>

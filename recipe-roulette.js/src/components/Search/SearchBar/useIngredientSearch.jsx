@@ -97,6 +97,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
                 handleOpenSnackbar("You've reached the maximum number of ingredients!")
             }
         }
+        
         if (inputValues.current !== "" && firstAvailableIngredient) {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })

@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback, useRef, useState } from "react";
-import classes from "./IngredientSearch.module.scss";
 import { useIngredientSearch } from "./useIngredientSearch";
 import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
+import classes from "./IngredientSearch.module.scss";
 
 export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackListed" }) {
     const {
@@ -30,6 +31,7 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
             if (inputRef.current) {
                 inputRef.current.blur();
                 handleBlur(event); // Update the focus state
+                setCondition(true)
             }
         }
     }, [searchState.inputActive]);
