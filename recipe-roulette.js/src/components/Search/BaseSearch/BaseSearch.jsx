@@ -19,6 +19,7 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
             if (isFocused) {
                 event.preventDefault()
                 if (inputRef.current) {
+                    inputRef.current.blur()
                     handleBlur(event) // Update the focus state
                     setCondition(true)
                 }
@@ -61,21 +62,30 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
                 />
                 <div
                     onMouseDown={(e) => {
-                        if (isFocused) {
-                            handleBlur(e)
-                            setInputValue("")
+                        if (isFocused && inputValue !== "") {
                             e.stopPropagation()
+                            e.preventDefault()
+                            setInputValue("")
+                        } else if (isFocused && inputValue === "") {
+                            e.stopPropagation()
+                            handleBlur(e)
+                            inputRef.current.blur()
+                        } else if (!isFocused && inputValue !== "") {
+                            e.stopPropagation()
+                            e.preventDefault()
+                            setInputValue("")
                         }
                     }}
                     className={classes.ico}
                 >
-                    {isFocused ? <CloseIcon fontSize="small" /> : <SearchIcon fontSize="small" />}
+                    {isFocused || inputValue !== "" ? <CloseIcon fontSize="small" /> : <SearchIcon fontSize="small" />}
                 </div>
             </div>
             <div className={classes.suggestionsWrapper}>
                 {data.length > 0 ? (
                     data.map((recipe) => (
                         <BaseSearchSuggestion
+                            inputRef={inputRef}
                             key={recipe.id}
                             id={recipe.id}
                             handleBlur={handleBlur}

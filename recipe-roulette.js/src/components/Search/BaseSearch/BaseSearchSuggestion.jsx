@@ -1,14 +1,12 @@
 import classes from "./BaseSearchSuggestion.module.scss"
 
-export function BaseSearchSuggestion({ handleBlur = null, title = "", setInputValue }) {
+export function BaseSearchSuggestion({inputRef= null, handleBlur = null, title = "", setInputValue }) {
     function handleSuggestionClick(e) {
         e.preventDefault()
         e.stopPropagation()
         setInputValue(title)
-        if (handleBlur) {
-            console.log("i blur")
-            handleBlur(e)
-        }
+        handleBlur(e)
+        inputRef.current.blur()
     }
     return (
         <div onMouseDown={(e) => handleSuggestionClick(e)} className={classes.suggestion}>
