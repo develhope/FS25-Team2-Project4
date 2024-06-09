@@ -19,7 +19,6 @@ export function BaseSearch({ data = [], inputValue = "", setInputValue }) {
             if (isFocused) {
                 event.preventDefault()
                 if (inputRef.current) {
-                    console.log("pd")
                     handleBlur(event) // Update the focus state
                     setCondition(true)
                 }
