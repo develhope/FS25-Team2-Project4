@@ -18,7 +18,6 @@ export function useBaseSearch(setInputValue) {
             handleBlur(e)
         } else if (e.keyCode === 27) {
             handleBlur(e)
-            setInputValue("")
         }
     }
 
