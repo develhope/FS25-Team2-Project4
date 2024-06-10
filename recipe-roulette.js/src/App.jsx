@@ -56,6 +56,7 @@ function App() {
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route path="/signup" element={<SignupPage />} />
                                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
+                                <Route path="/*" element={<h1>Page not found (creare pagina placeholder)</h1>} />
                             </Routes>
                         </SnackbarProvider>
                     </RecipesProvider>

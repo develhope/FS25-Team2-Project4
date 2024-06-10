@@ -46,7 +46,7 @@
     overflow: hidden;
     .placeholderImage {
         box-sizing: border-box;
-        padding: 2rem;
+        padding: 1rem;
         padding-bottom: 0;
         border-radius: 1.5rem;
         svg {
@@ -57,9 +57,9 @@
     }
 }
 .placeholderSearch {
-    padding:2rem 0;
+    padding: 2rem 0;
     justify-content: flex-start;
-    .placeholderImage{
+    .placeholderImage {
         padding-top: 0;
     }
 }
@@ -73,7 +73,7 @@
     font-weight: 700;
     font-size: $size-20;
     span {
-        background-color: #DA1E28;
+        background-color: #f1c21b;
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         color: white;
@@ -95,10 +95,9 @@
     color: white;
     background-color: #00a538;
 
-    height: 120px;
-    min-height: 120px;
+    height: 100px;
     padding: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 1.25rem;
     box-sizing: border-box;
 }
 

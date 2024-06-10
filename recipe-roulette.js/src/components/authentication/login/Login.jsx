@@ -1,5 +1,5 @@
 import classes from "./Login.module.scss"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useLogin } from "../../../hooks/Form/useLogin"
 import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn"
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn"
@@ -12,6 +12,10 @@ import StartIcon from "@mui/icons-material/Start"
 
 export function Login() {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
+
+    const location = useLocation()
+    const prevPath = location.state?.prevpath
+    console.log(location);
 
     return (
             <div className={classes.container}>

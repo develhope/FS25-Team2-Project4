@@ -6,7 +6,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import TuneIcon from "@mui/icons-material/Tune"
 import LockResetIcon from "@mui/icons-material/LockReset"
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import MenuOpenIcon from "@mui/icons-material/MenuOpen"
 
 import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
 import { IcoButton } from "../Buttons/IcoButton/IcoButton"
@@ -51,6 +51,10 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 } catch (error) {
                     console.log(error)
                 }
+                break
+            default:
+                setTitle("Page not found")
+                break
         }
     }, [location.pathname])
 
