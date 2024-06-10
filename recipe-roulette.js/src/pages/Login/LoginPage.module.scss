@@ -11,5 +11,18 @@
     color: $darkest-gray;
     padding: $size-24;
     box-sizing: border-box;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    border-radius: 3rem;
+
+    scale: 0.8;
+    transition:
+        scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        border-radius 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);}
+
+.animateLoginPage {
+    border-radius: 0;
+    scale: 1;
+    transition:
+        scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        border-radius 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

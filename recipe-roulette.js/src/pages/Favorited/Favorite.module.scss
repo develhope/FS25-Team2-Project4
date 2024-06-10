@@ -72,8 +72,9 @@
     font-family: $font-title;
     font-weight: 700;
     font-size: $size-20;
+    line-height: 130%;
     span {
-        background-color: #f1c21b;
+        background-color: #00a538;
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         color: white;
@@ -89,7 +90,9 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: .025rem;
+    font-family: $header-text;
 
     text-decoration: none;
     color: white;

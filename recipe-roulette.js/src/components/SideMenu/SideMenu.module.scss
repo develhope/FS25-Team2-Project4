@@ -71,7 +71,7 @@
         box-sizing: border-box;
         width: 100%;
         .link {
-            width: 75%;
+            width: 100%;
             font-family: $header-text;
             border-radius: 2rem;
             font-size: $size-16;
@@ -84,12 +84,9 @@
             height: 3.5rem;
             padding: 0 $size-16;
             letter-spacing: 0.025rem;
-            transition: width 0.4s ease;
         }
         .activeLink {
             background-color: $second-color;
-            transition: width 0.4s ease;
-            width: 100%;
             box-sizing: border-box;
         }
     }

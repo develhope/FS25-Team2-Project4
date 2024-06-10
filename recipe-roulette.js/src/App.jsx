@@ -18,6 +18,7 @@ import { Recipe } from "./pages/Recipe/Recipe"
 import { RecipesProvider } from "./contexts/RecipesContext"
 import { LoginPage } from "./pages/Login/LoginPage"
 import { SignupPage } from "./pages/Signup/SignupPage"
+import { NotFound404 } from "./pages/NotFound404/NotFound404"
 
 function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
@@ -56,7 +57,7 @@ function App() {
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route path="/signup" element={<SignupPage />} />
                                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
-                                <Route path="/*" element={<h1>Page not found (creare pagina placeholder)</h1>} />
+                                <Route path="/*" element={<NotFound404 />} />
                             </Routes>
                         </SnackbarProvider>
                     </RecipesProvider>
