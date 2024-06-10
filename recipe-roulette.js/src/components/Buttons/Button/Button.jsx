@@ -17,10 +17,12 @@ export function Button({
         <button
             type={type}
             onClick={() => {
-                action && action()
-                setTimeout(() => {
-                    link && navigate(`/${link}`)
-                }, 0)
+                if (active) {
+                    action && action()
+                    setTimeout(() => {
+                        link && navigate(`/${link}`)
+                    }, 0)
+                }
             }}
             className={`${classes.button} ${!active && classes.disabled} 
             ${width === "fill" && classes.wideButton}

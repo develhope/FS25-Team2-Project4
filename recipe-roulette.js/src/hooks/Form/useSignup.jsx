@@ -16,7 +16,7 @@ export function useSignup() {
             email: ``,
             password: ``,
             confirmPass: ``,
-            check: ``,
+            check: false,
         }
     }
 
@@ -37,7 +37,7 @@ export function useSignup() {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(data)
-        if (data.password === data.confirmPass) {
+        if (data.password === data.confirmPass && data.check) {
             setItem(data)
             login()
         } else {
