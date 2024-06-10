@@ -1,29 +1,176 @@
-@use "../../assets/scss/" as *;
+@use "../../assets/scss" as *;
 
 .settingsPage {
-    scale: .8;
-    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
-
+    transform: translateX(65%);
+    transition: transform 0.3s ease-in-out;
     background-color: white;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     padding: $size-16;
     padding-top: 0;
-    .fakeContent {
-        width: 100%;
-        height: $height-80;
-        background-color: $second-color;
-        border-radius: $size-16;
-        margin-bottom: $size-16;
+    .title {
+        font-size: $text-size-24;
+        margin: $size-16 0;
     }
-    
+    .profileSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: $third-color;
+        color: #3C3838;
+        border-radius: $size-16;
+        width: 100%;
+        padding: $size-16;
+        box-sizing: border-box;
+        margin-bottom: $size-16;
+        .profilePicture {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: $size-8;
+        }
+        .profileName {
+            font-size: $text-size-20;
+            margin: 0;
+            margin-bottom: $size-4;
+        }
+        .profileEmail {
+            font-size: $text-size-14;
+            color: #3C3838;
+            margin: 0;
+            margin-bottom: $size-8;
+        }
+        .editButton {
+            background-color: #C5E4C9;
+            border: none;
+            border-radius: $size-8;
+            padding: $size-8 $size-16;
+            margin-top: $size-16;
+            color: #3C3838;
+            font-family: "Poppins", "Lato", "Roboto", "Segoe UI", "system-ui";
+            border-radius: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
+    .menuSection {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .menuItem {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: $second-color;
+            border: 1px solid $light-gray;
+            border-radius: $size-8;
+            margin-bottom: $size-16;
+            cursor: pointer;
+            font-size: $text-size-16;
+            font-family: "Poppins", "Lato", "Roboto", "Segoe UI", "system-ui";
+            font-weight: 500;
+            text-decoration: none;
+            color: #3C3838;
+            padding: 0 1rem;
+            letter-spacing: 0.025rem;
+            transition: width 0.45s ease;
+        }
+    }
+    .logoutButtonWrapper {
+        margin-top: auto;
+        width: 100%;
+    }
+    .logoutButton {
+        width: 100%;
+        background-color: #FFD7D9;
+        border: none;
+        border-radius: 2rem;
+        padding: $size-16;
+        color: #3C3838;
+        cursor: pointer;
+        font-family: "Poppins", "Lato", "Roboto", "Segoe UI", "system-ui";
+        font-size: $text-size-16;
+        font-weight: 500;
+    }
+    .editProfileSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #F1F8EB;
+        border-radius: $size-16;
+        width: 100%;
+        padding: $size-16;
+        box-sizing: border-box;
+        .profilePicture {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: $size-8;
+        }
+        .editProfileImageButtonWrapper {
+            position: relative;
+            margin-bottom: $size-16;
+            .editProfileImageButton {
+                display: none;
+            }
+            .editProfileImageButtonLabel {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: white;
+                border: none;
+                border-radius: 2rem;
+                padding: $size-8 $size-16;
+                color: #3C3838;
+                cursor: pointer;
+            }
+        }
+        .editForm {
+            width: 100%;
+            label {
+                display: block;
+                font-size: $text-size-16;
+                margin-bottom: $size-8;
+                color: #3C3838;
+                font-family: "Poppins", "Lato", "Roboto", "Segoe UI", "system-ui";
+                font-weight: 500;
+            }
+            input {
+                width: 100%;
+                padding: $size-16;
+                font-size: $text-size-14;
+                border: 1px solid $light-gray;
+                border-radius: 2rem;
+                box-sizing: border-box;
+                margin-bottom: $size-8;
+            }
+        }
+        .saveButton {
+            width: 100%;
+            background-color: #C5E4C9;
+            border: none;
+            border-radius: 2rem;
+            padding: $size-16;
+            color: #3C3838;
+            font-family: "Poppins", "Lato", "Roboto", "Segoe UI", "system-ui";
+            font-weight: 500;
+            font-size: $text-size-16;
+            cursor: pointer;
+        }
+    }
 }
 .animateSettings {
-    scale: 1;
-    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
 }

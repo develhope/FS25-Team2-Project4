@@ -18,17 +18,17 @@ export function useLogin() {
 
   function setItem(data) {
     try {
-      window.localStorage.setItem("username", data.username);
-      window.localStorage.setItem("password", data.password);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("password", data.password);
     } catch (error) {
       console.log(error);
     }
   }
 
-  function getItem(data) {
+  function getItem() {
     try {
-      const username = window.localStorage.getItem("username");
-      const password = window.localStorage.getItem("password");
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
 
       if (username && password) {
         setData({ ...data, username, password});
@@ -46,24 +46,21 @@ export function useLogin() {
     const name = e.target.name;
     const value = e.target.value;
 
-    setData((d) => {
-      return {
-        ...d,
-        [name]: value,
-      };
-    });
+    setData((d) => ({
+      ...d,
+      [name]: value,
+    }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setItem(data);
-    login()
-    console.log(data);
-    navigate("/")
+    login();
+    navigate("/");
   }
 
   function handleShowPassword () {
-    setShowPassword(!showPassword)
+    setShowPassword(!showPassword);
   }
 
   return {
