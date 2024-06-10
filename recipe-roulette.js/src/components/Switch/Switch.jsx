@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react"
 import classes from "./Switch.module.scss"
-import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
-export function Switch({ label, prop }) {
-    const { toggleFilter, filter } = useManageIngredients()
-    const [state, setState] = useState(filter[prop])
+export function Switch({ state = false, action = null, label, prop, filterWhat = "ingredients" }) {
 
     function handleSwitch() {
-        toggleFilter(prop, setState)
+        action(prop)
     }
-    useEffect(()=> {
-        setState(filter[prop])
-    },[filter])
 
     return (
         <div className={classes.switchComponent}>

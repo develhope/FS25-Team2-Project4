@@ -12,6 +12,9 @@
 
     height: 100%;
     overflow: hidden;
+
+    scale: .8;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }
 
 .discoveryPreview .mainContent {
@@ -63,6 +66,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    font-weight: 500;
 
     text-decoration: none;
     color: white;
@@ -71,7 +75,7 @@
     height: 120px;
     min-height: 120px;
     padding: 1rem;
-    border-radius: 60px;
+    border-radius: 1.5rem;
     box-sizing: border-box;
 }
 
@@ -87,8 +91,13 @@
 
     height: 3rem;
     padding: 1rem;
-    border-radius: 60px;
+    border-radius: 1.5rem;
     box-sizing: border-box;
 
     border: 1px solid #007E2B;
+}
+
+.discoveryPreviewAnimate{
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }

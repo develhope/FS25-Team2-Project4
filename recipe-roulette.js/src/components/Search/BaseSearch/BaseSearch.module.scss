@@ -1,0 +1,35 @@
+@use "../../../assets/scss/" as *;
+
+.baseSearch {
+    position: inherit;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: width .3s ease;
+    transform: translateX(0);
+
+    input {
+        height: 100%;
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid $light-gray;
+        border-radius: 2rem;
+        padding: 0 1rem;
+        font-style: $font-text;
+        font-size: $size-16;
+    }
+    :focus {
+        outline: none;
+        border: none;
+        background-color: $second-color;
+    }
+}
+
+.baseSearchActive {
+    width: 105%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width .3s ease;
+
+}

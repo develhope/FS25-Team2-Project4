@@ -1,20 +1,23 @@
 import { useState } from "react"
+import { useRecipesContext } from "../../contexts/RecipesContext"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../hooks/Auth/useAuth"
 
-export function useRecipeCard(isFav, isExpanded) {
-    const [favState, setFavState] = useState(isFav)
+export function useRecipeCard(recipeId, isFav, isExpanded) {
+    const [cardState, setCardState] = useState({
+        id: recipeId,
+        isFavorited: isFav,
+    })
     const [expandedCard, setExpandedCard] = useState(isExpanded)
     const [expandedIngredients, setExpandedIngredients] = useState(true)
-
-    function handleFavState(e) {
-        e.preventDefault()
-        e.stopPropagation()
-        setFavState((f) => !f)
-    }
+    const { handleRecipesUpdate, handleTargetedRecipe } = useRecipesContext()
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate()
 
     function handleCardState(e) {
-        e.stopPropagation()
         e.preventDefault()
-        setExpandedCard((b) => !b)
+        e.stopPropagation()
+        handleRecipesUpdate(cardState, setCardState)
     }
 
     function handleIngWrapperState(e) {
@@ -23,12 +26,20 @@ export function useRecipeCard(isFav, isExpanded) {
         setExpandedIngredients((b) => !b)
     }
 
+    function handleOpenRecipePage() {
+        if (isAuthenticated) {
+            navigate("/recipe")
+        }
+        handleTargetedRecipe(cardState)
+    }
+
     return {
-        favState,
+        cardState,
         expandedCard,
         expandedIngredients,
         handleIngWrapperState,
         handleCardState,
-        handleFavState,
+        // handleShowFullDetails,
+        handleOpenRecipePage,
     }
 }

@@ -1,5 +1,15 @@
 @use "../../assets/scss/" as *;
 
 .recipePage {
-    padding: 0 $size-24;
+    padding: 0 $size-20;
+    padding-bottom: $size-24;
+    height: 100%;
+    overflow-y: scroll;
+    scale: .8;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
+}
+
+.animateRecipePage {
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }

@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../components/Snackbar/useSnackbar";
 
 export function useSignup() {
   const [data, setData] = useState(createData());
   const [passError, setPassError] = useState(null);
-
+  const {handleOpenSnackbar } = useSnackbar()
+  const navigate = useNavigate()
 
   function createData() {
     return {
@@ -31,9 +34,12 @@ export function useSignup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     if (data.password === data.confirmPass) {
       console.log(data);
+      setTimeout(() => {
+        navigate("/login")
+      }, 1500);
+      handleOpenSnackbar("Registration successful, please log in to access the app")
     } else {
       setPassError(`Please, confirm your password correctly`);
     }

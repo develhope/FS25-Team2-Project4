@@ -1,17 +1,16 @@
 import { NavigationLink } from "./NavigationLink/NavigationLink";
-
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
-import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
-
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuth } from "../../hooks/Auth/useAuth";
 import classes from "./SideMenu.module.scss";
-import { LogoutButton } from "../authentication/Logout/LogoutButton";
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
+  const { logout, isAuthenticated } = useAuth();
+
   return (
     <div>
       <div
@@ -51,31 +50,26 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             destination="/settings"
             icon={<SettingsOutlinedIcon fontSize="small" />}
           />
-          <NavigationLink
-            path={path}
-            handleMenuToggle={handleMenuToggle}
-            label="Login"
-            destination="/login"
-            icon={<LoginOutlinedIcon fontSize="small" />}
-          />
-          <NavigationLink
-            path={path}
-            handleMenuToggle={handleMenuToggle}
-            label="Sign up"
-            destination="/signup"
-            icon={<AppRegistrationOutlinedIcon fontSize="small" />}
-          />
-          <NavigationLink
-            path={path}
-            handleMenuToggle={handleMenuToggle}
-            label="Results"
-            destination="/recipes-results"
-            icon={<MenuBookOutlinedIcon fontSize="small" />}
-          />
+          <div className={classes.separator} />
+          {isAuthenticated ? (
+            <NavigationLink
+              path={path}
+              handleMenuToggle={handleMenuToggle}
+              label={"Logout"}
+              destination={"/login"}
+              icon={<LogoutIcon fontSize="small" />}
+              action={logout}
+            />
+          ) : (
+            <NavigationLink
+              path={path}
+              handleMenuToggle={handleMenuToggle}
+              label="Login"
+              destination="/login"
+              icon={<LoginOutlinedIcon fontSize="small" />}
+            />
+          )}
         </section>
-        <div className={classes.logoutBtn}>
-          <LogoutButton />
-        </div>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 @use "../../assets/scss/" as *;
 
 .favoritePage {
-    transform: translateX(50%);
-    transition: transform 0.3s ease-in-out;
+    scale: 0.8;
+    transition: scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 
     overflow-y: scroll;
 
@@ -13,8 +13,9 @@
     flex-direction: column;
     gap: $size-16;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    padding: 1px $size-20 2rem;
+    padding: 1px $size-20 $size-20;
     border-radius: 0;
     .search {
         position: relative;
@@ -32,7 +33,76 @@
     }
 }
 
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+    padding: 0 1rem;
+    padding-bottom: 7em;
+    justify-content: center;
+    gap: 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    .placeholderImage {
+        box-sizing: border-box;
+        padding: 2rem;
+        padding-bottom: 0;
+        border-radius: 1.5rem;
+        svg {
+            object-fit: contain;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+.placeholderSearch {
+    padding:2rem 0;
+    justify-content: flex-start;
+    .placeholderImage{
+        padding-top: 0;
+    }
+}
+.placeholder h2 {
+    color: $dark-gray;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+
+    font-family: $font-title;
+    font-weight: 700;
+    font-size: $size-20;
+    span {
+        background-color: #00a538;
+        border-radius: 0.5rem;
+        padding: 0 0.5rem;
+        color: white;
+    }
+}
+.placeholder .cta {
+    position: fixed;
+    bottom: 1.5rem;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+
+    text-decoration: none;
+    color: white;
+    background-color: #00a538;
+
+    height: 120px;
+    min-height: 120px;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+}
+
 .animateFavorite {
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

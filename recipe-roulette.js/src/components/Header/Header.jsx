@@ -1,14 +1,16 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate, useNavigation } from "react-router-dom"
 import { useState, useEffect } from "react"
-
-import classes from "./Header.module.scss"
-import { Button } from "../Buttons/Button/Button"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import WavingHandRoundedIcon from "@mui/icons-material/WavingHandRounded"
-export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import classes from "./Header.module.scss"
+import { WindowSharp } from "@mui/icons-material"
+
+export function Header({ handleMenuToggle }) {
     const [title, setTitle] = useState("/")
+    const { targetedRecipe, setTargetedRecipe } = useRecipesContext()
+    const navigate = useNavigate()
     const location = useLocation()
 
     useEffect(() => {
@@ -28,6 +30,16 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
             case "/recipes-results":
                 setTitle("Results")
                 break
+            case "/recipe":
+                try {
+                    const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
+                    if (currentTargetedRecipe) {
+                        setTargetedRecipe(currentTargetedRecipe)
+                        setTitle(currentTargetedRecipe.title)
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
         }
     }, [location.pathname])
 
@@ -35,11 +47,38 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
         location.pathname !== "/login" &&
         location.pathname !== "/signup" && (
             <header>
-                <h1>{title}</h1>
+                <div className={classes.leftItems}>
+                    {location.pathname === "/recipes-results" ? (
+                        <div onClick={() => navigate("/discovery")} className={classes.backIcon}>
+                            <ArrowBackIcon stroke={2} fontSize="small" />
+                        </div>
+                    ) : null}
+                    {location.pathname === "/recipe" ? (
+                        <div
+                            onClick={() => {
+                                try {
+                                    const path = localStorage.getItem("prevPath")
+                                    if (path) {
+                                        navigate(path)
+                                    } else {
+                                        navigate("/")
+                                    }
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }}
+                            className={classes.backIcon}
+                        >
+                            <ArrowBackIcon stroke={2} fontSize="small" />
+                        </div>
+                    ) : null}
+
+                    <h1>{title}</h1>
+                </div>
 
                 <div className={classes.rightItems}>
                     <div className={classes.menu}>
-                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null }
+                        {location.pathname !== "/" ? <MenuOutlinedIcon onClick={handleMenuToggle} /> : null}
                     </div>
                 </div>
             </header>
