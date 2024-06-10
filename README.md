@@ -4,4 +4,4 @@ Members:
 - Alessandro Canonico
 - Ilyas Macaluso
 - Andrea Audisio
-- Francesco Setti
+- Francesco Damiata
