@@ -24,8 +24,8 @@ export function RecipeResults() {
                     {searchFilteredRecipes.map((recipe) => {
                         return (
                             <RecipeCard
-                                recipeId={recipe.id}
                                 key={recipe.id}
+                                recipeId={recipe.id}
                                 title={recipe.title}
                                 image={recipe.image}
                                 attributes={recipe.attributes}

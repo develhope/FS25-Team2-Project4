@@ -27,7 +27,7 @@ export const RecipesProvider = ({ children }) => {
         caloricApport: 9999,
     })
     const [filteredRecipes, setFilteredRecipes] = useState([])
-    const [searchFilteredRecipes, setSeatchFilteredRecipes] = useState([])
+    const [searchFilteredRecipes, setSearchFilteredRecipes] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [recipeAnimation, setRecipeAnimation] = useState(true)
 
@@ -36,10 +36,10 @@ export const RecipesProvider = ({ children }) => {
     }, [location.pathname])
 
     useEffect(() => {
-        setSeatchFilteredRecipes(
+        setSearchFilteredRecipes(
             filteredRecipes.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase()))
         )
-    }, [inputValue, filteredRecipes])
+    }, [inputValue])
 
     //sessionStorage useffect
     useEffect(() => {
@@ -53,11 +53,11 @@ export const RecipesProvider = ({ children }) => {
             if (sessionRecipes && sessionRecipes.length > 0) {
                 setRecipes(sessionRecipes)
                 setFilteredRecipes(sessionRecipes)
-                setSeatchFilteredRecipes(sessionRecipes)
+                setSearchFilteredRecipes(sessionRecipes)
             } else {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
-                setSeatchFilteredRecipes(recipesArray)
+                setSearchFilteredRecipes(recipesArray)
             }
             sessionFilter && setRecipeFilter(sessionFilter)
         } catch (error) {
@@ -102,7 +102,6 @@ export const RecipesProvider = ({ children }) => {
             (recipe) =>
                 recipe.caloricApport <= recipeFilter.caloricApport && recipe.preparationTime <= recipeFilter.preparationTime
         )
-
         if (recipeFilter.isGlutenFree) {
             filtering = filtering.filter((item) => item.isGlutenFree)
         }
@@ -122,6 +121,7 @@ export const RecipesProvider = ({ children }) => {
         }
 
         setFilteredRecipes(filtering)
+        setSearchFilteredRecipes(filtering)
     }, [recipeFilter, recipes])
 
     const toggleRecipeFilter = (prop) => {
