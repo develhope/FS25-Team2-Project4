@@ -35,10 +35,9 @@
     font-weight: bold;
     margin: 0;
     line-height: 130%;
-
 }
 .discoveryPreview .mainContent h2 span {
-    background-color: #00A538;
+    background-color: #00a538;
     color: white;
     padding: 0 .5rem;
     border-radius: .5rem;
@@ -49,17 +48,12 @@
     height: 0;
     flex-grow: 1;
 
-    border-radius: 1.5rem;
-    padding: 1rem;
-    padding-bottom: 0;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    margin: 0;
 
 }
 
-.discoveryPreview .mainContent p {
-    margin: 0;
-}
 .discoveryPreview .mainContent .cta {
     display: flex;
     justify-content: center;
@@ -68,7 +62,6 @@
     font-weight: 600;
     letter-spacing: .025rem;
     font-family: $header-text;
-
 
     text-decoration: none;
     color: white;
@@ -79,27 +72,6 @@
     padding: 1rem;
     border-radius: 1.25rem;
     box-sizing: border-box;
-}
-
-.discoveryPreview .mainContent .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: $header-text;
-    font-weight: 500;
-
-
-    text-decoration: none;
-    color: #007E2B;
-    background-color: white;
-
-    height: 3rem;
-    padding: 1rem;
-    border-radius: 1.5rem;
-    box-sizing: border-box;
-
-    border: 1px solid #007E2B;
 }
 
 .discoveryPreviewAnimate{

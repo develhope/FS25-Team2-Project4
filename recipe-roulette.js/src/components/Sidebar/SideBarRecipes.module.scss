@@ -41,46 +41,44 @@
         opacity 0.4s ease;
 
     header {
-        padding: 0 $size-24;
+        padding: 0 $size-20;
+        padding-right: .75rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: $height-80;
+        height: 3.75rem;
         border-bottom: 1px solid $light-gray;
+        button {
+            height: 32px;
+            padding-left: 0.5rem;
+            padding-right: 0.75rem;
+            gap: 0.25rem;
+        }
         h2 {
-            font-family: $header-text;
             color: $dark-gray;
-            font-weight: 600;
+            font-family: $header-text;
+            font-size: $text-size-20;
+            font-weight: 700;
+            margin: 0;
         }
         .rightItems {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
         .closeIco {
-            color: $darkish-gray;
             display: flex;
             box-sizing: border-box;
             align-items: center;
+            justify-content: center;
             background-color: transparent;
-            border: none;
             height: 2rem;
             width: 2rem;
-        }
-        .deselectAllButton {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: $text-size-14;
-            width: fit-content;
-            height: $height-40;
-            color: $dark-gray;
-            font-weight: 600;
-            border: 1px solid #e5e0df;
-            border-radius: $size-20;
-            background-color: white;
-            padding: 0 $size-16;
+            color: $darkish-gray;
+            svg {
+                stroke-width: 0.5px;
+                stroke: $dark-gray;
+            }
         }
     }
     .sidebarBody {

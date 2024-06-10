@@ -10,6 +10,7 @@
     box-sizing: border-box;
     padding: 0 $size-20;
     padding-bottom: $size-24;
+    padding-top: 2.75rem;
     font-size: $text-size-16;
     font-style: $font-text;
     color: $darkest-gray;
@@ -18,7 +19,6 @@
     gap: 0.75rem;
 }
 .recipesResultsPage .search {
-    position: relative;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -64,7 +64,7 @@
     padding: 1.5rem;
     .placeholderImage {
         box-sizing: border-box;
-        padding: 2rem;
+        padding: 1rem;
         padding-top: 0;
         padding-bottom: 0;
         border-radius: 1.5rem;
@@ -86,7 +86,7 @@
     font-weight: 700;
     font-size: $size-20;
     span {
-        background-color: #00a538;
+        background-color: #f1c21b;
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         color: white;

@@ -6,6 +6,7 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const { ing, blackList, displayedIng, handleDeselectAll, handleIngUpdate, setRefresh, filteredIng } = useManageIngredients()
     const { handleOpenSnackbar } = useSnackbar()
 
+    const [condition, setCondition] = useState(true)
     const [inputValues, setInputValues] = useState({ initial: "", current: "" })
     const [searchState, setSearchState] = useState({ inputActive: false })
     const [suggestions, setSuggestions] = useState(ing)
@@ -56,9 +57,6 @@ export function useIngredientSearch(isFixed, searchCriteria) {
             } else {
                 handleIngUpdate(prop, cardState, setCardState)
             }
-        } else {
-            // snackbar di avviso che spunta dal basso
-            handleOpenSnackbar("maximum number of ingredient reached!")
         }
         setSearchState({ inputActive: false })
         setInputValues((prev) => ({ ...prev, current: "" }))
@@ -96,14 +94,15 @@ export function useIngredientSearch(isFixed, searchCriteria) {
                 (dbIngredient) => !notAlreadySelected.some((blIngredient) => blIngredient.id === dbIngredient.id)
             )
             if (firstAvailableIngredient && selectedIngs.length === 8) {
-                handleOpenSnackbar("Maximum number of ingredients reached")
+                handleOpenSnackbar("You've reached the maximum number of ingredients!")
             }
         }
+        
         if (inputValues.current !== "" && firstAvailableIngredient) {
-                setInputValues((prev) => ({ ...prev, current: "" }))
-                setSearchState({ inputActive: false })
-                handleIngUpdate(prop, firstAvailableIngredient, setCardState)
-                setRefresh((b) => !b)
+            setInputValues((prev) => ({ ...prev, current: "" }))
+            setSearchState({ inputActive: false })
+            handleIngUpdate(prop, firstAvailableIngredient, setCardState)
+            setRefresh((b) => !b)
         } else {
             setInputValues((prev) => ({ ...prev, current: "" }))
             setSearchState({ inputActive: false })
@@ -115,10 +114,9 @@ export function useIngredientSearch(isFixed, searchCriteria) {
     const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
             handleInputDeactivation(searchCriteria)
-            //disattiva l'input dopo aver chiamato la funzione (previene comportamenti indesiderati)
-            setTimeout(() => {
-                e.target.blur()
-            }, 0)
+            handleBlur(e)
+        } else if (e.keyCode === 27) {
+            handleBlur(e)
         }
     }
 
@@ -141,9 +139,11 @@ export function useIngredientSearch(isFixed, searchCriteria) {
         handleReset,
         setInputValues,
         handleBlur,
+        setCondition,
         inputValues,
         searchState,
         suggestions,
         fixedPosition,
+        condition,
     }
 }

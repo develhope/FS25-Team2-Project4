@@ -1,81 +1,61 @@
-import { Link, useLocation } from "react-router-dom";
-import { useRecipeCard } from "./useRecipeCard";
+import { useLocation } from "react-router-dom"
+import { useRecipeCard } from "./useRecipeCard"
+import { useRecipesContext } from "../../contexts/RecipesContext"
+import { FilterChip } from "../FilterChip/FilterChip"
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import FavoriteIcon from "@mui/icons-material/Favorite"
+import ExpandLessIcon from "@mui/icons-material/ExpandLess"
+import Skeleton from "@mui/material/Skeleton"
 
-import { FilterChip } from "../FilterChip/FilterChip";
-import Skeleton from "@mui/material/Skeleton";
-
-import classes from "./RecipeCard.module.scss";
-import { useAuth } from "../../hooks/Auth/useAuth";
-import { useSnackbar } from "../Snackbar/useSnackbar";
-import { Snackbar } from "../Snackbar/Snackbar";
-
-const defaultTitle = "Card Title";
+import classes from "./RecipeCard.module.scss"
+import { useState } from "react"
 
 function RecipeCard({
-  recipeId,
-  isExpanded = false,
-  title = defaultTitle,
-  images = [
-    "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC",
-  ],
-  attributes,
-  isFav = false,
-  isGlutenFree = false,
-  isVegetarian = false,
-  isVegan = false,
-  ingredients = [],
-  preparation = [],
+    recipeId,
+    isExpanded = false,
+    title = "Card Title",
+    image = "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC",
+    attributes,
+    isFav = false,
+    isGlutenFree = false,
+    isVegetarian = false,
+    isVegan = false,
+    ingredients = [],
+    preparation = [],
 }) {
-  const {
-    handleCardState,
-    handleOpenRecipePage,
-    cardState,
-    expandedCard,
-    expandedIngredients,
-    handleIngWrapperState,
-  } = useRecipeCard(recipeId, isFav, isExpanded);
-  const location = useLocation();
-  const { isAuthenticated } = useAuth();
-  const { handleClickLoginSnackBar } = useSnackbar();
+    const { handleCardState, handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
+        useRecipeCard(recipeId, isFav, isExpanded)
+    const { recipeAnimation } = useRecipesContext()
+    const [animateMe, setAnimateMe] = useState(false)
+    const location = useLocation()
 
-  return (
-    <div
-      onClick={() => {
-        localStorage.setItem("prevPath", location.pathname);
-        handleOpenRecipePage();
-      }}
-      className={`${classes.recipeCard} ${
-        expandedCard && classes.recipeCardExpanded
-      }`}
-    >
-      {/* topItems */}
-      <div className={classes.topItems}>
+    setTimeout(() => {
+        setAnimateMe(true)
+    }, 0)
+
+    return (
         <div
-          onClick={
-            isAuthenticated
-              ? (e) => handleCardState(e)
-              : handleClickLoginSnackBar
-          }
-          className={`${classes.favIcon} ${
-            !cardState.isFavorited ? classes.notFav : classes.isFav
-          }`}
+            onClick={() => {
+                localStorage.setItem("prevPath", location.pathname)
+                handleOpenRecipePage()
+            }}
+            className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded} ${recipeAnimation && classes.animateRecipeCard}`}
         >
-          <FavoriteIcon stroke={"#3C3838"} strokeWidth={"1px"} />
-        </div>
-        {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
-        {false ? (
-          <Skeleton
-            sx={{ bgcolor: "#C5E4C9" }}
-            variant="rectangular"
-            height={"100%"}
-          />
-        ) : (
-          <img src={images[0]} alt="" />
-        )}
-      </div>
+            {/* topItems */}
+            <div className={classes.topItems}>
+                <div
+                    onClick={(e) => handleCardState(e)}
+                    className={`${classes.favIcon} ${!cardState.isFavorited ? classes.notFav : classes.isFav}`}
+                >
+                    <FavoriteIcon stroke={"#3C3838"} strokeWidth={"1px"} />
+                </div>
+                {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
+                {!image ? (
+                    <Skeleton className={classes.skeleton} sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
+                ) : (
+                    <img className={`${classes.imageInactive} ${animateMe && classes.imageActive}`} src={image} alt="" />
+                )}
+            </div>
 
       {/* bottomItems */}
       <div className={classes.bottomItems}>

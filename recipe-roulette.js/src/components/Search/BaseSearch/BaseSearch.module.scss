@@ -1,35 +1,128 @@
 @use "../../../assets/scss/" as *;
 
 .baseSearch {
-    position: inherit;
-    height: 40px;
+    position: relative;
+    height: fit-content;
     width: 100%;
+    transform: translateY(0);
     box-sizing: border-box;
-    transition: width .3s ease;
-    transform: translateX(0);
+    transition: width 0.3s ease;
+    border-radius: 2rem;
+    outline: 1px solid $light-gray;
+    overflow: hidden;
 
-    input {
-        height: 100%;
+    transition:
+        transform 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        border-radius 0.1s cubic-bezier(0.08, 0.82, 0.17, 1);
+    .searchBar {
+        position: relative;
         box-sizing: border-box;
         width: 100%;
-        border: 1px solid $light-gray;
-        border-radius: 2rem;
-        padding: 0 1rem;
-        font-style: $font-text;
-        font-size: $size-16;
+        .input {
+            width: 90%;
+            background-color: transparent;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 1.25rem;
+            border: none;
+            font-family: $header-text;
+            font-size: $text-size-14;
+            font-weight: 500;
+        }
+        .ico {
+            color: $darkish-gray;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2rem;
+            width: 2rem;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
+
     :focus {
         outline: none;
         border: none;
-        background-color: $second-color;
+    }
+}
+.baseSearch .searchBar {
+    height: 40px;
+}
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem;
+    padding-top: 3rem;
+    .placeholderImage {
+        box-sizing: border-box;
+        padding: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-radius: 1.5rem;
+        height: 100%;
+        svg {
+            object-fit: cover;
+            height: 90%;
+            width: 100%;
+        }
     }
 }
 
-.baseSearchActive {
-    width: 105%;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: width .3s ease;
+.placeholder h2 {
+    color: $dark-gray;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 
+    font-family: $font-title;
+    font-weight: 700;
+    font-size: $size-20;
+    span {
+        background-color: #da1e28;
+        border-radius: 0.5rem;
+        padding: 0 0.5rem;
+        color: white;
+    }
+}
+.baseSearch .suggestionsWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    background-color: white;
+    transition: height 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+.baseSearchActive {
+    position: absolute;
+    transform: translateY(-3.75rem);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    border-radius: 0;
+
+    transition:
+        transform 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        border-radius 1s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.baseSearchActive .searchBar {
+    background-color: $second-color;
+    height: 3rem;
+    transition: height 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+.baseSearchActive .suggestionsWrapper {
+    height: 100svh;
+    overflow-y: scroll;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
 }

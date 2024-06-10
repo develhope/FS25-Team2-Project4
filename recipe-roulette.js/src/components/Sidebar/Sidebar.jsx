@@ -5,7 +5,7 @@ import { Switch } from "../Switch/Switch"
 import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
 import { Button } from "../Buttons/Button/Button"
 
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
+import CloseIcon from "@mui/icons-material/Close"
 import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
 
 export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
@@ -29,7 +29,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                             action={() => handleDeselectAll("isBlackListed")}
                         />
                         <div onClick={handleSidebarToggle} className={classes.closeIco}>
-                            <CloseOutlinedIcon />
+                            <CloseIcon stroke={2} fontSize="small" />
                         </div>
                     </div>
                 </header>
@@ -37,7 +37,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                     <div className={classes.blackListedWrapper}>
                         <h4>Add ingredeints to black list</h4>
                         <div className={classes.blackListed}>
-                            <IngredientSearch isFixed={false} searchCriteria="isBlackListed" />
+                            <IngredientSearch isFixed={true} searchCriteria="isBlackListed" />
                             {blackList.length > 0 && (
                                 <div className={classes.filterChipWrapper}>
                                     {blackList
@@ -62,8 +62,18 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                     <div className={classes.preferences}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
-                            <Switch state={filter.isGlutenFree} action={toggleFilter} label={"Gluten free"} prop={"isGlutenFree"} />
-                            <Switch state={filter.isVegetarian} action={toggleFilter} label={"Vegetarian"} prop={"isVegetarian"} />
+                            <Switch
+                                state={filter.isGlutenFree}
+                                action={toggleFilter}
+                                label={"Gluten free"}
+                                prop={"isGlutenFree"}
+                            />
+                            <Switch
+                                state={filter.isVegetarian}
+                                action={toggleFilter}
+                                label={"Vegetarian"}
+                                prop={"isVegetarian"}
+                            />
                             <Switch state={filter.isVegan} action={toggleFilter} label={"Vegan"} prop={"isVegan"} />
                         </div>
                     </div>

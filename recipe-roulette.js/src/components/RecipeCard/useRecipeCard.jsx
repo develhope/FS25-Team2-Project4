@@ -27,10 +27,8 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     }
 
     function handleOpenRecipePage() {
-        if (isAuthenticated) {
-            navigate("/recipe")
-        }
         handleTargetedRecipe(cardState)
+        navigate("/recipe")
     }
 
     return {

@@ -1,14 +1,17 @@
 @use "../../../assets/scss/" as *;
 
 .container {
+    position: absolute;
     display: flex;
     flex-direction: column;
     background-color: $accent-color;
     box-sizing: border-box;
     border-radius: $size-16;
-    width: 100%;
+    width: calc(100vw - 3rem);
     font-size: $text-size-14;
-    animation: fadeIn 0.5s ease-in-out forwards
+    transition:
+        height .45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        width .45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 
 .title {
@@ -16,6 +19,7 @@
     width: 100%;
     font-size: $text-size-20;
     padding: 1.5rem;
+    padding-top: 1rem;
     padding-bottom: 0;
     h1 {
         margin: 0;
@@ -50,16 +54,18 @@
             font-size: $text-size-16;
             font-family: $header-text;
         }
-        ::placeholder {
-          font-size: $text-size-16;
-          color: $medium-light-gray;
+        :focus {
+            outline: 2px solid $main-color;
         }
-
+        ::placeholder {
+            font-size: $text-size-16;
+            color: $medium-light-gray;
+        }
         label {
             font-family: $font-text;
             display: block;
-            padding-top: .75rem;
-            padding-bottom: 0.5rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.25rem;
             padding-left: 0.25rem;
             font-size: $text-size-16;
             font-family: $header-text;
@@ -88,5 +94,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.75rem;
+    gap: 0.5rem;
+}
+
+.active {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    border-radius: 0;
+    transition:
+        height .45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        width .45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

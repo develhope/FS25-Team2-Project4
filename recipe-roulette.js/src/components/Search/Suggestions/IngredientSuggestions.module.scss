@@ -6,14 +6,11 @@
 
     width: 100%;
     height: 0;
-    padding: 0 .75rem;
+    padding: 0 0.75rem;
     box-sizing: border-box;
-    opacity: 0;
-    background-color: $third-color;
+    opacity: 1;
+    background-color: white;
     overflow-y: scroll;
-    border-radius: 0 0 $size-24 $size-24;
-    outline: 1px solid $lighter-gray;
-    outline-offset: -2px;
 
     display: flex;
     flex-direction: column;
@@ -27,29 +24,31 @@
     .activeSuggestion {
         color: $dark-gray;
     }
-    & :hover {
-        background-color: $second-color;
-    }
-    & :active {
-        background-color: $second-color;
-    }
     .inactiveSuggestion {
         color: rgb(198, 198, 198);
     }
 }
+.activeSuggestion:hover {
+    background-color: $second-color;
+}
+.activeSuggestion:active {
+    background-color: $second-color;
+}
 .active {
     opacity: 1;
     padding: 0.75rem;
-
-    height: 312px;
+    height: 100svh;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
     transition:
-        opacity 0.3s ease,
-        padding 0.3s ease,
-        height 0.3s ease;
+        opacity 0.4s ease,
+        padding 0.4s ease,
+        height 0.4s ease;
 }
 
 .ingredientSuggestion {
-    border-radius: 2rem;
+    font-family: $header-text;
+    border-radius: 1rem;
     width: 100%;
     min-height: 2.5rem;
     display: flex;
@@ -57,15 +56,57 @@
     gap: 0.75rem;
     margin: 0;
     padding: 0 1rem;
-    font-size: $text-size-16;
-    background-color: $third-color;
+    font-size: $text-size-14;
+    background-color: white;
     box-sizing: border-box;
+    font-weight: 500;
 }
 .lockedSuggestion {
-    font-weight: 500;
     color: $dark-gray;
     background-color: $second-color;
 }
 .ingredientSuggestion:hover {
     cursor: pointer;
+}
+
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem;
+    padding-top: 3rem;
+    .placeholderImage {
+        box-sizing: border-box;
+        padding: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-radius: 1.5rem;
+        height: 100%;
+        svg {
+            object-fit: cover;
+            height: 90%;
+            width: 100%;
+        }
+    }
+}
+
+.placeholder h2 {
+    color: $dark-gray;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+
+    font-family: $font-title;
+    font-weight: 700;
+    font-size: $size-20;
+    span {
+        background-color: #da1e28;
+        border-radius: 0.5rem;
+        padding: 0 0.5rem;
+        color: white;
+    }
 }

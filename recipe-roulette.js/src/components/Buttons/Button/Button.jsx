@@ -9,7 +9,7 @@ export function Button({
     action,
     active = true,
     link = null,
-    style = "secondary"
+    style = "secondary",
 }) {
     const navigate = useNavigate()
 
@@ -18,7 +18,9 @@ export function Button({
             type={type}
             onClick={() => {
                 action && action()
-                link && navigate(`/${link}`)
+                setTimeout(() => {
+                    link && navigate(`/${link}`)
+                }, 0)
             }}
             className={`${classes.button} ${!active && classes.disabled} 
             ${width === "fill" && classes.wideButton}

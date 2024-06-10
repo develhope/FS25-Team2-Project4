@@ -1,17 +1,14 @@
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
-import { IngredientSearch } from "../../components/Search/SearchBar/IngredientSearch"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
 
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { Button } from "../../components/Buttons/Button/Button"
-import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
 
 import { useButtonState } from "../../hooks/ButtonState/useButtonState"
 import { useMemo, useState } from "react"
 
-import TuneIcon from "@mui/icons-material/Tune"
-import LockResetIcon from "@mui/icons-material/LockReset"
+
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined"
 import AddIcon from "@mui/icons-material/Add"
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
@@ -35,11 +32,6 @@ export function Discovery({ handleSidebarToggle }) {
     return (
         <div className={`${classes.discoveryPage} ${animate && classes.animateDiscovery}`}>
             <div className={classes.contentWrapper}>
-                <div className={classes.globalActions}>
-                    <IngredientSearch isFixed={true} searchCriteria="isSelected" />
-                    <IcoButton action={() => handleSidebarToggle()} icon={<TuneIcon fontSize={"small"} />} />
-                    <IcoButton action={() => handleDeselectAll("isSelected")} icon={<LockResetIcon fontSize={"medium"} />} />
-                </div>
                 <div className={classes.ingredientsWrapper}>
                     {displayedIng.length > 0 &&
                         displayedIng.map((ing) => {
