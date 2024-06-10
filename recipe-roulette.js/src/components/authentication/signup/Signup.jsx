@@ -81,7 +81,7 @@ export function Signup() {
                         type="submit"
                         label="Sign up"
                         icon={<EditNoteIcon fontSize="small" />}
-                        active={data.username && data.password && data.confirmPass && data.email &&data.check}
+                        active={data.username && data.password && data.confirmPass && data.email && data.check}
                         link={" "}
                     />
                     <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />

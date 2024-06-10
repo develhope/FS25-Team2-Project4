@@ -9,6 +9,7 @@ import Skeleton from "@mui/material/Skeleton"
 
 import classes from "./RecipeCard.module.scss"
 import { useState } from "react"
+import { Snackbar } from "../Snackbar/Snackbar"
 
 function RecipeCard({
     recipeId,
