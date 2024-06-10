@@ -39,6 +39,7 @@ export const IngredientsProvider = ({ children }) => {
         const newState = !filter[prop]
         setFilter((prevData) => ({ ...prevData, [prop]: newState }))
         setState(newState)
+        /**/ console.log(filter)
     }
 
     const handleIngUpdate = (prop, cardState, setCardState) => {
