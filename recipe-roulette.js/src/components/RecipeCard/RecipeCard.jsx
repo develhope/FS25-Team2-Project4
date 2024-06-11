@@ -9,9 +9,7 @@ import Skeleton from "@mui/material/Skeleton"
 
 import classes from "./RecipeCard.module.scss"
 import { useState } from "react"
-import { Snackbar } from "../Snackbar/Snackbar"
 import { useAuth } from "../../hooks/Auth/useAuth"
-import { useSnackbar } from "../Snackbar/useSnackbar"
 
 function RecipeCard({
     handleClickLoginSnackBar,
@@ -41,8 +39,10 @@ function RecipeCard({
     return (
         <div
             onClick={() => {
-                localStorage.setItem("prevPath", location.pathname)
-                handleOpenRecipePage()
+                if (!expandedCard) {
+                    localStorage.setItem("prevPath", location.pathname)
+                    handleOpenRecipePage()
+                }
             }}
             className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded} ${recipeAnimation && classes.animateRecipeCard}`}
         >

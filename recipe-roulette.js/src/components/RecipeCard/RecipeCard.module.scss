@@ -103,6 +103,10 @@
 /* card espansa (quella che si vede nella pagina "/recipe") */
 .recipeCardExpanded {
     outline: none;
+    border-radius: 0;
+    height: 100%;
+    padding-bottom: 2rem;
+    overflow-y: scroll;
     .bottomItems {
         padding: 0;
         padding-top: 1rem;
@@ -113,7 +117,6 @@
     .topItems {
         outline: none;
     }
-    overflow: visible;
 }
 .recipeCardExpanded:hover {
     box-shadow: none;

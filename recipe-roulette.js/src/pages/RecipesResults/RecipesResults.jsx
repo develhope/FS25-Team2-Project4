@@ -14,8 +14,6 @@ export function RecipeResults() {
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
-            <Snackbar />
-
             <div className={classes.subHeading}>
                 <div className={classes.chipWrapper}>
                     <FilterChipRecipes filterType={"preparationTime"} label="All" />
@@ -192,6 +190,7 @@ export function RecipeResults() {
                     </div>
                 </div>
             )}
+            <Snackbar />
         </div>
     )
 }
