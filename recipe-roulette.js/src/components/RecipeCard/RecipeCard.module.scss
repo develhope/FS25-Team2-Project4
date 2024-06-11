@@ -12,11 +12,12 @@
     color: inherit;
     overflow: hidden;
     transition: scale 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    min-height: fit-content;
 
     .topItems {
         position: relative;
         width: 100%;
-        height: calc(100vw * 0.5);
+        height: 12rem;
         min-height: 12rem;
         overflow: hidden;
         outline: 2px solid $lighter-gray;

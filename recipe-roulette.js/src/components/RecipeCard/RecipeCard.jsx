@@ -10,8 +10,11 @@ import Skeleton from "@mui/material/Skeleton"
 import classes from "./RecipeCard.module.scss"
 import { useState } from "react"
 import { Snackbar } from "../Snackbar/Snackbar"
+import { useAuth } from "../../hooks/Auth/useAuth"
+import { useSnackbar } from "../Snackbar/useSnackbar"
 
 function RecipeCard({
+    handleClickLoginSnackBar,
     recipeId,
     isExpanded = false,
     title = "Card Title",
@@ -27,7 +30,8 @@ function RecipeCard({
     const { handleCardState, handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
         useRecipeCard(recipeId, isFav, isExpanded)
     const { recipeAnimation } = useRecipesContext()
-    const [animateMe, setAnimateMe] = useState(false)
+    const { isAuthenticated } = useAuth()
+    const [animateMe, setAnimateMe] = useState(false) //animazione fade immagine
     const location = useLocation()
 
     setTimeout(() => {
@@ -45,7 +49,10 @@ function RecipeCard({
             {/* topItems */}
             <div className={classes.topItems}>
                 <div
-                    onClick={(e) => handleCardState(e)}
+                    onClick={(e) => {
+                        isAuthenticated ? handleCardState(e) : handleClickLoginSnackBar(e)
+                        e.stopPropagation()
+                    }}
                     className={`${classes.favIcon} ${!cardState.isFavorited ? classes.notFav : classes.isFav}`}
                 >
                     <FavoriteIcon stroke={"#3C3838"} strokeWidth={"1px"} />
@@ -58,77 +65,69 @@ function RecipeCard({
                 )}
             </div>
 
-      {/* bottomItems */}
-      <div className={classes.bottomItems}>
-        <section className={classes.chipsWrapper}>
-          {isVegan && <FilterChip label={"Vegan"} />}
-          {isVegetarian && <FilterChip label={"Vegetarian"} />}
-          {isGlutenFree && <FilterChip label={"GlutenFree"} />}
+            {/* bottomItems */}
+            <div className={classes.bottomItems}>
+                <section className={classes.chipsWrapper}>
+                    {isVegan && <FilterChip label={"Vegan"} />}
+                    {isVegetarian && <FilterChip label={"Vegetarian"} />}
+                    {isGlutenFree && <FilterChip label={"GlutenFree"} />}
 
-          {attributes &&
-            attributes.length > 0 &&
-            attributes.map((chip, index) => (
-              <FilterChip key={index} label={chip} />
-            ))}
-        </section>
-        {!expandedCard && <p className={classes.title}>{title}</p>}
-      </div>
-
-      {expandedCard && (
-        <div className={classes.recipeBody}>
-          <ul
-            className={`${classes.ingredients} ${
-              expandedIngredients
-                ? classes.ingredientsExpanded
-                : classes.ingredientsCollapsed
-            }`}
-          >
-            <div
-              onClick={(e) => handleIngWrapperState(e)}
-              className={classes.ingredientsHeader}
-            >
-              <h4>Ingredients</h4>
-              <ExpandLessIcon className={classes.ico} fontSize="small" />
+                    {attributes &&
+                        attributes.length > 0 &&
+                        attributes.map((chip, index) => <FilterChip key={index} label={chip} />)}
+                </section>
+                {!expandedCard && <p className={classes.title}>{title}</p>}
             </div>
-            <ul>
-              {ingredients.length > 0 &&
-                ingredients.map((ingredient, index) => {
-                  return <li key={index}>{ingredient}</li>;
-                })}
-            </ul>
-          </ul>
 
-          <div className={classes.preparation}>
-            <h2>Preparazione</h2>
-            {preparation.length > 0 && (
-              <ol>
-                {preparation.map((steps, index) => {
-                  return (
-                    <li key={index} className={classes.step}>
-                      {steps[0]}
-                      <ul>
-                        {steps.length > 0 &&
-                          steps.map((step, index) => {
-                            if (index > 0) {
-                              return (
-                                <li key={index} className={classes.detail}>
-                                  {step}
-                                </li>
-                              );
-                            }
-                          })}
-                      </ul>
-                    </li>
-                  );
-                })}
-              </ol>
+            {expandedCard && (
+                <div className={classes.recipeBody}>
+                    <ul
+                        className={`${classes.ingredients} ${
+                            expandedIngredients ? classes.ingredientsExpanded : classes.ingredientsCollapsed
+                        }`}
+                    >
+                        <div onClick={(e) => handleIngWrapperState(e)} className={classes.ingredientsHeader}>
+                            <h4>Ingredients</h4>
+                            <ExpandLessIcon className={classes.ico} fontSize="small" />
+                        </div>
+                        <ul>
+                            {ingredients.length > 0 &&
+                                ingredients.map((ingredient, index) => {
+                                    return <li key={index}>{ingredient}</li>
+                                })}
+                        </ul>
+                    </ul>
+
+                    <div className={classes.preparation}>
+                        <h2>Preparazione</h2>
+                        {preparation.length > 0 && (
+                            <ol>
+                                {preparation.map((steps, index) => {
+                                    return (
+                                        <li key={index} className={classes.step}>
+                                            {steps[0]}
+                                            <ul>
+                                                {steps.length > 0 &&
+                                                    steps.map((step, index) => {
+                                                        if (index > 0) {
+                                                            return (
+                                                                <li key={index} className={classes.detail}>
+                                                                    {step}
+                                                                </li>
+                                                            )
+                                                        }
+                                                    })}
+                                            </ul>
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        )}
+                    </div>
+                </div>
             )}
-          </div>
         </div>
-      )}
-      <Snackbar />
-    </div>
-  );
+    )
 }
 
-export default RecipeCard;
+export default RecipeCard

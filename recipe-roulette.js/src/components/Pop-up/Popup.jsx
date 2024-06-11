@@ -8,7 +8,7 @@ export function PopupLogin({ onClose, children }) {
 
   return (
     <div className={classes.overlay} onClick={onClose}>
-      <div className={classes.popup} onClick={stopPropagation}>
+      <div className={classes.popup} onClick={(e) => stopPropagation(e)}>
         {children}
       </div>
     </div>

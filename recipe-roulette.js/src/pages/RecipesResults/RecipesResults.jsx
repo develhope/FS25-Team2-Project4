@@ -4,13 +4,18 @@ import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
 import classes from "./RecipesResults.module.scss"
 import { useRecipesContext } from "../../contexts/RecipesContext"
+import { Snackbar } from "../../components/Snackbar/Snackbar"
+import { useSnackbar } from "../../components/Snackbar/useSnackbar"
 
 export function RecipeResults() {
     const { animate } = useAnimate()
     const { searchFilteredRecipes } = useRecipesContext()
+    const { handleClickLoginSnackBar } = useSnackbar()
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
+            <Snackbar />
+
             <div className={classes.subHeading}>
                 <div className={classes.chipWrapper}>
                     <FilterChipRecipes filterType={"preparationTime"} label="All" />
@@ -24,6 +29,7 @@ export function RecipeResults() {
                     {searchFilteredRecipes.map((recipe) => {
                         return (
                             <RecipeCard
+                                handleClickLoginSnackBar={handleClickLoginSnackBar}
                                 key={recipe.id}
                                 recipeId={recipe.id}
                                 title={recipe.title}

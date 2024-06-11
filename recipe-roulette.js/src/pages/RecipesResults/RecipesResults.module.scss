@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
     padding: 0 $size-20;
     padding-bottom: $size-24;
@@ -14,9 +15,9 @@
     font-size: $text-size-16;
     font-style: $font-text;
     color: $darkest-gray;
-
-    overflow-y: scroll;
-    gap: 0.75rem;
+    padding-bottom: 0;
+    overflow: visible;
+        gap: 0.75rem;
 }
 .recipesResultsPage .search {
     width: 100%;
@@ -46,11 +47,14 @@
 
 .recipesWrapper {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: $size-20;
     box-sizing: border-box;
+    padding: 0 1px;
     width: 100%;
-    height: fit-content;
+    height: 100%;
+    overflow:visible;
+    overflow-y: scroll;
 }
 .placeholder {
     display: flex;
