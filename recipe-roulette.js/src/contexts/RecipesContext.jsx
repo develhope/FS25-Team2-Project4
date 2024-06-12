@@ -126,7 +126,7 @@ export const RecipesProvider = ({ children }) => {
 
         setFilteredRecipes(filtering)
         setSearchFilteredRecipes(filtering)
-    }, [recipes])
+    }, [recipes, recipeFilter])
 
     const toggleRecipeFilter = (prop) => {
         const newState = !recipeFilter[prop]
