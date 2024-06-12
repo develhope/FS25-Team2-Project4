@@ -60,7 +60,7 @@ function RecipeCard({
                 {!image ? (
                     <Skeleton className={classes.skeleton} sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
                 ) : (
-                    <img className={`${classes.imageInactive} ${animateMe && classes.imageActive}`} src={image} alt="" />
+                    <img /* className={`${classes.imageInactive} ${animateMe && classes.imageActive}`} */ src={image} alt="" />
                 )}
             </div>
 

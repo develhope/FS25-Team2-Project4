@@ -51,7 +51,6 @@ export const RecipesProvider = ({ children }) => {
             const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
             const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"))
             const authToken = JSON.parse(window.localStorage.getItem("authToken"))
-            console.log(authToken);
             if (localRecipes && localRecipes.length > 0 && authToken) {
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)

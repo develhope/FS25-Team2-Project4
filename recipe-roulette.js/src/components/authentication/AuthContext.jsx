@@ -29,7 +29,6 @@ export function AuthProvider({ children }) {
     function logout() {
         window.localStorage.removeItem("authToken")
         setIsAuthenticated(false)
-        console.log(isAuthenticated)
     }
 
     return <AuthContext.Provider value={{ isAuthenticated, login, logout }}>{children}</AuthContext.Provider>
