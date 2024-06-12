@@ -5,7 +5,8 @@ import { useMemo } from "react"
 import { Link } from "react-router-dom"
 
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
-import LoginIcon from '@mui/icons-material/Login';import { useAuth } from "../../hooks/Auth/useAuth"
+import LoginIcon from "@mui/icons-material/Login"
+import { useAuth } from "../../hooks/Auth/useAuth"
 
 import classes from "./Favorite.module.scss"
 

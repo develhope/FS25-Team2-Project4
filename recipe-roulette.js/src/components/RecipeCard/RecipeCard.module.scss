@@ -101,6 +101,9 @@
 }
 
 /* card espansa (quella che si vede nella pagina "/recipe") */
+.recipeCardExpanded::-webkit-scrollbar{
+    width: 0;
+}
 .recipeCardExpanded {
     outline: none;
     border-radius: 0;

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
+import { useAuth } from "../hooks/Auth/useAuth"
 
 const RecipesContext = createContext()
 
@@ -48,12 +49,15 @@ export const RecipesProvider = ({ children }) => {
                 const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
                 currentTargetedRecipe && setTargetedRecipe(currentTargetedRecipe)
             }
-            const sessionRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
-            const sessionFilter = JSON.parse(window.sessionStorage.getItem("recipeFilter"))
-            if (sessionRecipes && sessionRecipes.length > 0) {
-                setRecipes(sessionRecipes)
-                setFilteredRecipes(sessionRecipes)
-                setSearchFilteredRecipes(sessionRecipes)
+            const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
+            const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"))
+            const authToken = JSON.parse(window.localStorage.getItem("authToken"))
+            console.log(authToken);
+            localRecipes.forEach(rec => console.log(rec.isFavorited))
+            if (localRecipes && localRecipes.length > 0 && authToken) {
+                setRecipes(localRecipes)
+                setFilteredRecipes(localRecipes)
+                setSearchFilteredRecipes(localRecipes)
             } else {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
@@ -63,13 +67,15 @@ export const RecipesProvider = ({ children }) => {
         } catch (error) {
             console.error(error)
         }
-    }, [])
+    }, [location.pathname])
 
     useEffect(() => {
+        const authToken = JSON.parse(window.localStorage.getItem("authToken"))
         try {
-            if (recipes && recipes.length > 0) {
+            if (recipes && recipes.length > 0 && authToken) {
                 const jsonRecipes = JSON.stringify(recipes)
-                window.sessionStorage.setItem("recipes", jsonRecipes)
+                window.localStorage.setItem("recipes", jsonRecipes)
+                console.log("recipes localStorage updated"); //messaggio di conferma
             }
         } catch (error) {
             console.error(error)
@@ -86,7 +92,7 @@ export const RecipesProvider = ({ children }) => {
             console.error(error)
         }
 
-        //animazoni card quando si cambiano i filtr
+        //animazoni card quando si cambiano i filtri
         if (recipeAnimation) {
             setTimeout(() => {
                 setRecipeAnimation(false)
@@ -122,7 +128,7 @@ export const RecipesProvider = ({ children }) => {
 
         setFilteredRecipes(filtering)
         setSearchFilteredRecipes(filtering)
-    }, [recipeFilter, recipes])
+    }, [recipes])
 
     const toggleRecipeFilter = (prop) => {
         const newState = !recipeFilter[prop]
@@ -134,7 +140,7 @@ export const RecipesProvider = ({ children }) => {
             return recipe.id === recipeState.id ? { ...recipe, isFavorited: !recipeState.isFavorited } : recipe
         })
         const updatedRecipe = updatedRecipes.find((recipe) => recipe.id === recipeState.id)
-        //guarda qui in caso di bug
+        //guarda qui in caso di bug (serve per quando si levano dai preferiti le ricette)
         setTimeout(() => {
             setRecipes(updatedRecipes)
             setFilteredRecipes(updatedRecipes)

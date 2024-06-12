@@ -57,7 +57,6 @@ function RecipeCard({
                 >
                     <FavoriteIcon stroke={"#3C3838"} strokeWidth={"1px"} />
                 </div>
-                {/* da implementare la logica per capire se il caricamento dell'immagine è finito */}
                 {!image ? (
                     <Skeleton className={classes.skeleton} sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
                 ) : (

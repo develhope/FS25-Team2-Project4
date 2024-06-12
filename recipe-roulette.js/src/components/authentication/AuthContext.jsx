@@ -7,8 +7,8 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         try {
-            const sessionAuthentication = JSON.parse(window.localStorage.getItem("authToken"))
-            if (sessionAuthentication) {
+            const localAuthentication = JSON.parse(window.localStorage.getItem("authToken"))
+            if (localAuthentication) {
                 setIsAuthenticated(true)
             }
         } catch (error) {
