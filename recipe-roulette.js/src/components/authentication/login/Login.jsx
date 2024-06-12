@@ -11,9 +11,10 @@ import LoginIcon from "@mui/icons-material/Login"
 import StartIcon from "@mui/icons-material/Start"
 import { useInput } from "../../../hooks/useInput"
 
-export function Login() {
+export function Login({ setShowPopup = null }) {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
     const { inputState, handleBlur, handleInputActivation } = useInput()
+    const location = useLocation()
 
     return (
         <div className={`${classes.container} ${inputState && classes.active}`}>
@@ -21,7 +22,13 @@ export function Login() {
                 <h1>Login</h1>
             </header>
 
-            <form onSubmit={handleSubmit} className={classes.formBox}>
+            <form
+                onSubmit={(e) => {
+                    handleSubmit(e)
+                    setShowPopup && setShowPopup(false)
+                }}
+                className={classes.formBox}
+            >
                 <div className={classes.inputBox}>
                     <label htmlFor="username">Username</label>
                     <input
@@ -67,10 +74,16 @@ export function Login() {
                         style="primary"
                         type="submit"
                         label="Login"
+                        prevPath={location.pathname}
                         icon={<LoginIcon fontSize="small" />}
                         active={data.username && data.password}
                     />
-                    <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />
+                    <Button
+                        action={() => setShowPopup && setShowPopup(false)}
+                        prevPath={location.pathname}
+                        label="Skip"
+                        icon={<StartIcon fontSize="small" />}
+                    />
                 </div>
 
                 <div className={classes.message}>

@@ -8,21 +8,29 @@ export function Button({
     icon = null,
     action,
     active = true,
+    prevPath = null,
     link = null,
     style = "secondary",
 }) {
     const navigate = useNavigate()
 
+    function handleOnClick() {
+        if (active) {
+            action && action()
+            setTimeout(() => {
+                link && navigate(`/${link}`)
+                prevPath && prevPath === "/recipes-results" && navigate("/recipes-results")
+                prevPath && prevPath === "/login" && navigate("/")
+                prevPath && prevPath === "/signup" && navigate("/")
+            }, 0)
+        }
+    }
+
     return (
         <button
             type={type}
             onClick={() => {
-                if (active) {
-                    action && action()
-                    setTimeout(() => {
-                        link && navigate(`/${link}`)
-                    }, 0)
-                }
+                active && handleOnClick()
             }}
             className={`${classes.button} ${!active && classes.disabled} 
             ${width === "fill" && classes.wideButton}

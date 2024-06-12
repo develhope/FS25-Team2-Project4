@@ -54,12 +54,11 @@ export function useLogin() {
         })
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e, prevLocation) {
         e.preventDefault()
         setItem(data)
         login()
         console.log(data)
-        navigate("/")
     }
 
     function handleShowPassword() {

@@ -7,10 +7,12 @@ import { createPortal } from "react-dom"
 import { PopupLogin } from "../Pop-up/Popup"
 import { Button } from "../Buttons/Button/Button"
 import { Login } from "../authentication/login/Login"
+import { useLocation } from "react-router-dom"
 
 export function Snackbar() {
     const { isActive, message, handleCloseSnackbar, showBtn } = useSnackbar()
     const [showPopup, setShowPopup] = useState()
+    const location = useLocation()
 
     return (
         <div className={`${classes.snackbar} ${isActive ? classes.snackbarActive : classes.snackbarInactive}`}>
@@ -23,7 +25,7 @@ export function Snackbar() {
                 <MaterialSymbol className={classes.ico} icon="close" size={24} grade={24} />
             </div>
             {showPopup && createPortal(
-                <PopupLogin onClose={() => setShowPopup(false)} children={<Login/>} />,
+                <PopupLogin /* onClose={() => setShowPopup(false)} */ children={<Login prevLocation={location.pathname} setShowPopup={setShowPopup}/>} />,
                 document.getElementById('popup-root')
             )}
         </div>

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
+import { useLocation } from "react-router-dom"
 
 const RecipesContext = createContext()
 
@@ -25,11 +26,13 @@ export const RecipesProvider = ({ children }) => {
         ],
         preparationTime: 9999,
         caloricApport: 9999,
+        //si potrebbe creare un costruttore
     })
     const [filteredRecipes, setFilteredRecipes] = useState([])
     const [searchFilteredRecipes, setSearchFilteredRecipes] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [recipeAnimation, setRecipeAnimation] = useState(true)
+    const location = useLocation()
 
     useEffect(() => {
         setInputValue("")
@@ -41,7 +44,7 @@ export const RecipesProvider = ({ children }) => {
         )
     }, [inputValue])
 
-    //sessionStorage useffect
+    //recupero dal localStorage
     useEffect(() => {
         try {
             if (location.pathname === "/recipe") {
@@ -54,18 +57,17 @@ export const RecipesProvider = ({ children }) => {
             if (localRecipes && localRecipes.length > 0 && authToken) {
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)
-                setSearchFilteredRecipes(localRecipes)
             } else {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
-                setSearchFilteredRecipes(recipesArray)
             }
             sessionFilter && setRecipeFilter(sessionFilter)
         } catch (error) {
             console.error(error)
         }
-    }, [location.pathname])
+    }, [location])
 
+    //impostazione del localStorage
     useEffect(() => {
         const authToken = JSON.parse(window.localStorage.getItem("authToken"))
         try {
@@ -79,6 +81,7 @@ export const RecipesProvider = ({ children }) => {
         }
     }, [recipes])
 
+    //salvataggio dei filtri nel localStorage
     useEffect(() => {
         try {
             setTimeout(() => {
@@ -89,7 +92,7 @@ export const RecipesProvider = ({ children }) => {
             console.error(error)
         }
 
-        //animazoni card quando si cambiano i filtri
+        //triggher animazoni recipeCard 
         if (recipeAnimation) {
             setTimeout(() => {
                 setRecipeAnimation(false)
@@ -100,6 +103,7 @@ export const RecipesProvider = ({ children }) => {
         }, 300)
     }, [recipeFilter])
 
+    //aggiornamento ricette quando vengono modificati i filtri o aggiunti preferiti
     useEffect(() => {
         let filtering = recipes.filter(
             (recipe) =>
@@ -126,6 +130,8 @@ export const RecipesProvider = ({ children }) => {
         setFilteredRecipes(filtering)
         setSearchFilteredRecipes(filtering)
     }, [recipes, recipeFilter])
+
+    //inizio funzioni recipeContext
 
     const toggleRecipeFilter = (prop) => {
         const newState = !recipeFilter[prop]

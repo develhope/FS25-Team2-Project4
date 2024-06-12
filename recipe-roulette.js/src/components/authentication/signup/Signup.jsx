@@ -5,11 +5,13 @@ import { Button } from "../../Buttons/Button/Button"
 import EditNoteIcon from "@mui/icons-material/EditNote"
 import StartIcon from "@mui/icons-material/Start"
 import { useInput } from "../../../hooks/useInput"
+import { useLocation } from "react-router-dom"
 
 export function Signup() {
     const { data, passError, handleInput, handleSubmit } = useSignup()
     const { inputState, handleBlur, handleInputActivation } = useInput()
-    
+    const location = useLocation()
+
     return (
         <div className={`${classes.container} ${inputState && classes.active}`}>
             <header className={classes.title}>
@@ -25,7 +27,7 @@ export function Signup() {
                         id="username"
                         value={data.username}
                         onChange={handleInput}
-                        onFocus={(e)=>handleInputActivation(e)}
+                        onFocus={(e) => handleInputActivation(e)}
                         onBlur={(e) => handleBlur(e)}
                         placeholder="Insert your username"
                         required
@@ -37,7 +39,7 @@ export function Signup() {
                         id="email"
                         value={data.email}
                         onChange={handleInput}
-                        onFocus={(e)=>handleInputActivation(e)}
+                        onFocus={(e) => handleInputActivation(e)}
                         onBlur={(e) => handleBlur(e)}
                         placeholder="Insert your email"
                         required
@@ -49,7 +51,7 @@ export function Signup() {
                         id="password"
                         value={data.password}
                         onChange={handleInput}
-                        onFocus={(e)=>handleInputActivation(e)}
+                        onFocus={(e) => handleInputActivation(e)}
                         onBlur={(e) => handleBlur(e)}
                         placeholder="Insert password"
                         required
@@ -61,7 +63,7 @@ export function Signup() {
                         id="confirmPass"
                         value={data.confirmPass}
                         onChange={handleInput}
-                        onFocus={(e)=>handleInputActivation(e)}
+                        onFocus={(e) => handleInputActivation(e)}
                         onBlur={(e) => handleBlur(e)}
                         placeholder="Repeat password"
                         required
@@ -82,9 +84,9 @@ export function Signup() {
                         label="Sign up"
                         icon={<EditNoteIcon fontSize="small" />}
                         active={data.username && data.password && data.confirmPass && data.email && data.check}
-                        link={" "}
+                        prevPath={location.pathname}
                     />
-                    <Button label="Skip" icon={<StartIcon fontSize="small" />} link={" "} />
+                    <Button prevPath={location.pathname} label="Skip" icon={<StartIcon fontSize="small" />} />
                 </div>
             </form>
         </div>
