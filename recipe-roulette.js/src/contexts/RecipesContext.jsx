@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
-import { useAuth } from "../hooks/Auth/useAuth"
 
 const RecipesContext = createContext()
 
@@ -53,7 +52,6 @@ export const RecipesProvider = ({ children }) => {
             const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"))
             const authToken = JSON.parse(window.localStorage.getItem("authToken"))
             console.log(authToken);
-            localRecipes.forEach(rec => console.log(rec.isFavorited))
             if (localRecipes && localRecipes.length > 0 && authToken) {
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)
