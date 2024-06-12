@@ -31,10 +31,12 @@ export function useProfile() {
 
     const handleEditClick = () => setEditing(true);
 
+    const handleDiscardClick = () => setEditing(false);
+
     const handleSaveClick = () => {
         localStorage.setItem("username", signupData.username);
         localStorage.setItem("email", signupData.email);
-        if (signupData.password === signupData.confirmPass && signupData.password) {
+        if (signupData.password === signupData.confirmPass && signupData.password !== "") {
             localStorage.setItem("password", signupData.password);
             
         }
@@ -67,5 +69,6 @@ export function useProfile() {
         handleSaveClick,
         handleAvatarChange,
         handleSignupInput,
+        handleDiscardClick,
     };
 }
