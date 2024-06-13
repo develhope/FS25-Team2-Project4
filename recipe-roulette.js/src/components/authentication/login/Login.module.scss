@@ -98,18 +98,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0.75rem;
         padding-bottom: 0;
-        .signup {
-            background-color: $main-color;
-            padding: 0.25rem 0.75rem;
-            font-weight: 500;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 0 4px rgba($color: $second-color, $alpha: 1.0);
-            a {
-                color: $dark-gray;
-                text-decoration: none;
-            }
+        button {
+            padding: 0 4px;
+            height: 32px;
+            font-weight: 600;
+            text-decoration: underline;
+            color: #58933d;
+            border: none;
+            text-decoration: none;
+            background-color: transparent;
         }
     }
 }
@@ -126,6 +124,7 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 1.5rem;
+    padding-top: 1rem;
     box-sizing: border-box;
 }
 

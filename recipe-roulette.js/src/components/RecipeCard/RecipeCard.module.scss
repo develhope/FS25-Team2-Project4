@@ -91,16 +91,6 @@
     transition: scale 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-//animazione fade immagine (per rendere più fluida la prima comparsa a schermo)
-.imageInactive {
-    opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-.imageActive {
-    opacity: 1;
-    transition: opacity 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
 /* card espansa (quella che si vede nella pagina "/recipe") */
 .recipeCardExpanded::-webkit-scrollbar{
     width: 0;

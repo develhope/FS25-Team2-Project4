@@ -1,5 +1,4 @@
 import classes from "./IngredientCard.module.scss"
-import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
 
 import LockOpenIcon from "@mui/icons-material/LockOpen"

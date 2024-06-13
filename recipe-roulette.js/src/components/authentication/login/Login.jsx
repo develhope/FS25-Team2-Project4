@@ -1,15 +1,16 @@
-import classes from "./Login.module.scss"
 import { Link, useLocation } from "react-router-dom"
 import { useLogin } from "../../../hooks/Form/useLogin"
 import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn"
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn"
 import { Button } from "../../Buttons/Button/Button"
+import { useInput } from "../../../hooks/useInput"
 
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import LoginIcon from "@mui/icons-material/Login"
 import StartIcon from "@mui/icons-material/Start"
-import { useInput } from "../../../hooks/useInput"
+
+import classes from "./Login.module.scss"
 
 export function Login({ setShowPopup = null }) {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
@@ -87,9 +88,9 @@ export function Login({ setShowPopup = null }) {
                 </div>
 
                 <div className={classes.message}>
-                    Not registered yet?{" "}
+                    <p>Dont' have an ccount yet?</p>
                     <span className={classes.signup}>
-                        <Link to="/signup">Sign Up</Link>
+                        <Button link="signup" label="Sign Up" />
                     </span>
                 </div>
             </form>

@@ -190,7 +190,7 @@ export function RecipeResults() {
                     </div>
                 </div>
             )}
-            <Snackbar />
+            <Snackbar/>
         </div>
     )
 }

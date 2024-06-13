@@ -2,14 +2,13 @@ import { useLocation } from "react-router-dom"
 import { useRecipeCard } from "./useRecipeCard"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { FilterChip } from "../FilterChip/FilterChip"
+import { useAuth } from "../../hooks/Auth/useAuth"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import ExpandLessIcon from "@mui/icons-material/ExpandLess"
 import Skeleton from "@mui/material/Skeleton"
 
 import classes from "./RecipeCard.module.scss"
-import { useState } from "react"
-import { useAuth } from "../../hooks/Auth/useAuth"
 
 function RecipeCard({
     handleClickLoginSnackBar,
@@ -29,12 +28,7 @@ function RecipeCard({
         useRecipeCard(recipeId, isFav, isExpanded)
     const { recipeAnimation } = useRecipesContext()
     const { isAuthenticated } = useAuth()
-    const [animateMe, setAnimateMe] = useState(false) //animazione fade immagine
     const location = useLocation()
-
-    setTimeout(() => {
-        setAnimateMe(true)
-    }, 0)
 
     return (
         <div
@@ -60,7 +54,7 @@ function RecipeCard({
                 {!image ? (
                     <Skeleton className={classes.skeleton} sx={{ bgcolor: "#C5E4C9" }} variant="rectangular" height={"100%"} />
                 ) : (
-                    <img /* className={`${classes.imageInactive} ${animateMe && classes.imageActive}`} */ src={image} alt="" />
+                    <img src={image} alt="" />
                 )}
             </div>
 
