@@ -5,6 +5,7 @@ import { useLogin } from "./useLogin"
 export function useSignup() {
     const [data, setData] = useState(createData())
     const [passError, setPassError] = useState(null)
+    const [isRegistered, setisRegistered] = useState()
 
     //ho importato questi per settare nel localStorage i dati dell'utente ed effettuare l'accesso
     const { setItem } = useLogin()
@@ -40,6 +41,7 @@ export function useSignup() {
         if (data.password === data.confirmPass && data.check) {
             setItem(data)
             login()
+            setisRegistered(true)
         } else {
             console.log("Please, confirm your password correctly")
             setPassError(`Please, confirm your password correctly`)
@@ -49,6 +51,7 @@ export function useSignup() {
     return {
         data,
         passError,
+        isRegistered,
         handleInput,
         handleSubmit,
     }

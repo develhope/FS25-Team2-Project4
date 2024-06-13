@@ -26,10 +26,9 @@ export function Snackbar() {
             </div>
             {showPopup &&
                 createPortal(
-                    <PopupLogin
-                        handleClosePopup={() => setShowPopup(false)}
-                        children={<Login setShowPopup={setShowPopup} />}
-                    />,
+                    <PopupLogin handleClosePopup={() => setShowPopup(false)}>
+                    <Login setShowPopup={setShowPopup} />
+                    </PopupLogin>,
                     document.getElementById("popup-root")
                 )}
         </div>
