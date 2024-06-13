@@ -22,7 +22,7 @@ export const SnackbarProvider = ({ children }) => {
             setIntervalId(
                 setTimeout(() => {
                     setIsActive(false)
-                }, 3500)
+                }, 2500)
             )
             setIsActive(true)
         }
