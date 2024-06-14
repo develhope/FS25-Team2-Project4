@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 
 export function useProfile() {
     const [editing, setEditing] = useState(false);
+    const [initialAvatar, setInitialAvatar] = useState("src/assets/images/3d_avatar_26.png");
     const [avatar, setAvatar] = useState("src/assets/images/3d_avatar_26.png");
     const [signupData, setSignupData] = useState({
         username: "",
@@ -19,13 +20,16 @@ export function useProfile() {
         const storedUsername = localStorage.getItem("username");
         const storedEmail = localStorage.getItem("email");
         const storedAvatar = localStorage.getItem("avatar");
+
         setSignupData((prevData) => ({
             ...prevData,
             username: storedUsername || "Amazing User",
             email: storedEmail || "email@provider.dominio",
         }));
+
         if (storedAvatar) {
             setAvatar(storedAvatar);
+            setInitialAvatar(storedAvatar); 
         }
     }, []);
 
@@ -34,12 +38,17 @@ export function useProfile() {
     const handleDiscardClick = () => {
         const storedUsername = localStorage.getItem("username");
         const storedEmail = localStorage.getItem("email");
+        const storedAvatar = localStorage.getItem("avatar");
+
         setSignupData({
             username: storedUsername || "Amazing User",
             email: storedEmail || "email@provider.dominio",
             password: "",
             confirmPass: "",
         });
+
+        setAvatar(initialAvatar);
+
         setEditing(false);
     };
 
@@ -48,7 +57,6 @@ export function useProfile() {
         localStorage.setItem("email", signupData.email);
         if (signupData.password === signupData.confirmPass && signupData.password !== "") {
             localStorage.setItem("password", signupData.password);
-            
         }
         setEditing(false);
     };
