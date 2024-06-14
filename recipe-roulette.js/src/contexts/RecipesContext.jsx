@@ -53,7 +53,7 @@ export const RecipesProvider = ({ children }) => {
             }
             const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
             const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"))
-            const authToken = JSON.parse(window.localStorage.getItem("authToken"))
+            const authToken = window.localStorage.getItem("authToken") //no parse perchè è stringa
             if (localRecipes && localRecipes.length > 0 && authToken) {
                 setRecipes(localRecipes)
                 setFilteredRecipes(localRecipes)
@@ -69,10 +69,10 @@ export const RecipesProvider = ({ children }) => {
 
     //impostazione del localStorage
     useEffect(() => {
-        const authToken = JSON.parse(window.localStorage.getItem("authToken"))
+        const authToken = window.localStorage.getItem("authToken") //no parse perchè è stringa
         try {
             if (recipes && recipes.length > 0 && authToken) {
-                const jsonRecipes = JSON.stringify(recipes)
+                const jsonRecipes = JSON.stringify(recipes) 
                 window.localStorage.setItem("recipes", jsonRecipes)
                 console.log("recipes localStorage updated"); //messaggio di conferma
             }
