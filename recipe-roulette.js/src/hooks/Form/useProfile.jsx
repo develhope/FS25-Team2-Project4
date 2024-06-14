@@ -31,7 +31,17 @@ export function useProfile() {
 
     const handleEditClick = () => setEditing(true);
 
-    const handleDiscardClick = () => setEditing(false);
+    const handleDiscardClick = () => {
+        const storedUsername = localStorage.getItem("username");
+        const storedEmail = localStorage.getItem("email");
+        setSignupData({
+            username: storedUsername || "Amazing User",
+            email: storedEmail || "email@provider.dominio",
+            password: "",
+            confirmPass: "",
+        });
+        setEditing(false);
+    };
 
     const handleSaveClick = () => {
         localStorage.setItem("username", signupData.username);
