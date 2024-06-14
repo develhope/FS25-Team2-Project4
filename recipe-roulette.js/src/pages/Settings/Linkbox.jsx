@@ -26,7 +26,7 @@ export function LinkBox({ handleLogoutClick }) {
                 </Link>
             </div>
             <div className={classes.logoutButtonWrapper}>
-                <Button label="Logout" width="fill" action={handleLogoutClick} icon={<LogoutIcon fontSize="small" />} />
+                <Button label="Logout" width="fill" action={handleLogoutClick} icon={<LogoutIcon fontSize="small" />} link="login" />
             </div>
         </>
     )
