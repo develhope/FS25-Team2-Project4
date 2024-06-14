@@ -1,10 +1,10 @@
-import classes from "./Settings.module.scss"
-import { Button } from "../../components/Buttons/Button/Button"
-
-import DoneAllIcon from "@mui/icons-material/DoneAll"
-import EditNoteIcon from "@mui/icons-material/EditNote"
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined"
-import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined"
+import classes from "./Settings.module.scss";
+import { Button } from "../../components/Buttons/Button/Button";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+import { useAuth } from "../../hooks/Auth/useAuth";
 
 export function CardSetting({
     editing,
@@ -17,6 +17,17 @@ export function CardSetting({
     handleEditClick,
     passError,
 }) {
+    const { isAuthenticated } = useAuth();
+
+    if (!isAuthenticated) {
+        return (
+            <div className={classes.profileSection}>
+                <h2 className={classes.profileName}>Not Logged In</h2>
+                <p className={classes.profileEmail}>Please log in to edit your profile</p>
+            </div>
+        );
+    }
+
     return (
         <>
             {editing ? (
@@ -101,11 +112,11 @@ export function CardSetting({
                         style="primary"
                         width="fill"
                         action={handleEditClick}
-                        label="Edit Informations"
+                        label="Edit Information"
                         icon={<EditNoteIcon fontSize="small" />}
                     />
                 </div>
             )}
         </>
-    )
+    );
 }
