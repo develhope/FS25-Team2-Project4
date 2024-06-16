@@ -1,6 +1,5 @@
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { useProfile } from "../../hooks/Form/useProfile"
-import { useLogout } from "../../hooks/Form/useLogout"
 import { CardSetting } from "./CardSetting"
 import { LinkBox } from "./Linkbox"
 import classes from "./Settings.module.scss"
