@@ -1,7 +1,7 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { useRecipesContext } from "../../contexts/RecipesContext"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
@@ -9,11 +9,16 @@ import LoginIcon from "@mui/icons-material/Login"
 import { useAuth } from "../../hooks/Auth/useAuth"
 
 import classes from "./Favorite.module.scss"
+import { PopupLogin } from "../../components/Pop-up/Popup"
+import { createPortal } from "react-dom"
+import { Login } from "../../components/authentication/login/Login"
 
 export function Favorited() {
     const { animate } = useAnimate()
     const { searchFilteredRecipes, filteredRecipes, recipes, inputValue } = useRecipesContext()
     const { isAuthenticated } = useAuth()
+    const [showPopup, setShowPopup] = useState()
+
 
     const filterFavoritecipes = useMemo(() => {
         return searchFilteredRecipes.filter((recipe) => recipe.isFavorited)
@@ -479,10 +484,17 @@ export function Favorited() {
                         To add or see your Favorited!
                     </h2>
 
-                    <Link className={classes.cta} to={"/login"}>
+                    <button className={classes.cta} onClick={() => setShowPopup(true)}>
                         <LoginIcon />
                         <p>Signup or Login</p>
-                    </Link>
+                    </button>
+                    {showPopup &&
+                createPortal(
+                    <PopupLogin handleClosePopup={() => setShowPopup(false)}>
+                    <Login setShowPopup={setShowPopup} />
+                    </PopupLogin>,
+                    document.getElementById("popup-root")
+                )}
                 </div>
             )}
         </div>
