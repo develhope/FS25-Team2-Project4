@@ -68,13 +68,13 @@ export const RecipesProvider = ({ children }) => {
     }, [location])
 
     //impostazione del localStorage
-    useEffect(() => {
+    useEffect(() => { //controlla se si è loggati (authToken presente nel localStorage)
         const authToken = window.localStorage.getItem("authToken") //no parse perchè è stringa
-        try {
+        try { //se si è loggati aggiorniamo le ricette salvate nel localStorage (preferiti aggiunti)
             if (recipes && recipes.length > 0 && authToken) {
-                const jsonRecipes = JSON.stringify(recipes) 
+                const jsonRecipes = JSON.stringify(recipes)
                 window.localStorage.setItem("recipes", jsonRecipes)
-                console.log("recipes localStorage updated"); //messaggio di conferma
+                console.log("recipes localStorage updated") //messaggio di conferma
             }
         } catch (error) {
             console.error(error)
@@ -92,35 +92,24 @@ export const RecipesProvider = ({ children }) => {
             console.error(error)
         }
 
-        //triggher animazoni recipeCard 
-        if (recipeAnimation) {
-            setTimeout(() => {
-                setRecipeAnimation(false)
-            }, 0)
-        }
-        setTimeout(() => {
-            setRecipeAnimation(true)
-        }, 300)
+        //animazoni recipeCard
+        recipeAnimation && setTimeout(() => setRecipeAnimation(false), 0) // se è già in corso, resetta
+        setTimeout(() => setRecipeAnimation(true), 300)
     }, [recipeFilter])
 
     //aggiornamento ricette quando vengono modificati i filtri o aggiunti preferiti
     useEffect(() => {
         let filtering = recipes.filter(
-            (recipe) =>
-                recipe.caloricApport <= recipeFilter.caloricApport && recipe.preparationTime <= recipeFilter.preparationTime
-        )
-        if (recipeFilter.isGlutenFree) {
-            filtering = filtering.filter((item) => item.isGlutenFree)
-        }
-        if (recipeFilter.isVegetarian) {
-            filtering = filtering.filter((item) => item.isVegetarian)
-        }
-        if (recipeFilter.isVegan) {
-            filtering = filtering.filter((item) => item.isVegan)
-        }
-        if (recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
-        } else {
-            filtering = filtering.filter((item) =>
+            (
+                recipe //filtra in base ad apporto calorico e tempo di preparazione selezionato
+            ) => recipe.caloricApport <= recipeFilter.caloricApport && recipe.preparationTime <= recipeFilter.preparationTime
+        ) //filtra in base alle preferenze selezionate
+        recipeFilter.isGlutenFree && (filtering = filtering.filter((item) => item.isGlutenFree))
+        recipeFilter.isVegetarian && (filtering = filtering.filter((item) => item.isVegetarian))
+        recipeFilter.isVegan && (filtering = filtering.filter((item) => item.isVegan))
+
+        if (!recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) { //se non è selezionato "all"
+            filtering = filtering.filter((item) => //filtra in base ai tipi di cucina selezionati
                 recipeFilter.cuisineEthnicity.some((cuisine) => {
                     return cuisine.toLowerCase() === item.cuisineEthnicity.toLowerCase()
                 })
