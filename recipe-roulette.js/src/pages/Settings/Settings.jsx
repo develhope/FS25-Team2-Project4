@@ -3,13 +3,13 @@ import { useProfile } from "../../hooks/Form/useProfile"
 import { useLogout } from "../../hooks/Form/useLogout"
 import { CardSetting } from "./CardSetting"
 import { LinkBox } from "./Linkbox"
-
 import classes from "./Settings.module.scss"
+import { useAuth } from "../../hooks/Auth/useAuth"
 
 export function Settings() {
     const { animate } = useAnimate()
     const { editing, avatar, signupData, handleEditClick, handleSaveClick, handleAvatarChange, handleSignupInput,handleDiscardClick } = useProfile()
-    const { handleLogoutClick } = useLogout()
+    const { logout } = useAuth()
 
     const passError = signupData.password !== signupData.confirmPass ? "Passwords do not match" : ""
 
@@ -26,7 +26,7 @@ export function Settings() {
                 handleDiscardClick={handleDiscardClick}
                 passError={passError}
             />
-            {!editing && <LinkBox handleLogoutClick={handleLogoutClick} />}
+            {!editing && <LinkBox handleLogoutClick={logout} />}
         </div>
     )
 }

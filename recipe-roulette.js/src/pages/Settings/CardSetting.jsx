@@ -17,7 +17,7 @@ export function CardSetting({
     handleEditClick,
     passError,
 }) {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, logout } = useAuth();
 
     if (!isAuthenticated) {
         return (
