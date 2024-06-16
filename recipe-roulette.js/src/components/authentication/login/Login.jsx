@@ -88,7 +88,7 @@ export function Login({ setShowPopup = null }) {
                 </div>
 
                 <div className={classes.message}>
-                    <p>Dont' have an ccount yet?</p>
+                    <p>Don't you have an account yet?</p>
                     <span className={classes.signup}>
                         <Button link="signup" label="Sign Up" />
                     </span>

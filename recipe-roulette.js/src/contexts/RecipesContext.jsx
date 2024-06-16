@@ -35,9 +35,7 @@ export const RecipesProvider = ({ children }) => {
     const [recipeAnimation, setRecipeAnimation] = useState(true)
     const location = useLocation()
 
-    useEffect(() => {
-        setInputValue("")
-    }, [location.pathname])
+    useEffect(() => {setInputValue("")}, [location.pathname])
 
     useEffect(() => {
         setSearchFilteredRecipes(
