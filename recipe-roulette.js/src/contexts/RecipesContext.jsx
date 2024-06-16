@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
 import { useLocation } from "react-router-dom"
 
@@ -34,9 +34,7 @@ export const RecipesProvider = ({ children }) => {
     const [recipeAnimation, setRecipeAnimation] = useState(true)
     const location = useLocation()
 
-    useEffect(() => {
-        setInputValue("")
-    }, [location.pathname])
+    useEffect(() => {setInputValue("")}, [location.pathname])
 
     useEffect(() => {
         setSearchFilteredRecipes(
