@@ -23,7 +23,7 @@ export function Recipe() {
                     isVegetarian={targetedRecipe.isVegetarian}
                     isVegan={targetedRecipe.isVegan}
                     preparation={targetedRecipe.preparation}
-                    ingredients={targetedRecipe.ingredients}
+                    ingredients={targetedRecipe.ingQuantities}
                     attributes={targetedRecipe.attributes}
                 />
             )}

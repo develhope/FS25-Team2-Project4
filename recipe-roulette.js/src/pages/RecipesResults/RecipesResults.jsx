@@ -31,11 +31,10 @@ export function RecipeResults() {
                                 key={recipe.id}
                                 recipeId={recipe.id}
                                 title={recipe.title}
-                                image={recipe.image}
                                 attributes={recipe.attributes}
                                 isFav={recipe.isFavorited}
                                 preparation={recipe.preparation}
-                                ingredients={recipe.ingredients}
+                                ingredients={recipe.ingQuantities}
                                 isGlutenFree={recipe.isGlutenFree}
                                 isVegetarian={recipe.isVegetarian}
                                 isVegan={recipe.isVegan}

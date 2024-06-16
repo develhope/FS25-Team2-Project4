@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import recipesArray from "../assets/recipes/recipes"
 import { useLocation } from "react-router-dom"
 
 const RecipesContext = createContext()
 
 export const RecipesProvider = ({ children }) => {
-    const [recipes, setRecipes] = useState([])
+    const [recipes, setRecipes] = useState(recipesArray)
     const [targetedRecipe, setTargetedRecipe] = useState()
     const [recipeFilter, setRecipeFilter] = useState({
         isVegetarian: false,
@@ -28,6 +28,7 @@ export const RecipesProvider = ({ children }) => {
         caloricApport: 9999,
         //si potrebbe creare un costruttore
     })
+    const [recipesResult, setRecipesResult] = useState([])
     const [filteredRecipes, setFilteredRecipes] = useState([])
     const [searchFilteredRecipes, setSearchFilteredRecipes] = useState([])
     const [inputValue, setInputValue] = useState("")
@@ -52,6 +53,7 @@ export const RecipesProvider = ({ children }) => {
                 currentTargetedRecipe && setTargetedRecipe(currentTargetedRecipe)
             }
             const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
+            const localRecipesResult = JSON.parse(window.localStorage.getItem("recipesResult"))
             const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"))
             const authToken = window.localStorage.getItem("authToken") //no parse perchè è stringa
             if (localRecipes && localRecipes.length > 0 && authToken) {
@@ -61,6 +63,10 @@ export const RecipesProvider = ({ children }) => {
                 setRecipes(recipesArray)
                 setFilteredRecipes(recipesArray)
             }
+            if (localRecipesResult && localRecipesResult.length > 0) {
+                setRecipesResult(localRecipesResult)
+                setFilteredRecipes(localRecipesResult)
+            }
             sessionFilter && setRecipeFilter(sessionFilter)
         } catch (error) {
             console.error(error)
@@ -68,18 +74,22 @@ export const RecipesProvider = ({ children }) => {
     }, [location])
 
     //impostazione del localStorage
-    useEffect(() => { //controlla se si è loggati (authToken presente nel localStorage)
+    useEffect(() => {
+        //controlla se si è loggati (authToken presente nel localStorage)
         const authToken = window.localStorage.getItem("authToken") //no parse perchè è stringa
-        try { //se si è loggati aggiorniamo le ricette salvate nel localStorage (preferiti aggiunti)
+        try {
+            //se si è loggati aggiorniamo le ricette salvate nel localStorage (preferiti aggiunti)
             if (recipes && recipes.length > 0 && authToken) {
+                const jsonRecipesResult = JSON.stringify(recipesResult)
                 const jsonRecipes = JSON.stringify(recipes)
                 window.localStorage.setItem("recipes", jsonRecipes)
+                window.localStorage.setItem("recipesResult", jsonRecipesResult)
                 console.log("recipes localStorage updated") //messaggio di conferma
             }
         } catch (error) {
             console.error(error)
         }
-    }, [recipes])
+    }, [recipes, recipesResult])
 
     //salvataggio dei filtri nel localStorage
     useEffect(() => {
@@ -99,7 +109,7 @@ export const RecipesProvider = ({ children }) => {
 
     //aggiornamento ricette quando vengono modificati i filtri o aggiunti preferiti
     useEffect(() => {
-        let filtering = recipes.filter(
+        let filtering = recipesResult.filter(
             (
                 recipe //filtra in base ad apporto calorico e tempo di preparazione selezionato
             ) => recipe.caloricApport <= recipeFilter.caloricApport && recipe.preparationTime <= recipeFilter.preparationTime
@@ -108,19 +118,30 @@ export const RecipesProvider = ({ children }) => {
         recipeFilter.isVegetarian && (filtering = filtering.filter((item) => item.isVegetarian))
         recipeFilter.isVegan && (filtering = filtering.filter((item) => item.isVegan))
 
-        if (!recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) { //se non è selezionato "all"
-            filtering = filtering.filter((item) => //filtra in base ai tipi di cucina selezionati
-                recipeFilter.cuisineEthnicity.some((cuisine) => {
-                    return cuisine.toLowerCase() === item.cuisineEthnicity.toLowerCase()
-                })
+        if (!recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
+            //se non è selezionato "all"
+            filtering = filtering.filter(
+                (
+                    item //filtra in base ai tipi di cucina selezionati
+                ) =>
+                    recipeFilter.cuisineEthnicity.some((cuisine) => {
+                        return cuisine.toLowerCase() === item.cuisineEthnicity.toLowerCase()
+                    })
             )
         }
 
         setFilteredRecipes(filtering)
         setSearchFilteredRecipes(filtering)
-    }, [recipes, recipeFilter])
+    }, [recipesResult, recipeFilter])
 
-    //inizio funzioni recipeContext
+    // cerca ricette che possiedono tutti gli ingredienti selezionati nella pagina "roulette"
+    const searchRecipeByIng = (displayedIng) => {
+        const matchingRecipes = recipes.filter((recipe) =>
+            displayedIng.every((ing) => recipe.ingredients.includes(ing.name.toLowerCase()))
+        )
+        // Imposta il risultato filtrato delle ricette
+        setRecipesResult(matchingRecipes)
+    }
 
     const toggleRecipeFilter = (prop) => {
         const newState = !recipeFilter[prop]
@@ -131,11 +152,15 @@ export const RecipesProvider = ({ children }) => {
         const updatedRecipes = recipes.map((recipe) => {
             return recipe.id === recipeState.id ? { ...recipe, isFavorited: !recipeState.isFavorited } : recipe
         })
+        const updatedRecipesResult = recipesResult.map((recipe) => {
+            return recipe.id === recipeState.id ? { ...recipe, isFavorited: !recipeState.isFavorited } : recipe
+        })
         const updatedRecipe = updatedRecipes.find((recipe) => recipe.id === recipeState.id)
+
         //guarda qui in caso di bug (serve per quando si levano dai preferiti le ricette)
         setTimeout(() => {
             setRecipes(updatedRecipes)
-            setFilteredRecipes(updatedRecipes)
+            setRecipesResult(updatedRecipesResult)
         }, 150)
         setRecipeState((prevData) => {
             return {
@@ -248,6 +273,7 @@ export const RecipesProvider = ({ children }) => {
                 inputValue,
                 searchFilteredRecipes,
                 recipeAnimation,
+                recipesResult,
                 setRecipes,
                 setTargetedRecipe,
                 handleRecipesUpdate,
@@ -256,6 +282,7 @@ export const RecipesProvider = ({ children }) => {
                 setInputValue,
                 handlePreferencesToggle,
                 handleDeselectRecipeFilters,
+                searchRecipeByIng,
             }}
         >
             {children}
