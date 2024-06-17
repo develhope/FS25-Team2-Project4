@@ -36,23 +36,22 @@
 .placeholder {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-height: 100%;
-    padding: 0 1rem;
-    padding-bottom: 7em;
+    width: 100%;
+    height: 85%;
+    max-height: 85%;
     justify-content: center;
     gap: 2rem;
     box-sizing: border-box;
-    overflow: hidden;
+    padding: 1rem;
     .placeholderImage {
         box-sizing: border-box;
-        padding: 1rem;
-        padding-bottom: 0;
-        border-radius: 1.5rem;
-        svg {
+        width: 100%;
+        height: 10%;
+        flex-grow: 1;
+        > svg {
             object-fit: contain;
-            height: 100%;
             width: 100%;
+            height: 100%;
         }
     }
 }
@@ -74,7 +73,7 @@
     font-size: $size-20;
     line-height: 130%;
     span {
-        background-color: #00a538;
+        background-color: #00a55b;
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         color: white;
@@ -91,13 +90,13 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: 600;
-    letter-spacing: .025rem;
+    letter-spacing: 0.025rem;
     font-family: $header-text;
     font-size: $size-16;
 
     text-decoration: none;
     color: white;
-    background-color: #00a538;
+    background-color: #00a55b;
     border: none;
 
     height: 100px;

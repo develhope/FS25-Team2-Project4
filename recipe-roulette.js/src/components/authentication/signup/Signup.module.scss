@@ -1,7 +1,6 @@
 @use "../../../assets/scss/" as *;
 
 .container {
-    position: absolute;
     display: flex;
     flex-direction: column;
     background-color: $accent-color;
@@ -9,9 +8,7 @@
     border-radius: $size-16;
     width: calc(100vw - 3rem);
     font-size: $text-size-14;
-    transition:
-        height .45s cubic-bezier(0.08, 0.82, 0.17, 1),
-        width .45s cubic-bezier(0.08, 0.82, 0.17, 1);
+    flex-grow: 1;
 }
 
 .title {
@@ -21,8 +18,10 @@
     padding: 1.5rem;
     padding-top: 1rem;
     padding-bottom: 0;
-    h1 {
+    > h1 {
         margin: 0;
+        font-size: $text-size-32;
+        color: $dark-gray;
     }
 }
 
@@ -34,12 +33,14 @@
     padding-bottom: 1.5rem;
     box-sizing: border-box;
     gap: 1rem;
+    flex-grow: 1;
 
     .inputBox {
         display: flex;
         flex-direction: column;
-        place-self: start;
+        justify-content: flex-start;
         width: 100%;
+        flex-grow: 1;
 
         input {
             display: flex;
@@ -96,16 +97,4 @@
     flex-direction: column;
     width: 100%;
     gap: 0.5rem;
-}
-
-.active {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
-    border-radius: 0;
-    transition:
-        height .45s cubic-bezier(0.08, 0.82, 0.17, 1),
-        width .45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

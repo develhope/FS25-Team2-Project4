@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 
-export function useAnimate () {
+export function useAnimate(destination) {
     const location = useLocation()
     const [animate, setAnimate] = useState(false)
-    
+
     useEffect(() => {
-            setAnimate(true)
-    }, [location.pathname])
+        destination === location.pathname ? setAnimate(true) : setAnimate(false)
+    }, [location])
 
-    return {animate}
+    return { animate, setAnimate }
 }
-

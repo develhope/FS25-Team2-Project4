@@ -1,18 +1,24 @@
 import { NavigationLink } from "./NavigationLink/NavigationLink"
 
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined"
+import BookmarksIcon from "@mui/icons-material/Bookmarks"
+
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
+import SettingsIcon from "@mui/icons-material/Settings"
+
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined"
 import AutorenewIcon from "@mui/icons-material/Autorenew"
 import LogoutIcon from "@mui/icons-material/Logout"
-import CloseIcon from '@mui/icons-material/Close'
+import CloseIcon from "@mui/icons-material/Close"
 
 import { useAuth } from "../../hooks/Auth/useAuth"
 
 import classes from "./SideMenu.module.scss"
+import { useLocation } from "react-router-dom"
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
     const { logout, isAuthenticated } = useAuth()
+    const location = useLocation()
     return (
         <div>
             <div
@@ -39,22 +45,33 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
                         handleMenuToggle={handleMenuToggle}
                         label="Favorited"
                         destination="/favorited"
-                        icon={<BookmarksOutlinedIcon fontSize="small" />}
+                        icon={
+                            location.pathname === "/favorited" ? (
+                                <BookmarksIcon fontSize="small" />
+                            ) : (
+                                <BookmarksOutlinedIcon fontSize="small" />
+                            )
+                        }
                     />
                     <NavigationLink
                         path={path}
                         handleMenuToggle={handleMenuToggle}
                         label="Settings"
                         destination="/settings"
-                        icon={<SettingsOutlinedIcon fontSize="small" />}
+                        icon={
+                            location.pathname === "/settings" ? (
+                                <SettingsIcon fontSize="small" />
+                            ) : (
+                                <SettingsOutlinedIcon fontSize="small" />
+                            )
+                        }
                     />
                     <div className={classes.separator} />
                     {isAuthenticated ? (
                         <NavigationLink
                             path={path}
                             handleMenuToggle={handleMenuToggle}
-                            label={"Logout"}
-                            destination={"/login"}
+                            label="Logout"
                             icon={<LogoutIcon fontSize="small" />}
                             action={logout}
                         />

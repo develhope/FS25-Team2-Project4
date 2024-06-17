@@ -14,7 +14,6 @@
     overflow: hidden;
 
     scale: .8;
-    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }
 
 .discoveryPreview .mainContent {
@@ -38,7 +37,7 @@
 
 }
 .discoveryPreview .mainContent h2 span {
-    background-color: #00A538;
+    background-color: #00a55b;
     color: white;
     padding: 0 .5rem;
     border-radius: .5rem;
@@ -72,7 +71,7 @@
 
     text-decoration: none;
     color: white;
-    background-color: #00A538;
+    background-color: #00a55b;
 
     height: 100px;
     min-height: 100px;

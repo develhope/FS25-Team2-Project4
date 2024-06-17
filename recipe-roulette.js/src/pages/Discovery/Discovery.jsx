@@ -1,25 +1,27 @@
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
-
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { Button } from "../../components/Buttons/Button/Button"
-
 import { useButtonState } from "../../hooks/ButtonState/useButtonState"
 import { useMemo, useState } from "react"
-
+import { useRecipesContext } from "../../contexts/RecipesContext"
+import { useLocationHook } from "../../hooks/useLocationHook"
 
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined"
 import AddIcon from "@mui/icons-material/Add"
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
-
 import classes from "./Discovery.module.scss"
 
-export function Discovery({ handleSidebarToggle }) {
-    const { displayedIng, shuffleIng, handleIngIncrement, handleDeselectAll } = useManageIngredients()
-    const { animate } = useAnimate()
+export function Discovery() {
+    const { displayedIng, shuffleIng, handleIngIncrement } = useManageIngredients()
+    const {searchRecipeByIng} = useRecipesContext()
+
     const { isActive, setIsActive } = useButtonState(true)
     const [animateButton, seAnimateButton] = useState(false)
+
+    const {location } = useLocationHook()
+    const { animate } = useAnimate(location)
 
     const setButtonState = useMemo(() => {
         if (displayedIng.length === 8) {
@@ -64,12 +66,7 @@ export function Discovery({ handleSidebarToggle }) {
                     link={"recipes-results"}
                     width={"fill"}
                     active={true}
-                    action={() =>
-                        console.log(
-                            `Find 5 ${["(filters)"]} recipes with these ingredients`,
-                            displayedIng.map((ing) => ing.name)
-                        )
-                    }
+                    action={() => searchRecipeByIng(displayedIng)}
                     label="Recipes"
                     icon={<ManageSearchOutlinedIcon fontSize="small" />}
                     size={20}
