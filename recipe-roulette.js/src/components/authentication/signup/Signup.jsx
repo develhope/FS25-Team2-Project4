@@ -1,70 +1,60 @@
-import classes from "./Signup.module.scss"
 import { useSignup } from "../../../hooks/Form/useSignup"
 import { Button } from "../../Buttons/Button/Button"
+import { useLocation } from "react-router-dom"
 
 import EditNoteIcon from "@mui/icons-material/EditNote"
 import StartIcon from "@mui/icons-material/Start"
-import { useInput } from "../../../hooks/useInput"
-import { useLocation } from "react-router-dom"
+import classes from "./Signup.module.scss"
 
 export function Signup() {
     const { data, passError, handleInput, handleSubmit } = useSignup()
-    const { inputState, handleBlur, handleInputActivation } = useInput()
     const location = useLocation()
 
     return (
-        <div className={`${classes.container} ${inputState && classes.active}`}>
+        <div className={`${classes.container}`}>
             <header className={classes.title}>
                 <h1>Signup</h1>
             </header>
 
             <form onSubmit={handleSubmit} className={classes.formBox}>
                 <div className={classes.inputBox}>
-                    <label htmlFor="username">Username</label>
+                    <label>Username</label>
                     <input
                         type="text"
                         name="username"
                         id="username"
                         value={data.username}
                         onChange={handleInput}
-                        onFocus={(e) => handleInputActivation(e)}
-                        onBlur={(e) => handleBlur(e)}
                         placeholder="Insert your username"
                         required
                     />
-                    <label htmlFor="email">Email</label>
+                    <label>Email</label>
                     <input
                         type="email"
                         name="email"
                         id="email"
                         value={data.email}
                         onChange={handleInput}
-                        onFocus={(e) => handleInputActivation(e)}
-                        onBlur={(e) => handleBlur(e)}
                         placeholder="Insert your email"
                         required
                     />
-                    <label htmlFor="password">Password</label>
+                    <label>Password</label>
                     <input
                         type="password"
                         name="password"
                         id="password"
                         value={data.password}
                         onChange={handleInput}
-                        onFocus={(e) => handleInputActivation(e)}
-                        onBlur={(e) => handleBlur(e)}
                         placeholder="Insert password"
                         required
                     />
-                    <label htmlFor="confirmPass">Confirm password</label>
+                    <label>Confirm password</label>
                     <input
                         type="password"
                         name="confirmPass"
                         id="confirmPass"
                         value={data.confirmPass}
                         onChange={handleInput}
-                        onFocus={(e) => handleInputActivation(e)}
-                        onBlur={(e) => handleBlur(e)}
                         placeholder="Repeat password"
                         required
                     />

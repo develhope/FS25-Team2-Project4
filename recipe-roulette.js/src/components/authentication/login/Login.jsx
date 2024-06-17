@@ -1,9 +1,8 @@
-import { Link, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useLogin } from "../../../hooks/Form/useLogin"
 import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn"
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn"
 import { Button } from "../../Buttons/Button/Button"
-import { useInput } from "../../../hooks/useInput"
 
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import VisibilityIcon from "@mui/icons-material/Visibility"
@@ -14,11 +13,10 @@ import classes from "./Login.module.scss"
 
 export function Login({ setShowPopup = null }) {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
-    const { inputState, handleBlur, handleInputActivation } = useInput()
     const location = useLocation()
 
     return (
-        <div className={`${classes.container} ${inputState && classes.active}`}>
+        <div className={`${classes.container}`}>
             <header className={classes.title}>
                 <h1>Login</h1>
             </header>
@@ -31,7 +29,7 @@ export function Login({ setShowPopup = null }) {
                 className={classes.formBox}
             >
                 <div className={classes.inputBox}>
-                    <label htmlFor="username">Username</label>
+                    <label>Username</label>
                     <input
                         type="text"
                         name="username"
@@ -39,11 +37,9 @@ export function Login({ setShowPopup = null }) {
                         value={data.username}
                         placeholder="Insert username here"
                         onChange={handleInput}
-                        onFocus={handleInputActivation}
-                        onBlur={(e) => handleBlur(e)}
                         required
                     />
-                    <label htmlFor="password">Password</label>
+                    <label>Password</label>
                     <div className={classes.passInput}>
                         <input
                             type={showPassword ? "text" : "password"}
@@ -52,8 +48,6 @@ export function Login({ setShowPopup = null }) {
                             value={data.password}
                             placeholder="Insert password here"
                             onChange={handleInput}
-                            onFocus={handleInputActivation}
-                            onBlur={(e) => handleBlur(e)}
                             required
                         />
                         {showPassword ? (
@@ -88,7 +82,7 @@ export function Login({ setShowPopup = null }) {
                 </div>
 
                 <div className={classes.message}>
-                    <p>Don't you have an account yet?</p>
+                    <p>Don't have an account yet?</p>
                     <span className={classes.signup}>
                         <Button link="signup" label="Sign Up" />
                     </span>

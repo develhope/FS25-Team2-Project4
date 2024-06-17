@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: $main-color;
     height: 100%;
     width: 100%;
     color: $darkest-gray;
-    padding: 0 $size-24;
-    overflow-y: hidden;
+    padding: $size-24;
+    overflow-y: scroll;
     box-sizing: border-box;
 
     border-radius: 3rem;

@@ -168,9 +168,9 @@ export function NotFound404() {
                 <h2>
                     The page you're looking for <br/> <span>does not exist!</span>
                 </h2>
-                <Link className={classes.cta} to={"/"}>
+                <Link className={classes.cta} to={-1}>
                     <ArrowBackOutlinedIcon />
-                    <p>Go back to Home</p>
+                    <p>Go back</p>
                 </Link>
             </div>
         </div>
