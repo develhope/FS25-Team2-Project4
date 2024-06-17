@@ -229,7 +229,7 @@ export const RecipesProvider = ({ children }) => {
                 if (recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
                     updatedEthnicity = [] // allora deseleziona tutti
                     handleSelected(false) //e imposta lo stato della chip a "non selezionata"
-                // se non è gia selezionato, allora seleziona tutti
+                    // se non è gia selezionato, allora seleziona tutti
                 } else {
                     updatedEthnicity = [
                         "all",
@@ -246,12 +246,13 @@ export const RecipesProvider = ({ children }) => {
                     ]
                     handleSelected(true) // e imposta lo stato della chip a "selezionato"
                 }
-            } else { // il target non è all, ma una delle altre chips
+            } else {
+                // il target non è all, ma una delle altre chips
                 // Rimuovi l'elemento se è presente
                 if (alreadyThere) {
                     updatedEthnicity = updatedEthnicity.filter((item) => item !== value.toLowerCase() && item !== "all")
                     handleSelected && handleSelected(false)
-                // Aggiungi l'elemento se non è presente
+                    // Aggiungi l'elemento se non è presente
                 } else {
                     updatedEthnicity.push(value.toLowerCase())
                     // se l'array di preferenze ha lunghezza 10 (tutte le chip selezionate tranne "all")
