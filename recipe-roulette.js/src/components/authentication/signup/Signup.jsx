@@ -65,7 +65,7 @@ export function Signup() {
                         <input type="checkbox" name="check" id="check" checked={data.check} onChange={handleInput} required />
                     </label>
                 </div>
-
+                {/* aggiungere messaggio di errore se le pass non sono uguali */}
                 <div className={classes.buttonsWrapper}>
                     <Button
                         style="primary"
@@ -73,7 +73,7 @@ export function Signup() {
                         type="submit"
                         label="Sign up"
                         icon={<EditNoteIcon fontSize="small" />}
-                        active={data.username && data.password && data.confirmPass && data.email && data.check}
+                        active={data.username && data.password && data.confirmPass && data.confirmPass === data.password && data.email && data.check}
                         prevPath={location.pathname}
                     />
                     <Button prevPath={location.pathname} label="Skip" icon={<StartIcon fontSize="small" />} />
