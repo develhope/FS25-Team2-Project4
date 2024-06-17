@@ -4,14 +4,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    background-color: $main-color;
+    justify-content: space-evenly;
+    background-color: $second-color;
     height: 100%;
     width: 100%;
     color: $darkest-gray;
     padding: $size-24;
     overflow-y: scroll;
     box-sizing: border-box;
+    gap: 1.25rem;
 
     border-radius: 3rem;
     scale: .8;
@@ -26,4 +27,21 @@
     transition:
         scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
         border-radius 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.pageBox h2 {
+    font-size: $text-size-24;
+    color: $dark-gray;
+    font-family: $font-title;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    line-height: 120%;
+
+}
+.pageBox h2 span {
+    background-color: #00a55b;
+    color: white;
+    padding: 0 .5rem;
+    border-radius: .5rem;
 }
