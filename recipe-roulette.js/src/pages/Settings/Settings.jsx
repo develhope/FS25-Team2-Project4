@@ -2,13 +2,17 @@ import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { useProfile } from "../../hooks/Form/useProfile"
 import { CardSetting } from "./CardSetting"
 import { LinkBox } from "./Linkbox"
-import classes from "./Settings.module.scss"
 import { useAuth } from "../../hooks/Auth/useAuth"
+import { useLocationHook } from "../../hooks/useLocationHook"
+
+import classes from "./Settings.module.scss"
 
 export function Settings() {
-    const { animate } = useAnimate()
     const { editing, avatar, signupData, handleEditClick, handleSaveClick, handleAvatarChange, handleSignupInput,handleDiscardClick } = useProfile()
     const { logout } = useAuth()
+    
+    const {location } = useLocationHook()
+    const { animate } = useAnimate(location)
 
     const passError = signupData.password !== signupData.confirmPass ? "Passwords do not match" : ""
 

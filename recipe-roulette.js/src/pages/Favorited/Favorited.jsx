@@ -4,20 +4,23 @@ import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 
-import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
-import LoginIcon from "@mui/icons-material/Login"
 import { useAuth } from "../../hooks/Auth/useAuth"
-
-import classes from "./Favorite.module.scss"
 import { PopupLogin } from "../../components/Pop-up/Popup"
 import { createPortal } from "react-dom"
 import { Login } from "../../components/authentication/login/Login"
+import { useLocationHook } from "../../hooks/useLocationHook"
+
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
+import LoginIcon from "@mui/icons-material/Login"
+import classes from "./Favorite.module.scss"
 
 export function Favorited() {
-    const { animate } = useAnimate()
     const { searchFilteredRecipes, filteredRecipes, recipes, inputValue } = useRecipesContext()
     const { isAuthenticated } = useAuth()
     const [showPopup, setShowPopup] = useState()
+    
+    const {location } = useLocationHook()
+    const { animate } = useAnimate(location)
 
     const filterFavoritecipes = useMemo(() => {
         return searchFilteredRecipes.filter((recipe) => recipe.isFavorited)

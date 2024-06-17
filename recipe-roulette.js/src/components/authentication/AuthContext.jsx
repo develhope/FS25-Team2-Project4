@@ -10,6 +10,8 @@ export function AuthProvider({ children }) {
             const localAuthentication = JSON.parse(window.localStorage.getItem("authToken"))
             if (localAuthentication) {
                 setIsAuthenticated(true)
+            } else {
+                setIsAuthenticated(false)
             }
         } catch (error) {
             console.error(error)

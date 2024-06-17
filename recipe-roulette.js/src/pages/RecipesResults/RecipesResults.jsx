@@ -2,15 +2,20 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
-import classes from "./RecipesResults.module.scss"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
 import { useSnackbar } from "../../components/Snackbar/useSnackbar"
+import { useLocationHook } from "../../hooks/useLocationHook"
+
+import classes from "./RecipesResults.module.scss"
 
 export function RecipeResults() {
-    const { animate } = useAnimate()
     const { searchFilteredRecipes } = useRecipesContext()
     const { handleClickLoginSnackBar } = useSnackbar()
+
+    const { location } = useLocationHook()
+    const { animate } = useAnimate(location)
+    console.log(location);
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
@@ -189,7 +194,7 @@ export function RecipeResults() {
                     </div>
                 </div>
             )}
-            <Snackbar/>
+            <Snackbar />
         </div>
     )
 }

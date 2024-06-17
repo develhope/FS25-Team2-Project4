@@ -1,27 +1,27 @@
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
-
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { Button } from "../../components/Buttons/Button/Button"
-
 import { useButtonState } from "../../hooks/ButtonState/useButtonState"
 import { useMemo, useState } from "react"
+import { useRecipesContext } from "../../contexts/RecipesContext"
+import { useLocationHook } from "../../hooks/useLocationHook"
 
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined"
 import AddIcon from "@mui/icons-material/Add"
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
-
 import classes from "./Discovery.module.scss"
-import { useRecipesContext } from "../../contexts/RecipesContext"
 
 export function Discovery() {
     const { displayedIng, shuffleIng, handleIngIncrement } = useManageIngredients()
     const {searchRecipeByIng} = useRecipesContext()
 
-    const { animate } = useAnimate()
     const { isActive, setIsActive } = useButtonState(true)
     const [animateButton, seAnimateButton] = useState(false)
+
+    const {location } = useLocationHook()
+    const { animate } = useAnimate(location)
 
     const setButtonState = useMemo(() => {
         if (displayedIng.length === 8) {

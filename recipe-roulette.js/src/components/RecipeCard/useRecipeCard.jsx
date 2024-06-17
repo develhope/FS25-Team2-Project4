@@ -11,7 +11,6 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     const [expandedCard, setExpandedCard] = useState(isExpanded)
     const [expandedIngredients, setExpandedIngredients] = useState(true)
     const { handleRecipesUpdate, handleTargetedRecipe } = useRecipesContext()
-    const { isAuthenticated } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
