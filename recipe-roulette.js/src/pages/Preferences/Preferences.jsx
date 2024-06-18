@@ -127,10 +127,9 @@ export function Preferences() {
                     action={() => {handleDeselectAll("isBlackListed"); clearLocalSave()}}
                 />
                 <button type="button" 
-                    /* label="Save" */ 
                     className={classes.button}
-                    action={handleSave} width={"fill"}
-                >Save</button>
+                    onClick={handleSave} width={"fill"}
+                >Save</button> 
             </div>
             
         </div>
