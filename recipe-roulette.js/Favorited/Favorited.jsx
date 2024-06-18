@@ -1,13 +1,13 @@
-import RecipeCard from "../../components/RecipeCard/RecipeCard"
-import { useAnimate } from "../../hooks/animatePages/useAnimate"
-import { IcoButton } from "../../components/Buttons/IcoButton/IcoButton"
+import RecipeCard from "../src/components/RecipeCard/RecipeCard"
+import { useAnimate } from "../src/hooks/animatePages/useAnimate"
+import { IcoButton } from "../src/components/Buttons/IcoButton/IcoButton"
 
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
 
 import classes from "./Favorite.module.scss"
-import { useRecipesContext } from "../../contexts/RecipesContext"
-import { BaseSearch } from "../../components/Search/BaseSearch/BaseSearch"
+import { useRecipesContext } from "../src/contexts/RecipesContext"
+import { BaseSearch } from "../src/components/Search/BaseSearch/BaseSearch"
 import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { DiscoveryPreview } from "./pages/DiscoveryPreview/DiscoveryPreview";
 import { Discovery } from "./pages/Discovery/Discovery";
-import { Favorited } from "./pages/Favorited/Favorited";
+/* import { Favorited } from "./pages/Favorited/Favorited"; */
 import { Settings } from "./pages/Settings/Settings";
 import { RecipeResults } from "./pages/RecipesResults/RecipesResults";
 import { IngredientsProvider } from "./pages/Discovery/IngredientsContext";
@@ -18,6 +18,7 @@ import { Recipe } from "./pages/Recipe/Recipe";
 import { RecipesProvider } from "./contexts/RecipesContext";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
+import { Preferences } from "./pages/Preferences/Preferences";
 
 function App() {
   const { handleSidebarToggle, sidebarState } = useDiscoverySidebar();
@@ -54,14 +55,14 @@ function App() {
                     <Discovery handleSidebarToggle={handleSidebarToggle} />
                   }
                 />
-                <Route
+{/*                 <Route
                   path="/favorited"
                   element={
                     <Favorited
                       handleRecipesSidebarToggle={toggleSidebarRecipes}
                     />
                   }
-                />
+                /> */}
                 <Route path="/settings" element={<Settings />} />
                 <Route
                   path="/recipes-results"
@@ -75,6 +76,7 @@ function App() {
 
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
+                <Route path="/preferences" element={<Preferences />} />
                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
               </Routes>
             </SnackbarProvider>

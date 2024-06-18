@@ -5,6 +5,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ClassOutlinedIcon from '@mui/icons-material/ClassOutlined';
 import { useAuth } from "../../hooks/Auth/useAuth";
 import classes from "./SideMenu.module.scss";
 
@@ -49,6 +50,13 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             label="Settings"
             destination="/settings"
             icon={<SettingsOutlinedIcon fontSize="small" />}
+          />
+          <NavigationLink
+            path={path}
+            handleMenuToggle={handleMenuToggle}
+            label="Preferences"
+            destination="/preferences"
+            icon={<ClassOutlinedIcon fontSize="small" />}
           />
           <div className={classes.separator} />
           {isAuthenticated ? (
