@@ -76,16 +76,13 @@ export function Preferences() {
         localStorage.clear()
     }
 
-/*     useEffect(() => {
-        setInputValue("")
-    }, [location.pathname]) */
+
 
     return (
         <div className={`${classes.preferencesPage} ${animate && classes.animateSettings}`}>
-            <p>the preferences you set here
+            <p className={classes.description}>the preferences you set here
                 will affect both ingredients 
                 and recipes results</p>
-            <br/>
 
         
             <div className={classes.blackListedWrapper}>
@@ -114,6 +111,7 @@ export function Preferences() {
                         )}
                     </div>
             </div>
+            
 
             <div className={classes.switchesWrapper}>
             <Switch state={filter.isGlutenFree} action={toggleFilter} label={"Gluten free"} prop={"isGlutenFree"} />
@@ -123,11 +121,15 @@ export function Preferences() {
             <div>
                 <label><input type="checkbox" onClick={handleApply} /> same for recipes?</label>
             </div>
+            <br/>
             <div className={classes.bottomButtons}>
-                <Button className={classes.bottomButtons.reset} label="Reset All" icon={<RotateLeftOutlinedIcon fontSize="small" />} size={18}
+                <Button label="Reset All" icon={<RotateLeftOutlinedIcon fontSize="small" />} size={18}
                     action={() => {handleDeselectAll("isBlackListed"); clearLocalSave()}}
                 />
-                <Button type="button" className="save" label="Save" action={handleSave} width={"fill"}/>
+                <Button type="button" 
+                     label="Save" 
+                    action={handleSave} width={"fill"}
+                />
             </div>
             
         </div>
