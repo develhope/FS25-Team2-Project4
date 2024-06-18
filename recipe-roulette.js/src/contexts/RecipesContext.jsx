@@ -55,9 +55,12 @@ export const RecipesProvider = ({ children }) => {
         try {
             if (location.pathname === "/recipe") {
                 const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
-                currentTargetedRecipe && isAuthenticated //se c'è targetedRecipe nel localSorage è si è autenticati
-                    ? setTargetedRecipe(currentTargetedRecipe) //imposta quella ricetta in targetedRecipe
-                    : setTargetedRecipe({ ...currentTargetedRecipe, isFavorited: false }) //sennò imposta quella ricetta e resetta la proprietà isFavorited a false
+                if (currentTargetedRecipe && isAuthenticated) {
+                    //se c'è targetedRecipe nel localSorage è si è autenticati
+                    setTargetedRecipe(currentTargetedRecipe) //imposta quella ricetta in targetedRecipe
+                } else {
+                    setTargetedRecipe({ ...currentTargetedRecipe, isFavorited: false }) //sennò imposta quella ricetta e resetta la proprietà isFavorited a false
+                }
             }
             const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
             const localRecipesResult = JSON.parse(window.localStorage.getItem("recipesResult"))
@@ -90,6 +93,7 @@ export const RecipesProvider = ({ children }) => {
         } catch (error) {
             console.error(error)
         }
+        console.log(isAuthenticated)
     }, [location, isAuthenticated])
 
     //impostazione del localStorage quando vengono aggiunte ricette ai preferiti
