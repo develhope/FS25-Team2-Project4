@@ -7,18 +7,19 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
+    max-height: 100%;
     box-sizing: border-box;
     padding: 0 $size-20;
-    padding-bottom: $size-24;
     font-size: $text-size-16;
     font-style: $font-text;
     color: $darkest-gray;
-
-    overflow-y: scroll;
+    padding-bottom: 0;
+    overflow: hidden;
+    padding-top: 2.75rem;
     gap: 0.75rem;
 }
 .recipesResultsPage .search {
-    position: relative;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -44,34 +45,43 @@
     }
 }
 
+.recipesWrapper::-webkit-scrollbar {
+    width: 0;
+}
+
 .recipesWrapper {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: $size-20;
     box-sizing: border-box;
+    padding: 0 1px;
+    padding-bottom: 2rem;
     width: 100%;
-    height: fit-content;
+    height: 100%;
+    overflow: visible;
+    overflow-y: scroll;
 }
 .placeholder {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 100%;
+    height: 10%;
+    flex-grow: 1;
     max-height: 100%;
     justify-content: center;
     gap: 2rem;
     box-sizing: border-box;
-    overflow: hidden;
     padding: 1.5rem;
     .placeholderImage {
         box-sizing: border-box;
-        padding: 2rem;
-        padding-top: 0;
-        padding-bottom: 0;
-        border-radius: 1.5rem;
+        padding: 0 1rem;
+        width: 100%;
+        height: 10%;
+        flex-grow: 1;
         svg {
             object-fit: contain;
-            height: 100%;
             width: 100%;
+            height: 100%;
         }
     }
 }
@@ -86,7 +96,7 @@
     font-weight: 700;
     font-size: $size-20;
     span {
-        background-color: #00a538;
+        background-color: #f1c21b;
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         color: white;

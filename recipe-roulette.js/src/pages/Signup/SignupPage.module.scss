@@ -4,12 +4,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: $main-color;
     height: 100%;
     width: 100%;
     color: $darkest-gray;
-    padding: 0 $size-24;
+    padding: $size-24;
     overflow-y: scroll;
     box-sizing: border-box;
+
+    border-radius: 3rem;
+    scale: .8;
+    transition:
+        scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        border-radius 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.animateSignupPage {
+    border-radius: 0;
+    scale: 1;
+    transition:
+        scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+        border-radius 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

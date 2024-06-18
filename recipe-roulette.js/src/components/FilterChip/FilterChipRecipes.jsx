@@ -1,16 +1,23 @@
-import { MaterialSymbol } from "react-material-symbols"
 import { useFilterChipRecipes } from "./useFilterChipRecipes"
 
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined"
 
 import classes from "./FilterChip.module.scss"
-import { Check } from "@mui/icons-material"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
-export function FilterChipRecipes({ label }) {
-    const { selectedState, handleSelected } = useFilterChipRecipes()
+export function FilterChipRecipes({ numericValue = 9999, filterType = null, label }) {
+    const { handlePreferencesToggle } = useRecipesContext()
+    const { selectedState, handleSelected } = useFilterChipRecipes(label, filterType, numericValue)
 
     return (
-        <div className={`${classes.filterChip} ${selectedState ? classes.active : classes.inactive}`} onClick={handleSelected}>
+        <div
+            onClick={() => {
+                filterType === "cuisineEthnicity" && handlePreferencesToggle(filterType, label.toLowerCase(), handleSelected, selectedState)
+                filterType === "caloricApport"  && handlePreferencesToggle(filterType, numericValue, handleSelected, selectedState)
+                filterType === "preparationTime" && handlePreferencesToggle(filterType, numericValue, handleSelected, selectedState)
+            }}
+            className={`${classes.filterChip} ${selectedState ? classes.active : classes.inactive}`}
+        >
             <CheckOutlinedIcon className={classes.ico} fontSize="18px" />
             <p className={classes.label}>{label}</p>
         </div>

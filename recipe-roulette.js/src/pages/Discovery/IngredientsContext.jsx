@@ -13,30 +13,45 @@ export const IngredientsProvider = ({ children }) => {
 
     useEffect(() => {
         try {
-            const sessionIng = JSON.parse(window.sessionStorage.getItem("displayedIng"))
+            const sessionFilters = JSON.parse(window.sessionStorage.getItem("filters"))
+            const sessionDisplayedIng = JSON.parse(window.sessionStorage.getItem("displayedIng"))
+            const sessionIng = JSON.parse(window.sessionStorage.getItem("ing"))
+            sessionFilters && setFilter(sessionFilters)
             if (sessionIng && sessionIng.length > 0) {
-                setDisplayedIng(sessionIng)
+                setIng(sessionIng)
+                setBlackList(sessionIng.filter((ing) => ing.isBlackListed))
+            } else {
+                setIng(ingredientsArray)
+            }
+            if (sessionDisplayedIng && sessionDisplayedIng.length > 0) {
+                setDisplayedIng(sessionDisplayedIng)
             } else {
                 generateIngredients()
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }, [])
 
     useEffect(() => {
         try {
             if (displayedIng.length > 0) {
-                console.log("session storage updated")
                 const jsonDisplayedIngs = JSON.stringify(displayedIng)
                 window.sessionStorage.setItem("displayedIng", jsonDisplayedIngs)
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }, [displayedIng])
 
     useEffect(() => {
+        setTimeout(() => {
+            const jsonIngs = JSON.stringify(ing)
+            const jsonFilters = JSON.stringify(filter)
+            window.sessionStorage.setItem("ing", jsonIngs)
+            window.sessionStorage.setItem("filters", jsonFilters)
+        }, 0)
+
         if (filteredIng) {
             setFilteredIng(() => {
                 let newData = ing

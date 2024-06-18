@@ -1,8 +1,8 @@
 @use "../../assets/scss" as *;
 
 .discoveryPage {
-    scale: .8;
-    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
+    scale: 0.8;
+    transition: scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 
     background-color: white;
     width: 100%;
@@ -20,30 +20,7 @@
         max-height: 100%;
         box-sizing: border-box;
         align-items: center;
-        padding-top: 3.25rem;
-        .globalActions {
-            position: absolute;
-            top: 0;
-            display: flex;
-            width: 100%;
-            box-sizing: border-box;
-            gap: 0.5rem;
-            align-items: center;
-            .icoButton {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 3rem;
-                width: 3rem;
-                min-width: 3rem;
-                color: $dark-gray;
-                font-weight: 600;
-                border: 1px solid #e5e0df;
-                border-radius: $size-24;
-                background-color: white;
-                font-size: 18px;
-            }
-        }
+        padding-top: 2.75rem;
         .ingredientsWrapper {
             width: 100%;
             position: relative;
@@ -60,7 +37,7 @@
         display: flex;
         width: 100%;
         box-sizing: border-box;
-        gap: 1rem;
+        gap: .75rem;
         align-items: center;
         justify-content: center;
         padding: 0.75rem 0;
@@ -91,5 +68,5 @@
 }
 .animateDiscovery {
     scale: 1;
-    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
+    transition: scale 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
 }

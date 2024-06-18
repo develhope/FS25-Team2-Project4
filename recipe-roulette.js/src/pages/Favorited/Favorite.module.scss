@@ -15,7 +15,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 1px $size-20 $size-20;
+    padding: 2.75rem $size-20 $size-20;
     border-radius: 0;
     .search {
         position: relative;
@@ -36,30 +36,29 @@
 .placeholder {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-height: 100%;
-    padding: 0 1rem;
-    padding-bottom: 7em;
+    width: 100%;
+    height: 85%;
+    max-height: 85%;
     justify-content: center;
     gap: 2rem;
     box-sizing: border-box;
-    overflow: hidden;
+    padding: 1rem;
     .placeholderImage {
         box-sizing: border-box;
-        padding: 2rem;
-        padding-bottom: 0;
-        border-radius: 1.5rem;
-        svg {
+        width: 100%;
+        height: 10%;
+        flex-grow: 1;
+        > svg {
             object-fit: contain;
-            height: 100%;
             width: 100%;
+            height: 100%;
         }
     }
 }
 .placeholderSearch {
-    padding:2rem 0;
+    padding: 2rem 0;
     justify-content: flex-start;
-    .placeholderImage{
+    .placeholderImage {
         padding-top: 0;
     }
 }
@@ -72,8 +71,9 @@
     font-family: $font-title;
     font-weight: 700;
     font-size: $size-20;
+    line-height: 130%;
     span {
-        background-color: #00a538;
+        background-color: #00a55b;
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         color: white;
@@ -89,16 +89,19 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.025rem;
+    font-family: $header-text;
+    font-size: $size-16;
 
     text-decoration: none;
     color: white;
-    background-color: #00a538;
+    background-color: #00a55b;
+    border: none;
 
-    height: 120px;
-    min-height: 120px;
+    height: 100px;
     padding: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 1.25rem;
     box-sizing: border-box;
 }
 

@@ -14,7 +14,6 @@
     overflow: hidden;
 
     scale: .8;
-    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
 }
 
 .discoveryPreview .mainContent {
@@ -34,9 +33,11 @@
     text-align: center;
     font-weight: bold;
     margin: 0;
+    line-height: 130%;
+
 }
 .discoveryPreview .mainContent h2 span {
-    background-color: #00A538;
+    background-color: #00a55b;
     color: white;
     padding: 0 .5rem;
     border-radius: .5rem;
@@ -48,34 +49,34 @@
     flex-grow: 1;
 
     border-radius: 1.5rem;
-    background-color: $accent-color;
-    padding: 2rem;
+    padding: 1rem;
     padding-bottom: 0;
     box-sizing: border-box;
     margin: 0;
 
-    border: 1px solid $light-gray;
 }
 
 .discoveryPreview .mainContent p {
     margin: 0;
-    font-weight: 500;
 }
 .discoveryPreview .mainContent .cta {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: .025rem;
+    font-family: $header-text;
+
 
     text-decoration: none;
     color: white;
-    background-color: #00A538;
+    background-color: #00a55b;
 
-    height: 120px;
-    min-height: 120px;
+    height: 100px;
+    min-height: 100px;
     padding: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 1.25rem;
     box-sizing: border-box;
 }
 
@@ -84,6 +85,9 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    font-family: $header-text;
+    font-weight: 500;
+
 
     text-decoration: none;
     color: #007E2B;

@@ -3,13 +3,12 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    place-items: center;
     background-color: $accent-color;
     box-sizing: border-box;
     border-radius: $size-16;
-    width: 100%;
-    animation: fadeIn 0.5s ease-in-out forwards
+    width: calc(100vw - 3rem);
+    font-size: $text-size-14;
+    flex-grow: 1;
 }
 
 .title {
@@ -20,8 +19,10 @@
     font-size: $text-size-20;
     padding: 1.5rem;
     padding-bottom: 0;
-    h1 {
+    > h1 {
         margin: 0;
+        font-size: $text-size-32;
+        color: $dark-gray;
     }
 }
 
@@ -34,6 +35,7 @@
     padding: 0 1.5rem;
     box-sizing: border-box;
     gap: 1.5rem;
+    flex-grow: 1;
 
     p {
         margin: 0;
@@ -43,7 +45,7 @@
         flex-direction: column;
         width: 100%;
         height: fit-content;
-
+        flex-grow: 1;
         input {
             width: 100%;
             border-radius: $size-24;
@@ -53,19 +55,24 @@
             padding-left: $size-16;
             font-size: 1rem;
             font-family: $header-text;
-
-        }::placeholder {
+        }
+        :focus {
+            outline: 2px solid $main-color;
+        }
+        ::placeholder {
             font-size: $text-size-16;
             color: $medium-light-gray;
         }
 
         label {
             display: block;
-            padding-top: .75rem;
-            padding-bottom: .5rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.25rem;
+            padding-left: 0.25rem;
             font-size: $text-size-16;
             font-family: $header-text;
             font-weight: 500;
+            color: $dark-gray;
         }
         .passInput {
             position: relative;
@@ -82,13 +89,28 @@
             background-color: transparent;
             top: 50%;
             transform: translateY(-50%);
-            right: .5rem;
+            right: 0.5rem;
             color: $medium-light-gray;
         }
     }
-
-    p {
+    .message {
         font-size: $text-size-14;
+        font-family: $header-text;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 0;
+        button {
+            padding: 0 4px;
+            height: 32px;
+            font-weight: 600;
+            text-decoration: underline;
+            color: #58933d;
+            border: none;
+            text-decoration: none;
+            background-color: transparent;
+        }
     }
 }
 
@@ -104,15 +126,6 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 1.5rem;
+    padding-top: 1rem;
     box-sizing: border-box;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-         opacity: 1;
-    }
 }

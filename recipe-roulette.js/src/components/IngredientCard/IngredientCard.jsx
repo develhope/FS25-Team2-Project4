@@ -1,10 +1,10 @@
-import classes from "./IngredientCard.module.scss"
-import { MaterialSymbol } from "react-material-symbols"
 import { useIngredientCard } from "./useIngredientCard"
 
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import CloseIcon from "@mui/icons-material/Close"
+
+import classes from "./IngredientCard.module.scss"
 
 export function IngredientCard({ ing }) {
     const { handleIngredientClick, handleXClick, cardState } = useIngredientCard(ing)

@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom"
-import classes from "./DiscoveryPreview.module.scss"
+import { useAnimate } from "../../hooks/animatePages/useAnimate"
+import { useLocationHook } from "../../hooks/useLocationHook"
 
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined"
-import { useAnimate } from "../../hooks/animatePages/useAnimate"
+import classes from "./DiscoveryPreview.module.scss"
 
 export function DiscoveryPreview() {
-    const { animate } = useAnimate()
+    const {location } = useLocationHook()
+    const { animate } = useAnimate(location)
+
     return (
         <div className={`${classes.discoveryPreview} ${animate && classes.discoveryPreviewAnimate}`}>
             <div className={classes.mainContent}>

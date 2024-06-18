@@ -1,0 +1,80 @@
+@use "../../assets/scss/" as *;
+
+.discoveryPreview {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: $size-20;
+    padding-top: 0;
+    box-sizing: border-box;
+
+    height: 100%;
+    overflow: hidden;
+
+    scale: .8;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
+}
+
+.discoveryPreview .mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    height: 0;
+    flex-grow:1;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+.discoveryPreview .mainContent h2 {
+    font-size: $size-24;
+    color: $darkish-gray;
+    font-family: $font-title;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    line-height: 130%;
+}
+.discoveryPreview .mainContent h2 span {
+    background-color: #00a538;
+    color: white;
+    padding: 0 .5rem;
+    border-radius: .5rem;
+}
+
+.discoveryPreview .mainContent > svg {
+    width: 100%;
+    height: 0;
+    flex-grow: 1;
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+.discoveryPreview .mainContent .cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    letter-spacing: .025rem;
+    font-family: $header-text;
+
+    text-decoration: none;
+    color: white;
+    background-color: #00A538;
+
+    height: 100px;
+    min-height: 100px;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    box-sizing: border-box;
+}
+
+.discoveryPreviewAnimate{
+    scale: 1;
+    transition: scale 0.45s cubic-bezier(0.08,0.82,0.17,1);
+}

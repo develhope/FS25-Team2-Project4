@@ -8,12 +8,16 @@
   transform: translateX(-50%);
 
   width: 91%;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.3);
   box-sizing: border-box;
   color: $darkish-gray;
   background-color: $third-color;
+
+  font-family: $header-text;
+  font-size: 14px;
+  font-weight: 600;
 
   display: flex;
   justify-content: space-between;
@@ -28,7 +32,10 @@
 }
 .snackbar p {
   margin: 0;
-  font-weight: 500;
+}
+.snackbar .rightItems {
+  display: flex;
+  align-items: center;
 }
 .snackbar .ico {
   border: none;
@@ -36,18 +43,22 @@
   padding-top: 2px;
   color: $darkish-gray;
 }
+
 .snackbarInactive {
-  bottom: -9rem;
+  bottom: -5rem;
   transition: bottom 0.3s ease;
 }
 .snackbarActive {
-  bottom: 1.5rem;
+  bottom: 1rem;
   transition: bottom 0.3s ease;
 }
 
 .snackbar button {
+  padding: 0 4px;
+  font-weight: 600;
   text-decoration: underline;
-  color: blue;
+  color: #58933D;
   border: none;
+  text-decoration: none;
   background-color: transparent;
 }

@@ -27,7 +27,7 @@
     max-width: 90%;
 
     background-color: white;
-    border-radius: $size-24 0 0 $size-24;
+    border-radius: $size-16 0 0 $size-16;
 
     transform: translateX($width-360);
     opacity: 0;
@@ -36,22 +36,30 @@
         opacity 0.4s ease;
 
     header {
-        padding: 0 $size-24;
-        padding-right: $size-8 ;
+        padding: 0 $size-20;
+        padding-right: .75rem ;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: $height-80;
+        height: 3.75rem;
         border-bottom: 1px solid $light-gray;
+        button {
+            height: 32px;
+            padding-left: .5rem;
+            padding-right: .75rem;
+            gap: .25rem;
+        }
         h2 {
             color: $dark-gray;
             font-family: $header-text;
-            font-weight: 600;
+            font-size: $text-size-20;
+            font-weight: 700;
+            margin: 0;
         }
         .rightItems {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
         .closeIco {
             display: flex;
@@ -59,34 +67,25 @@
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            border: none;
             height: 2rem;
             width: 2rem;
             color: $darkish-gray;
-        }
-        .deselectAllButton {
-            display: flex;
-            align-items: center;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: $text-size-14;
-            width: fit-content;
-            height: $height-40;
-            color: $dark-gray;
-            font-weight: 600;
-            border: 1px solid #e5e0df;
-            border-radius: $size-20;
-            background-color: white;
-            padding: 0 $size-16;
+            svg {
+                stroke-width: .5px;
+                stroke: $dark-gray;
+            }
         }
     }
     .sidebarBody {
-        padding: $size-16;
+        position: relative;
+        padding: $size-16 0;
+        padding-top: 0;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
         .preferences {
+            padding: 0 $size-16;
+
             h4 {
                 margin: 0;
                 margin-bottom: $size-8;
@@ -100,9 +99,13 @@
     }
 }
 .blackListedWrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    padding: 0 $size-16;
+    padding-top: 1rem;
+    box-sizing: border-box;
 }
 .blackListed {
     display: flex;
@@ -110,6 +113,7 @@
     gap: .75rem;
 }
 .filterChipWrapper {
+    
     display: flex;
     gap: $size-8;
     flex-wrap: wrap;

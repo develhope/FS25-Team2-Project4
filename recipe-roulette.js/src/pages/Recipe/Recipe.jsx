@@ -1,16 +1,24 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
+import { Snackbar } from "../../components/Snackbar/Snackbar"
+import { useSnackbar } from "../../components/Snackbar/useSnackbar"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
+import { useLocationHook } from "../../hooks/useLocationHook"
+
 import classes from "./Recipe.module.scss"
 
 export function Recipe() {
     const { targetedRecipe } = useRecipesContext()
-    const { animate } = useAnimate()
+    const { handleClickLoginSnackBar } = useSnackbar()
+
+    const {location } = useLocationHook()
+    const { animate } = useAnimate(location)
 
     return (
         <div className={`${classes.recipePage} ${animate && classes.animateRecipePage}`}>
             {targetedRecipe && (
                 <RecipeCard
+                    handleClickLoginSnackBar={handleClickLoginSnackBar}
                     recipeId={targetedRecipe.id}
                     title={targetedRecipe.title}
                     isExpanded={true}
@@ -19,10 +27,11 @@ export function Recipe() {
                     isVegetarian={targetedRecipe.isVegetarian}
                     isVegan={targetedRecipe.isVegan}
                     preparation={targetedRecipe.preparation}
-                    ingredients={targetedRecipe.ingredients}
+                    ingredients={targetedRecipe.ingQuantities}
                     attributes={targetedRecipe.attributes}
                 />
             )}
+            <Snackbar />
         </div>
     )
 }

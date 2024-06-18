@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/Auth/useAuth"
@@ -11,8 +11,11 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     const [expandedCard, setExpandedCard] = useState(isExpanded)
     const [expandedIngredients, setExpandedIngredients] = useState(true)
     const { handleRecipesUpdate, handleTargetedRecipe } = useRecipesContext()
-    const { isAuthenticated } = useAuth();
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setCardState((prevState) => ({ ...prevState, isFavorited: isFav }))
+    }, [isFav])
 
     function handleCardState(e) {
         e.preventDefault()
@@ -27,10 +30,8 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     }
 
     function handleOpenRecipePage() {
-        if (isAuthenticated) {
-            navigate("/recipe")
-        }
         handleTargetedRecipe(cardState)
+        navigate("/recipe")
     }
 
     return {
@@ -39,7 +40,6 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
         expandedIngredients,
         handleIngWrapperState,
         handleCardState,
-        // handleShowFullDetails,
         handleOpenRecipePage,
     }
 }

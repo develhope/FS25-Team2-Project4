@@ -1,54 +1,58 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "../../components/Snackbar/useSnackbar";
+import { useState } from "react"
+import { useAuth } from "../Auth/useAuth"
+import { useLogin } from "./useLogin"
 
 export function useSignup() {
-  const [data, setData] = useState(createData());
-  const [passError, setPassError] = useState(null);
-  const {handleOpenSnackbar } = useSnackbar()
-  const navigate = useNavigate()
+    const [data, setData] = useState(createData())
+    const [passError, setPassError] = useState(null)
+    const [isRegistered, setisRegistered] = useState()
 
-  function createData() {
-    return {
-      username: ``,
-      email: ``,
-      password: ``,
-      confirmPass: ``,
-      check: ``,
-    };
-  }
+    //ho importato questi per settare nel localStorage i dati dell'utente ed effettuare l'accesso
+    const { setItem } = useLogin()
+    const { login } = useAuth()
 
-  function handleInput(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    const checked = e.target.checked;
-    const type = e.target.type;
-
-    setData((d) => {
-      return {
-        ...d,
-        [name]: type === `checkbox` ? checked : value,
-      };
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (data.password === data.confirmPass) {
-      console.log(data);
-      setTimeout(() => {
-        navigate("/login")
-      }, 1500);
-      handleOpenSnackbar("Registration successful, please log in to access the app")
-    } else {
-      setPassError(`Please, confirm your password correctly`);
+    function createData() {
+        return {
+            username: ``,
+            email: ``,
+            password: ``,
+            confirmPass: ``,
+            check: false,
+        }
     }
-  }
 
-  return {
-    data,
-    passError,
-    handleInput,
-    handleSubmit,
-  };
+    function handleInput(e) {
+        const name = e.target.name
+        const value = e.target.value
+        const checked = e.target.checked
+        const type = e.target.type
+
+        setData((d) => {
+            return {
+                ...d,
+                [name]: type === `checkbox` ? checked : value,
+            }
+        })
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log(data)
+        if (data.password === data.confirmPass && data.check) {
+            setItem(data)
+            login()
+            setisRegistered(true)
+        } else {
+            console.log("Please, confirm your password correctly")
+            setPassError(`Please, confirm your password correctly`)
+        }
+    }
+
+    return {
+        data,
+        passError,
+        isRegistered,
+        handleInput,
+        handleSubmit,
+    }
 }

@@ -22,7 +22,7 @@ export const SnackbarProvider = ({ children }) => {
             setIntervalId(
                 setTimeout(() => {
                     setIsActive(false)
-                }, 3500)
+                }, 2500)
             )
             setIsActive(true)
         }
@@ -36,7 +36,7 @@ export const SnackbarProvider = ({ children }) => {
     function handleClickLoginSnackBar (e) {
         e.preventDefault()
         if (!isAuthenticated) {
-            handleOpenSnackbar("To add a recipe to your favorites, you need to log in.")
+            handleOpenSnackbar("Want to add favorites?")
             setShowBtn(true)
         }
     }
