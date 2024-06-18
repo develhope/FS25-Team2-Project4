@@ -57,6 +57,7 @@ function App() {
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route path="/signup" element={<SignupPage />} />
                                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
+                                <Route path="/food-preferences" element={<Preferences />} />
                                 <Route path="/*" element={<NotFound404 />} />
                             </Routes>
                         </SnackbarProvider>
