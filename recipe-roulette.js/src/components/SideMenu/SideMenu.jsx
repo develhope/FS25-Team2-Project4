@@ -51,13 +51,13 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             destination="/settings"
             icon={<SettingsOutlinedIcon fontSize="small" />}
           />
-          <NavigationLink
+{/*           <NavigationLink
             path={path}
             handleMenuToggle={handleMenuToggle}
             label="Preferences"
             destination="/preferences"
             icon={<ClassOutlinedIcon fontSize="small" />}
-          />
+          /> */}
           <div className={classes.separator} />
           {isAuthenticated ? (
             <NavigationLink

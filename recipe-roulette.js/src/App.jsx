@@ -76,7 +76,7 @@ function App() {
 
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
-                <Route path="/preferences" element={<Preferences />} />
+                <Route path="/food-preferences" element={<Preferences />} />
                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
               </Routes>
             </SnackbarProvider>

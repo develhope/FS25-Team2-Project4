@@ -27,7 +27,7 @@ export function Header({ handleMenuToggle }) {
             case "/settings":
                 setTitle("Settings")
                 break
-            case "/preferences":
+            case "/food-preferences":
                 setTitle("preferences")
                 break
             case "/recipes-results":
