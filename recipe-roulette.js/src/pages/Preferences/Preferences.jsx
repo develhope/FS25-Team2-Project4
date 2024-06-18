@@ -126,10 +126,11 @@ export function Preferences() {
                 <Button label="Reset All" icon={<RotateLeftOutlinedIcon fontSize="small" />} size={18}
                     action={() => {handleDeselectAll("isBlackListed"); clearLocalSave()}}
                 />
-                <Button type="button" 
-                     label="Save" 
+                <button type="button" 
+                    /* label="Save" */ 
+                    className={classes.button}
                     action={handleSave} width={"fill"}
-                />
+                >Save</button>
             </div>
             
         </div>

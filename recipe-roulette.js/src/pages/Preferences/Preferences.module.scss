@@ -46,3 +46,24 @@
     font-size: 0.8rem;
     font-weight: 500;
 }
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    font-size: $text-size-14;
+    min-width: max-content;
+    height: $height-40;
+    color: white;
+    font-weight: 500;
+    font-family: $header-text;
+    border: 1px solid #e5e0df;
+    border-radius: 1.5rem;
+    background-color:$green;
+}
+.button:active {
+    background-color: $second-color;
+}
