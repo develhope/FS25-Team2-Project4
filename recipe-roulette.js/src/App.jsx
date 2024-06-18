@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { DiscoveryPreview } from "./pages/DiscoveryPreview/DiscoveryPreview"
 import { Discovery } from "./pages/Discovery/Discovery"
-/* import { Favorited } from "./pages/Favorited/Favorited" */
+import { Favorited } from "./pages/Favorited/Favorited"
 import { Preferences } from "./pages/Preferences/Preferences"
 import { Settings } from "./pages/Settings/Settings"
 import { RecipeResults } from "./pages/RecipesResults/RecipesResults"
@@ -44,10 +44,10 @@ function App() {
                             <Routes classes>
                                 <Route path="/" element={<DiscoveryPreview />} />
                                 <Route path="/discovery" element={<Discovery handleSidebarToggle={handleSidebarToggle} />} />
-{/*                                 <Route
+                                <Route
                                     path="/favorited"
                                     element={<Favorited handleRecipesSidebarToggle={toggleSidebarRecipes} />}
-                                /> */}
+                                />
                                 <Route path="/settings" element={<Settings />} />
                                 <Route
                                     path="/recipes-results"

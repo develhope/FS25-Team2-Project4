@@ -1,21 +1,7 @@
-<<<<<<< HEAD:recipe-roulette.js/src/pages/Favorited/Favorited.jsx
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useMemo, useState } from "react"
-=======
-import RecipeCard from "../src/components/RecipeCard/RecipeCard"
-import { useAnimate } from "../src/hooks/animatePages/useAnimate"
-import { IcoButton } from "../src/components/Buttons/IcoButton/IcoButton"
-
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined"
-import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
-
-import classes from "./Favorite.module.scss"
-import { useRecipesContext } from "../src/contexts/RecipesContext"
-import { BaseSearch } from "../src/components/Search/BaseSearch/BaseSearch"
-import { useEffect, useMemo, useState } from "react"
->>>>>>> Preferences_Andrea:recipe-roulette.js/Favorited/Favorited.jsx
 import { Link } from "react-router-dom"
 
 import { useAuth } from "../../hooks/Auth/useAuth"
