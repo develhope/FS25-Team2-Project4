@@ -72,6 +72,10 @@ export function Preferences() {
         console.log("saving test");
     }
 
+    function clearLocalSave() {
+        localStorage.clear()
+    }
+
 /*     useEffect(() => {
         setInputValue("")
     }, [location.pathname]) */
@@ -121,7 +125,7 @@ export function Preferences() {
             </div>
             <div className={classes.bottomButtons}>
                 <Button className={classes.bottomButtons.reset} label="Reset All" icon={<RotateLeftOutlinedIcon fontSize="small" />} size={18}
-                    action={() => handleDeselectAll("isBlackListed")}
+                    action={() => {handleDeselectAll("isBlackListed"); clearLocalSave()}}
                 />
                 <Button type="button" className="save" label="Save" action={handleSave} width={"fill"}/>
             </div>
