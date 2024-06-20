@@ -47,9 +47,9 @@ export function Preferences() {
             if(local_filter.isVegetarian !== filter.isVegetarian){toggleFilter(isVegetarian)};
             if(local_filter.isVegan !== filter.isVegan){toggleFilter(isVegan)};
 
-            if(local_recipeFilter.isGlutenFree !== recipeFilter.isGlutenFree){togglerecipeFilter(isGlutenFree)};
-            if(local_recipeFilter.isVegetarian !== recipeFilter.isVegetarian){togglerecipeFilter(isVegetarian)};
-            if(local_recipeFilter.isVegan !== recipeFilter.isVegan){togglerecipeFilter(isVegan)};
+            if(local_recipeFilter.isGlutenFree !== recipeFilter.isGlutenFree){toggleRecipeFilter(isGlutenFree)};
+            if(local_recipeFilter.isVegetarian !== recipeFilter.isVegetarian){toggleRecipeFilter(isVegetarian)};
+            if(local_recipeFilter.isVegan !== recipeFilter.isVegan){toggleRecipeFilter(isVegan)};
             
             setBlackList([...local_blacklist]);
         }
@@ -65,7 +65,7 @@ export function Preferences() {
         };
     }
 
-    function handleSave(event) {
+    function handleSave() {
         localStorage.setItem("local_filter", JSON.stringify(filter));
         localStorage.setItem("local_recipeFilter", JSON.stringify(recipeFilter));
         localStorage.setItem("local_blacklist", JSON.stringify(blackList));
@@ -73,6 +73,7 @@ export function Preferences() {
     }
 
     function clearLocalSave() {
+        //non si deve eliminare tutto il localStorage, solo i filtri
         localStorage.clear()
     }
 
