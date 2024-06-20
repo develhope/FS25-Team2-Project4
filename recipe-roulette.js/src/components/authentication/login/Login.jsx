@@ -4,6 +4,7 @@ import { GoogleLoginBtn } from "../../SocialLoginButtons/GoogleLoginBtn"
 import { FacebookSocialBtn } from "../../SocialLoginButtons/FacebookLoginBtn"
 import { Button } from "../../Buttons/Button/Button"
 
+import CloseIcon from "@mui/icons-material/Close"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import LoginIcon from "@mui/icons-material/Login"
@@ -11,7 +12,7 @@ import StartIcon from "@mui/icons-material/Start"
 
 import classes from "./Login.module.scss"
 
-export function Login({ setShowPopup = null }) {
+export function Login({ setShowPopup = null, setChangeToSignup = null }) {
     const { data, showPassword, handleInput, handleSubmit, handleShowPassword } = useLogin()
     const location = useLocation()
 
@@ -19,6 +20,11 @@ export function Login({ setShowPopup = null }) {
         <div className={`${classes.container}`}>
             <header className={classes.title}>
                 <h1>Login</h1>
+                {setShowPopup && ( //mostra la X solo quando il componente viene utilizzato come popup
+                    <div onClick={() => setShowPopup && setShowPopup()} className={classes.closeIco}>
+                        <CloseIcon />
+                    </div>
+                )}
             </header>
 
             <form
@@ -81,18 +87,18 @@ export function Login({ setShowPopup = null }) {
                     />
                 </div>
 
+                <div className={classes.loginBtnBox}>
+                    <GoogleLoginBtn />
+                    <FacebookSocialBtn />
+                </div>
+
                 <div className={classes.message}>
                     <p>Don't have an account yet?</p>
                     <span className={classes.signup}>
-                        <Button link="signup" label="Sign Up" />
+                        <Button action={() => setChangeToSignup(true)} label="Sign Up" />
                     </span>
                 </div>
             </form>
-
-            <div className={classes.loginBtnBox}>
-                <GoogleLoginBtn />
-                <FacebookSocialBtn />
-            </div>
         </div>
     )
 }

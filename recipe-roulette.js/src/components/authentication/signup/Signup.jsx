@@ -4,9 +4,11 @@ import { useLocation } from "react-router-dom"
 
 import EditNoteIcon from "@mui/icons-material/EditNote"
 import StartIcon from "@mui/icons-material/Start"
+import CloseIcon from "@mui/icons-material/Close"
+
 import classes from "./Signup.module.scss"
 
-export function Signup() {
+export function Signup({ setShowPopup = null, setChangeToSignup = null }) {
     const { data, passError, handleInput, handleSubmit } = useSignup()
     const location = useLocation()
 
@@ -14,9 +16,20 @@ export function Signup() {
         <div className={`${classes.container}`}>
             <header className={classes.title}>
                 <h1>Signup</h1>
+                {setShowPopup && ( //mostra la X solo quando il componente viene utilizzato come popup
+                    <div onClick={() => setShowPopup && setShowPopup()} className={classes.closeIco}>
+                        <CloseIcon />
+                    </div>
+                )}
             </header>
 
-            <form onSubmit={handleSubmit} className={classes.formBox}>
+            <form
+                onSubmit={() => {
+                    handleSubmit()
+                    setShowPopup && setShowPopup(false)
+                }}
+                className={classes.formBox}
+            >
                 <div className={classes.inputBox}>
                     <label>Username</label>
                     <input
@@ -61,7 +74,7 @@ export function Signup() {
                     {passError && <p>{passError}</p>}
 
                     <label htmlFor="check" className={classes.checkLabel}>
-                        I Agree with<span>Terms & Conditions</span>
+                        I agree with<span>Terms & Conditions</span>
                         <input type="checkbox" name="check" id="check" checked={data.check} onChange={handleInput} required />
                     </label>
                 </div>
@@ -73,10 +86,29 @@ export function Signup() {
                         type="submit"
                         label="Sign up"
                         icon={<EditNoteIcon fontSize="small" />}
-                        active={data.username && data.password && data.confirmPass && data.confirmPass === data.password && data.email && data.check}
+                        active={
+                            data.username &&
+                            data.password &&
+                            data.confirmPass &&
+                            data.confirmPass === data.password &&
+                            data.email &&
+                            data.check
+                        }
                         prevPath={location.pathname}
                     />
-                    <Button prevPath={location.pathname} label="Skip" icon={<StartIcon fontSize="small" />} />
+
+                    <Button
+                        action={() => setShowPopup && setShowPopup(false)}
+                        prevPath={location.pathname}
+                        label="Skip"
+                        icon={<StartIcon fontSize="small" />}
+                    />
+                </div>
+                <div className={classes.message}>
+                    <p>Already have an account?</p>
+                    <span className={classes.login}>
+                        <Button action={() => setChangeToSignup(false)} label="Login" />
+                    </span>
                 </div>
             </form>
         </div>
