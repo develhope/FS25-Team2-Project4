@@ -38,6 +38,9 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
             case "/settings":
                 setTitle("Settings")
                 break
+            case "/food-preferences":
+                setTitle("preferences")
+                break
             case "/recipes-results":
                 setTitle("Results")
                 break
