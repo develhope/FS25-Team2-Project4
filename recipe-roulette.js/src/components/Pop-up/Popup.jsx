@@ -1,6 +1,6 @@
 import classes from "./Popup.module.scss"
 
-export function PopupLogin({ handleClosePopup, children }) {
+export function Popup({ handleClosePopup, children }) {
     function stopPropagation(e) {
         e.stopPropagation()
     }

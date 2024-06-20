@@ -1,7 +1,7 @@
 import { useSnackbar } from "./useSnackbar"
 import { useState } from "react"
 import { createPortal } from "react-dom"
-import { PopupLogin } from "../Pop-up/Popup"
+import { Popup } from "../Pop-up/Popup"
 import { Button } from "../Buttons/Button/Button"
 import { Login } from "../authentication/login/Login"
 
@@ -25,9 +25,9 @@ export function Snackbar() {
             </div>
             {showPopup &&
                 createPortal(
-                    <PopupLogin handleClosePopup={() => setShowPopup(false)}>
+                    <Popup handleClosePopup={() => setShowPopup(false)}>
                     <Login setShowPopup={setShowPopup} />
-                    </PopupLogin>,
+                    </Popup>,
                     document.getElementById("popup-root")
                 )}
         </div>

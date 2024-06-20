@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { useAuth } from "../../hooks/Auth/useAuth";
-import { PopupLogin } from "../../components/Pop-up/Popup"
+import { Popup } from "../../components/Pop-up/Popup"
 import { Login } from "../../components/authentication/login/Login";
 
 export function LinkBox({ handleLogoutClick }) {
@@ -58,9 +58,9 @@ export function LinkBox({ handleLogoutClick }) {
       </div>
       {showPopup &&
         createPortal(
-          <PopupLogin handleClosePopup={() => setShowPopup(false)}>
+          <Popup handleClosePopup={() => setShowPopup(false)}>
             <Login setShowPopup={setShowPopup} />
-          </PopupLogin>,
+          </Popup>,
           document.getElementById("popup-root")
         )}
     </>

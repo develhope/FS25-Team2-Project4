@@ -5,7 +5,7 @@ import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 
 import { useAuth } from "../../hooks/Auth/useAuth"
-import { PopupLogin } from "../../components/Pop-up/Popup"
+import { Popup } from "../../components/Pop-up/Popup"
 import { createPortal } from "react-dom"
 import { Login } from "../../components/authentication/login/Login"
 import { useLocationHook } from "../../hooks/useLocationHook"
@@ -463,9 +463,9 @@ export function Favorited() {
                     </h2>
                     {showPopup &&
                         createPortal(
-                            <PopupLogin handleClosePopup={() => setShowPopup(false)}>
+                            <Popup handleClosePopup={() => setShowPopup(false)}>
                                 <Login setShowPopup={setShowPopup} />
-                            </PopupLogin>,
+                            </Popup>,
                             document.getElementById("popup-root")
                         )}
                     <Link className={classes.cta} onClick={() => setShowPopup(true)}>
