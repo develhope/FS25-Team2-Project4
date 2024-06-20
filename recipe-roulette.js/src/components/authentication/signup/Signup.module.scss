@@ -8,7 +8,6 @@
     border-radius: $size-16;
     width: calc(100vw - 3rem);
     font-size: $text-size-14;
-    flex-grow: 1;
 }
 
 .title {
@@ -33,15 +32,11 @@
     padding-bottom: 1.5rem;
     box-sizing: border-box;
     gap: 1rem;
-    flex-grow: 1;
-
     .inputBox {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         width: 100%;
-        flex-grow: 1;
-
         input {
             display: flex;
             align-items: center;

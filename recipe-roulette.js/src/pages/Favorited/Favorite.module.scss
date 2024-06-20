@@ -34,24 +34,27 @@
 }
 
 .placeholder {
+    padding-top: .5rem;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 85%;
-    max-height: 85%;
-    justify-content: center;
-    gap: 2rem;
+    height: 100%;
+    justify-content: space-between;
+    gap: 1.5rem;
     box-sizing: border-box;
-    padding: 1rem;
     .placeholderImage {
+        display: flex;
+        align-items: center;
         box-sizing: border-box;
         width: 100%;
         height: 10%;
         flex-grow: 1;
+        padding: 1.5rem;
+        border-radius: 1rem;
         > svg {
             object-fit: contain;
             width: 100%;
-            height: 100%;
+            max-height: 100%;
         }
     }
 }
@@ -80,11 +83,7 @@
     }
 }
 .placeholder .cta {
-    position: fixed;
-    bottom: 1.5rem;
-    width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
