@@ -21,6 +21,7 @@
     "@mui/material": "^5.15.19",
     "axios": "^1.7.2",
     "bootstrap-icons": "^1.11.3",
+    "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.4.0",

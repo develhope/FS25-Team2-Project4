@@ -93,7 +93,6 @@ export const RecipesProvider = ({ children }) => {
         } catch (error) {
             console.error(error)
         }
-        console.log(isAuthenticated)
     }, [location, isAuthenticated])
 
     //impostazione del localStorage quando vengono aggiunte ricette ai preferiti

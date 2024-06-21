@@ -9,7 +9,7 @@
     justify-content: space-between;
     padding: 1rem 0;
     padding-bottom: 0.75rem;
-    gap: .5rem;
+    gap: 0.5rem;
     box-sizing: border-box;
     .globalActions {
         z-index: 11;
@@ -22,12 +22,12 @@
         gap: 0.5rem;
         align-items: center;
         background-color: white;
-        padding-bottom: .75rem;
+        padding-bottom: 0.75rem;
     }
-    .topItem{
+    .topItem {
         display: flex;
         align-items: center;
-        gap: .75rem;
+        gap: 0.75rem;
         box-sizing: border-box;
         padding: 0 1.25rem;
         padding-right: 1rem;
@@ -36,7 +36,7 @@
         align-items: center;
         justify-content: space-between;
     }
-    .leftItems{
+    .leftItems {
         display: flex;
         align-items: center;
         color: $dark-gray;
@@ -49,39 +49,12 @@
             margin: 0;
             width: 100%;
         }
-        .backIcon {
-            display: flex;
-            align-items: center;
-            height: 2rem;
-            width: 2rem;
-            min-width: 2rem;
-            svg {
-                stroke: $dark-gray;
-                stroke-width: 1;
-            }
+        > button {
+            justify-content: flex-start;
+        }
+        svg {
+            stroke: $dark-gray;
+            stroke-width: 1;
         }
     }
-    .rightItems {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: .5rem;
-
-        .menu {
-            padding-left: .25rem;
-            box-sizing: border-box;
-            display: flex;
-            height: 40px;
-            width: 40px;
-            align-items: center;
-            justify-content: center;
-            color: $dark-gray;
-            border: none;
-            background-color: transparent;
-        }
-    }
-}
-
-.headerGreen{
-    background-color: $main-color;
 }

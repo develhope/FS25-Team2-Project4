@@ -1,12 +1,14 @@
+import { useAuth } from "../../hooks/Auth/useAuth";
 import { NavigationLink } from "./NavigationLink/NavigationLink";
+import { IcoButton } from "../Buttons/IcoButton/IcoButton";
+
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ClassOutlinedIcon from '@mui/icons-material/ClassOutlined';
-import { useAuth } from "../../hooks/Auth/useAuth";
+import CloseIcon from '@mui/icons-material/Close';
+
 import classes from "./SideMenu.module.scss";
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
@@ -25,9 +27,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
       >
         <header>
           <h4>Browse</h4>
-          <div onClick={handleMenuToggle} className={classes.closeIco}>
-            <MenuOpenOutlinedIcon />
-          </div>
+          <IcoButton action={handleMenuToggle} icon={<CloseIcon/>} style="transparent" />
         </header>
         <section className={classes.links}>
           <NavigationLink
