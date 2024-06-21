@@ -30,7 +30,8 @@ export function Button({
             onClick={() => {active && handleOnClick()}}
             className={`${classes.button} ${!active && classes.disabled} 
             ${width === "fill" && classes.wideButton}
-            ${style === "primary" && classes.primaryColor}`}
+            ${style === "primary" && classes.primaryColor}
+            ${style === "transparent" && classes.transparent}`}
         >
             {icon}
             {label}

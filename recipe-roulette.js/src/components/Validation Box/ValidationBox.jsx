@@ -1,7 +1,4 @@
-import { IcoButton } from "../Buttons/IcoButton/IcoButton";
 import classes from "./ValidationBox.module.scss";
-import DoneIcon from '@mui/icons-material/Done';
-import CloseIcon from '@mui/icons-material/Close';
 import { Button } from "../Buttons/Button/Button";
 
 
@@ -13,8 +10,8 @@ export function ValidationBox ({message, setShowPopup = null, handleValidationAc
                 {message}
             </header>
             <div className={classes.buttonsWrapper}>
-                <Button label="Cancel" action={() => setShowPopup(false)}/>
-                <Button label="Log out" action={() => {handleValidationAction(), setShowPopup(false)}}/>
+                <Button label="Cancel" action={() => setShowPopup(false)} style="transparent"/>
+                <Button label="Log out" action={() => {handleValidationAction(), setShowPopup(false)}} style="primary"/>
             </div>
         </div>
     )
