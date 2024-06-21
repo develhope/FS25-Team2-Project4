@@ -5,17 +5,19 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ClassOutlinedIcon from "@mui/icons-material/ClassOutlined";
 import { useAuth } from "../../hooks/Auth/useAuth";
 import classes from "./SideMenu.module.scss";
 import { createPortal } from "react-dom";
 import { Popup } from "../Pop-up/Popup";
 import { useState } from "react";
 import { ValidationBox } from "../Validation Box/ValidationBox";
+import { useSnackbar } from "../Snackbar/useSnackbar";
+import { Snackbar } from "../Snackbar/Snackbar";
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
   const { logout, isAuthenticated } = useAuth();
   const [showPopup, setShowPopup] = useState();
+  const {handleOpenSnackbar} = useSnackbar()
 
   return (
     <div>
@@ -89,11 +91,12 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             <ValidationBox
               message="Confirm logout?"
               setShowPopup={setShowPopup}
-              handleValidationAction={logout}
+              handleValidationAction={() => {logout(), handleOpenSnackbar("You have successfully logged out.")}}
             />
           </Popup>,
           document.getElementById("popup-root")
         )}
+        <Snackbar/>
     </div>
   );
 }
