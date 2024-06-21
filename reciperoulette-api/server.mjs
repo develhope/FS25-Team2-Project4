@@ -3,9 +3,10 @@ import cors from "cors"
 import { router as usersRouters } from "./routes/users-routes.mjs"
 
 const app = express()
+app.use(express.json())
 app.use(cors())
 
-app.use("/api/users", usersRouters )
+app.use("/api/users", usersRouters)
 
 
 app.listen(3000, () => {
