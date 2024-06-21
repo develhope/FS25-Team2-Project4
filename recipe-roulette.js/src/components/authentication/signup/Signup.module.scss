@@ -7,20 +7,35 @@
     box-sizing: border-box;
     border-radius: $size-16;
     width: calc(100vw - 3rem);
+    max-width: 30rem;
     font-size: $text-size-14;
 }
 
 .title {
-    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    box-sizing: border-box;
     font-size: $text-size-20;
     padding: 1.5rem;
-    padding-top: 1rem;
     padding-bottom: 0;
     > h1 {
         margin: 0;
         font-size: $text-size-32;
         color: $dark-gray;
+    }
+    .closeIco {
+        color: $dark-gray;
+        display: flex;
+        height: 2rem;
+        width: 2rem;
+        justify-content: flex-end;
+        align-items: center;
+        svg {
+            stroke: $dark-gray;
+            stroke-width: 0.5;
+        }
     }
 }
 
@@ -29,9 +44,9 @@
     flex-direction: column;
     width: 100%;
     padding: 0 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 2rem;
     box-sizing: border-box;
-    gap: 1rem;
+    gap: 1.5rem;
     .inputBox {
         display: flex;
         flex-direction: column;
@@ -44,7 +59,7 @@
             width: 100%;
             border-radius: $size-24;
             border: 1px ridge $light-gray;
-            height: 3rem;
+            height: 48px;
             box-sizing: border-box;
             padding-left: $size-16;
             font-size: $text-size-16;
@@ -73,7 +88,7 @@
             font-size: $text-size-14;
             display: flex;
             align-items: center;
-            gap: 0.2em;
+            gap: 0.5rem;
             padding-bottom: 0;
             span {
                 text-decoration: underline;
@@ -83,6 +98,29 @@
                 width: fit-content;
                 margin: 0;
             }
+        }
+    }
+    .message {
+        font-size: $text-size-14;
+        font-family: $header-text;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 0;
+        color: $dark-gray;
+        p {
+            margin: 0;
+        }
+        button {
+            padding: 0 4px;
+            height: 32px;
+            font-weight: 600;
+            text-decoration: underline;
+            color: #58933d;
+            border: none;
+            text-decoration: none;
+            background-color: transparent;
         }
     }
 }

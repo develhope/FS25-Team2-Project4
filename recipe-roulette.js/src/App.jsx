@@ -18,7 +18,6 @@ import { AuthProvider } from "./components/authentication/AuthContext"
 import { Recipe } from "./pages/Recipe/Recipe"
 import { RecipesProvider } from "./contexts/RecipesContext"
 import { LoginPage } from "./pages/Login/LoginPage"
-import { SignupPage } from "./pages/Signup/SignupPage"
 import { NotFound404 } from "./pages/NotFound404/NotFound404"
 
 function App() {
@@ -56,7 +55,6 @@ function App() {
                                 <Route path={`/recipe`} element={<Recipe />} />
 
                                 <Route path="/login" element={<LoginPage />} />
-                                <Route path="/signup" element={<SignupPage />} />
                                 <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
                                 <Route path="/food-preferences" element={<Preferences />} />
                                 <Route path="/*" element={<NotFound404 />} />
