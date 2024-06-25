@@ -1,10 +1,4 @@
-import pgPromise from "pg-promise"
-import dotenv from "dotenv"
-dotenv.config()
-
-const url = process.env.DATABASE_URL
-
-const db = pgPromise()(url)
+import { db } from "../utils/helpers.mjs"
 
 const getUsers = async (req, res) => {
     try {
