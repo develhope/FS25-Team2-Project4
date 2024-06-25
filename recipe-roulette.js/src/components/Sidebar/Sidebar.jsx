@@ -4,6 +4,7 @@ import { FilterChip } from "../FilterChip/FilterChip"
 import { Switch } from "../Switch/Switch"
 import { IngredientSearch } from "../Search/SearchBar/IngredientSearch"
 import { Button } from "../Buttons/Button/Button"
+import { IcoButton } from "../Buttons/IcoButton/IcoButton"
 
 import CloseIcon from "@mui/icons-material/Close"
 import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
@@ -28,9 +29,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                             size={18}
                             action={() => handleDeselectAll("isBlackListed")}
                         />
-                        <div onClick={handleSidebarToggle} className={classes.closeIco}>
-                            <CloseIcon stroke={2} fontSize="small" />
-                        </div>
+                        <IcoButton action={handleSidebarToggle} style="transparent" icon={<CloseIcon fontSize="small" />} />
                     </div>
                 </header>
                 <section className={classes.sidebarBody}>
