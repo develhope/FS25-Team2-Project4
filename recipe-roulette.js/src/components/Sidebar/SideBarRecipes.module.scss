@@ -42,7 +42,7 @@
 
     header {
         padding: 0 $size-20;
-        padding-right: .75rem;
+        padding-right: 0.75rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -50,8 +50,6 @@
         border-bottom: 1px solid $light-gray;
         button {
             height: 32px;
-            padding-left: 0.5rem;
-            padding-right: 0.75rem;
             gap: 0.25rem;
         }
         h2 {
@@ -60,23 +58,14 @@
             font-size: $text-size-20;
             font-weight: 700;
             margin: 0;
+            letter-spacing: 0.5px;
         }
         .rightItems {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-        }
-        .closeIco {
-            display: flex;
-            box-sizing: border-box;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            height: 2rem;
-            width: 2rem;
-            color: $darkish-gray;
-            svg {
-                stroke-width: 0.5px;
+            gap: 1rem;
+            > button:last-child > svg {
+                stroke-width: .5;
                 stroke: $dark-gray;
             }
         }

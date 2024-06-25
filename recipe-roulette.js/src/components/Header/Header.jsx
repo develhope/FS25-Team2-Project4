@@ -68,13 +68,11 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 <div className={classes.topItem}>
                     <div className={classes.leftItems}>
                         {location.pathname === "/recipes-results" ? (
-                            <div onClick={() => navigate("/discovery")} className={classes.backIcon}>
-                                <ArrowBackIcon stroke={2} fontSize="small" />
-                            </div>
+                            <IcoButton navigateTo="/discovery" icon={<ArrowBackIcon fontSize="small" />} style="transparent" />
                         ) : null}
                         {location.pathname === "/recipe" ? (
-                            <div
-                                onClick={() => {
+                            <IcoButton
+                                action={() => {
                                     try {
                                         const path = localStorage.getItem("prevPath")
                                         if (path) {
@@ -86,20 +84,15 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                                         console.log(error)
                                     }
                                 }}
-                                className={classes.backIcon}
-                            >
-                                <ArrowBackIcon fontSize="small" />
-                            </div>
+                                icon={<ArrowBackIcon fontSize="small" />}
+                                style="transparent"
+                            />
                         ) : null}
 
                         <h1>{title}</h1>
                     </div>
 
-                    <div className={classes.rightItems}>
-                        <div className={classes.menu}>
-                            {location.pathname !== "/" ? <MenuOpenIcon onClick={handleMenuToggle} /> : null}
-                        </div>
-                    </div>
+                    <IcoButton action={handleMenuToggle} icon={<MenuOpenIcon />} style="transparent" />
                 </div>
                 {location.pathname === "/recipes-results" && (
                     <section className={classes.globalActions}>

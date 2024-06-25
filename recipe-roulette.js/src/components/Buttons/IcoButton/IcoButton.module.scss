@@ -11,12 +11,20 @@
     border: 1px solid #e5e0df;
     border-radius: 1.5rem;
     background-color: white;
+    box-sizing: border-box;
+    padding: 0;
 }
 
 button:active {
     background-color: $third-color;
 }
-
+.noBorder {
+    height: 2rem;
+    width: 2rem;
+    min-width: 2rem;
+    border: none;
+    background-color: none;
+}
 .disabled {
     background-color: $lighter-gray;
     color: $medium-gray;

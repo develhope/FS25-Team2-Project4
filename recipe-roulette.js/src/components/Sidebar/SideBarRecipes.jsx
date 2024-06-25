@@ -1,12 +1,14 @@
 import { Switch } from "../Switch/Switch"
 import { FilterChipRecipes } from "../FilterChip/FilterChipRecipes"
 
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
+import CloseIcon from "@mui/icons-material/Close"
 import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
 
-import classes from "./SideBarRecipes.module.scss"
 import { Button } from "../Buttons/Button/Button"
 import { useRecipesContext } from "../../contexts/RecipesContext"
+import { IcoButton } from "../Buttons/IcoButton/IcoButton"
+
+import classes from "./SideBarRecipes.module.scss"
 
 export function SideBarRecipes({ state, toggleSidebarRecipes }) {
     const { toggleRecipeFilter, recipeFilter } = useRecipesContext()
@@ -31,9 +33,7 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                             action={handleDeselectRecipeFilters}
                             icon={<RotateLeftOutlinedIcon className={classes.ico} fontSize="small" />}
                         />
-                        <div onClick={toggleSidebarRecipes} className={classes.closeIco}>
-                            <CloseOutlinedIcon fontSize="small" />
-                        </div>
+                        <IcoButton action={toggleSidebarRecipes} style="transparent" icon={<CloseIcon fontSize="small" />} />
                     </div>
                 </header>
 
