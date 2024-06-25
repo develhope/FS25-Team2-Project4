@@ -7,7 +7,6 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useAuth } from "../../hooks/Auth/useAuth";
 import CloseIcon from '@mui/icons-material/Close';
 import classes from "./SideMenu.module.scss";
 import { createPortal } from "react-dom";
