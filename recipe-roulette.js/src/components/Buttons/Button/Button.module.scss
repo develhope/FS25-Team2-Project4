@@ -35,6 +35,11 @@
     border: none;
 }
 
+.transparent {
+    background-color: transparent;
+    border: none;
+}
+
 .primaryColor:active{
     background-color: $second-color;
 }

@@ -1,0 +1,32 @@
+@use "../../assets/scss/" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: $accent-color;
+    box-sizing: border-box;
+    border-radius: $size-16;
+    width: calc(100vw - 3rem);
+    max-width: 30rem;
+    font-size: $text-size-14;
+    border: 1px solid $light-gray;
+    justify-content: start;
+    align-items: start;
+    gap: $size-24;
+    padding: $size-16 $size-24;
+
+    header {
+        font-size: $text-size-20;
+        font-weight: 500;
+        font-family: $font-text;
+    }
+
+    .buttonsWrapper {
+        display: flex;
+        flex-direction: row;
+        align-self: end;
+        justify-self: end;
+        gap: $size-8;
+        
+    }
+}

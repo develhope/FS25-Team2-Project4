@@ -7,12 +7,18 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ClassOutlinedIcon from "@mui/icons-material/ClassOutlined";
+import { useAuth } from "../../hooks/Auth/useAuth";
 import CloseIcon from '@mui/icons-material/Close';
-
 import classes from "./SideMenu.module.scss";
+import { createPortal } from "react-dom";
+import { Popup } from "../Pop-up/Popup";
+import { useState } from "react";
+import { ValidationBox } from "../Validation Box/ValidationBox";
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
   const { logout, isAuthenticated } = useAuth();
+  const [showPopup, setShowPopup] = useState();
 
   return (
     <div>
@@ -51,7 +57,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             destination="/settings"
             icon={<SettingsOutlinedIcon fontSize="small" />}
           />
-{/*           <NavigationLink
+          {/*           <NavigationLink
             path={path}
             handleMenuToggle={handleMenuToggle}
             label="Preferences"
@@ -64,9 +70,8 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
               path={path}
               handleMenuToggle={handleMenuToggle}
               label={"Logout"}
-              destination={"/login"}
               icon={<LogoutIcon fontSize="small" />}
-              action={logout}
+              action={() => setShowPopup(true)}
             />
           ) : (
             <NavigationLink
@@ -79,6 +84,17 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
           )}
         </section>
       </div>
+      {showPopup &&
+        createPortal(
+          <Popup handleClosePopup={() => setShowPopup(false)}>
+            <ValidationBox
+              message="Confirm logout?"
+              setShowPopup={setShowPopup}
+              handleValidationAction={logout}
+            />
+          </Popup>,
+          document.getElementById("popup-root")
+        )}
     </div>
   );
 }

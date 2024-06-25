@@ -11,10 +11,11 @@ import { createPortal } from "react-dom";
 import { useAuth } from "../../hooks/Auth/useAuth";
 import { Popup } from "../../components/Pop-up/Popup"
 import { Login } from "../../components/authentication/login/Login";
+import { ValidationBox } from "../../components/Validation Box/ValidationBox";
 
 export function LinkBox({ handleLogoutClick }) {
   const [showPopup, setShowPopup] = useState();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <>
@@ -39,9 +40,10 @@ export function LinkBox({ handleLogoutClick }) {
           <Button
             label="Logout"
             width="fill"
-            action={handleLogoutClick}
+            action={(e) => {
+              setShowPopup(true);
+            }}
             icon={<LogoutIcon fontSize="small" />}
-            link="login"
           />
         ) : (
           <Button
@@ -59,7 +61,11 @@ export function LinkBox({ handleLogoutClick }) {
       {showPopup &&
         createPortal(
           <Popup handleClosePopup={() => setShowPopup(false)}>
-            <Login setShowPopup={setShowPopup} />
+            {isAuthenticated ? <ValidationBox
+              message="Confirm logout?"
+              setShowPopup={setShowPopup}
+              handleValidationAction={logout}
+            /> : <Login setShowPopup={setShowPopup} />}
           </Popup>,
           document.getElementById("popup-root")
         )}
