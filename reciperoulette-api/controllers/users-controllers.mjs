@@ -1,6 +1,8 @@
-import { db } from "../utils/helpers.mjs"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import bcrypt from "bcrypt"
+import { db } from "../utils/DBhelpers.mjs"
+
 dotenv.config()
 
 const secretKey = process.env.SECRET_KEY
@@ -20,52 +22,52 @@ const signup = async (req, res) => {
         const emailExists = await db.oneOrNone(`SELECT email FROM users WHERE email=$1`, email)
         const usernameExists = await db.oneOrNone(`SELECT username FROM users WHERE username=$1`, username)
         if (!emailExists && !usernameExists) {
+            const hashedPassword = await bcrypt.hash(password, 10)
             const { id } = await db.one(`INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;`, [
                 username,
                 email,
-                password,
+                hashedPassword,
             ])
             res.status(201).json({ id, msg: "User created successfully" })
         } else {
-            res.status(400).json({ msg: "An user with this email or username already exists" })
+            res.status(400).json({ msg: "A user with this email or username already exists" })
         }
     } catch (error) {
-        console.log()
+        console.log(error)
         res.status(500).json({ msg: "Internal server error" })
     }
 }
 
 const login = async (req, res) => {
     try {
-        const {username, password} = req.body
-        const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`, username)
+        const { username, password } = req.body
+        const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`, [username])
 
-        if (user && user.password === password) {
-            const token = jwt.sign(user, secretKey, { expiresIn: '7d' } )
+        if (user && await bcrypt.compare(password, user.password)) {
+            const token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: "7d" })
             await db.none(`UPDATE users SET token=$2 WHERE username=$1`, [username, token])
-            res.status(200).json({msg: "Logged in", id: user.id, username: user.username, token})
+            res.status(200).json({ msg: "Logged in", id: user.id, username: user.username, token })
         } else {
-            res.status(401).json({msg: "Invalid password"})
+            res.status(401).json({ msg: "Invalid credentials" })
         }
     } catch (error) {
-        res.status(400).json({msg: "Username not found, sign up before login"})
+        res.status(500).json({ msg: "Internal server error" })
     }
 }
 
-/* const logout = async (req, res) => {
+const logout = async (req, res) => {
     try {
-        const {username} = req.body
-        const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`, username)
+        const user = req.user
 
-        if (user) {
-            await db.one(`UPDATE users SET token=null WHERE username=$1`, username)
-            res.status(200).json({msg: `Logged out`})
-        } else {
-            res.status(401).json({msg: "User not found"})
+        if (!user) {
+            return res.status(400).json({ msg: "User not authenticated" })
         }
-    } catch (error) {
-        res.status(500).json({msg: "Server error"})
-    }
-} */
 
-export { getUsers, signup, login }
+        await db.none(`UPDATE users SET token=$2 WHERE id=$1`, [user.id, null])
+        res.status(200).json({ msg: "User logged out" })
+    } catch (error) {
+        res.status(500).json({ msg: "Internal server error" })
+    }
+}
+
+export { getUsers, signup, login, logout }
