@@ -20,4 +20,4 @@ model User {
   password      String?
 }
 
-// aggiungere proprietà sopra e successivamente npx prisma generate e poi npx prisma db push 
+// aggiungere proprietà sopra e successivamente npx prisma generate e poi npx prisma db push

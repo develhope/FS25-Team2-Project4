@@ -1,4 +1,9 @@
 import { db } from "../utils/helpers.mjs"
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config()
+
+const secretKey = process.env.SECRET_KEY
 
 const getUsers = async (req, res) => {
     try {
@@ -30,4 +35,37 @@ const signup = async (req, res) => {
     }
 }
 
-export { getUsers, signup }
+const login = async (req, res) => {
+    try {
+        const {username, password} = req.body
+        const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`, username)
+
+        if (user && user.password === password) {
+            const token = jwt.sign(user, secretKey, { expiresIn: '7d' } )
+            await db.none(`UPDATE users SET token=$2 WHERE username=$1`, [username, token])
+            res.status(200).json({msg: "Logged in", id: user.id, username: user.username, token})
+        } else {
+            res.status(401).json({msg: "Invalid password"})
+        }
+    } catch (error) {
+        res.status(400).json({msg: "Username not found, sign up before login"})
+    }
+}
+
+/* const logout = async (req, res) => {
+    try {
+        const {username} = req.body
+        const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`, username)
+
+        if (user) {
+            await db.one(`UPDATE users SET token=null WHERE username=$1`, username)
+            res.status(200).json({msg: `Logged out`})
+        } else {
+            res.status(401).json({msg: "User not found"})
+        }
+    } catch (error) {
+        res.status(500).json({msg: "Server error"})
+    }
+} */
+
+export { getUsers, signup, login }
