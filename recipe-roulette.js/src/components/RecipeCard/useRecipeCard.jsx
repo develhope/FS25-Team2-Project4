@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../../hooks/Auth/useAuth"
 
 export function useRecipeCard(recipeId, isFav, isExpanded) {
     const [cardState, setCardState] = useState({
