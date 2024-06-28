@@ -7,6 +7,7 @@ import { useButtonState } from "../../hooks/ButtonState/useButtonState"
 import { useMemo, useState } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useLocationHook } from "../../hooks/useLocationHook"
+import { useRecipesFetch } from "../../hooks/recipesFetch/useRecipesFetch"
 
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined"
 import AddIcon from "@mui/icons-material/Add"
@@ -15,13 +16,15 @@ import classes from "./Discovery.module.scss"
 
 export function Discovery() {
     const { displayedIng, shuffleIng, handleIngIncrement } = useManageIngredients()
-    const {searchRecipeByIng} = useRecipesContext()
-
+    const { recipeFilter } = useRecipesContext()
     const { isActive, setIsActive } = useButtonState(true)
     const [animateButton, seAnimateButton] = useState(false)
 
     const {location } = useLocationHook()
     const { animate } = useAnimate(location)
+    const { handleRecipesFetch } = useRecipesFetch()
+
+    console.log(recipeFilter)
 
     const setButtonState = useMemo(() => {
         if (displayedIng.length === 8) {
@@ -66,7 +69,16 @@ export function Discovery() {
                     link={"recipes-results"}
                     width={"fill"}
                     active={true}
-                    action={() => searchRecipeByIng(displayedIng)}
+                    action={() => {
+                        const ingNames = displayedIng.map((ing) => ing.name)
+                        console.log(ingNames)
+                        handleRecipesFetch(
+                            ingNames,
+                            recipeFilter.preparationTime,
+                            recipeFilter.caloricApport,
+                            recipeFilter.cuisineEthnicity
+                        )
+                    }}
                     label="Recipes"
                     icon={<ManageSearchOutlinedIcon fontSize="small" />}
                     size={20}
