@@ -14,6 +14,7 @@ export function Recipe() {
     const {location } = useLocationHook()
     const { animate } = useAnimate(location)
 
+    
     return (
         <div className={`${classes.recipePage} ${animate && classes.animateRecipePage}`}>
             {targetedRecipe && (
