@@ -17,8 +17,7 @@ import classes from "./Header.module.scss"
 
 export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
-    const { targetedRecipe, setTargetedRecipe, filteredRecipes, searchFilteredRecipes, setInputValue, inputValue } =
-        useRecipesContext()
+    const { recipes, setRecipes, setInputValue, inputValue } = useRecipesContext()
     const { handleDeselectAll } = useManageIngredients()
 
     const navigate = useNavigate()
@@ -46,10 +45,15 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 break
             case "/recipe":
                 try {
-                    const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
-                    if (currentTargetedRecipe) {
-                        setTargetedRecipe(currentTargetedRecipe)
-                        setTitle(currentTargetedRecipe.title)
+                    const { targetedRecipe } = JSON.parse(localStorage.getItem("recipes"))
+                    if (targetedRecipe) {
+                        setRecipes((prev) => {
+                            return {
+                                ...prev,
+                                targetedRecipe: targetedRecipe,
+                            }
+                        })
+                        setTitle(targetedRecipe.title)
                     }
                 } catch (error) {
                     console.log(error)
@@ -97,7 +101,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 {location.pathname === "/recipes-results" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch data={searchFilteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
+                        <BaseSearch data={recipes.results} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"
@@ -109,7 +113,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
                         <BaseSearch
-                            data={searchFilteredRecipes.filter((rec) => rec.isFavorited)}
+                            data={recipes.favorited}
                             inputValue={inputValue}
                             setInputValue={setInputValue}
                         />

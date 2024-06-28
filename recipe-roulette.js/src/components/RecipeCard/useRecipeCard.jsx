@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useRecipesContext } from "../../contexts/RecipesContext"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export function useRecipeCard(recipeId, isFav, isExpanded) {
     const [cardState, setCardState] = useState({
@@ -9,17 +9,18 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     })
     const [expandedCard, setExpandedCard] = useState(isExpanded)
     const [expandedIngredients, setExpandedIngredients] = useState(true)
-    const { handleRecipesUpdate, setTargetedRecipe } = useRecipesContext()
+    const { handleRecipesUpdate, setRecipes } = useRecipesContext()
+    const location = useLocation()
     const navigate = useNavigate()
 
     useEffect(() => {
-        setCardState((prevState) => ({ ...prevState, isFavorited: isFav }))
-    }, [isFav])
+        setCardState((prevState) => ({ ...prevState, isFavorited: isFav, id: recipeId }))
+    }, [isFav, recipeId])
 
     function handleCardState(e) {
         e.preventDefault()
         e.stopPropagation()
-        handleRecipesUpdate(cardState, setCardState)
+        handleRecipesUpdate(cardState, setCardState, location.pathname)
     }
 
     function handleIngWrapperState(e) {
@@ -29,7 +30,12 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     }
 
     function handleOpenRecipePage(recipe) {
-        setTargetedRecipe(recipe)
+        setRecipes((prev) => {
+            return {
+                ...prev,
+                targetedRecipe: recipe,
+            }
+        })
         navigate("/recipe")
     }
 
