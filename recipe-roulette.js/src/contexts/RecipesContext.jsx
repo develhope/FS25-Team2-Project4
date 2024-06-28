@@ -188,12 +188,10 @@ export const RecipesProvider = ({ children }) => {
         })
     }
 
-    // imposta l'ultima ricetta aperta nel localStorage e nella variabile di stato targetedRecipe
-    const handleTargetedRecipe = (recipeState) => {
-        const currentTargetedRecipe = recipes.find((recipe) => recipe.id === recipeState.id)
-        setTargetedRecipe(currentTargetedRecipe)
+    const handleTargetedRecipe = (recipe) => {
+        recipeState && setTargetedRecipe(recipe)
         try {
-            const jsonTargetedRecipe = JSON.stringify(currentTargetedRecipe)
+            const jsonTargetedRecipe = JSON.stringify(recipe)
             window.localStorage.setItem("targetedRecipe", jsonTargetedRecipe)
         } catch (error) {
             console.error(error)
@@ -318,6 +316,7 @@ export const RecipesProvider = ({ children }) => {
                 handlePreferencesToggle,
                 handleDeselectRecipeFilters,
                 searchRecipeByIng,
+                setSearchFilteredRecipes,
             }}
         >
             {children}

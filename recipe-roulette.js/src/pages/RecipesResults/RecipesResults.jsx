@@ -5,6 +5,7 @@ import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { Snackbar } from "../../components/Snackbar/Snackbar"
 import { useSnackbar } from "../../components/Snackbar/useSnackbar"
+import { useRecipesFetch } from "../../hooks/recipesFetch/useRecipesFetch"
 import { useLocationHook } from "../../hooks/useLocationHook"
 
 import classes from "./RecipesResults.module.scss"
@@ -12,6 +13,7 @@ import classes from "./RecipesResults.module.scss"
 export function RecipeResults() {
     const { searchFilteredRecipes } = useRecipesContext()
     const { handleClickLoginSnackBar } = useSnackbar()
+    const { state } = useRecipesFetch()
 
     const { location } = useLocationHook()
     const { animate } = useAnimate(location)
@@ -26,22 +28,14 @@ export function RecipeResults() {
                     <FilterChipRecipes filterType={"preparationTime"} numericValue={60} label="> 60m" />
                 </div>
             </div>
-            {searchFilteredRecipes && searchFilteredRecipes.length > 0 ? (
+            {state.loading === true ? (
                 <section className={classes.recipesWrapper}>
                     {searchFilteredRecipes.map((recipe) => {
                         return (
                             <RecipeCard
                                 handleClickLoginSnackBar={handleClickLoginSnackBar}
                                 key={recipe.id}
-                                recipeId={recipe.id}
-                                title={recipe.title}
-                                attributes={recipe.attributes}
-                                isFav={recipe.isFavorited}
-                                preparation={recipe.preparation}
-                                ingredients={recipe.ingQuantities}
-                                isGlutenFree={recipe.isGlutenFree}
-                                isVegetarian={recipe.isVegetarian}
-                                isVegan={recipe.isVegan}
+                                recipe={recipe}
                             />
                         )
                     })}

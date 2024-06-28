@@ -14,23 +14,10 @@ export function Recipe() {
     const {location } = useLocationHook()
     const { animate } = useAnimate(location)
 
-    
     return (
         <div className={`${classes.recipePage} ${animate && classes.animateRecipePage}`}>
             {targetedRecipe && (
-                <RecipeCard
-                    handleClickLoginSnackBar={handleClickLoginSnackBar}
-                    recipeId={targetedRecipe.id}
-                    title={targetedRecipe.title}
-                    isExpanded={true}
-                    isFav={targetedRecipe.isFavorited}
-                    isGlutenFree={targetedRecipe.isGlutenFree}
-                    isVegetarian={targetedRecipe.isVegetarian}
-                    isVegan={targetedRecipe.isVegan}
-                    preparation={targetedRecipe.preparation}
-                    ingredients={targetedRecipe.ingQuantities}
-                    attributes={targetedRecipe.attributes}
-                />
+                <RecipeCard isExpanded={true} handleClickLoginSnackBar={handleClickLoginSnackBar} recipe={targetedRecipe} />
             )}
             <Snackbar />
         </div>

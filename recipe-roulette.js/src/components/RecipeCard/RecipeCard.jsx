@@ -10,32 +10,24 @@ import Skeleton from "@mui/material/Skeleton"
 
 import classes from "./RecipeCard.module.scss"
 
-function RecipeCard({
-    handleClickLoginSnackBar,
-    recipeId,
-    isExpanded = false,
-    title = "Card Title",
-    image = "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC",
-    attributes,
-    isFav = false,
-    isGlutenFree = false,
-    isVegetarian = false,
-    isVegan = false,
-    ingredients = [],
-    preparation = [],
-}) {
-    const { handleCardState, handleOpenRecipePage, cardState, expandedCard, expandedIngredients, handleIngWrapperState } =
-        useRecipeCard(recipeId, isFav, isExpanded)
+function RecipeCard({ isExpanded = false, recipe, handleClickLoginSnackBar = null }) {
+    const { handleCardState, cardState, expandedCard, expandedIngredients, handleIngWrapperState, handleOpenRecipePage } =
+        useRecipeCard(recipe.id, recipe.isFavorited, isExpanded)
     const { recipeAnimation } = useRecipesContext()
     const { isAuthenticated } = useAuth()
     const location = useLocation()
+
+    const image =
+        "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC"
+    const { recipeId, title, attributes, isFavorited, isGlutenFree, isVegetarian, isVegan, ingQuantities, preparation } = recipe
 
     return (
         <div
             onClick={() => {
                 if (!expandedCard) {
                     localStorage.setItem("prevPath", location.pathname)
-                    handleOpenRecipePage()
+                    localStorage.setItem("targetedRecipe", JSON.stringify(recipe))
+                    handleOpenRecipePage(recipe)
                 }
             }}
             className={`${classes.recipeCard} ${expandedCard && classes.recipeCardExpanded} ${recipeAnimation && classes.animateRecipeCard}`}
@@ -84,15 +76,15 @@ function RecipeCard({
                             <ExpandLessIcon className={classes.ico} fontSize="small" />
                         </div>
                         <ul>
-                            {ingredients.length > 0 &&
-                                ingredients.map((ingredient, index) => {
+                            {ingQuantities.length > 0 &&
+                                ingQuantities.map((ingredient, index) => {
                                     return <li key={index}>{ingredient}</li>
                                 })}
                         </ul>
                     </ul>
 
                     <div className={classes.preparation}>
-                        <h2>Preparazione</h2>
+                        <h2>Preparation</h2>
                         {preparation.length > 0 && (
                             <ol>
                                 {preparation.map((steps, index) => {

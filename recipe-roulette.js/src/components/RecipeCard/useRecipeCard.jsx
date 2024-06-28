@@ -9,7 +9,7 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
     })
     const [expandedCard, setExpandedCard] = useState(isExpanded)
     const [expandedIngredients, setExpandedIngredients] = useState(true)
-    const { handleRecipesUpdate, handleTargetedRecipe } = useRecipesContext()
+    const { handleRecipesUpdate, setTargetedRecipe } = useRecipesContext()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,8 +28,8 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
         setExpandedIngredients((b) => !b)
     }
 
-    function handleOpenRecipePage() {
-        handleTargetedRecipe(cardState)
+    function handleOpenRecipePage(recipe) {
+        setTargetedRecipe(recipe)
         navigate("/recipe")
     }
 
@@ -40,5 +40,6 @@ export function useRecipeCard(recipeId, isFav, isExpanded) {
         handleIngWrapperState,
         handleCardState,
         handleOpenRecipePage,
+        setExpandedCard,
     }
 }
