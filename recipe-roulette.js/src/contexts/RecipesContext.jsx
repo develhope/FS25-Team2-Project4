@@ -99,14 +99,12 @@ export const RecipesProvider = ({ children }) => {
 
     // Salvataggio dei filtri nel localStorage quando vengono modificati, + animazione recipeCard
     useEffect(() => {
-        ;(async () => {
-            try {
-                const jsonFilters = JSON.stringify(recipeFilter)
-                window.sessionStorage.setItem("recipeFilter", jsonFilters)
-            } catch (error) {
-                console.error(error)
-            }
-        })()
+        try {
+            const jsonFilters = JSON.stringify(recipeFilter)
+            window.sessionStorage.setItem("recipeFilter", jsonFilters)
+        } catch (error) {
+            console.error(error)
+        }
 
         // Animazione recipeCard
         recipeAnimation && setTimeout(() => setRecipeAnimation(false), 0) // Se è già in corso, resetta
@@ -115,7 +113,7 @@ export const RecipesProvider = ({ children }) => {
 
     // Aggiornamento ricette visualizzate quando vengono modificati i filtri o aggiunti preferiti
     useEffect(() => {
-        let filtering = recipes.results.filter(
+        let filtering = recipes.favorited.filter(
             (rec) => rec.caloricApport <= recipeFilter.caloricApport && rec.preparationTime <= recipeFilter.preparationTime
         )
 
@@ -138,7 +136,7 @@ export const RecipesProvider = ({ children }) => {
             ...prev,
             filtered: filtering,
         }))
-    }, [recipeFilter, recipes.results])
+    }, [recipeFilter, recipes.favorited])
 
     // Gestione di aggiunta/rimozione di ricette dai preferiti
     const handleRecipesUpdate = (recipeState, setRecipeState, location) => {

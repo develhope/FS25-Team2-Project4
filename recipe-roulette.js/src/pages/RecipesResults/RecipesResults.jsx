@@ -21,14 +21,6 @@ export function RecipeResults() {
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
-            <div className={classes.subHeading}>
-                <div className={classes.chipWrapper}>
-                    <FilterChipRecipes filterType={"preparationTime"} label="All" />
-                    <FilterChipRecipes filterType={"preparationTime"} numericValue={30} label="> 30m" />
-                    <FilterChipRecipes filterType={"preparationTime"} numericValue={45} label="> 45m" />
-                    <FilterChipRecipes filterType={"preparationTime"} numericValue={60} label="> 60m" />
-                </div>
-            </div>
             {!state.loading ? (
                 <section className={classes.recipesWrapper}>
                     {recipes.searched.map((recipe) => {

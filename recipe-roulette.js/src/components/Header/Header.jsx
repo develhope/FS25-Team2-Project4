@@ -116,9 +116,8 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
 
                     <IcoButton action={handleMenuToggle} icon={<MenuOpenIcon />} style="transparent" />
                 </div>
-                {location.pathname === "/recipes-results" && (
+{/*                 {location.pathname === "/recipes-results" && (
                     <section className={classes.globalActions}>
-                        {/* <IngredientSearch isFixed={true} /> */}
                         <BaseSearch data={recipes.results} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
@@ -126,11 +125,11 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                             icon={<TuneOutlinedIcon fontSize="small" />}
                         />
                     </section>
-                )}
+                )} */}
                 {location.pathname === "/favorited" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch data={recipes.favorited} inputValue={inputValue} setInputValue={setInputValue} />
+                        <BaseSearch data={recipes.filtered} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"

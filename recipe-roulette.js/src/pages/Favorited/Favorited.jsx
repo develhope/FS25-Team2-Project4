@@ -24,14 +24,12 @@ export function Favorited() {
     const { animate } = useAnimate(location)
 
     const searchFavorites = useMemo(() => {
-        setRecipes((prev) => ({ ...prev, filtered: prev.favorited }))
-        console.log(recipes.filtered, recipes.favorited)
         return recipes.filtered.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase()))
     }, [inputValue, recipes.filtered, recipes.favorited])
 
     return (
         <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
-            {isAuthenticated && searchFavorites.length > 0 ? (
+            {isAuthenticated && recipes.favorited.length > 0 ? (
                 <>
                     {searchFavorites && searchFavorites.length > 0 ? (
                         <section className={classes.recipesWrapper}>
