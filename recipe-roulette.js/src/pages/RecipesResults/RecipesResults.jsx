@@ -37,7 +37,11 @@ export function RecipeResults() {
                 </section>
             ) : (
                 <div className={classes.placeholder}>
-                    <BlocksShuffleThree width={"40%"} height={"40%"}/>
+                    <BlocksShuffleThree color="#00a55b" width={"40%"} height={"40%"}/>
+                    <h2>
+                        <span>Generating Your Recipes!</span> <br />
+                        This could take a couple minutes...
+                    </h2>
                 </div>
             )}
             <Snackbar />

@@ -44,19 +44,17 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 setTitle("Results")
                 break
             case "/recipe":
-                try {
-                    const { targetedRecipe } = JSON.parse(localStorage.getItem("recipes"))
-                    if (targetedRecipe) {
-                        setRecipes((prev) => {
-                            return {
-                                ...prev,
-                                targetedRecipe: targetedRecipe,
-                            }
-                        })
-                        setTitle(targetedRecipe.title)
+                if (recipes.targetedRecipe) {
+                    setTitle(recipes.targetedRecipe.title)
+                } else {
+                    try {
+                        const { targetedRecipe } = JSON.parse(localStorage.getItem("recipes"))
+                        if (targetedRecipe) {
+                            setTitle(targetedRecipe.title)
+                        }
+                    } catch (error) {
+                        console.log(error)
                     }
-                } catch (error) {
-                    console.log(error)
                 }
                 break
             default:
@@ -64,6 +62,26 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 break
         }
     }, [location.pathname])
+
+    useEffect(() => {
+        if (location.pathname === "/recipe") {
+            try {
+                const { targetedRecipe } = JSON.parse(localStorage.getItem("recipes"))
+                console.log(targetedRecipe)
+                if (targetedRecipe) {
+                    setRecipes((prev) => {
+                        return {
+                            ...prev,
+                            targetedRecipe: targetedRecipe,
+                        }
+                    })
+                    setTitle(targetedRecipe.title)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }, [])
 
     return (
         location.pathname !== "/login" &&
@@ -112,11 +130,7 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 {location.pathname === "/favorited" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch
-                            data={recipes.favorited}
-                            inputValue={inputValue}
-                            setInputValue={setInputValue}
-                        />
+                        <BaseSearch data={recipes.favorited} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"

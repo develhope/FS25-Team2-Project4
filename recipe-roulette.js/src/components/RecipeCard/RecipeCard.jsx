@@ -16,7 +16,7 @@ function RecipeCard({ isExpanded = false, recipe, handleClickLoginSnackBar = nul
     const location = useLocation()
     const { id, title, attributes, isFavorited, isGlutenFree, isVegetarian, isVegan, ingQuantities, preparation } = recipe
     const { handleCardState, cardState, expandedCard, expandedIngredients, handleIngWrapperState, handleOpenRecipePage } =
-        useRecipeCard(recipe.id, recipe.isFavorited, isExpanded)
+        useRecipeCard(recipe, isExpanded)
 
     const image =
         "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202312/MIT_Food-Diabetes-01_0.jpg?itok=Mp8FVJkC"

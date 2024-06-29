@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useAuth } from "../hooks/Auth/useAuth";
-import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import { useAuth } from "../hooks/Auth/useAuth"
+import axios from "axios"
 
-const RecipesContext = createContext();
+const RecipesContext = createContext()
 
+// Classe per gestire i filtri delle ricette
 function RecipeFilter({
     isVegetarian = false,
     isGlutenFree = false,
@@ -25,223 +26,255 @@ function RecipeFilter({
     preparationTime = 9999,
     caloricApport = 9999,
 } = {}) {
-    this.isVegetarian = isVegetarian;
-    this.isGlutenFree = isGlutenFree;
-    this.isVegan = isVegan;
-    this.cuisineEthnicity = cuisineEthnicity;
-    this.preparationTime = preparationTime;
-    this.caloricApport = caloricApport;
+    this.isVegetarian = isVegetarian
+    this.isGlutenFree = isGlutenFree
+    this.isVegan = isVegan
+    this.cuisineEthnicity = cuisineEthnicity
+    this.preparationTime = preparationTime
+    this.caloricApport = caloricApport
 }
 
 export const RecipesProvider = ({ children }) => {
-    const [recipeFilter, setRecipeFilter] = useState(new RecipeFilter());
+    const [recipeFilter, setRecipeFilter] = useState(new RecipeFilter()) // Filtri di ricerca
     const [recipes, setRecipes] = useState({
         results: [],
         favorited: [],
         filtered: [],
         searched: [],
         targetedRecipe: null,
-    });
+    })
 
-    const [inputValue, setInputValue] = useState("");
-    const [recipeAnimation, setRecipeAnimation] = useState(true);
-    const { isAuthenticated } = useAuth();
-    const location = useLocation();
-
-    useEffect(() => {
-        setInputValue("");
-    }, [location.pathname]);
+    const [inputValue, setInputValue] = useState("") // Valore dell'input che filtra i risultati
+    const [recipeAnimation, setRecipeAnimation] = useState(true) // Stato per animare le recipeCard quando vengono modificati i filtri
+    const { isAuthenticated } = useAuth() // Stato di autenticazione
+    const location = useLocation() // Hook per ottenere la posizione corrente
 
     useEffect(() => {
-        setRecipes((prev) => ({
-            ...prev,
-            filtereAndSearched: prev.filtered.filter((rec) =>
-                rec.title.toLowerCase().includes(inputValue.toLowerCase())
-            ),
-        }));
-    }, [inputValue]);
+        // Reset dell'inputValue quando si cambia pagina
+        setInputValue("")
+    }, [location.pathname])
 
     useEffect(() => {
-        (async () => {
+        setRecipes((prev) => {
+            return {
+                ...prev,
+                searched: prev.filtered.filter((rec) => rec.title.toLowerCase().includes(inputValue.toLowerCase())),
+            }
+        })
+    }, [inputValue])
+
+    // Recupero dal localStorage/backend quando si effettua il login o si cambia pagina
+    useEffect(() => {
+        ;(async () => {
             try {
-                const localRecipes = JSON.parse(window.localStorage.getItem("recipes")) || {};
-                const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"));
+                const localRecipes = JSON.parse(window.localStorage.getItem("recipes"))
+                const sessionFilter = JSON.parse(window.localStorage.getItem("recipeFilter"))
                 if (isAuthenticated) {
-                    if (Object.keys(localRecipes).length) {
-                        setRecipes(localRecipes);
-                    }
+                    // Imposta le ricette dal localStorage se si è autenticati
+                    localRecipes && setRecipes(localRecipes)
                 } else {
-                    let { results = [], filtered = [], targetedRecipe, favorited = [] } = localRecipes;
-                    results = results.map((rec) => ({ ...rec, isFavorited: false }));
-                    filtered = filtered.map((rec) => ({ ...rec, isFavorited: false }));
-                    if (targetedRecipe) targetedRecipe = { ...targetedRecipe, isFavorited: false };
-                    favorited = favorited.map((rec) => ({ ...rec, isFavorited: false }));
+                    // Se non si è autenticati, imposta il contenuto del localStorage e imposta isFavorited a false
+                    let { results, filtered, targetedRecipe, favorited, searched } = localRecipes
+                    results = results.map((rec) => ({ ...rec, isFavorited: false }))
+                    filtered = filtered.map((rec) => ({ ...rec, isFavorited: false }))
+                    targetedRecipe = { ...targetedRecipe, isFavorited: false }
+                    favorited = favorited.map((rec) => ({ ...rec, isFavorited: false }))
+                    searched = searched.map((rec) => ({ ...rec, isFavorited: false }))
 
                     setRecipes((prev) => ({
                         ...prev,
-                        results: results.length ? results : prev.results,
-                        filtered: filtered.length ? filtered : prev.filtered,
-                        targetedRecipe: targetedRecipe || prev.targetedRecipe,
-                        favorited: favorited.length ? favorited : prev.favorited,
-                    }));
-
-                    if (sessionFilter) setRecipeFilter(sessionFilter);
+                        results: results.length > 0 ? results : prev.results,
+                        filtered: filtered.length > 0 ? filtered : prev.filtered,
+                        targetedRecipe: targetedRecipe ? targetedRecipe : prev.targetedRecipe,
+                        favorited: favorited.length > 0 ? favorited : prev.favorited,
+                        searched: searched.length > 0 ? searched : prev.searched,
+                    }))
+                    sessionFilter && setRecipeFilter(sessionFilter)
                 }
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
-        })();
-    }, [location, isAuthenticated]);
+        })()
+    }, [location, isAuthenticated])
 
+    // Salvataggio dei filtri nel localStorage quando vengono modificati, + animazione recipeCard
     useEffect(() => {
-        (async () => {
+        ;(async () => {
             try {
-                const jsonFilters = JSON.stringify(recipeFilter);
-                window.sessionStorage.setItem("recipeFilter", jsonFilters);
+                const jsonFilters = JSON.stringify(recipeFilter)
+                window.sessionStorage.setItem("recipeFilter", jsonFilters)
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
-        })();
+        })()
 
-        if (recipeAnimation) setTimeout(() => setRecipeAnimation(false), 0);
-        setTimeout(() => setRecipeAnimation(true), 300);
-    }, [recipeFilter]);
+        // Animazione recipeCard
+        recipeAnimation && setTimeout(() => setRecipeAnimation(false), 0) // Se è già in corso, resetta
+        setTimeout(() => setRecipeAnimation(true), 300)
+    }, [recipeFilter])
 
+    // Aggiornamento ricette visualizzate quando vengono modificati i filtri o aggiunti preferiti
     useEffect(() => {
-        let filtering = recipes.favorited.filter(
-            (rec) =>
-                rec.caloricApport <= recipeFilter.caloricApport &&
-                rec.preparationTime <= recipeFilter.preparationTime
-        );
+        let filtering = recipes.results.filter(
+            (rec) => rec.caloricApport <= recipeFilter.caloricApport && rec.preparationTime <= recipeFilter.preparationTime
+        )
 
-        if (recipeFilter.isGlutenFree)
-            filtering = filtering.filter((item) => item.isGlutenFree);
-        if (recipeFilter.isVegetarian)
-            filtering = filtering.filter((item) => item.isVegetarian);
-        if (recipeFilter.isVegan)
-            filtering = filtering.filter((item) => item.isVegan);
+        // Filtra in base alle preferenze selezionate
+        recipeFilter.isGlutenFree && (filtering = filtering.filter((item) => item.isGlutenFree))
+        recipeFilter.isVegetarian && (filtering = filtering.filter((item) => item.isVegetarian))
+        recipeFilter.isVegan && (filtering = filtering.filter((item) => item.isVegan))
 
-        if (!recipeFilter.cuisineEthnicity.includes("all")) {
+        // Se non è selezionato "all", filtra in base ai tipi di cucina selezionati
+        if (!recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
             filtering = filtering.filter((rec) =>
-                recipeFilter.cuisineEthnicity.some((cuisine) =>
-                    cuisine.toLowerCase() === rec.cuisineEthnicity.toLowerCase()
-                )
-            );
+                recipeFilter.cuisineEthnicity.some((cuisine) => {
+                    return cuisine.toLowerCase() === rec.cuisineEthnicity.toLowerCase()
+                })
+            )
         }
 
+        // Imposta il risultato del filtering alla variabile di stato dedicata
         setRecipes((prev) => ({
             ...prev,
             filtered: filtering,
-        }));
-    }, [recipeFilter, recipes.favorited]);
+        }))
+    }, [recipeFilter, recipes.results])
 
+    // Gestione di aggiunta/rimozione di ricette dai preferiti
     const handleRecipesUpdate = (recipeState, setRecipeState, location) => {
-        if (location === "/recipes-results") {
-            const updatedResults = recipes.results.map((recipe) =>
-                recipe.id === recipeState.id
-                    ? { ...recipe, isFavorited: !recipeState.isFavorited }
-                    : recipe
-            );
+        const prevPath = localStorage.getItem("prevPath")
 
-            const updatedResult = updatedResults.find((recipe) => recipe.id === recipeState.id);
+        const updatedResults = recipes.results.map((recipe) =>
+            recipe.id === recipeState.id ? { ...recipe, isFavorited: !recipeState.isFavorited } : recipe
+        )
+        const updatedResult = updatedResults.find((recipe) => recipe.id === recipeState.id)
 
-            setRecipes((prev) => {
-                const newFavorited = updatedResult.isFavorited
-                    ? [...prev.favorited, updatedResult]
-                    : prev.favorited.filter((rec) => rec.id !== recipeState.id);
+        if (location === "/recipes-results" || (location === "/recipe" && prevPath === "/recipes-results")) {
+            console.log("Updated Results:", updatedResults)
+            console.log("Updated Result:", updatedResult)
 
-                const updatedRecipes = {
-                    ...prev,
-                    results: updatedResults,
-                    favorited: newFavorited,
-                };
+            const updatedRecipes = {
+                ...recipes,
+                results: updatedResults,
+                searched: updatedResults,
+                filtered: updatedResults,
+                favorited: updatedResult.isFavorited
+                    ? [...recipes.favorited, updatedResult] // Aggiungi se è stato favorito
+                    : recipes.favorited.filter((rec) => rec.id !== recipeState.id), // Rimuovi se non è stato favorito
+            }
 
-                if (isAuthenticated) {
-                    window.localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
-                }
-
-                return updatedRecipes;
-            });
-
-            setRecipeState((prev) => ({ ...prev, isFavorited: updatedResult.isFavorited }));
-        } else if (location === "/favorited") {
-            setTimeout(() => {
-                setRecipes((prev) => {
-                    const newFavorited = prev.favorited.filter((rec) => rec.id !== recipeState.id);
-
-                    const updatedRecipes = {
-                        ...prev,
-                        favorited: newFavorited,
-                    };
-
-                    if (isAuthenticated) {
-                        window.localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
-                    }
-
-                    return updatedRecipes;
-                });
-            }, 300);
-        }
-    };
-
-    const handleTargetedRecipe = async (recipe) => {
-        if (recipe) {
-            setRecipes((prev) => ({
-                ...prev,
-                targetedRecipe: recipe,
-            }));
+            setRecipes(updatedRecipes)
+            setRecipeState((prev) => ({ ...prev, isFavorited: updatedResult.isFavorited }))
 
             if (isAuthenticated) {
                 try {
-                    const jsonRecipes = JSON.stringify(recipes);
-                    localStorage.setItem("recipes", jsonRecipes);
+                    const jsonRecipes = JSON.stringify(updatedRecipes)
+                    localStorage.setItem("recipes", jsonRecipes)
                 } catch (error) {
-                    console.error(error);
+                    console.error(error)
                 }
             }
+        } else if (location === "/favorited" || (location === "/recipe" && prevPath === "/favorited")) {
+            setTimeout(() => {
+                // Filtra le ricette preferite
+                const newFavorited = { ...recipeState, isFavorited: !recipeState.isFavorited }
+                console.log("Previous Favorited:", recipes.favorited)
+                console.log("New Favorited:", newFavorited)
+
+                const updatedRecipes = {
+                    ...recipes,
+                    results: updatedResult ? updatedResults : recipes.results,
+                    favorited: !newFavorited.isFavorited
+                        ? [...recipes.favorited.filter((rec) => rec.id !== recipeState.id)] // Aggiungi se isFavorited è true
+                        : [...recipes.favorited, updatedResult], // Rimuovi se isFavorited è false
+                }
+
+                // Aggiorna nel localStorage
+                const jsonRecipes = JSON.stringify(updatedRecipes)
+                localStorage.setItem("recipes", jsonRecipes)
+
+                setRecipes(updatedRecipes)
+
+                if (updatedResult) {
+                    setRecipeState((prev) => ({ ...prev, isFavorited: updatedResult.isFavorited }))
+                }
+            }, 100)
         }
-    };
+    }
 
+    // Gestione della ricetta aperta a schermo intero
+    const handleTargetedRecipe = (recipe) => {
+        recipe &&
+            setRecipes((prev) => ({
+                ...prev,
+                targetedRecipe: recipe,
+            }))
+        try {
+            const jsonRecipes = JSON.stringify(recipes)
+            localStorage.setItem("recipes", jsonRecipes)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    // Gestione delle proprietà booleane di recipeFilter
     const toggleRecipeFilter = (prop) => {
-        setRecipeFilter((prevData) => ({
-            ...prevData,
-            [prop]: !recipeFilter[prop],
-        }));
-    };
+        const newState = !recipeFilter[prop]
+        setRecipeFilter((prevData) => ({ ...prevData, [prop]: newState }))
+    }
 
+    // Gestione delle proprietà non booleane di recipeFilter
     const handlePreferencesToggle = (filterType, value, handleSelected, selectedState) => {
         if (filterType === "caloricApport" || filterType === "preparationTime") {
-            setRecipeFilter((prevData) => ({
-                ...prevData,
-                [filterType]: selectedState ? 9999 : value,
-            }));
-        } else if (filterType === "cuisineEthnicity") {
-            let updatedEthnicity = [...recipeFilter.cuisineEthnicity];
-            const alreadyThere = updatedEthnicity.find((cuisine) => cuisine.toLowerCase() === value);
+            if (!selectedState) {
+                setRecipeFilter((prevData) => ({
+                    ...prevData,
+                    [filterType]: value,
+                }))
+            } else {
+                setRecipeFilter((prevData) => ({
+                    ...prevData,
+                    [filterType]: 9999,
+                }))
+            }
+        }
+        // Gestione della proprietà cuisineEthnicity di recipeFilter
+        if (filterType === "cuisineEthnicity") {
+            let updatedEthnicity = [...recipeFilter.cuisineEthnicity] // Copia l'array originale
+            const alreadyThere = updatedEthnicity.find((cuisine) => cuisine.toLowerCase() === value)
 
             if (value === "all") {
-                updatedEthnicity = recipeFilter.cuisineEthnicity.includes("all")
-                    ? []
-                    : [...new RecipeFilter().cuisineEthnicity];
-                handleSelected(!recipeFilter.cuisineEthnicity.includes("all"));
+                if (recipeFilter.cuisineEthnicity.find((cuisine) => cuisine === "all")) {
+                    updatedEthnicity = [] // Deseleziona tutti se "all" è già selezionato
+                    handleSelected(false)
+                } else {
+                    const { cuisineEthnicity } = new RecipeFilter()
+                    updatedEthnicity = cuisineEthnicity // Seleziona tutti se "all" non è selezionato
+                    handleSelected(true)
+                }
             } else {
-                updatedEthnicity = alreadyThere
-                    ? updatedEthnicity.filter((item) => item !== value.toLowerCase() && item !== "all")
-                    : [...updatedEthnicity, value.toLowerCase()];
-
-                if (updatedEthnicity.length === 10) updatedEthnicity.push("all");
+                if (alreadyThere) {
+                    updatedEthnicity = updatedEthnicity.filter((item) => item !== value.toLowerCase() && item !== "all")
+                    handleSelected && handleSelected(false)
+                } else {
+                    updatedEthnicity.push(value.toLowerCase())
+                    if (updatedEthnicity.length === 10) {
+                        updatedEthnicity.push("all") // Seleziona anche "all" se tutte le altre cucine sono selezionate
+                    }
+                }
             }
 
             setRecipeFilter((prevData) => ({
                 ...prevData,
                 cuisineEthnicity: updatedEthnicity,
-            }));
+            }))
         }
-    };
+    }
 
+    // Reset dei filtri recipeFilter
     const handleDeselectRecipeFilters = () => {
-        setRecipeFilter(new RecipeFilter());
-    };
+        setRecipeFilter(new RecipeFilter())
+    }
 
     return (
         <RecipesContext.Provider
@@ -261,9 +294,9 @@ export const RecipesProvider = ({ children }) => {
         >
             {children}
         </RecipesContext.Provider>
-    );
-};
+    )
+}
 
 export const useRecipesContext = () => {
-    return useContext(RecipesContext);
-};
+    return useContext(RecipesContext)
+}
