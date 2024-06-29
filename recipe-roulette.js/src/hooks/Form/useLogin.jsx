@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../Auth/useAuth";
 import { useNavigate } from "react-router";
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 
 export function useLogin() {
@@ -27,6 +26,19 @@ export function useLogin() {
     }
   }
 
+  function getItem(data) {
+    try {
+      const username = window.localStorage.getItem("username");
+      const password = window.localStorage.getItem("password");
+
+      if (username && password) {
+        setData({ ...data, username, password });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleInput(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -41,44 +53,43 @@ export function useLogin() {
 
   async function handlePostLoginData(data) {
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/api/users/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: data.username,
           password: data.password,
         }),
       });
-  
-/*       if (!response.ok) {
+
+      if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
-      } */
-  
+      }
+
       const responseData = await response.json();
       console.log(responseData);
       return responseData;
     } catch (error) {
-      console.error('Error while fetching data:', error);
-      throw new Error('Error while fetching data');
+      console.error("Error while fetching data:", error);
+      throw new Error("Error while fetching data");
     }
   }
 
-  const mutation = useMutation(
-    {
-      mutationFn: handlePostLoginData,
-      onSuccess: (data) => {
-        console.log(data);
-        setItem(data)
-        login();
-        navigate("/discovery");
-      },
-      onError: (error) => {
-        console.error("Login failed:", error.message);
-      },
+  const mutation = useMutation({
+    mutationFn: handlePostLoginData,
+    onSuccess: (data) => {
+      console.log(data);
+      getItem(data);
+      setItem(data);
+      login();
+      navigate("/discovery");
     },
-  );
+    onError: (error) => {
+      console.error("Login failed:", error.message);
+    },
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
