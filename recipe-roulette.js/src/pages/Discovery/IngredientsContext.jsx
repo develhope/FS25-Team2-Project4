@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react"
 import ingredientsArray from "../../assets/ingredientsArray"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
 const IngredientsContext = createContext()
 
@@ -72,7 +73,6 @@ export const IngredientsProvider = ({ children }) => {
     const toggleFilter = (prop) => {
         const newState = !filter[prop]
         setFilter((prevData) => ({ ...prevData, [prop]: newState }))
-        /**/ console.log(filter)
     }
 
     const handleIngUpdate = (prop, cardState, setCardState) => {
@@ -134,6 +134,14 @@ export const IngredientsProvider = ({ children }) => {
         }
         if (setCardState) {
             setCardState((prevData) => ({ ...prevData, [prop]: false }))
+        }
+    }
+    const handleDeselectPreferences = (prop, setCardState, setFilterState) => {
+        if (prop === "isBlackListed") {
+            setFilter({ isGlutenFree: false, isVegan: false, isVegetarian: false })
+        }
+        if (setFilterState) {
+            setFilterState((prevData) => ({ ...prevData, [prop]: false }))
         }
     }
 
@@ -217,6 +225,7 @@ export const IngredientsProvider = ({ children }) => {
                 generateIngredients,
                 setRefresh,
                 toggleFilter,
+                handleDeselectPreferences,
                 ing,
                 displayedIng,
                 blackList,

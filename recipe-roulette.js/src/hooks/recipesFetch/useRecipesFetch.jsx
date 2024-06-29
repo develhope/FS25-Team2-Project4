@@ -14,49 +14,52 @@ export const RecipesFetchProvider = ({ children }) => {
     const { setRecipes } = useRecipesContext()
 
     const handleRecipesFetch = useCallback(
-        async (ingredients, prepTime, caloricApport, cuisineEthnicity) => {
-            setState({ error: false, loading: true });
-    
-            console.log(ingredients, prepTime, caloricApport, cuisineEthnicity);
+        async (ingredients, prepTime, caloricApport, cuisineEthnicity, isVegetarian, isVegan, isGlutenFree) => {
+            setState({ error: false, loading: true })
+
             try {
                 const response = await axios.post("http://localhost:3000/api/generate-recipes", {
                     ingredients,
                     prepTime,
                     caloricApport,
                     cuisineEthnicity,
-                });
-    
-                const parsedData = JSON.parse(response.data);
-                console.log(parsedData);
-    
+                    preferences: {
+                        isVegan,
+                        isVegetarian,
+                        isGlutenFree,
+                    },
+                })
+
+                const parsedData = JSON.parse(response.data)
+                console.log(parsedData)
+
                 setRecipes((prev) => {
                     const updatedRecipes = {
                         ...prev,
                         results: parsedData?.meals,
                         filtered: parsedData?.meals,
                         searched: parsedData?.meals,
-                    };
-    
+                    }
+
                     // Salva le ricette aggiornate nel local storage
                     try {
-                        const jsonRecipes = JSON.stringify(updatedRecipes);
-                        localStorage.setItem("recipes", jsonRecipes);
+                        const jsonRecipes = JSON.stringify(updatedRecipes)
+                        localStorage.setItem("recipes", jsonRecipes)
                     } catch (error) {
-                        console.error("Failed to save recipes to local storage:", error);
+                        console.error("Failed to save recipes to local storage:", error)
                     }
-    
-                    return updatedRecipes;
-                });
-    
-                setState({ loading: false, error: false });
+
+                    return updatedRecipes
+                })
+
+                setState({ loading: false, error: false })
             } catch (error) {
-                console.error("An error occurred while fetching recipes:", error);
-                setState({ error: true, loading: false });
+                console.error("An error occurred while fetching recipes:", error)
+                setState({ error: true, loading: false })
             }
         },
         [setRecipes]
-    );
-    
+    )
 
     return <RecipesFetchContext.Provider value={{ handleRecipesFetch, state }}>{children}</RecipesFetchContext.Provider>
 }

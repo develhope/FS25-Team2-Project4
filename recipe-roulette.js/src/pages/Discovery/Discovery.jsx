@@ -20,11 +20,9 @@ export function Discovery() {
     const { isActive, setIsActive } = useButtonState(true)
     const [animateButton, seAnimateButton] = useState(false)
 
-    const {location } = useLocationHook()
+    const { location } = useLocationHook()
     const { animate } = useAnimate(location)
     const { handleRecipesFetch } = useRecipesFetch()
-
-    console.log(recipeFilter)
 
     const setButtonState = useMemo(() => {
         if (displayedIng.length === 8) {
@@ -76,7 +74,10 @@ export function Discovery() {
                             ingNames,
                             recipeFilter.preparationTime,
                             recipeFilter.caloricApport,
-                            recipeFilter.cuisineEthnicity
+                            recipeFilter.cuisineEthnicity,
+                            recipeFilter.isVegetarian,
+                            recipeFilter.isVegan,
+                            recipeFilter.isGlutenFree
                         )
                     }}
                     label="Recipes"

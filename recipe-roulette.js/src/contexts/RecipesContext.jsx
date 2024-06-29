@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { useAuth } from "../hooks/Auth/useAuth"
 import axios from "axios"
+import { useManageIngredients } from "../pages/Discovery/IngredientsContext"
 
 const RecipesContext = createContext()
 
@@ -47,6 +48,7 @@ export const RecipesProvider = ({ children }) => {
     const [inputValue, setInputValue] = useState("") // Valore dell'input che filtra i risultati
     const [recipeAnimation, setRecipeAnimation] = useState(true) // Stato per animare le recipeCard quando vengono modificati i filtri
     const { isAuthenticated } = useAuth() // Stato di autenticazione
+    const { filter } = useManageIngredients()
     const location = useLocation() // Hook per ottenere la posizione corrente
 
     useEffect(() => {
@@ -217,7 +219,7 @@ export const RecipesProvider = ({ children }) => {
 
     // Gestione delle proprietà booleane di recipeFilter
     const toggleRecipeFilter = (prop) => {
-        const newState = !recipeFilter[prop]
+        const newState = !filter[prop]
         setRecipeFilter((prevData) => ({ ...prevData, [prop]: newState }))
     }
 

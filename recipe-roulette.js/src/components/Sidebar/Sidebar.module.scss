@@ -52,7 +52,7 @@
             font-family: $header-text;
             font-size: $text-size-20;
             font-weight: 700;
-            letter-spacing: .5px;
+            letter-spacing: 0.5px;
             margin: 0;
         }
         .rightItems {
@@ -60,30 +60,43 @@
             align-items: center;
             gap: 1rem;
             > button:last-child > svg {
-                stroke-width: .5;
+                stroke-width: 0.5;
                 stroke: $dark-gray;
             }
         }
     }
-    .sidebarBody {
-        position: relative;
-        padding: $size-16 0;
-        padding-top: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        .preferences {
-            padding: 0 $size-16;
+}
+.sidebar .sidebarBody {
+    box-sizing: border-box;
+    position: relative;
+    padding: $size-16 0;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: calc(100% - 60px);
+    padding-bottom: 2rem;
+    overflow-y: scroll;
+    .preparationTime {
+        padding: 0 $size-16;
+    }
+    .caloricApport {
+        padding: 0 $size-16;
+    }
+    .cuisineEthnicity {
+        padding: 0 $size-16;
+    }
+    .preferences {
+        padding: 0 $size-16;
 
-            h4 {
-                margin: 0;
-                margin-bottom: $size-8;
-            }
-            .switchesWrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 0.75rem;
-            }
+        h4 {
+            margin: 0;
+            margin-bottom: $size-8;
+        }
+        .switchesWrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
     }
 }

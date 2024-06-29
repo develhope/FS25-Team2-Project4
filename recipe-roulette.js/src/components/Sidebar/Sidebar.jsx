@@ -8,10 +8,13 @@ import { IcoButton } from "../Buttons/IcoButton/IcoButton"
 
 import CloseIcon from "@mui/icons-material/Close"
 import RotateLeftOutlinedIcon from "@mui/icons-material/RotateLeftOutlined"
+import { FilterChipRecipes } from "../FilterChip/FilterChipRecipes"
+import { useRecipesContext } from "../../contexts/RecipesContext"
 
 export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
     const { handleDeselectAll, blackList } = useManageIngredients()
     const { toggleFilter, filter } = useManageIngredients()
+    const { toggleRecipeFilter, recipeFilter, handleDeselectRecipeFilters } = useRecipesContext()
 
     return (
         <div>
@@ -27,7 +30,10 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                             label="Reset All"
                             icon={<RotateLeftOutlinedIcon fontSize="small" />}
                             size={18}
-                            action={() => handleDeselectAll("isBlackListed")}
+                            action={() => {
+                                handleDeselectRecipeFilters()
+                                handleDeselectAll("isBlackListed")
+                            }}
                         />
                         <IcoButton action={handleSidebarToggle} style="transparent" icon={<CloseIcon fontSize="small" />} />
                     </div>
@@ -61,19 +67,68 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                     <div className={classes.preferences}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
+                            {/* filtra gli ingredienti, inoltre imposta recipeFilter in modo che il fitro 
+                            venga passato anche alla richiesta di fetch */}
                             <Switch
                                 state={filter.isGlutenFree}
-                                action={toggleFilter}
+                                action={() => {
+                                    toggleFilter("isGlutenFree")
+                                    toggleRecipeFilter("isGlutenFree")
+                                }}
                                 label={"Gluten free"}
-                                prop={"isGlutenFree"}
                             />
                             <Switch
                                 state={filter.isVegetarian}
-                                action={toggleFilter}
+                                action={() => {
+                                    toggleFilter("isVegetarian")
+                                    toggleRecipeFilter("isVegetarian")
+                                }}
                                 label={"Vegetarian"}
-                                prop={"isVegetarian"}
                             />
-                            <Switch state={filter.isVegan} action={toggleFilter} label={"Vegan"} prop={"isVegan"} />
+                            <Switch
+                                state={filter.isVegan}
+                                action={() => {
+                                    toggleFilter("isVegan")
+                                    toggleRecipeFilter("isVegan")
+                                }}
+                                label={"Vegan"}
+                            />
+                        </div>
+                    </div>
+                    <div className={classes.preparationTime}>
+                        <h4>Preparation Time</h4>
+                        <div className={classes.filterChipWrapper}>
+                            <FilterChipRecipes filterType={"preparationTime"} label="All" />
+                            <FilterChipRecipes filterType={"preparationTime"} numericValue={30} label="30m or less" />
+                            <FilterChipRecipes filterType={"preparationTime"} numericValue={45} label="45m or less" />
+                            <FilterChipRecipes filterType={"preparationTime"} numericValue={60} label="60m or less" />
+                        </div>
+                    </div>
+
+                    <div className={classes.cuisineEthnicity}>
+                        <h4>Cousine Etnicity</h4>
+                        <div className={classes.filterChipWrapper}>
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="All" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Italian" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="French" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Chinese" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Japanese" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Indian" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Greek" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Spanish" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Mexican" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Thai" />
+                            <FilterChipRecipes filterType={"cuisineEthnicity"} label="Middle Eastern" />
+                        </div>
+                    </div>
+
+                    <div className={classes.caloricApport}>
+                        <h4>Caloric Apport</h4>
+                        <div className={classes.filterChipWrapper}>
+                            <FilterChipRecipes filterType={"caloricApport"} label="All" />
+                            <FilterChipRecipes numericValue={350} filterType={"caloricApport"} label="350 kcal or less" />
+                            <FilterChipRecipes numericValue={450} filterType={"caloricApport"} label="450 kcal of less" />
+                            <FilterChipRecipes numericValue={550} filterType={"caloricApport"} label="550 kcal or less" />
                         </div>
                     </div>
                 </section>
