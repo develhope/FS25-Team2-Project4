@@ -1,6 +1,5 @@
 import { IngredientCard } from "../../components/IngredientCard/IngredientCard"
 import { useManageIngredients } from "../Discovery/IngredientsContext"
-import { Snackbar } from "../../components/Snackbar/Snackbar"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 import { Button } from "../../components/Buttons/Button/Button"
 import { useButtonState } from "../../hooks/ButtonState/useButtonState"
@@ -84,7 +83,6 @@ export function Discovery() {
                     size={20}
                 />
             </div>
-            <Snackbar />
         </div>
     )
 }

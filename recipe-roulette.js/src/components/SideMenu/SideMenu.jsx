@@ -14,7 +14,7 @@ import { Popup } from "../Pop-up/Popup";
 import { useState } from "react";
 import { ValidationBox } from "../Validation Box/ValidationBox";
 import { useSnackbar } from "../Snackbar/useSnackbar";
-import { Snackbar } from "../Snackbar/Snackbar";
+
 
 export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
   const { logout, isAuthenticated } = useAuth();
@@ -96,7 +96,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
           </Popup>,
           document.getElementById("popup-root")
         )}
-        <Snackbar/>
+        
     </div>
   );
 }

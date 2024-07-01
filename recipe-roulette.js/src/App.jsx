@@ -19,6 +19,7 @@ import { Recipe } from "./pages/Recipe/Recipe"
 import { RecipesProvider } from "./contexts/RecipesContext"
 import { LoginPage } from "./pages/Login/LoginPage"
 import { NotFound404 } from "./pages/NotFound404/NotFound404"
+import { Snackbar } from "./components/Snackbar/Snackbar"
 
 function App() {
     const { handleSidebarToggle, sidebarState } = useDiscoverySidebar()
@@ -59,6 +60,7 @@ function App() {
                                 <Route path="/food-preferences" element={<Preferences />} />
                                 <Route path="/*" element={<NotFound404 />} />
                             </Routes>
+                            <Snackbar/>
                         </SnackbarProvider>
                     </RecipesProvider>
                 </IngredientsProvider>

@@ -3,7 +3,6 @@ import { FilterChipRecipes } from "../../components/FilterChip/FilterChipRecipes
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
 
 import { useRecipesContext } from "../../contexts/RecipesContext"
-import { Snackbar } from "../../components/Snackbar/Snackbar"
 import { useSnackbar } from "../../components/Snackbar/useSnackbar"
 import { useRecipesFetch } from "../../hooks/recipesFetch/useRecipesFetch"
 import { useLocationHook } from "../../hooks/useLocationHook"
@@ -51,7 +50,6 @@ export function RecipeResults() {
                     </div>
                 </div>
             )}
-            <Snackbar />
         </div>
     )
 }

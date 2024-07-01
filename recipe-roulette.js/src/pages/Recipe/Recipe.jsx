@@ -1,5 +1,5 @@
 import RecipeCard from "../../components/RecipeCard/RecipeCard"
-import { Snackbar } from "../../components/Snackbar/Snackbar"
+
 import { useSnackbar } from "../../components/Snackbar/useSnackbar"
 import { useRecipesContext } from "../../contexts/RecipesContext"
 import { useAnimate } from "../../hooks/animatePages/useAnimate"
@@ -19,7 +19,7 @@ export function Recipe() {
             {targetedRecipe && (
                 <RecipeCard isExpanded={true} handleClickLoginSnackBar={handleClickLoginSnackBar} recipe={targetedRecipe} />
             )}
-            <Snackbar />
+
         </div>
     )
 }
