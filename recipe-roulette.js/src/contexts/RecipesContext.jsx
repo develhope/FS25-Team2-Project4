@@ -78,21 +78,23 @@ export const RecipesProvider = ({ children }) => {
                     localRecipes && setRecipes(localRecipes)
                 } else {
                     // Se non si è autenticati, imposta il contenuto del localStorage e imposta isFavorited a false
-                    let { results, filtered, targetedRecipe, favorited, searched } = localRecipes
-                    results = results.map((rec) => ({ ...rec, isFavorited: false }))
-                    filtered = filtered.map((rec) => ({ ...rec, isFavorited: false }))
-                    targetedRecipe = { ...targetedRecipe, isFavorited: false }
-                    favorited = favorited.map((rec) => ({ ...rec, isFavorited: false }))
-                    searched = searched.map((rec) => ({ ...rec, isFavorited: false }))
-
-                    setRecipes((prev) => ({
-                        ...prev,
-                        results: results.length > 0 ? results : prev.results,
-                        filtered: filtered.length > 0 ? filtered : prev.filtered,
-                        targetedRecipe: targetedRecipe ? targetedRecipe : prev.targetedRecipe,
-                        favorited: favorited.length > 0 ? favorited : prev.favorited,
-                        searched: searched.length > 0 ? searched : prev.searched,
-                    }))
+                    if (localRecipes) {
+                        let { results, filtered, targetedRecipe, favorited, searched } = localRecipes
+                        results = results.map((rec) => ({ ...rec, isFavorited: false }))
+                        filtered = filtered.map((rec) => ({ ...rec, isFavorited: false }))
+                        targetedRecipe = { ...targetedRecipe, isFavorited: false }
+                        favorited = favorited.map((rec) => ({ ...rec, isFavorited: false }))
+                        searched = searched.map((rec) => ({ ...rec, isFavorited: false }))
+    
+                        setRecipes((prev) => ({
+                            ...prev,
+                            results: results.length > 0 ? results : prev.results,
+                            filtered: filtered.length > 0 ? filtered : prev.filtered,
+                            targetedRecipe: targetedRecipe ? targetedRecipe : prev.targetedRecipe,
+                            favorited: favorited.length > 0 ? favorited : prev.favorited,
+                            searched: searched.length > 0 ? searched : prev.searched,
+                        }))
+                        }
                     sessionFilter && setRecipeFilter(sessionFilter)
                 }
             } catch (error) {
