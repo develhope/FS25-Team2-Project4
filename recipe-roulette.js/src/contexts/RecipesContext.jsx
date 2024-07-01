@@ -51,10 +51,10 @@ export const RecipesProvider = ({ children }) => {
     const [recipeAnimation, setRecipeAnimation] = useState(true) // Stato per animare le recipeCard quando vengono modificati i filtri
     const { isAuthenticated } = useAuth() // Stato di autenticazione
     const { filter } = useManageIngredients()
-    const location = useLocation() // Hook per ottenere la posizione corrente
+    const location = useLocation()
 
+    // Reset dell'inputValue quando si cambia pagina
     useEffect(() => {
-        // Reset dell'inputValue quando si cambia pagina
         setInputValue("")
     }, [location.pathname])
 
@@ -67,7 +67,7 @@ export const RecipesProvider = ({ children }) => {
         })
     }, [inputValue])
 
-    // Effetto per recuperare le ricette dal localStorage quando isAuthenticated cambia
+    // Recupero le ricette dal localStorage quando isAuthenticated cambia
     useEffect(() => {
         const retrieveRecipesFromLocalStorage = async () => {
             try {
@@ -112,7 +112,7 @@ export const RecipesProvider = ({ children }) => {
         try {
             const jsonFilters = JSON.stringify(recipeFilter)
             window.sessionStorage.setItem("recipeFilter", jsonFilters)
-            // useFetchPreferences(jsonFilters, serId) //si deve prendere userId da qualche parte (cache localStorage) e metterlo li
+            // useFetchPreferences(jsonFilters, userId) //si deve prendere userId da qualche parte (cache localStorage) e metterlo li
         } catch (error) {
             console.error(error)
         }
@@ -124,8 +124,6 @@ export const RecipesProvider = ({ children }) => {
 
     // Aggiornamento ricette visualizzate quando vengono modificati i filtri o aggiunti preferiti
     useEffect(() => {
-        console.log(recipes.favorited, recipeFilter)
-        // setRecipeState(prev => ({prev..., favorited: prev.favorited.filter())})
         let filtering = recipes.favorited.filter(
             (rec) => rec && rec.caloricApport <= recipeFilter.caloricApport && rec.preparationTime <= recipeFilter.preparationTime
         )
