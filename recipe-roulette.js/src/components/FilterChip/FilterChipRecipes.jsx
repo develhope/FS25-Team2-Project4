@@ -15,6 +15,7 @@ export function FilterChipRecipes({ numericValue = 9999, filterType = null, labe
                 filterType === "cuisineEthnicity" && handlePreferencesToggle(filterType, label.toLowerCase(), handleSelected, selectedState)
                 filterType === "caloricApport"  && handlePreferencesToggle(filterType, numericValue, handleSelected, selectedState)
                 filterType === "preparationTime" && handlePreferencesToggle(filterType, numericValue, handleSelected, selectedState)
+                filterType === "difficulty" && handlePreferencesToggle(filterType, numericValue, handleSelected, selectedState)
             }}
             className={`${classes.filterChip} ${selectedState ? classes.active : classes.inactive}`}
         >

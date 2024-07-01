@@ -26,8 +26,8 @@
         opacity: 0;
         width: 0;
         transition:
-            opacity 0.2s ease-out,
-            width 0.2s ease-out;
+            opacity 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+            width  0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
     }
 }
 .active {
@@ -38,8 +38,8 @@
         opacity: 1;
         width: 18px;
         transition:
-            opacity 0.2s ease-out,
-            width 0.2s ease-out;
+            opacity 0.45s cubic-bezier(0.08, 0.82, 0.17, 1),
+            width 0.45s cubic-bezier(0.08, 0.82, 0.17, 1);
     }
 }
 

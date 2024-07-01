@@ -1,9 +1,9 @@
 import classes from "./Switch.module.scss"
 
-export function Switch({ state = false, action = null, label, prop, filterWhat = "ingredients" }) {
+export function Switch({ state = false, action = null, label }) {
 
     function handleSwitch() {
-        action(prop)
+        action()
     }
 
     return (

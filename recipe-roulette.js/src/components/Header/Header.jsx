@@ -17,8 +17,7 @@ import classes from "./Header.module.scss"
 
 export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSidebarToggle }) {
     const [title, setTitle] = useState("/")
-    const { targetedRecipe, setTargetedRecipe, filteredRecipes, searchFilteredRecipes, setInputValue, inputValue } =
-        useRecipesContext()
+    const { recipes, setRecipes, setInputValue, inputValue } = useRecipesContext()
     const { handleDeselectAll } = useManageIngredients()
 
     const navigate = useNavigate()
@@ -45,14 +44,17 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 setTitle("Results")
                 break
             case "/recipe":
-                try {
-                    const currentTargetedRecipe = JSON.parse(window.localStorage.getItem("targetedRecipe"))
-                    if (currentTargetedRecipe) {
-                        setTargetedRecipe(currentTargetedRecipe)
-                        setTitle(currentTargetedRecipe.title)
+                if (recipes.targetedRecipe) {
+                    setTitle(recipes.targetedRecipe.title)
+                } else {
+                    try {
+                        const { targetedRecipe } = JSON.parse(localStorage.getItem("recipes"))
+                        if (targetedRecipe) {
+                            setTitle(targetedRecipe.title)
+                        }
+                    } catch (error) {
+                        console.log(error)
                     }
-                } catch (error) {
-                    console.log(error)
                 }
                 break
             default:
@@ -60,6 +62,26 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
                 break
         }
     }, [location.pathname])
+
+    useEffect(() => {
+        if (location.pathname === "/recipe") {
+            try {
+                const { targetedRecipe } = JSON.parse(localStorage.getItem("recipes"))
+                console.log(targetedRecipe)
+                if (targetedRecipe) {
+                    setRecipes((prev) => {
+                        return {
+                            ...prev,
+                            targetedRecipe: targetedRecipe,
+                        }
+                    })
+                    setTitle(targetedRecipe.title)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }, [])
 
     return (
         location.pathname !== "/login" &&
@@ -94,25 +116,20 @@ export function Header({ handleMenuToggle, handleSidebarToggle, handleRecipesSid
 
                     <IcoButton action={handleMenuToggle} icon={<MenuOpenIcon />} style="transparent" />
                 </div>
-                {location.pathname === "/recipes-results" && (
+{/*                 {location.pathname === "/recipes-results" && (
                     <section className={classes.globalActions}>
-                        {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch data={searchFilteredRecipes} inputValue={inputValue} setInputValue={setInputValue} />
+                        <BaseSearch data={recipes.results} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"
                             icon={<TuneOutlinedIcon fontSize="small" />}
                         />
                     </section>
-                )}
+                )} */}
                 {location.pathname === "/favorited" && (
                     <section className={classes.globalActions}>
                         {/* <IngredientSearch isFixed={true} /> */}
-                        <BaseSearch
-                            data={searchFilteredRecipes.filter((rec) => rec.isFavorited)}
-                            inputValue={inputValue}
-                            setInputValue={setInputValue}
-                        />
+                        <BaseSearch data={recipes.filtered} inputValue={inputValue} setInputValue={setInputValue} />
                         <IcoButton
                             action={handleRecipesSidebarToggle}
                             label="Filters"

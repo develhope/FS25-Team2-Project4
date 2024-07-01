@@ -8,16 +8,20 @@ import { useLocationHook } from "../../hooks/useLocationHook"
 import classes from "./Recipe.module.scss"
 
 export function Recipe() {
-    const { targetedRecipe } = useRecipesContext()
+    const { recipes } = useRecipesContext()
     const { handleClickLoginSnackBar } = useSnackbar()
 
-    const {location } = useLocationHook()
+    const { location } = useLocationHook()
     const { animate } = useAnimate(location)
 
     return (
         <div className={`${classes.recipePage} ${animate && classes.animateRecipePage}`}>
-            {targetedRecipe && (
-                <RecipeCard isExpanded={true} handleClickLoginSnackBar={handleClickLoginSnackBar} recipe={targetedRecipe} />
+            {recipes.targetedRecipe && (
+                <RecipeCard
+                    isExpanded={true}
+                    handleClickLoginSnackBar={handleClickLoginSnackBar}
+                    recipe={recipes.targetedRecipe}
+                />
             )}
 
         </div>

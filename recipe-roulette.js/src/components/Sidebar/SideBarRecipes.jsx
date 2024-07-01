@@ -9,9 +9,11 @@ import { useRecipesContext } from "../../contexts/RecipesContext"
 import { IcoButton } from "../Buttons/IcoButton/IcoButton"
 
 import classes from "./SideBarRecipes.module.scss"
+import { useManageIngredients } from "../../pages/Discovery/IngredientsContext"
 
 export function SideBarRecipes({ state, toggleSidebarRecipes }) {
     const { toggleRecipeFilter, recipeFilter } = useRecipesContext()
+    const { toggleFilter, filter, handleDeselectPreferences } = useManageIngredients()
     const { handleDeselectRecipeFilters } = useRecipesContext()
 
     function handleSidebarClick(e) {
@@ -30,7 +32,10 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                     <div className={classes.rightItems}>
                         <Button
                             label="Reset All"
-                            action={handleDeselectRecipeFilters}
+                            action={() => {
+                                handleDeselectRecipeFilters()
+                                handleDeselectPreferences("isBlackListed")
+                            }}
                             icon={<RotateLeftOutlinedIcon className={classes.ico} fontSize="small" />}
                         />
                         <IcoButton action={toggleSidebarRecipes} style="transparent" icon={<CloseIcon fontSize="small" />} />
@@ -52,25 +57,28 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
                             <Switch
-                                action={toggleRecipeFilter}
-                                state={recipeFilter.isGlutenFree}
-                                filterWhat="recipes"
+                                state={filter.isGlutenFree}
+                                action={() => {
+                                    toggleFilter("isGlutenFree")
+                                    toggleRecipeFilter("isGlutenFree")
+                                }}
                                 label={"Gluten free"}
-                                prop={"isGlutenFree"}
                             />
                             <Switch
-                                action={toggleRecipeFilter}
-                                state={recipeFilter.isVegetarian}
-                                filterWhat="recipes"
+                                state={filter.isVegetarian}
+                                action={() => {
+                                    toggleFilter("isVegetarian")
+                                    toggleRecipeFilter("isVegetarian")
+                                }}
                                 label={"Vegetarian"}
-                                prop={"isVegetarian"}
                             />
                             <Switch
-                                action={toggleRecipeFilter}
-                                state={recipeFilter.isVegan}
-                                filterWhat="recipes"
+                                state={filter.isVegan}
+                                action={() => {
+                                    toggleFilter("isVegan")
+                                    toggleRecipeFilter("isVegan")
+                                }}
                                 label={"Vegan"}
-                                prop={"isVegan"}
                             />
                         </div>
                     </div>
@@ -97,6 +105,16 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                             <FilterChipRecipes numericValue={250} filterType={"caloricApport"} label="250 kcal or less" />
                             <FilterChipRecipes numericValue={350} filterType={"caloricApport"} label="350 kcal of less" />
                             <FilterChipRecipes numericValue={500} filterType={"caloricApport"} label="500 kcal or less" />
+                        </div>
+                    </div>
+
+                    <div className={classes.filterSection}>
+                        <h4>Difficulty</h4>
+                        <div className={classes.filterChipWrapper}>
+                            <FilterChipRecipes numericValue={"all"} filterType={"difficulty"} label="All" />
+                            <FilterChipRecipes numericValue={"easy"} filterType={"difficulty"} label="Easy" />
+                            <FilterChipRecipes numericValue={"medium"} filterType={"difficulty"} label="Medium" />
+                            <FilterChipRecipes numericValue={"hard"} filterType={"difficulty"} label="Hard" />
                         </div>
                     </div>
                 </section>
