@@ -84,7 +84,6 @@ export const RecipesProvider = ({ children }) => {
                         const resetRecipes = (recipes) => {
                             const resetRecipeList = (list) => list.map((rec) => ({ ...rec, isFavorited: false }))
 
-                            console.log(localRecipes.targetedRecipe)
                             return {
                                 ...recipes,
                                 results: resetRecipeList(recipes.results),
@@ -141,9 +140,7 @@ export const RecipesProvider = ({ children }) => {
                 })
             )
         }
-        console.log(recipeFilter.difficulty, filtering)
         if (recipeFilter.difficulty !== "all") {
-            console.log(filtering)
             filtering = filtering.filter((rec) => recipeFilter.difficulty.toLocaleLowerCase() === rec.difficulty.toLowerCase())
         }
         // Imposta il risultato del filtering alla variabile di stato dedicata
