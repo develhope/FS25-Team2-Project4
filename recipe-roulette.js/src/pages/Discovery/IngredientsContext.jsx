@@ -1,6 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react"
 import ingredientsArray from "../../assets/ingredientsArray"
-import { useRecipesContext } from "../../contexts/RecipesContext"
 
 const IngredientsContext = createContext()
 
