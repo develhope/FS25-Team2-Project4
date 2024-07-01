@@ -13,7 +13,6 @@ export function useRecipeCard(recipe, isExpanded) {
     const { isAuthenticated } = useAuth()
 
     useEffect(() => {
-        console.log(isAuthenticated)
         setCardState((prevState) => ({ ...prevState, isFavorited: recipe.isFavorited, id: recipe.id }))
     }, [recipe.isFavorited, recipe.id, isAuthenticated])
 

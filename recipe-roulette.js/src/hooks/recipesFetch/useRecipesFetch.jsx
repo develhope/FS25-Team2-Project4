@@ -14,7 +14,7 @@ export const RecipesFetchProvider = ({ children }) => {
     const { setRecipes } = useRecipesContext()
 
     const handleRecipesFetch = useCallback(
-        async (ingredients, prepTime, caloricApport, cuisineEthnicity, isVegetarian, isVegan, isGlutenFree) => {
+        async (ingredients, prepTime, caloricApport, cuisineEthnicity, isVegetarian, isVegan, isGlutenFree, difficulty) => {
             setState({ error: false, loading: true })
 
             try {
@@ -23,6 +23,7 @@ export const RecipesFetchProvider = ({ children }) => {
                     prepTime,
                     caloricApport,
                     cuisineEthnicity,
+                    difficulty,
                     preferences: {
                         isVegan,
                         isVegetarian,

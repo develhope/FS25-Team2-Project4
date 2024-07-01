@@ -42,7 +42,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                     <div className={classes.blackListedWrapper}>
                         <h4>Add ingredeints to black list</h4>
                         <div className={classes.blackListed}>
-                            <IngredientSearch isFixed={true} searchCriteria="isBlackListed" />
+                            <IngredientSearch isFixed={true} sidebarSearch={true} searchCriteria="isBlackListed" />
                             {blackList.length > 0 && (
                                 <div className={classes.filterChipWrapper}>
                                     {blackList
@@ -64,7 +64,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                             )}
                         </div>
                     </div>
-                    <div className={classes.preferences}>
+                    <div className={classes.filterSection}>
                         <h4>Preferences</h4>
                         <div className={classes.switchesWrapper}>
                             {/* filtra gli ingredienti, inoltre imposta recipeFilter in modo che il fitro 
@@ -95,7 +95,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                             />
                         </div>
                     </div>
-                    <div className={classes.preparationTime}>
+                    <div className={classes.filterSection}>
                         <h4>Preparation Time</h4>
                         <div className={classes.filterChipWrapper}>
                             <FilterChipRecipes filterType={"preparationTime"} label="All" />
@@ -105,7 +105,7 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                         </div>
                     </div>
 
-                    <div className={classes.cuisineEthnicity}>
+                    <div className={classes.filterSection}>
                         <h4>Cousine Etnicity</h4>
                         <div className={classes.filterChipWrapper}>
                             <FilterChipRecipes filterType={"cuisineEthnicity"} label="All" />
@@ -122,13 +122,23 @@ export function Sidebar({ sidebarState = false, handleSidebarToggle }) {
                         </div>
                     </div>
 
-                    <div className={classes.caloricApport}>
+                    <div className={classes.filterSection}>
                         <h4>Caloric Apport</h4>
                         <div className={classes.filterChipWrapper}>
                             <FilterChipRecipes filterType={"caloricApport"} label="All" />
                             <FilterChipRecipes numericValue={350} filterType={"caloricApport"} label="350 kcal or less" />
                             <FilterChipRecipes numericValue={450} filterType={"caloricApport"} label="450 kcal of less" />
                             <FilterChipRecipes numericValue={550} filterType={"caloricApport"} label="550 kcal or less" />
+                        </div>
+                    </div>
+
+                    <div className={classes.filterSection}>
+                        <h4>Difficulty</h4>
+                        <div className={classes.filterChipWrapper}>
+                            <FilterChipRecipes numericValue={"all"} filterType={"difficulty"} label="All" />
+                            <FilterChipRecipes numericValue={"easy"} filterType={"difficulty"} label="Easy" />
+                            <FilterChipRecipes numericValue={"medium"} filterType={"difficulty"} label="Medium" />
+                            <FilterChipRecipes numericValue={"hard"} filterType={"difficulty"} label="Hard" />
                         </div>
                     </div>
                 </section>

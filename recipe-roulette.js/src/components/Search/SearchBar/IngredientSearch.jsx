@@ -1,13 +1,13 @@
-import React, { useEffect, useCallback, useRef, useState } from "react";
-import { useIngredientSearch } from "./useIngredientSearch";
-import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions";
+import React, { useEffect, useCallback, useRef, useState } from "react"
+import { useIngredientSearch } from "./useIngredientSearch"
+import { IngredientSuggestions } from "../Suggestions/IngredientSuggestions"
 
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined"
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
 
-import classes from "./IngredientSearch.module.scss";
+import classes from "./IngredientSearch.module.scss"
 
-export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackListed" }) {
+export function IngredientSearch({ isFixed = false, sidebarSearch = false, searchCriteria = "isBlackListed" }) {
     const {
         suggestions,
         inputValues,
@@ -20,42 +20,46 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
         handleInputActivation,
         handleBlur,
         handleXClick,
-    } = useIngredientSearch(isFixed, searchCriteria);
+    } = useIngredientSearch(isFixed, searchCriteria)
 
-    const inputRef = useRef(null);
+    const inputRef = useRef(null)
 
     // Handle back button when fixedPosition is true
-    const handleBackButton = useCallback((event) => {
-        if (searchState.inputActive) {
-            event.preventDefault();
-            if (inputRef.current) {
-                inputRef.current.blur();
-                handleBlur(event); // Update the focus state
-                setCondition(true)
+    const handleBackButton = useCallback(
+        (event) => {
+            if (searchState.inputActive) {
+                event.preventDefault()
+                if (inputRef.current) {
+                    inputRef.current.blur()
+                    handleBlur(event) // Update the focus state
+                    setCondition(true)
+                }
             }
-        }
-    }, [searchState.inputActive]);
+        },
+        [searchState.inputActive]
+    )
 
     useEffect(() => {
         if (searchState.inputActive && condition) {
-            window.history.pushState(null, document.title, window.location.href);
-            window.addEventListener('popstate', handleBackButton);
+            window.history.pushState(null, document.title, window.location.href)
+            window.addEventListener("popstate", handleBackButton)
             setCondition(false)
         } else if (searchState.inputActive) {
-            window.history.replaceState(null, document.title, window.location.href);
-            window.addEventListener('popstate', handleBackButton);
-        }
-        else {
-            window.removeEventListener('popstate', handleBackButton);
+            window.history.replaceState(null, document.title, window.location.href)
+            window.addEventListener("popstate", handleBackButton)
+        } else {
+            window.removeEventListener("popstate", handleBackButton)
         }
 
         return () => {
-            window.removeEventListener('popstate', handleBackButton);
-        };
-    }, [searchState.inputActive, handleBackButton]);
+            window.removeEventListener("popstate", handleBackButton)
+        }
+    }, [searchState.inputActive, handleBackButton])
 
     return (
-        <div className={`${fixedPosition && classes.positionFixed} ${classes.search}`}>
+        <div
+            className={`${fixedPosition && classes.positionFixed} ${fixedPosition && sidebarSearch && classes.sidebarSearch} ${classes.search}`}
+        >
             <div className={`${classes.searchBar} ${searchState.inputActive ? classes.inputActive : classes.inputInactive}`}>
                 <input
                     ref={inputRef}
@@ -88,5 +92,5 @@ export function IngredientSearch({ isFixed = false, searchCriteria = "isBlackLis
                 suggestions={suggestions}
             />
         </div>
-    );
+    )
 }

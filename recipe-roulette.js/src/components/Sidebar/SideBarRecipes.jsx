@@ -107,6 +107,16 @@ export function SideBarRecipes({ state, toggleSidebarRecipes }) {
                             <FilterChipRecipes numericValue={500} filterType={"caloricApport"} label="500 kcal or less" />
                         </div>
                     </div>
+
+                    <div className={classes.filterSection}>
+                        <h4>Difficulty</h4>
+                        <div className={classes.filterChipWrapper}>
+                            <FilterChipRecipes numericValue={"all"} filterType={"difficulty"} label="All" />
+                            <FilterChipRecipes numericValue={"easy"} filterType={"difficulty"} label="Easy" />
+                            <FilterChipRecipes numericValue={"medium"} filterType={"difficulty"} label="Medium" />
+                            <FilterChipRecipes numericValue={"hard"} filterType={"difficulty"} label="Hard" />
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

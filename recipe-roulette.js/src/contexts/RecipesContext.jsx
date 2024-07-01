@@ -26,6 +26,7 @@ function RecipeFilter({
     ],
     preparationTime = 9999,
     caloricApport = 9999,
+    difficulty = "all",
 } = {}) {
     this.isVegetarian = isVegetarian
     this.isGlutenFree = isGlutenFree
@@ -33,6 +34,7 @@ function RecipeFilter({
     this.cuisineEthnicity = cuisineEthnicity
     this.preparationTime = preparationTime
     this.caloricApport = caloricApport
+    this.difficulty = difficulty
 }
 
 export const RecipesProvider = ({ children }) => {
@@ -132,7 +134,11 @@ export const RecipesProvider = ({ children }) => {
                 })
             )
         }
-
+        console.log(recipeFilter.difficulty, filtering);
+        if (recipeFilter.difficulty !== "all") {
+            console.log(filtering)
+            filtering = filtering.filter((rec) => recipeFilter.difficulty.toLocaleLowerCase() === rec.difficulty.toLowerCase())
+        }
         // Imposta il risultato del filtering alla variabile di stato dedicata
         setRecipes((prev) => ({
             ...prev,
@@ -225,7 +231,7 @@ export const RecipesProvider = ({ children }) => {
 
     // Gestione delle proprietà non booleane di recipeFilter
     const handlePreferencesToggle = (filterType, value, handleSelected, selectedState) => {
-        if (filterType === "caloricApport" || filterType === "preparationTime") {
+        if (filterType === "caloricApport" || filterType === "preparationTime" || filterType === "difficulty") {
             if (!selectedState) {
                 setRecipeFilter((prevData) => ({
                     ...prevData,
@@ -234,7 +240,7 @@ export const RecipesProvider = ({ children }) => {
             } else {
                 setRecipeFilter((prevData) => ({
                     ...prevData,
-                    [filterType]: 9999,
+                    [filterType]: filterType === "difficulty" ? "all" : 9999,
                 }))
             }
         }

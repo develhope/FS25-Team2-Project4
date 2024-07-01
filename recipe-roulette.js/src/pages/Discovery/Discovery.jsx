@@ -77,7 +77,8 @@ export function Discovery() {
                             recipeFilter.cuisineEthnicity,
                             recipeFilter.isVegetarian,
                             recipeFilter.isVegan,
-                            recipeFilter.isGlutenFree
+                            recipeFilter.isGlutenFree,
+                            recipeFilter.difficulty
                         )
                     }}
                     label="Recipes"
