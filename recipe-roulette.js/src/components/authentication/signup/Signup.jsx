@@ -1,7 +1,6 @@
 import { useSignup } from "../../../hooks/Form/useSignup";
 import { Button } from "../../Buttons/Button/Button";
 import { useLocation } from "react-router-dom";
-import { Snackbar } from "../../Snackbar/Snackbar"
 
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import StartIcon from "@mui/icons-material/Start";
@@ -122,7 +121,6 @@ export function Signup({ setShowPopup = null, setChangeToSignup = null }) {
           </span>
         </div>
       </form>
-      <Snackbar/>
     </div>
   );
 }
