@@ -14,7 +14,7 @@ export function useFilterChipRecipes(label, filterType, numericValue) {
                     setSelectedState(false)
                 }
             }, 0)
-            if (filterType === "caloricApport" || filterType ==="preparationTime") {
+            if (filterType === "caloricApport" || filterType ==="preparationTime" || filterType==="difficulty") {
                 setTimeout(() => {
                     if (recipeFilter[filterType] === numericValue) {
                         setSelectedState(true)

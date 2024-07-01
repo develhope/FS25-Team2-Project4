@@ -9,9 +9,10 @@ import { useRecipesFetch } from "../../hooks/recipesFetch/useRecipesFetch"
 import { useLocationHook } from "../../hooks/useLocationHook"
 
 import classes from "./RecipesResults.module.scss"
+import { BlocksShuffleThree } from "react-svg-spinners"
 
 export function RecipeResults() {
-    const { searchFilteredRecipes } = useRecipesContext()
+    const { recipes } = useRecipesContext()
     const { handleClickLoginSnackBar } = useSnackbar()
     const { state } = useRecipesFetch()
 
@@ -20,35 +21,19 @@ export function RecipeResults() {
 
     return (
         <div className={`${classes.recipesResultsPage} ${animate && classes.animateFavorite} `}>
-            <div className={classes.subHeading}>
-                <div className={classes.chipWrapper}>
-                    <FilterChipRecipes filterType={"preparationTime"} label="All" />
-                    <FilterChipRecipes filterType={"preparationTime"} numericValue={30} label="> 30m" />
-                    <FilterChipRecipes filterType={"preparationTime"} numericValue={45} label="> 45m" />
-                    <FilterChipRecipes filterType={"preparationTime"} numericValue={60} label="> 60m" />
-                </div>
-            </div>
-            {state.loading === true ? (
+            {!state.loading ? (
                 <section className={classes.recipesWrapper}>
-                    {searchFilteredRecipes.map((recipe) => {
-                        return (
-                            <RecipeCard
-                                handleClickLoginSnackBar={handleClickLoginSnackBar}
-                                key={recipe.id}
-                                recipe={recipe}
-                            />
-                        )
+                    {recipes.searched.map((recipe) => {
+                        return <RecipeCard handleClickLoginSnackBar={handleClickLoginSnackBar} key={recipe.id} recipe={recipe} />
                     })}
                 </section>
             ) : (
                 <div className={classes.placeholder}>
+                    <BlocksShuffleThree color="#00a55b" width={"40%"} height={"40%"}/>
                     <h2>
-                        There is <span>no recipe</span> <br />
-                        matching your search!
+                        <span>Generating Your Recipes!</span> <br />
+                        This could take a couple minutes...
                     </h2>
-                    <div className={classes.placeholderImage}>
-                        <img src="../src/assets/images/undraw_cancel_re_pkdm 1.svg" alt="" />
-                    </div>
                 </div>
             )}
             <Snackbar />

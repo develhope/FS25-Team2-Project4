@@ -12,46 +12,29 @@ import { useLocationHook } from "../../hooks/useLocationHook"
 
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined"
 import LoginIcon from "@mui/icons-material/Login"
+
 import classes from "./Favorite.module.scss"
 
 export function Favorited() {
-    const { searchFilteredRecipes, filteredRecipes, recipes, inputValue } = useRecipesContext()
+    const { setRecipes, recipes, inputValue } = useRecipesContext()
     const { isAuthenticated } = useAuth()
     const [showPopup, setShowPopup] = useState()
 
     const { location } = useLocationHook()
     const { animate } = useAnimate(location)
 
-    const filterFavoritecipes = useMemo(() => {
-        return searchFilteredRecipes.filter((recipe) => recipe.isFavorited)
-    }, [inputValue, filteredRecipes, searchFilteredRecipes])
-
-    const favoriteRecipes = useMemo(() => {
-        return recipes.filter((recipe) => recipe.isFavorited)
-    }, [recipes])
+    const searchFavorites = useMemo(() => {
+        return recipes.filtered.filter((recipe) => recipe.title.toLowerCase().includes(inputValue.toLowerCase()))
+    }, [inputValue, recipes.filtered, recipes.favorited])
 
     return (
         <div className={`${classes.favoritePage} ${animate && classes.animateFavorite}`}>
-            {isAuthenticated && favoriteRecipes.length > 0 ? (
+            {isAuthenticated && recipes.favorited.length > 0 ? (
                 <>
-                    {favoriteRecipes && filterFavoritecipes.length > 0 ? (
+                    {searchFavorites && searchFavorites.length > 0 ? (
                         <section className={classes.recipesWrapper}>
-                            {filterFavoritecipes.map((recipe) => {
-                                return (
-                                    <RecipeCard
-                                        recipeId={recipe.id}
-                                        key={recipe.id}
-                                        title={recipe.title}
-                                        image={recipe.image}
-                                        attributes={recipe.attributes}
-                                        isFav={recipe.isFavorited}
-                                        preparation={recipe.preparation}
-                                        ingredients={recipe.ingredients}
-                                        isGlutenFree={recipe.isGlutenFree}
-                                        isVegetarian={recipe.isVegetarian}
-                                        isVegan={recipe.isVegan}
-                                    />
-                                )
+                            {searchFavorites.map((recipe) => {
+                                return <RecipeCard recipe={recipe} key={recipe.id} />
                             })}
                         </section>
                     ) : (

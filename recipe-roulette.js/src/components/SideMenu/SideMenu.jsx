@@ -42,7 +42,7 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             handleMenuToggle={handleMenuToggle}
             label="Roulette"
             destination="/discovery"
-            icon={<AutorenewIcon fontSize="small" />}
+            icon={<AutorenewIcon fontSize="small" />} 
           />
           <NavigationLink
             path={path}
@@ -58,13 +58,6 @@ export function SideMenu({ handleMenuToggle, menuState = false, path = "/" }) {
             destination="/settings"
             icon={<SettingsOutlinedIcon fontSize="small" />}
           />
-          {/*           <NavigationLink
-            path={path}
-            handleMenuToggle={handleMenuToggle}
-            label="Preferences"
-            destination="/preferences"
-            icon={<ClassOutlinedIcon fontSize="small" />}
-          /> */}
           <div className={classes.separator} />
           {isAuthenticated ? (
             <NavigationLink
