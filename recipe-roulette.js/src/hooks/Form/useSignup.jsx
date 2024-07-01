@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../components/Snackbar/useSnackbar";
 
 export function useSignup() {
     const [data, setData] = useState(createData())
     const [passError, setPassError] = useState(null)
     const [isRegistered, setisRegistered] = useState()
+    const {handleOpenSnackbar} = useSnackbar()
     const navigate = useNavigate();
 
     //ho importato questi per settare nel localStorage i dati dell'utente ed effettuare l'accesso
@@ -20,6 +22,21 @@ export function useSignup() {
             check: false,
         }
     }
+
+    function getItem(data) {
+      try {
+        const username = window.localStorage.getItem("username");
+        const email = window.localStorage.getItem("email");
+        const password = window.localStorage.getItem("password");
+  
+        if (username && password) {
+          setData({ ...data, username, password, email });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
 
     function setItem(data) {
         try {
@@ -68,7 +85,7 @@ export function useSignup() {
           return responseData;
         } catch (error) {
           console.error("Error while fetching data:", error);
-          throw error;
+          throw new Error("Error while fetching data");
         }
       }
 
@@ -76,10 +93,14 @@ export function useSignup() {
         mutationFn: handlePostSignUpData,
         onSuccess: (data) => {
           console.log(data);
+          getItem()
           setItem(data);
+          setisRegistered(true)
+          handleOpenSnackbar("Signed up, now you please log in")
           navigate("/login");
         },
         onError: (error) => {
+          handleOpenSnackbar("Signed up failed, please select another username")
           console.error("Signup failed:", error.message);
         },
       });
@@ -88,8 +109,7 @@ export function useSignup() {
         e.preventDefault()
         console.log(data)
         if (data.password === data.confirmPass && data.check) {
-            mutation.mutate({ email: data.email, username: data.username, password: data.password });
-            setisRegistered(true)
+            mutation.mutate({username: data.username, email: data.email, password: data.password });
         } else {
             console.log("Please, confirm your password correctly")
             setPassError(`Please, confirm your password correctly`)

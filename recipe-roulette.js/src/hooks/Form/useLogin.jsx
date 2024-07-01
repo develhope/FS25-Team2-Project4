@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useAuth } from "../Auth/useAuth";
 import { useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
+import { useSnackbar } from "../../components/Snackbar/useSnackbar";
 
 export function useLogin() {
   const [data, setData] = useState(createData());
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
+  const {handleOpenSnackbar} = useSnackbar()
   const navigate = useNavigate();
 
   function createData() {
@@ -83,10 +85,11 @@ export function useLogin() {
       console.log(data);
       getItem(data);
       setItem(data);
+      handleOpenSnackbar("Logged in")
       login();
-      navigate("/discovery");
     },
     onError: (error) => {
+      handleOpenSnackbar("Login Failed")
       console.error("Login failed:", error.message);
     },
   });
@@ -103,6 +106,7 @@ export function useLogin() {
   return {
     data,
     showPassword,
+    mutation,
     handleInput,
     handleSubmit,
     handleShowPassword,
