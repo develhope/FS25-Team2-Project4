@@ -19,6 +19,7 @@ import { Recipe } from "./pages/Recipe/Recipe"
 import { RecipesProvider } from "./contexts/RecipesContext"
 import { LoginPage } from "./pages/Login/LoginPage"
 import { NotFound404 } from "./pages/NotFound404/NotFound404"
+import { Snackbar } from "./components/Snackbar/Snackbar"
 import { RecipesFetchProvider } from "./hooks/recipesFetch/useRecipesFetch"
 
 function App() {
@@ -55,12 +56,13 @@ function App() {
                                         element={<RecipeResults handleRecipesSidebarToggle={toggleSidebarRecipes} />}
                                     />
                                     <Route path={`/recipe`} element={<Recipe />} />
-
+                           
                                     <Route path="/login" element={<LoginPage />} />
                                     <Route path="/sidebarRecipes" element={<SideBarRecipes />} />
                                     <Route path="/food-preferences" element={<Preferences />} />
                                     <Route path="/*" element={<NotFound404 />} />
                                 </Routes>
+                              <Snackbar/>
                             </RecipesFetchProvider>
                         </SnackbarProvider>
                     </RecipesProvider>

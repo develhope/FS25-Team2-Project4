@@ -13,7 +13,6 @@ import { Popup } from "../../components/Pop-up/Popup"
 import { Login } from "../../components/authentication/login/Login";
 import { ValidationBox } from "../../components/Validation Box/ValidationBox";
 import { useSnackbar } from "../../components/Snackbar/useSnackbar";
-import { Snackbar } from "../../components/Snackbar/Snackbar";
 
 export function LinkBox({ handleLogoutClick }) {
   const [showPopup, setShowPopup] = useState();
@@ -72,7 +71,6 @@ export function LinkBox({ handleLogoutClick }) {
           </Popup>,
           document.getElementById("popup-root")
         )}
-        <Snackbar/>
     </>
   );
 }

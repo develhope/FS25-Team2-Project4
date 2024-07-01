@@ -11,7 +11,6 @@ import LoginIcon from "@mui/icons-material/Login"
 import StartIcon from "@mui/icons-material/Start"
 
 import classes from "./Login.module.scss"
-import { Snackbar } from "../../Snackbar/Snackbar"
 
 export function Login({ setShowPopup = null, setChangeToSignup = null }) {
     const { data, showPassword, mutation, handleInput, handleSubmit, handleShowPassword } = useLogin()
@@ -76,7 +75,7 @@ export function Login({ setShowPopup = null, setChangeToSignup = null }) {
                         style="primary"
                         type="submit"
                         label="Login"
-                        prevPath={location.pathname}
+                        /* prevPath={location.pathname} */
                         icon={<LoginIcon fontSize="small" />}
                         active={data.username && data.password}
                     />
@@ -100,7 +99,6 @@ export function Login({ setShowPopup = null, setChangeToSignup = null }) {
                     </span>
                 </div>
             </form>
-            <Snackbar/>
         </div>
     )
 }
