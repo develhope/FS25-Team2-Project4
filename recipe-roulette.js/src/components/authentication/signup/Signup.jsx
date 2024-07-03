@@ -97,12 +97,7 @@ export function Signup({ setShowPopup = null, setChangeToSignup = null }) {
             label="Sign up"
             icon={<EditNoteIcon fontSize="small" />}
             active={
-              data.username &&
-              data.password &&
-              data.confirmPass &&
-              data.confirmPass === data.password &&
-              data.email &&
-              data.check
+              data.username && data.password && data.confirmPass && data.email
             }
             prevPath={location.pathname}
           />
